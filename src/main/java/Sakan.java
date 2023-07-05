@@ -9,10 +9,7 @@ public class Sakan {
 
         Scanner sc=new Scanner(System.in);
         String c ;
-    //seriously
-        //hello salah
-        //how are you
-//   lol noob
+
         while (true)
         {
 
