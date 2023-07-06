@@ -12,16 +12,19 @@ public class Sakan {
 
         while (true)
         {
-
-            System.out.println( "1) Tenant." );
-            System.out.println( "2) Owner." );
-            System.out.println( "3) Admin." );
+            System.out.println( "███████████████" );
+            System.out.println( "██(1) Tenant ██" );
+            System.out.println( "███████████████" );
+            System.out.println( "██(2) Owner  ██" );
+            System.out.println( "███████████████" );
+            System.out.println( "██(3) Admin  ██" );
+            System.out.println( "███████████████" );
             System.out.print( "Choose between the specific users :  " );
             c= sc.nextLine();
 
 
 
-            if(c.equalsIgnoreCase("Tenant")){
+            if(c.equalsIgnoreCase("1")){
                 tenantfunc();
 
 
@@ -41,6 +44,8 @@ public class Sakan {
 
     public static void tenantfunc(){
 
+
+
         Scanner sc=new Scanner(System.in);
         String c ;
         String name;
@@ -49,22 +54,28 @@ public class Sakan {
 
         Connection connection = null;
         PreparedStatement pst= null;
-        ResultSet resultSet = null;
-        String arr[]={"home1","home2","home3"};
-
-        System.out.print( "username: " );
+        ResultSet rs = null;
+        System.out.println("█████████████████████████");
+        System.out.println("██(1) Back to main menu██");
+        System.out.println("█████████████████████████");
+        System.out.print( "Enter username: " );
 
         temp=sc.nextLine();
 
-        if(temp.equalsIgnoreCase("back")){
+        if(temp.equalsIgnoreCase("1")){
             Mainfunc();
 
         }
 
         name=temp;
 
-        System.out.print( "password: " );
+        System.out.print( "Enter password: " );
         pass=sc.nextLine();
+
+        if(pass.equalsIgnoreCase("1")){
+            Mainfunc();
+
+        }
 
 
         try{
@@ -85,23 +96,49 @@ public class Sakan {
 
         }
 
-        System.out.println("Available houses: ");
 
-        for(int i=0;i<3;i++){
 
-            System.out.print(arr[i]+"\t");
+        System.out.println("███████████████████████████████");
+        System.out.println("██(1) View available housing ██");
+        System.out.println("███████████████████████████████");
+        System.out.println("██(2) Main menu              ██");
+        System.out.println("███████████████████████████████");
+
+        String view =sc.nextLine();
+        if(view.equalsIgnoreCase("1")){
+
+
+            try{
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                pst= connection.prepareStatement("SELECT * FROM houses WHERE availability = 'available' ");
+                rs = pst.executeQuery();
+                while(rs.next()){
+                   String content = "|  " + rs.getString(2) + "  |  " + rs.getString(3) + "  |  " + rs.getInt(4) + "  |  " + rs.getString(5) + "  |  " + rs.getString(6) + "  |"  ;
+                   System.out.println(content);
+                }
+
+
+
+
+
+            }catch (SQLException e) {
+                e.printStackTrace();
+
+            }
 
 
         }
-        System.out.print("\n");
-        System.out.print("\n");
+        else if(view.equalsIgnoreCase("2")){
+            Mainfunc();
 
-       Mainfunc();
+        }
+
+
 
     }
-    public static void hello(){
+    public static void viewhousesfunc(){
 
-        System.out.println("Hello world");
+
 
     }
 
