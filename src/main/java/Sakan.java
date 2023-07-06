@@ -12,7 +12,7 @@ public class Sakan {
 
         while (true)
         {
-            System.out.println( "hello" );
+
             System.out.println( "1) Tenant." );
             System.out.println( "2) Owner." );
             System.out.println( "3) Admin." );
