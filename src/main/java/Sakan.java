@@ -4,10 +4,11 @@ import java.util.*;
 import static java.lang.System.exit;
 
 public class Sakan {
-
+    public static int flag1 = 0;
     public static void Mainfunc(){
-
+           Sakan.flag1 =0;
         Scanner sc=new Scanner(System.in);
+
         String c ;
 
         while (true)
@@ -124,128 +125,129 @@ public class Sakan {
     }
 
     public static void Signup(){
+      if (Sakan.flag1 == 0) {
+          Scanner sc = new Scanner(System.in);
+          String name;
+          String pass;
+          String email;
 
-        Scanner sc=new Scanner(System.in);
-        String name;
-        String pass;
-        String email;
-
-        Connection connection = null;
-        PreparedStatement pst= null;
-        ResultSet rs = null;
-
-
-        System.out.println("███████████████████████████████");
-        System.out.println("██(1) To go back to main menu██");
-        System.out.println("███████████████████████████████");
-
-        System.out.print( "Enter your email: " );
-        String tempemail =sc.nextLine();
-        if(tempemail.equalsIgnoreCase("1")){
-            Mainfunc();
-
-        }
-           if(!tempemail.contains("@") || !tempemail.contains(".")){
-                System.out.println( "Please enter a valid email..." );
-                 Signup();
-            }
-
-        email = tempemail;
-
-        checkemail(email,1);
+          Connection connection = null;
+          PreparedStatement pst = null;
+          ResultSet rs = null;
 
 
-        System.out.print( "Enter username: " );
-        String tempname =sc.nextLine();
-        if(tempname.equalsIgnoreCase("1")){
-            Mainfunc();
+          System.out.println("███████████████████████████████");
+          System.out.println("██(1) To go back to main menu██");
+          System.out.println("███████████████████████████████");
 
-        }
-        name = tempname;
+          System.out.print("Enter your email: ");
+          String tempemail = sc.nextLine();
+          if (tempemail.equalsIgnoreCase("1")) {
+              Mainfunc();
 
+          }
+          if (!tempemail.contains("@") || !tempemail.contains(".")) {
+              System.out.println("Please enter a valid email...");
+              Signup();
+          }
 
+          email = tempemail;
 
+          checkemail(email, 1);
+       if(Sakan.flag1==0) {
 
-        System.out.print("Enter password: ");
-        String temppass = sc.nextLine();
+           System.out.print("Enter username: ");
+           String tempname = sc.nextLine();
+           if (tempname.equalsIgnoreCase("1")) {
+               Mainfunc();
 
-        if (temppass.equalsIgnoreCase("1")) {
-            Mainfunc();
-
-        }
-
-        pass = temppass;
-
-
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("INSERT INTO TENANTS(EMAIL,USERNAME,PASSWORD) VALUES" + "(?,?,?)");
-
-            pst.setString(1, email);
-            pst.setString(2, name);
-            pst.setString(3, pass);
-
-            pst.executeUpdate();
+           }
+           name = tempname;
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+           System.out.print("Enter password: ");
+           String temppass = sc.nextLine();
 
-        }
+           if (temppass.equalsIgnoreCase("1")) {
+               Mainfunc();
 
-        System.out.println("HERE");
+           }
+
+           pass = temppass;
 
 
+           try {
+               connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+               pst = connection.prepareStatement("INSERT INTO TENANTS(EMAIL,USERNAME,PASSWORD) VALUES" + "(?,?,?)");
+
+               pst.setString(1, email);
+               pst.setString(2, name);
+               pst.setString(3, pass);
+
+               pst.executeUpdate();
+
+
+           } catch (SQLException e) {
+               e.printStackTrace();
+
+           }
+           Sakan.flag1 = 1;
+
+       }
+      }
     }
 
     public static void Login(){
 
+        if (Sakan.flag1 == 0) {
 
 
+            Scanner sc = new Scanner(System.in);
+            String name;
+            String pass;
+            String email;
 
-        Scanner sc=new Scanner(System.in);
-        String name;
-        String pass;
-        String email;
-
-        Connection connection = null;
-        PreparedStatement pst= null;
-        ResultSet rs = null;
+            Connection connection = null;
+            PreparedStatement pst = null;
+            ResultSet rs = null;
 
 
-        System.out.println("███████████████████████████████");
-        System.out.println("██(1) To go back to main menu██");
-        System.out.println("███████████████████████████████");
+            System.out.println("███████████████████████████████");
+            System.out.println("██(1) To go back to main menu██");
+            System.out.println("███████████████████████████████");
 
-        System.out.print( "Enter your email: " );
-        String tempemail =sc.nextLine();
-        if(tempemail.equalsIgnoreCase("1")){
-            Mainfunc();
+            System.out.print("Enter your email: ");
+            String tempemail = sc.nextLine();
+            if (tempemail.equalsIgnoreCase("1")) {
+                Mainfunc();
+
+            }
+            if (!tempemail.contains("@") || !tempemail.contains(".")) {
+                System.out.println("Please enter a valid email...");
+                Login();
+            }
+
+            email = tempemail;
+
+            checkemail(email, 2);
+
+            if (Sakan.flag1 == 0) {
+
+
+                System.out.print("Enter password: ");
+                String temppass = sc.nextLine();
+
+                if (temppass.equalsIgnoreCase("1")) {
+                    Mainfunc();
+
+                }
+
+                pass = temppass;
+                checklogin(email,pass);
+            }
 
         }
-        if(!tempemail.contains("@") || !tempemail.contains(".")){
-            System.out.println( "Please enter a valid email..." );
-            Login();
-        }
 
-        email = tempemail;
-
-        checkemail(email,2);
-
-
-
-        System.out.print("Enter password: ");
-        String temppass = sc.nextLine();
-
-        if (temppass.equalsIgnoreCase("1")) {
-            Mainfunc();
-
-        }
-
-        pass = temppass;
-
-
-       checklogin(email,pass);
 
 
 
@@ -265,16 +267,20 @@ public class Sakan {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
             pst = connection.prepareStatement("SELECT EMAIL,PASSWORD FROM TENANTS WHERE EMAIL = '" + email + "' AND PASSWORD = '"+ pass +"'");
             rs = pst.executeQuery();
-            while(rs.next()){
+            if(rs.next()){
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(2));
                 String tempE =  rs.getString(1) ;
-                String tempP = rs.getString(3);
+                String tempP = rs.getString(2);
                 if(!tempE.equals(null) && !tempP.equals(null)){
                     System.out.println("Logged in successfully");
+                    Sakan.flag1 = 1;
                 }
-                else {
-                    System.out.println("Invalid username or email");
-                    Login();
-                }
+
+            }
+            else if(!rs.next()) {
+                System.out.println("Invalid username or email");
+                Login();
             }
 
 
@@ -302,21 +308,31 @@ public class Sakan {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
              pst = connection.prepareStatement("SELECT EMAIL FROM TENANTS WHERE EMAIL = '" + email + "'" );
              rs = pst.executeQuery();
-            while(rs.next()){
+
+            if(rs.next()){
+
              String tempE =  rs.getString(1);
+
+             if(Sakan.flag1==0) {
+
                 if(!tempE.equals(null)){
 
-                    if (func == 1 ) {
-                        System.out.println("This email already exists..");
-                        Signup();
-                    }
+                       if (func == 1) {
+                           System.out.println("This email already exists..");
+                           Signup();
+                       }
+                   }
 
-                }
-                else if(tempE.equals(null) && func ==2){
+
+             }
+            }
+            else if(!rs.next()){
+                 if( func ==2){
                     System.out.println("a user with that email doesn't exists..");
                     Login();
                 }
             }
+
 
 
 
