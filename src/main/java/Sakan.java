@@ -83,45 +83,70 @@ public class Sakan {
 
 
         }
+        Scanner sv = new Scanner(System.in);
+        String view;
+       while(true) {
+           System.out.println("███████████████████████████████████████████████████████");
+           System.out.println("██(A) View available housing                         ██");
+           System.out.println("███████████████████████████████████████████████████████");
+           System.out.println("██(B) To Select one of the available houses using ID ██");
+           System.out.println("███████████████████████████████████████████████████████");
+           System.out.println("██(C) Main menu                                      ██");
+           System.out.println("███████████████████████████████████████████████████████");
+           view = sv.nextLine();
+           if (view.equalsIgnoreCase("A")) {
 
 
-        System.out.println("███████████████████████████████");
-        System.out.println("██(1) View available housing ██");
-        System.out.println("███████████████████████████████");
-        System.out.println("██(2) Main menu              ██");
-        System.out.println("███████████████████████████████");
-
-        String view =sc.nextLine();
-        if(view.equalsIgnoreCase("1")){
-
-
-            try{
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                pst= connection.prepareStatement("SELECT * FROM houses WHERE availability = 'available' ");
-                rs = pst.executeQuery();
-                while(rs.next()){
-                    String content = "\t|\t" + rs.getString(2) + "\t|\t" + rs.getString(3) + "\t|\t" + rs.getInt(4) + "\t|\t" + rs.getString(5) + "\t|\t" + rs.getString(6) + "\t|\t";
-                    System.out.println(content);
-                }
+               try {
+                   connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                   pst = connection.prepareStatement("SELECT * FROM houses WHERE availability = 'available' ");
+                   rs = pst.executeQuery();
+                   while (rs.next()) {
+                       String content = "\t|\t ID: " + rs.getString(1) + " \t|\t" + rs.getString(2) + "\t|\t" + rs.getString(3) + "\t|\t" + rs.getInt(4) + "\t|\t" + rs.getString(5) + "\t|\t" + rs.getString(6) + "\t|\t";
+                       System.out.println(content);
+                   }
 
 
+               } catch (SQLException e) {
+                   e.printStackTrace();
+
+               }
+
+
+           } else if (view.equalsIgnoreCase("B")) {
+               System.out.print("Enter the house ID: ");
+
+              int houseNum =sc.nextInt();
+
+               try {
+                   connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                   pst = connection.prepareStatement("SELECT * FROM houses WHERE house_id = '" + houseNum + "' AND availability = 'available'" );
+                   rs = pst.executeQuery();
+                   if (rs.next()) {
+                       String content = "\t|\t" + rs.getString(2) + "\t|\t" + rs.getString(3) + "\t|\t" + rs.getInt(4) + "\t|\t" + rs.getString(5) + "\t|\t" + rs.getString(6) + "\t|\t";
+                       System.out.println(content);
+
+                   }
+                   else if(!rs.next()){
+                       System.out.println("Please enter a valid house ID...");
+
+                   }
+
+
+               } catch (SQLException e) {
+                   e.printStackTrace();
+
+               }
 
 
 
-            }catch (SQLException e) {
-                e.printStackTrace();
 
-            }
+           } else if (view.equalsIgnoreCase("C")) {
+               Mainfunc();
 
+           }
 
-        }
-        else if(view.equalsIgnoreCase("2")){
-            Mainfunc();
-
-        }
-
-
-
+       }
     }
 
     public static void Signup(){
