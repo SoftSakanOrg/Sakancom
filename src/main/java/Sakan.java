@@ -5,14 +5,21 @@ import static java.lang.System.exit;
 
 public class Sakan {
     public static int flag1 = 0;
+    public static int flag11 = 0;
+    public static int flag2 = 0;
+
+    public static String OnlineUser = "" ;
     public static void Mainfunc(){
            Sakan.flag1 =0;
+           Sakan.flag2 = 0;
+           Sakan.OnlineUser = "";
         Scanner sc=new Scanner(System.in);
 
         String c ;
 
         while (true)
         {
+
             System.out.println( "███████████████" );
             System.out.println( "██(1) Tenant ██" );
             System.out.println( "███████████████" );
@@ -57,6 +64,8 @@ public class Sakan {
         Connection connection = null;
         PreparedStatement pst= null;
         ResultSet rs = null;
+        if(Sakan.flag2==0){
+
         System.out.println("█████████████████████████");
         System.out.println("██(1) Sign up          ██");
         System.out.println("█████████████████████████");
@@ -83,15 +92,17 @@ public class Sakan {
 
 
         }
+       }
         Scanner sv = new Scanner(System.in);
         String view;
        while(true) {
+
            System.out.println("███████████████████████████████████████████████████████");
            System.out.println("██(A) View available housing                         ██");
            System.out.println("███████████████████████████████████████████████████████");
            System.out.println("██(B) To Select one of the available houses using ID ██");
            System.out.println("███████████████████████████████████████████████████████");
-           System.out.println("██(C) Main menu                                      ██");
+           System.out.println("██(C) Main menu (Log out)                            ██");
            System.out.println("███████████████████████████████████████████████████████");
            view = sv.nextLine();
            if (view.equalsIgnoreCase("A")) {
@@ -123,8 +134,11 @@ public class Sakan {
                    pst = connection.prepareStatement("SELECT * FROM houses WHERE house_id = '" + houseNum + "' AND availability = 'available'" );
                    rs = pst.executeQuery();
                    if (rs.next()) {
+                       String Housename = rs.getString(2);
                        String content = "\t|\t" + rs.getString(2) + "\t|\t" + rs.getString(3) + "\t|\t" + rs.getInt(4) + "\t|\t" + rs.getString(5) + "\t|\t" + rs.getString(6) + "\t|\t";
                        System.out.println(content);
+                       viewhousesfunc(Housename,houseNum,Sakan.OnlineUser);
+
 
                    }
                    else if(!rs.next()){
@@ -179,7 +193,7 @@ public class Sakan {
           email = tempemail;
 
           checkemail(email, 1);
-       if(Sakan.flag1==0) {
+              if(Sakan.flag1==0) {
 
            System.out.print("Enter username: ");
            String tempname = sc.nextLine();
@@ -216,6 +230,7 @@ public class Sakan {
                e.printStackTrace();
 
            }
+           Sakan.OnlineUser.equals(email);
            Sakan.flag1 = 1;
 
        }
@@ -224,7 +239,7 @@ public class Sakan {
 
     public static void Login(){
 
-        if (Sakan.flag1 == 0) {
+        if (Sakan.flag11 == 0) {
 
 
             Scanner sc = new Scanner(System.in);
@@ -255,8 +270,8 @@ public class Sakan {
             email = tempemail;
 
             checkemail(email, 2);
+                if (Sakan.flag11 == 0) {
 
-            if (Sakan.flag1 == 0) {
 
 
                 System.out.print("Enter password: ");
@@ -270,6 +285,8 @@ public class Sakan {
                 pass = temppass;
                 checklogin(email,pass);
             }
+                 Sakan.flag11 =1;
+            Sakan.OnlineUser.equals(email);
 
         }
 
@@ -293,8 +310,7 @@ public class Sakan {
             pst = connection.prepareStatement("SELECT EMAIL,PASSWORD FROM TENANTS WHERE EMAIL = '" + email + "' AND PASSWORD = '"+ pass +"'");
             rs = pst.executeQuery();
             if(rs.next()){
-                System.out.println(rs.getString(1));
-                System.out.println(rs.getString(2));
+
                 String tempE =  rs.getString(1) ;
                 String tempP = rs.getString(2);
                 if(!tempE.equals(null) && !tempP.equals(null)){
@@ -338,7 +354,7 @@ public class Sakan {
 
              String tempE =  rs.getString(1);
 
-             if(Sakan.flag1==0) {
+                if(Sakan.flag1==0) {
 
                 if(!tempE.equals(null)){
 
@@ -352,9 +368,11 @@ public class Sakan {
              }
             }
             else if(!rs.next()){
-                 if( func ==2){
-                    System.out.println("a user with that email doesn't exists..");
-                    Login();
+                if (flag11==0) {
+                    if (func == 2) {
+                        System.out.println("a user with that email doesn't exists..");
+                        Login();
+                    }
                 }
             }
 
@@ -373,12 +391,123 @@ public class Sakan {
     }
 
 
-    public static void viewhousesfunc(){
+    public static void viewhousesfunc(String HouseName , int HouseID, String Temail) {
 
+        Scanner sc=new Scanner(System.in);
+
+        Connection connection = null;
+        PreparedStatement pst= null;
+        ResultSet rs = null;
+        String view1;
+while(true) {
+    System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+    System.out.println("\t            ★★  " + HouseName + "  ★★                 \t");
+    System.out.println("███████████████████████████████████████████████████████");
+    System.out.println("██(A) View pictures of the selected house            ██");
+    System.out.println("███████████████████████████████████████████████████████");
+    System.out.println("██(B) View the people living in the selected house   ██");
+    System.out.println("███████████████████████████████████████████████████████");
+    System.out.println("██(C) To book the selected house                     ██");
+    System.out.println("███████████████████████████████████████████████████████");
+    System.out.println("██(D) Back                                           ██");
+    System.out.println("███████████████████████████████████████████████████████");
+    System.out.println("██(E) Main menu (Log out)                            ██");
+    System.out.println("███████████████████████████████████████████████████████");
+
+    view1  = sc.nextLine();
+
+    if (view1.equalsIgnoreCase("A")) {
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            pst = connection.prepareStatement("SELECT picture FROM house_pic  WHERE " + HouseID + " = house_id  ");
+            rs = pst.executeQuery();
+            while (rs.next()) {
+
+                String content = "\t|\t" + rs.getString(1) + "\t|\t";
+                System.out.println(content);
+
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
 
 
     }
 
+    if (view1.equalsIgnoreCase("B")) {
+
+        try {
+            int flagpart = 0;
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            pst = connection.prepareStatement("SELECT * FROM house_participants  WHERE " + HouseID + " = house_id  ");
+            rs = pst.executeQuery();
+
+
+            while (rs.next()) {
+                flagpart =1;
+                String content = "\t| Name: \t" + rs.getString(3) + "\t| Age: \t" + rs.getString(4) + "\t| Major: \t" + rs.getString(5) + "\t| Gender: \t" + rs.getString(6) + "\t|\t";
+                System.out.println(content);
+
+
+            }
+            if(flagpart==0){
+                System.out.println("No one is living in this apartment currently");
+            }
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+
+    }
+
+    if (view1.equalsIgnoreCase("C")) {
+
+        try {
+            int flagpart = 0;
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            pst = connection.prepareStatement("SELECT * FROM houses  WHERE " + HouseID + " = house_id AND max_participants > 1 ");
+            rs = pst.executeQuery();
+
+
+            if (rs.next()) {
+                Scanner st = new Scanner(System.in);
+
+
+            }
+            if(flagpart==0){
+                System.out.println("No one is living in this apartment currently");
+            }
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+
+    }
+
+    if (view1.equalsIgnoreCase("D")) {
+        Sakan.flag2 = 1;
+        tenantfunc();
+    }
+
+    else if (view1.equalsIgnoreCase("E")) {
+        Mainfunc();
+
+    }
+}
+    }
     public static void main(String []args){
 
        Mainfunc();
