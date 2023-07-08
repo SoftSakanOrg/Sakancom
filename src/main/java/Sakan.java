@@ -8,6 +8,8 @@ public class Sakan {
     public static int flag11 = 0;
     public static int flag2 = 0;
 
+    public static int whileflag = 0;
+
     public static String OnlineUser = "" ;
     public static void Mainfunc(){
            Sakan.flag1 =0;
@@ -230,7 +232,7 @@ public class Sakan {
                e.printStackTrace();
 
            }
-           Sakan.OnlineUser.equals(email);
+           Sakan.OnlineUser=email;
            Sakan.flag1 = 1;
 
        }
@@ -286,7 +288,7 @@ public class Sakan {
                 checklogin(email,pass);
             }
                  Sakan.flag11 =1;
-            Sakan.OnlineUser.equals(email);
+            Sakan.OnlineUser =email ;
 
         }
 
@@ -392,7 +394,7 @@ public class Sakan {
 
 
     public static void viewhousesfunc(String HouseName , int HouseID, String Temail) {
-
+        Scanner st = new Scanner(System.in);
         Scanner sc=new Scanner(System.in);
 
         Connection connection = null;
@@ -471,21 +473,116 @@ while(true) {
 
     if (view1.equalsIgnoreCase("C")) {
 
+        String gender;
+        String backb;
+        int ageb;
+        String ageSTR;
+        String majorb;
+        String confirm;
+        String nameb = null;
+        String hosid = null;
         try {
-            int flagpart = 0;
+
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
             pst = connection.prepareStatement("SELECT * FROM houses  WHERE " + HouseID + " = house_id AND max_participants > 1 ");
             rs = pst.executeQuery();
 
 
             if (rs.next()) {
-                Scanner st = new Scanner(System.in);
+                while (true) {
+                Sakan.whileflag = 0;
+                System.out.println("████████████████████");
+                System.out.println("██(A) To go back  ██");
+                System.out.println("████████████████████");
+
+                System.out.println("This is a student housing.. Please fill the following data");
+
+                System.out.println("Please select your gender");
+                System.out.println("  (M) Male . (F) Female");
+
+                 backb = st.nextLine();
+                if (backb.equalsIgnoreCase("A")) {
+                    Sakan.whileflag = 1;
+                    break;
+                } else if (backb.equalsIgnoreCase("M") || backb.equalsIgnoreCase("F")) {
+                     gender = backb;
+                } else continue;
+
+                System.out.println("Please Enter your age: ");
+               ageSTR = st.nextLine();
+                    if (ageSTR.equalsIgnoreCase("A")) {
+                        Sakan.whileflag = 1;
+                        break;
+                    }
+
+               if(isNumber(ageSTR)){
+                   ageb = Integer.parseInt(ageSTR);
+               }
+               else continue;
+
+               System.out.println("Please Enter your Major: ");
+
+
+               majorb = st.nextLine();
+                    if (majorb.equalsIgnoreCase("A")) {
+                        Sakan.whileflag = 1;
+                        break;
+                    }
+
+                    while(true){
+                        System.out.println("Your data is ready.. are you sure you want to continue?");
+                        System.out.println("(A) Confirm   (B) Cancel");
+                        confirm = st.nextLine();
+                        if(confirm.equalsIgnoreCase("A")){
+                            try {
+                                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                                pst = connection.prepareStatement("SELECT username FROM tenants WHERE email = '" + Temail + "'" );
+                                rs = pst.executeQuery();
+
+                                if(rs.next()){
+                                     nameb = rs.getString(1);
+
+                                }
+                                pst = connection.prepareStatement("INSERT INTO house_participants(house_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
+                                pst.setInt(1,HouseID );
+                                pst.setString(2,nameb );
+                                pst.setInt(3, ageb);
+                                pst.setString(4, majorb);
+                                pst.setString(5, gender );
+
+                                pst.executeUpdate();
+                                pst = connection.prepareStatement("UPDATE houses SET participants = (participants+1) WHERE house_id = '" + HouseID + "'");
+                                pst.executeUpdate();
+                                pst = connection.prepareStatement("SELECT house_id FROM houses WHERE participants = max_participants ");
+                                rs = pst.executeQuery();
+
+                                if(rs.next()){
+
+                                    pst = connection.prepareStatement("UPDATE houses SET availability = 'unavailable' WHERE house_id = '" + HouseID + "'");
+                                    pst.executeUpdate();
+                                }
+
+                              System.out.println("Apartment booked successfully!");
+                               break;
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+
+                            }
+
+                        }
+                        else if(confirm.equalsIgnoreCase("B")){
+                            Sakan.whileflag = 1;
+                            break;
+                        }
+                        else System.out.println("Invalid input");
+                    }
+
+            }
+                if(Sakan.whileflag == 1){continue;}
 
 
             }
-            if(flagpart==0){
-                System.out.println("No one is living in this apartment currently");
-            }
+
 
 
 
@@ -508,6 +605,15 @@ while(true) {
     }
 }
     }
+    static boolean isNumber(String s)
+    {
+        for (int i = 0; i < s.length(); i++)
+            if (Character.isDigit(s.charAt(i)) == false)
+                return false;
+
+        return true;
+    }
+
     public static void main(String []args){
 
        Mainfunc();
