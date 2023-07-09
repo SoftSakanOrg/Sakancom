@@ -9,6 +9,9 @@ public class Sakan {
     public static int flag2 = 0;
 
     public static int whileflag = 0;
+    public static int whileflag2 = 0;
+
+    public static int flagnext = 0;
 
     public static String OnlineUser = "" ;
     public static void Mainfunc(){
@@ -104,65 +107,86 @@ public class Sakan {
            System.out.println("███████████████████████████████████████████████████████");
            System.out.println("██(B) To Select one of the available houses using ID ██");
            System.out.println("███████████████████████████████████████████████████████");
-           System.out.println("██(C) Main menu (Log out)                            ██");
+           System.out.println("██(C) View furnitures for sale                       ██");
+           System.out.println("███████████████████████████████████████████████████████");
+           System.out.println("██(E) To Select a furniture to buy using ID          ██");
+           System.out.println("███████████████████████████████████████████████████████");
+           System.out.println("██(F) Advertise a furniture for sale                 ██");
+           System.out.println("███████████████████████████████████████████████████████");
+           System.out.println("██(G) Main menu (Log out)                            ██");
            System.out.println("███████████████████████████████████████████████████████");
            view = sv.nextLine();
            if (view.equalsIgnoreCase("A")) {
 
-
-               try {
-                   connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                   pst = connection.prepareStatement("SELECT * FROM houses WHERE availability = 'available' ");
-                   rs = pst.executeQuery();
-                   while (rs.next()) {
-                       String content = "\t|\t ID: " + rs.getString(1) + " \t|\t" + rs.getString(2) + "\t|\t" + rs.getString(3) + "\t|\t" + rs.getInt(4) + "\t|\t" + rs.getString(5) + "\t|\t" + rs.getString(6) + "\t|\t";
-                       System.out.println(content);
-                   }
-
-
-               } catch (SQLException e) {
-                   e.printStackTrace();
-
-               }
-
+             viewhouse();
 
            } else if (view.equalsIgnoreCase("B")) {
-               System.out.print("Enter the house ID: ");
-
-              int houseNum =sc.nextInt();
-
-               try {
-                   connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                   pst = connection.prepareStatement("SELECT * FROM houses WHERE house_id = '" + houseNum + "' AND availability = 'available'" );
-                   rs = pst.executeQuery();
-                   if (rs.next()) {
-                       String Housename = rs.getString(2);
-                       String content = "\t|\t" + rs.getString(2) + "\t|\t" + rs.getString(3) + "\t|\t" + rs.getInt(4) + "\t|\t" + rs.getString(5) + "\t|\t" + rs.getString(6) + "\t|\t";
-                       System.out.println(content);
-                       viewhousesfunc(Housename,houseNum,Sakan.OnlineUser);
-
-
-                   }
-                   else if(!rs.next()){
-                       System.out.println("Please enter a valid house ID...");
-
-                   }
-
-
-               } catch (SQLException e) {
-                   e.printStackTrace();
-
-               }
-
-
-
-
-           } else if (view.equalsIgnoreCase("C")) {
+               selecthouse();
+           } else if (view.equalsIgnoreCase("G")) {
                Mainfunc();
 
            }
 
        }
+    }
+
+    public static void viewhouse(){
+        Connection connection = null;
+        PreparedStatement pst= null;
+        ResultSet rs = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            pst = connection.prepareStatement("SELECT * FROM houses WHERE availability = 'available' ");
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                String content = "\t|\t ID: " + rs.getString(1) + " \t|\t HouseName: " + rs.getString(2) + "\t|\t availability: " + rs.getString(3) + "\t|\t price: " + rs.getInt(4) + "\t|\t location: " + rs.getString(5) + "\t|\t services: " + rs.getString(6) + "\t|\t Number of residents: " + rs.getString(7) + "\t|\t Owner Name: " + rs.getString(9) + "\t|\t Contact number: " + rs.getInt(10) + "\t|\t";
+                System.out.println(content);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+    }
+
+    public static void selecthouse(){
+        Scanner sc=new Scanner(System.in);
+        Connection connection = null;
+        PreparedStatement pst= null;
+        ResultSet rs = null;
+        System.out.print("Enter the house ID: ");
+
+        int houseNum =sc.nextInt();
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            pst = connection.prepareStatement("SELECT * FROM houses WHERE house_id = '" + houseNum + "' AND availability = 'available'" );
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                String Housename = rs.getString(2);
+                String content = "\t|\t ID: " + rs.getString(1) + " \t|\t HouseName: " + rs.getString(2) + "\t|\t availability: " + rs.getString(3) + "\t|\t price: " + rs.getInt(4) + "\t|\t location: " + rs.getString(5) + "\t|\t services: " + rs.getString(6) + "\t|\t Number of residents: " + rs.getString(7) + "\t|\t Owner Name: " + rs.getString(9) + "\t|\t Contact number: " + rs.getInt(10) + "\t|\t";
+                System.out.println(content);
+                viewhousesfunc(Housename,houseNum,Sakan.OnlineUser);
+
+
+            }
+            else if(!rs.next()){
+                System.out.println("Please enter a valid house ID...");
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+
+
+
     }
 
     public static void Signup(){
@@ -491,6 +515,7 @@ while(true) {
             if (rs.next()) {
                 while (true) {
                 Sakan.whileflag = 0;
+                    Sakan.whileflag2 = 0;
                 System.out.println("████████████████████");
                 System.out.println("██(A) To go back  ██");
                 System.out.println("████████████████████");
@@ -530,6 +555,7 @@ while(true) {
                     }
 
                     while(true){
+                        Sakan.whileflag2=0;
                         System.out.println("Your data is ready.. are you sure you want to continue?");
                         System.out.println("(A) Confirm   (B) Cancel");
                         confirm = st.nextLine();
@@ -563,7 +589,10 @@ while(true) {
                                 }
 
                               System.out.println("Apartment booked successfully!");
-                               break;
+                                whileflag2 = 1;
+                                Sakan.flag2 = 1;
+                                tenantfunc();
+                             //  break;
                             } catch (SQLException e) {
                                 e.printStackTrace();
 
@@ -576,13 +605,84 @@ while(true) {
                         }
                         else System.out.println("Invalid input");
                     }
-
+                   if(Sakan.whileflag2 == 1){break;}
             }
                 if(Sakan.whileflag == 1){continue;}
 
 
             }
+           else {
 
+                while (true) {
+                    Sakan.whileflag = 0;
+                    Sakan.whileflag2 = 0;
+                    System.out.println("████████████████████");
+                    System.out.println("██(A) To go back  ██");
+                    System.out.println("████████████████████");
+
+
+                    while(true){
+                        ageb = 0;
+                        majorb = "Unknown";
+                        gender = "Unknown";
+                        Sakan.whileflag2=0;
+                        System.out.println("Your data is ready.. are you sure you want to continue?");
+                        System.out.println("(A) Confirm   (B) Cancel");
+                        confirm = st.nextLine();
+                        if(confirm.equalsIgnoreCase("A")){
+                            try {
+                                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                                pst = connection.prepareStatement("SELECT username FROM tenants WHERE email = '" + Temail + "'" );
+                                rs = pst.executeQuery();
+
+                                if(rs.next()){
+                                    nameb = rs.getString(1);
+
+                                }
+                                pst = connection.prepareStatement("INSERT INTO house_participants(house_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
+                                pst.setInt(1,HouseID );
+                                pst.setString(2,nameb );
+                                pst.setInt(3, ageb);
+                                pst.setString(4, majorb);
+                                pst.setString(5, gender );
+
+                                pst.executeUpdate();
+                                pst = connection.prepareStatement("UPDATE houses SET participants = (participants+1) WHERE house_id = '" + HouseID + "'");
+                                pst.executeUpdate();
+                                pst = connection.prepareStatement("SELECT house_id FROM houses WHERE participants = max_participants ");
+                                rs = pst.executeQuery();
+
+                                if(rs.next()){
+
+                                    pst = connection.prepareStatement("UPDATE houses SET availability = 'unavailable' WHERE house_id = '" + HouseID + "'");
+                                    pst.executeUpdate();
+                                }
+
+                                System.out.println("Apartment booked successfully!");
+                                Sakan.flag2 = 1;
+                                whileflag2 = 1;
+                                tenantfunc();
+
+                               // break;
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+
+                            }
+
+                        }
+                        else if(confirm.equalsIgnoreCase("B")){
+                            Sakan.whileflag = 1;
+                            break;
+                        }
+                        else System.out.println("Invalid input");
+                    }
+                    if(Sakan.whileflag2 == 1){break;}
+                }
+                if(Sakan.whileflag == 1){continue;}
+
+
+
+            }
 
 
 
@@ -605,6 +705,7 @@ while(true) {
     }
 }
     }
+
     static boolean isNumber(String s)
     {
         for (int i = 0; i < s.length(); i++)
