@@ -122,6 +122,14 @@ public class Sakan {
 
            } else if (view.equalsIgnoreCase("B")) {
                selecthouse();
+           } else if (view.equalsIgnoreCase("C")) {
+
+               viewfurniture();
+
+           }else if(view.equalsIgnoreCase("E")){
+            selectfurniture();
+           } else if(view.equalsIgnoreCase("F")){
+              addfurniture(Sakan.OnlineUser);
            } else if (view.equalsIgnoreCase("G")) {
                Mainfunc();
 
@@ -186,6 +194,201 @@ public class Sakan {
 
 
 
+
+    }
+
+    public static void viewfurniture(){
+        Connection connection = null;
+        PreparedStatement pst= null;
+        ResultSet rs = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            pst = connection.prepareStatement("SELECT * FROM furniture WHERE status = 'forsale' ");
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                String content = "\t|\t ID: " + rs.getInt(1) + " \t|\t price: " + rs.getInt(3) + "\t|\t description: " + rs.getString(4) + "\t|\t status: " + rs.getString(5) + "\t|\t" ;
+                System.out.println(content);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+    }
+
+    public static void selectfurniture(){
+        Scanner sc=new Scanner(System.in);
+        Connection connection = null;
+        PreparedStatement pst= null;
+        ResultSet rs = null;
+        System.out.print("Enter the furniture ID: ");
+
+        int furnitureNum =sc.nextInt();
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            pst = connection.prepareStatement("SELECT * FROM furniture WHERE furniture_id = '" + furnitureNum + "' AND status = 'forsale'" );
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                String fdescription = rs.getString(4);
+                String content = "\t|\t ID: " + rs.getInt(1) + " \t|\t price: " + rs.getInt(3) + "\t|\t description: " + rs.getString(4) + "\t|\t";
+                System.out.println(content);
+                viewfurnituresfunc(fdescription,furnitureNum);
+
+
+            }
+            else if(!rs.next()){
+                System.out.println("Please enter a valid furniture ID...");
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+
+
+
+    }
+
+    public static void  addfurniture(String Temail){
+        Scanner sf=new Scanner(System.in);
+        Connection connection = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        int TenantID=0;
+        int furID=0;
+        Scanner scon=new Scanner(System.in);
+        int furIDVal=0;
+
+        String fstatus="forsale";
+
+//        try{
+//                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+//                pst = connection.prepareStatement("SELECT ID FROM TENANTS WHERE EMAIL='"+Temail+"'");
+//                rs=pst.executeQuery();
+//
+//                if(rs.next()){
+//                    TenantID=rs.getInt(1);
+//                }
+//        }
+//        catch (SQLException e) {
+//            e.printStackTrace();
+//
+//        }
+
+        System.out.println("███████████████████████████████████████████████████████");
+        System.out.println("██(1) Back                                           ██");
+        System.out.println("███████████████████████████████████████████████████████");
+
+        System.out.println(" Enter description: ");
+        String description;
+        String text=sf.nextLine();
+
+       if(text.equalsIgnoreCase("1")){
+           Sakan.flag2 = 1;
+           tenantfunc();
+       }
+         description=text;
+
+
+
+        int price;
+
+        System.out.println(" Enter price: ");
+        int tnum=sf.nextInt();
+
+        if(String.valueOf(tnum).equalsIgnoreCase("1")){
+            Sakan.flag2 = 1;
+            tenantfunc();
+        }
+        price=tnum;
+
+     try {
+
+         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+         pst = connection.prepareStatement("SELECT ID FROM TENANTS WHERE EMAIL='" + Temail + "'");
+         rs = pst.executeQuery();
+
+         if (rs.next()) {
+             TenantID = rs.getInt(1);
+         }
+
+         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+         pst = connection.prepareStatement("INSERT INTO FURNITURE(TENANT_ID,PRICE,DESCRIPTION,STATUS) VALUES" + "(?,?,?,?)");
+
+         pst.setInt(1, TenantID);
+         pst.setInt(2, price);
+         pst.setString(3, description);
+         pst.setString(4, fstatus);
+
+         pst.executeUpdate();
+         System.out.println("You have successfully added your furnitures...");
+
+
+     } catch (SQLException e) {
+         e.printStackTrace();
+
+     }
+     try{
+         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+         pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE ORDER BY FURNITURE_ID DESC LIMIT 1");
+         rs= pst.executeQuery();
+
+         if(rs.next()){
+          furIDVal=rs.getInt(1);
+         }
+
+     }
+     catch (SQLException e) {
+         e.printStackTrace();
+
+     }
+     try {
+         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+         pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE WHERE FURNITURE_ID='" + furIDVal + "'");
+         rs = pst.executeQuery();
+         if (rs.next()) {
+             furID = rs.getInt(1);
+         }
+     } catch (SQLException e) {
+         e.printStackTrace();
+
+     }
+     System.out.println("Do you want to add  pictures for this furniture?");
+     System.out.println("A) yes . B) No");
+     String ans = scon.nextLine();
+     String picture = null;
+     if (ans.equalsIgnoreCase("A")) {
+         System.out.println(" Enter pictures: ");
+
+         String pictext = scon.nextLine();
+         if (pictext.equalsIgnoreCase("1")) {
+             Sakan.flag2 = 1;
+             tenantfunc();
+         }
+         picture = pictext;
+         try {
+             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+             pst = connection.prepareStatement("INSERT INTO FURNITURE_PIC(FURNITURE_ID,PICTURE) VALUES (?,?)");
+             pst.setInt(1, furID);
+             pst.setString(2, picture);
+             pst.executeUpdate();
+         } catch (SQLException e) {
+             e.printStackTrace();
+
+         }
+         System.out.println("Pictures have been added");
+     }
+
+
+     Sakan.flag2 = 1;
+     tenantfunc();
 
     }
 
@@ -416,6 +619,124 @@ public class Sakan {
 
     }
 
+    public static void viewfurnituresfunc(String Fdescription , int FurnitureID) {
+
+        Scanner st = new Scanner(System.in);
+        Scanner sc=new Scanner(System.in);
+
+        Connection connection = null;
+        PreparedStatement pst= null;
+        ResultSet rs = null;
+        String view1;
+        while(true) {
+            System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+            System.out.println("\t            ★★  " + Fdescription + "  ★★                 \t");
+            System.out.println("███████████████████████████████████████████████████████");
+            System.out.println("██(A) View pictures of the selected furniture        ██");
+            System.out.println("███████████████████████████████████████████████████████");
+            System.out.println("██(B) To purchase the selected furniture             ██");
+            System.out.println("███████████████████████████████████████████████████████");
+            System.out.println("██(C) Back                                           ██");
+            System.out.println("███████████████████████████████████████████████████████");
+            System.out.println("██(D) Main menu (Log out)                            ██");
+            System.out.println("███████████████████████████████████████████████████████");
+
+            view1  = sc.nextLine();
+
+            if (view1.equalsIgnoreCase("A")) {
+
+                try {
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                    pst = connection.prepareStatement("SELECT picture FROM furniture_pic  WHERE " + FurnitureID + " = furniture_id  ");
+                    rs = pst.executeQuery();
+                    while (rs.next()) {
+
+                        String content = "\t|\t" + rs.getString(1) + "\t|\t";
+                        System.out.println(content);
+
+
+                    }
+
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+
+
+            }
+
+
+
+            if (view1.equalsIgnoreCase("B")) {
+
+
+                String confirm;
+
+
+
+                        while (true) {
+                            Sakan.whileflag = 0;
+                            Sakan.whileflag2 = 0;
+
+
+                            while(true){
+
+                                Sakan.whileflag2=0;
+                                System.out.println("Are you sure you want to purchase this Furniture?");
+                                System.out.println("(A) Confirm   (B) Cancel");
+                                confirm = st.nextLine();
+                                if(confirm.equalsIgnoreCase("A")){
+                                    try {
+
+
+                                        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                                        pst = connection.prepareStatement("UPDATE furniture SET status='sold' WHERE furniture_id = '" + FurnitureID + "'");
+                                        pst.executeUpdate();
+
+                                        System.out.println("Furniture purchased successfully!");
+                                        Sakan.flag2 = 1;
+                                        Sakan.whileflag2 = 1;
+                                        tenantfunc();
+
+                                        // break;
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+
+                                    }
+
+                                }
+                                else if(confirm.equalsIgnoreCase("B")){
+                                    Sakan.whileflag = 1;
+                                    break;
+                                }
+                                else System.out.println("Invalid input");
+                            }
+                            if(Sakan.whileflag == 1){break;}
+                        }
+
+
+
+
+
+                }
+            else if (view1.equalsIgnoreCase("C")) {
+                Sakan.flag2 = 1;
+                tenantfunc();
+            }
+
+            else if (view1.equalsIgnoreCase("D")) {
+                Mainfunc();
+
+            }
+
+
+            }
+
+
+        }
+
+
 
     public static void viewhousesfunc(String HouseName , int HouseID, String Temail) {
         Scanner st = new Scanner(System.in);
@@ -589,7 +910,7 @@ while(true) {
                                 }
 
                               System.out.println("Apartment booked successfully!");
-                                whileflag2 = 1;
+                                Sakan.whileflag2 = 1;
                                 Sakan.flag2 = 1;
                                 tenantfunc();
                              //  break;
@@ -605,7 +926,12 @@ while(true) {
                         }
                         else System.out.println("Invalid input");
                     }
-                   if(Sakan.whileflag2 == 1){break;}
+
+                   if(Sakan.whileflag2 == 1){
+
+                       break;
+                   }
+
             }
                 if(Sakan.whileflag == 1){continue;}
 
@@ -616,9 +942,6 @@ while(true) {
                 while (true) {
                     Sakan.whileflag = 0;
                     Sakan.whileflag2 = 0;
-                    System.out.println("████████████████████");
-                    System.out.println("██(A) To go back  ██");
-                    System.out.println("████████████████████");
 
 
                     while(true){
@@ -660,7 +983,7 @@ while(true) {
 
                                 System.out.println("Apartment booked successfully!");
                                 Sakan.flag2 = 1;
-                                whileflag2 = 1;
+                                Sakan.whileflag2 = 1;
                                 tenantfunc();
 
                                // break;
@@ -676,7 +999,7 @@ while(true) {
                         }
                         else System.out.println("Invalid input");
                     }
-                    if(Sakan.whileflag2 == 1){break;}
+                    if(Sakan.whileflag == 1){break;}
                 }
                 if(Sakan.whileflag == 1){continue;}
 
