@@ -1,9 +1,11 @@
-//import java.util.Scanner;
+package main;//import java.util.Scanner;
 import java.sql.*;
 import java.util.*;
 import static java.lang.System.exit;
+import static java.lang.System.getLogger;
 
 public class Sakan {
+
     public static int flag1 = 0;
     public static int flag11 = 0;
     public static int flag2 = 0;
@@ -14,6 +16,13 @@ public class Sakan {
     public static int flagnext = 0;
 
     public static String OnlineUser = "" ;
+    public boolean flaglogin;
+   public static Tenant T=new Tenant();
+    static Houses H=new Houses();
+    static Furniture F=new Furniture();
+    static houseParticipants hp=new houseParticipants();
+    static housePictures hpc=new housePictures();
+    static furniturePictures fpc=new furniturePictures();
     public static void Mainfunc(){
            Sakan.flag1 =0;
            Sakan.flag2 = 0;
@@ -60,15 +69,10 @@ public class Sakan {
 
 
         Scanner sc=new Scanner(System.in);
-        String c ;
-        String name;
-        String pass;
-        String temp;
-        String email;
 
-        Connection connection = null;
-        PreparedStatement pst= null;
-        ResultSet rs = null;
+        String temp;
+
+
         if(Sakan.flag2==0){
 
         System.out.println("█████████████████████████");
@@ -102,6 +106,7 @@ public class Sakan {
         String view;
        while(true) {
 
+           System.out.println("\nHere is a menu showing the available options:-");
            System.out.println("███████████████████████████████████████████████████████");
            System.out.println("██(A) View available housing                         ██");
            System.out.println("███████████████████████████████████████████████████████");
@@ -167,17 +172,17 @@ public class Sakan {
         ResultSet rs = null;
         System.out.print("Enter the house ID: ");
 
-        int houseNum =sc.nextInt();
+        Sakan.H.setHouseId(sc.nextInt());
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT * FROM houses WHERE house_id = '" + houseNum + "' AND availability = 'available'" );
+            pst = connection.prepareStatement("SELECT * FROM houses WHERE house_id = '" +  Sakan.H.getHouseId() + "' AND availability = 'available'" );
             rs = pst.executeQuery();
             if (rs.next()) {
-                String Housename = rs.getString(2);
+               Sakan.H.setHouseName(rs.getString(2));
                 String content = "\t|\t ID: " + rs.getString(1) + " \t|\t HouseName: " + rs.getString(2) + "\t|\t availability: " + rs.getString(3) + "\t|\t price: " + rs.getInt(4) + "\t|\t location: " + rs.getString(5) + "\t|\t services: " + rs.getString(6) + "\t|\t Number of residents: " + rs.getString(7) + "\t|\t Owner Name: " + rs.getString(9) + "\t|\t Contact number: " + rs.getInt(10) + "\t|\t";
                 System.out.println(content);
-                viewhousesfunc(Housename,houseNum,Sakan.OnlineUser);
+                viewhousesfunc(Sakan.H.getHouseName(),Sakan.H.getHouseId(),Sakan.OnlineUser);
 
 
             }
@@ -226,17 +231,17 @@ public class Sakan {
         ResultSet rs = null;
         System.out.print("Enter the furniture ID: ");
 
-        int furnitureNum =sc.nextInt();
+       Sakan.F.setFurnitureID(sc.nextInt());
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT * FROM furniture WHERE furniture_id = '" + furnitureNum + "' AND status = 'forsale'" );
+            pst = connection.prepareStatement("SELECT * FROM furniture WHERE furniture_id = '" + Sakan.F.getFurnitureID() + "' AND status = 'forsale'" );
             rs = pst.executeQuery();
             if (rs.next()) {
-                String fdescription = rs.getString(4);
+               Sakan.F.setFurnitureDescription(rs.getString(4));
                 String content = "\t|\t ID: " + rs.getInt(1) + " \t|\t price: " + rs.getInt(3) + "\t|\t description: " + rs.getString(4) + "\t|\t";
                 System.out.println(content);
-                viewfurnituresfunc(fdescription,furnitureNum);
+                viewfurnituresfunc(  Sakan.F.getFurnitureDescription(),Sakan.F.getFurnitureID());
 
 
             }
@@ -261,53 +266,42 @@ public class Sakan {
         Connection connection = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        int TenantID=0;
+       // int TenantID=0;
+        Sakan.T.setTenantID(0);
         int furID=0;
         Scanner scon=new Scanner(System.in);
         int furIDVal=0;
 
-        String fstatus="forsale";
+       Sakan.F.setFurnitureStatus("forsale");
 
-//        try{
-//                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-//                pst = connection.prepareStatement("SELECT ID FROM TENANTS WHERE EMAIL='"+Temail+"'");
-//                rs=pst.executeQuery();
-//
-//                if(rs.next()){
-//                    TenantID=rs.getInt(1);
-//                }
-//        }
-//        catch (SQLException e) {
-//            e.printStackTrace();
-//
-//        }
+
 
         System.out.println("███████████████████████████████████████████████████████");
         System.out.println("██(1) Back                                           ██");
         System.out.println("███████████████████████████████████████████████████████");
 
         System.out.println(" Enter description: ");
-        String description;
-        String text=sf.nextLine();
+//        String description;
+       Sakan.F.setFurnitureDescription(sf.nextLine());
 
-       if(text.equalsIgnoreCase("1")){
+       if(Sakan.F.getFurnitureDescription().equalsIgnoreCase("1")){
            Sakan.flag2 = 1;
            tenantfunc();
        }
-         description=text;
+      //   description=text;
 
 
 
         int price;
 
         System.out.println(" Enter price: ");
-        int tnum=sf.nextInt();
+         Sakan.F.setFurniturePrice(sf.nextInt());
 
-        if(String.valueOf(tnum).equalsIgnoreCase("1")){
+        if(String.valueOf(Sakan.F.getFurniturePrice()).equalsIgnoreCase("1")){
             Sakan.flag2 = 1;
             tenantfunc();
         }
-        price=tnum;
+//        price=tnum;
 
      try {
 
@@ -316,16 +310,16 @@ public class Sakan {
          rs = pst.executeQuery();
 
          if (rs.next()) {
-             TenantID = rs.getInt(1);
+             Sakan.T.setTenantID(rs.getInt(1));
          }
 
          connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
          pst = connection.prepareStatement("INSERT INTO FURNITURE(TENANT_ID,PRICE,DESCRIPTION,STATUS) VALUES" + "(?,?,?,?)");
 
-         pst.setInt(1, TenantID);
-         pst.setInt(2, price);
-         pst.setString(3, description);
-         pst.setString(4, fstatus);
+         pst.setInt(1,  Sakan.T.getTenantID());
+         pst.setInt(2, Sakan.F.getFurniturePrice());
+         pst.setString(3, Sakan.F.getFurnitureDescription());
+         pst.setString(4, Sakan.F.getFurnitureStatus());
 
          pst.executeUpdate();
          System.out.println("You have successfully added your furnitures...");
@@ -341,7 +335,7 @@ public class Sakan {
          rs= pst.executeQuery();
 
          if(rs.next()){
-          furIDVal=rs.getInt(1);
+          Sakan.F.setFurnitureID(rs.getInt(1));
          }
 
      }
@@ -351,10 +345,10 @@ public class Sakan {
      }
      try {
          connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-         pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE WHERE FURNITURE_ID='" + furIDVal + "'");
+         pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE WHERE FURNITURE_ID='" + Sakan.F.getFurnitureID() + "'");
          rs = pst.executeQuery();
          if (rs.next()) {
-             furID = rs.getInt(1);
+             Sakan.F.setFurnitureID(rs.getInt(1));
          }
      } catch (SQLException e) {
          e.printStackTrace();
@@ -363,21 +357,21 @@ public class Sakan {
      System.out.println("Do you want to add  pictures for this furniture?");
      System.out.println("A) yes . B) No");
      String ans = scon.nextLine();
-     String picture = null;
+//     String picture = null;
      if (ans.equalsIgnoreCase("A")) {
          System.out.println(" Enter pictures: ");
 
-         String pictext = scon.nextLine();
-         if (pictext.equalsIgnoreCase("1")) {
+         Sakan.fpc.setFurniturePicture(scon.nextLine());
+         if ( Sakan.fpc.getFurniturePicture().equalsIgnoreCase("1")) {
              Sakan.flag2 = 1;
              tenantfunc();
          }
-         picture = pictext;
+//         picture = pictext;
          try {
              connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
              pst = connection.prepareStatement("INSERT INTO FURNITURE_PIC(FURNITURE_ID,PICTURE) VALUES (?,?)");
-             pst.setInt(1, furID);
-             pst.setString(2, picture);
+             pst.setInt(1, Sakan.F.getFurnitureID());
+             pst.setString(2, Sakan.fpc.getFurniturePicture());
              pst.executeUpdate();
          } catch (SQLException e) {
              e.printStackTrace();
@@ -393,11 +387,10 @@ public class Sakan {
     }
 
     public static void Signup(){
+
+
       if (Sakan.flag1 == 0) {
           Scanner sc = new Scanner(System.in);
-          String name;
-          String pass;
-          String email;
 
           Connection connection = null;
           PreparedStatement pst = null;
@@ -409,57 +402,61 @@ public class Sakan {
           System.out.println("███████████████████████████████");
 
           System.out.print("Enter your email: ");
-          String tempemail = sc.nextLine();
-          if (tempemail.equalsIgnoreCase("1")) {
+//          String tempemail
+              Sakan.T.setEmail(sc.nextLine());
+          if (Sakan.T.getEmail().equalsIgnoreCase("1")) {
               Mainfunc();
 
           }
-          if (!tempemail.contains("@") || !tempemail.contains(".")) {
+          if (!Sakan.T.getEmail().contains("@") || !T.getEmail().contains(".")) {
               System.out.println("Please enter a valid email...");
               Signup();
           }
 
-          email = tempemail;
 
-          checkemail(email, 1);
+
+          checkemail(Sakan.T.getEmail(), 1);
               if(Sakan.flag1==0) {
 
            System.out.print("Enter username: ");
-           String tempname = sc.nextLine();
-           if (tempname.equalsIgnoreCase("1")) {
+                  Sakan. T.setUsername( sc.nextLine());
+           if (Sakan.T.getUsername().equalsIgnoreCase("1")) {
                Mainfunc();
 
            }
-           name = tempname;
+//           name = tempname;
 
 
            System.out.print("Enter password: ");
-           String temppass = sc.nextLine();
+                  Sakan.T.setPassword(sc.nextLine());
 
-           if (temppass.equalsIgnoreCase("1")) {
+           if (Sakan.T.getPassword().equalsIgnoreCase("1")) {
                Mainfunc();
 
            }
 
-           pass = temppass;
+         //  pass = temppass;
 
 
            try {
                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
                pst = connection.prepareStatement("INSERT INTO TENANTS(EMAIL,USERNAME,PASSWORD) VALUES" + "(?,?,?)");
 
-               pst.setString(1, email);
-               pst.setString(2, name);
-               pst.setString(3, pass);
+               pst.setString(1, T.getEmail());
+               pst.setString(2, T.getUsername());
+               pst.setString(3, T.getPassword());
 
                pst.executeUpdate();
+
+           System.out.println("Signed  up successfully...");
+
 
 
            } catch (SQLException e) {
                e.printStackTrace();
 
            }
-           Sakan.OnlineUser=email;
+           Sakan.OnlineUser=T.getEmail();
            Sakan.flag1 = 1;
 
        }
@@ -468,17 +465,20 @@ public class Sakan {
 
     public static void Login(){
 
+
+
         if (Sakan.flag11 == 0) {
 
 
             Scanner sc = new Scanner(System.in);
-            String name;
-            String pass;
-            String email;
+
+
 
             Connection connection = null;
             PreparedStatement pst = null;
             ResultSet rs = null;
+
+
 
 
             System.out.println("███████████████████████████████");
@@ -486,36 +486,36 @@ public class Sakan {
             System.out.println("███████████████████████████████");
 
             System.out.print("Enter your email: ");
-            String tempemail = sc.nextLine();
-            if (tempemail.equalsIgnoreCase("1")) {
+            Sakan.T.setEmail(sc.nextLine());
+            if ( Sakan.T.getEmail().equalsIgnoreCase("1")) {
                 Mainfunc();
 
             }
-            if (!tempemail.contains("@") || !tempemail.contains(".")) {
+            if (!Sakan.T.getEmail().contains("@") || !Sakan.T.getEmail().contains(".")) {
                 System.out.println("Please enter a valid email...");
                 Login();
             }
 
-            email = tempemail;
+//            email = tempemail;
 
-            checkemail(email, 2);
+            checkemail(Sakan.T.getEmail(), 2);
                 if (Sakan.flag11 == 0) {
 
 
 
                 System.out.print("Enter password: ");
-                String temppass = sc.nextLine();
+                    Sakan.T.setPassword(sc.nextLine());
 
-                if (temppass.equalsIgnoreCase("1")) {
+                if (  Sakan.T.getPassword().equalsIgnoreCase("1")) {
                     Mainfunc();
 
                 }
 
-                pass = temppass;
-                checklogin(email,pass);
+//                pass = temppass;
+                checklogin(Sakan.T.getEmail(),Sakan.T.getPassword());
             }
                  Sakan.flag11 =1;
-            Sakan.OnlineUser =email ;
+            Sakan.OnlineUser =Sakan.T.getEmail() ;
 
         }
 
@@ -851,7 +851,7 @@ while(true) {
                     Sakan.whileflag = 1;
                     break;
                 } else if (backb.equalsIgnoreCase("M") || backb.equalsIgnoreCase("F")) {
-                     gender = backb;
+                     Sakan.hp.setPartGender( backb);
                 } else continue;
 
                 System.out.println("Please Enter your age: ");
@@ -862,15 +862,15 @@ while(true) {
                     }
 
                if(isNumber(ageSTR)){
-                   ageb = Integer.parseInt(ageSTR);
+                   Sakan.hp.setPartAge(Integer.parseInt(ageSTR));
                }
                else continue;
 
                System.out.println("Please Enter your Major: ");
 
 
-               majorb = st.nextLine();
-                    if (majorb.equalsIgnoreCase("A")) {
+              Sakan.hp.setPartMajor(st.nextLine());
+                    if (Sakan.hp.getPartMajor().equalsIgnoreCase("A")) {
                         Sakan.whileflag = 1;
                         break;
                     }
@@ -887,15 +887,15 @@ while(true) {
                                 rs = pst.executeQuery();
 
                                 if(rs.next()){
-                                     nameb = rs.getString(1);
+                                     Sakan.T.setUsername(rs.getString(1));
 
                                 }
                                 pst = connection.prepareStatement("INSERT INTO house_participants(house_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
                                 pst.setInt(1,HouseID );
-                                pst.setString(2,nameb );
-                                pst.setInt(3, ageb);
-                                pst.setString(4, majorb);
-                                pst.setString(5, gender );
+                                pst.setString(2,Sakan.T.getUsername() );
+                                pst.setInt(3, Sakan.hp.getPartAge());
+                                pst.setString(4, Sakan.hp.getPartMajor());
+                                pst.setString(5, Sakan.hp.getPartGender() );
 
                                 pst.executeUpdate();
                                 pst = connection.prepareStatement("UPDATE houses SET participants = (participants+1) WHERE house_id = '" + HouseID + "'");

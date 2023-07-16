@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -20,9 +20,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="b31be6aa-e67d-47e2-92cf-1b37e594a1f5" object-ref="schemas/sakan/tables/tolerants" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="b31be6aa-e67d-47e2-92cf-1b37e594a1f5" dataset="sakan.tolerants" active-filter-id="EMPTY_FILTER" />
@@ -52,7 +50,7 @@
           <database value="Sakan" />
           <tns-folder value="" />
           <tns-profile value="" />
-          <type value="USER_PASSWORD" />
+          <type value="USER" />
           <user value="root" />
           <deprecated-pwd value="" />
         </database>
