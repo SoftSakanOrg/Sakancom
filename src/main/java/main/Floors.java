@@ -10,10 +10,7 @@ public class Floors {
     private String houseServices;
     private Integer houseParticipants;
     private Integer houseMaxParticipants;
-    private String houseOwnerName;
 
-
-    private Integer houseOwnerContact;
 
 
 
@@ -29,8 +26,7 @@ public class Floors {
         this.houseServices = houseServices;
         this.houseParticipants = houseParticipants;
         this.houseMaxParticipants = houseMaxParticipants;
-        this.houseOwnerName = houseOwnerName;
-        this.houseOwnerContact = houseOwnerContact;
+
     }
 
     public Integer getHouseId() {
@@ -97,22 +93,5 @@ public class Floors {
         this.houseMaxParticipants = houseMaxParticipants;
     }
 
-    public String getHouseOwnerName() {
-        return houseOwnerName;
-    }
 
-    public void setHouseOwnerName(String houseOwnerName) {
-        this.houseOwnerName = houseOwnerName;
-    }
-
-    public Integer getHouseOwnerContact() {
-        return houseOwnerContact;
-    }
-
-    public void setHouseOwnerContact(Integer houseOwnerContact) {
-        this.houseOwnerContact = houseOwnerContact;
-    }
-
-    //    public Houses(houseId,houseName,) {
-//    }
 }

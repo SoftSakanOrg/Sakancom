@@ -47,7 +47,7 @@ public class Sakan {
 
 
             if(c.equalsIgnoreCase("1")){
-                tenantfunc();
+                tenantfunc("TENANTS");
 
 
             }
@@ -64,7 +64,7 @@ public class Sakan {
         }
     }
 
-    public static void tenantfunc(){
+    public static void tenantfunc(String usertype){
 
 
 
@@ -92,12 +92,12 @@ public class Sakan {
 
         }
         else if(temp.equalsIgnoreCase("1")) {
-            Signup();
+            Signup(usertype);
 
 
         }
         else if(temp.equalsIgnoreCase("2")) {
-            Login();
+            Login(usertype);
 
 
         }
@@ -146,14 +146,19 @@ public class Sakan {
     public static void viewfloor(){
         Connection connection = null;
         PreparedStatement pst= null;
+        PreparedStatement tst= null;
         ResultSet rs = null;
+        ResultSet ts = null;
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
             pst = connection.prepareStatement("SELECT * FROM floors WHERE availability = 'available' ");
+            tst = connection.prepareStatement("SELECT B.location,B.building_name FROM floors F,building B WHERE F.building_id = B.building_id ");
             rs = pst.executeQuery();
+            ts = tst.executeQuery();
             while (rs.next()) {
-                String content = "\t|\t ID: " + rs.getString(1)  + "\t|\t price: " + rs.getInt(4) +  "\t|\t services: " + rs.getString(5) + "\t|\t Number of residents: " + rs.getString(6)  + "\t|\t";
+                ts.next();
+                String content = "\t|\t ID: " + rs.getString(1)  + "\t|\t Building name: " + ts.getString(2)  + "\t|\t price: " + rs.getInt(4) +  "\t|\t services: " + rs.getString(5) + "\t|\t Number of residents: " + rs.getString(6)  + "\t|\t Location:" + ts.getString(1)  + "\t|\t";
                 System.out.println(content);
             }
 
@@ -286,7 +291,7 @@ public class Sakan {
 
        if(Sakan.F.getFurnitureDescription().equalsIgnoreCase("1")){
            Sakan.flag2 = 1;
-           tenantfunc();
+           tenantfunc("TENANTS");
        }
       //   description=text;
 
@@ -299,7 +304,7 @@ public class Sakan {
 
         if(String.valueOf(Sakan.F.getFurniturePrice()).equalsIgnoreCase("1")){
             Sakan.flag2 = 1;
-            tenantfunc();
+            tenantfunc("TENANTS");
         }
 //        price=tnum;
 
@@ -364,7 +369,7 @@ public class Sakan {
          Sakan.fpc.setFurniturePicture(scon.nextLine());
          if ( Sakan.fpc.getFurniturePicture().equalsIgnoreCase("1")) {
              Sakan.flag2 = 1;
-             tenantfunc();
+             tenantfunc("TENANTS");
          }
 //         picture = pictext;
          try {
@@ -382,11 +387,11 @@ public class Sakan {
 
 
      Sakan.flag2 = 1;
-     tenantfunc();
+     tenantfunc("TENANTS");
 
     }
 
-    public static void Signup(){
+    public static void Signup(String usertype){
 
 
       if (Sakan.flag1 == 0) {
@@ -410,12 +415,12 @@ public class Sakan {
           }
           if (!Sakan.T.getEmail().contains("@") || !T.getEmail().contains(".")) {
               System.out.println("Please enter a valid email...");
-              Signup();
+              Signup(usertype);
           }
 
 
 
-          checkemail(Sakan.T.getEmail(), 1);
+          checkemail(Sakan.T.getEmail(), 1, usertype);
               if(Sakan.flag1==0) {
 
            System.out.print("Enter username: ");
@@ -463,7 +468,7 @@ public class Sakan {
       }
     }
 
-    public static void Login(){
+    public static void Login(String usertype){
 
 
 
@@ -493,12 +498,12 @@ public class Sakan {
             }
             if (!Sakan.T.getEmail().contains("@") || !Sakan.T.getEmail().contains(".")) {
                 System.out.println("Please enter a valid email...");
-                Login();
+                Login(usertype);
             }
 
 //            email = tempemail;
 
-            checkemail(Sakan.T.getEmail(), 2);
+            checkemail(Sakan.T.getEmail(), 2, usertype);
                 if (Sakan.flag11 == 0) {
 
 
@@ -512,7 +517,6 @@ public class Sakan {
                 }
 
 //                pass = temppass;
-                checklogin(Sakan.T.getEmail(),Sakan.T.getPassword());
             }
                  Sakan.flag11 =1;
             Sakan.OnlineUser =Sakan.T.getEmail() ;
@@ -526,7 +530,7 @@ public class Sakan {
 
     }
 
-    public static void checklogin(String email, String pass){
+    public static void checklogin(String email, String pass, String usertype){
 
 
         Connection connection = null;
@@ -550,7 +554,7 @@ public class Sakan {
             }
             else if(!rs.next()) {
                 System.out.println("Invalid username or email");
-                Login();
+                Login(usertype);
             }
 
 
@@ -566,7 +570,7 @@ public class Sakan {
 
     }
 
-    public static void checkemail(String email, int func ){  //func 1 forSign up // func2 for Login
+    public static void checkemail(String email, int func, String usertype ){  //func 1 forSign up // func2 for Login
 
 
         Connection connection = null;
@@ -576,7 +580,7 @@ public class Sakan {
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-             pst = connection.prepareStatement("SELECT EMAIL FROM TENANTS WHERE EMAIL = '" + email + "'" );
+             pst = connection.prepareStatement("SELECT EMAIL FROM USERS WHERE EMAIL = '" + email + "' "  );
              rs = pst.executeQuery();
 
             if(rs.next()){
@@ -589,7 +593,7 @@ public class Sakan {
 
                        if (func == 1) {
                            System.out.println("This email already exists..");
-                           Signup();
+                           Signup(usertype);
                        }
                    }
 
@@ -600,7 +604,7 @@ public class Sakan {
                 if (flag11==0) {
                     if (func == 2) {
                         System.out.println("a user with that email doesn't exists..");
-                        Login();
+                        Login(usertype);
                     }
                 }
             }
@@ -697,7 +701,7 @@ public class Sakan {
                                         System.out.println("Furniture purchased successfully!");
                                         Sakan.flag2 = 1;
                                         Sakan.whileflag2 = 1;
-                                        tenantfunc();
+                                        tenantfunc("TENANTS");
 
                                         // break;
                                     } catch (SQLException e) {
@@ -722,7 +726,7 @@ public class Sakan {
                 }
             else if (view1.equalsIgnoreCase("C")) {
                 Sakan.flag2 = 1;
-                tenantfunc();
+                tenantfunc("TENANTS");
             }
 
             else if (view1.equalsIgnoreCase("D")) {
@@ -912,7 +916,7 @@ while(true) {
                               System.out.println("Apartment booked successfully!");
                                 Sakan.whileflag2 = 1;
                                 Sakan.flag2 = 1;
-                                tenantfunc();
+                                tenantfunc("TENANTS");
                              //  break;
                             } catch (SQLException e) {
                                 e.printStackTrace();
@@ -984,7 +988,7 @@ while(true) {
                                 System.out.println("Apartment booked successfully!");
                                 Sakan.flag2 = 1;
                                 Sakan.whileflag2 = 1;
-                                tenantfunc();
+                                tenantfunc("TENANTS");
 
                                // break;
                             } catch (SQLException e) {
@@ -1019,7 +1023,7 @@ while(true) {
 
     if (view1.equalsIgnoreCase("D")) {
         Sakan.flag2 = 1;
-        tenantfunc();
+        tenantfunc("TENANTS");
     }
 
     else if (view1.equalsIgnoreCase("E")) {
@@ -1027,6 +1031,85 @@ while(true) {
 
     }
 }
+    }
+
+    public static void ownerfunc(String usertype){
+
+
+
+        Scanner sc=new Scanner(System.in);
+
+        String temp;
+
+
+        if(Sakan.flag2==0){
+
+            System.out.println("█████████████████████████");
+            System.out.println("██(1) Sign up          ██");
+            System.out.println("█████████████████████████");
+            System.out.println("██(2) Log in           ██");
+            System.out.println("█████████████████████████");
+            System.out.println("██(3) Back to main menu██");
+            System.out.println("█████████████████████████");
+
+
+
+            temp=sc.nextLine();
+
+            if(temp.equalsIgnoreCase("3")){
+                Mainfunc();
+
+            }
+            else if(temp.equalsIgnoreCase("1")) {
+                Signup(usertype);
+
+
+            }
+            else if(temp.equalsIgnoreCase("2")) {
+                Login(usertype);
+
+
+            }
+        }
+        Scanner sv = new Scanner(System.in);
+        String view;
+        while(true) {
+
+            System.out.println("\nHere is a menu showing the available options:-");
+            System.out.println("███████████████████████████████████████████████████████");
+            System.out.println("██(A) View available Apartments                      ██");
+            System.out.println("███████████████████████████████████████████████████████");
+            System.out.println("██(B) To Select one of the available floors using ID ██");
+            System.out.println("███████████████████████████████████████████████████████");
+            System.out.println("██(C) View furnitures for sale                       ██");
+            System.out.println("███████████████████████████████████████████████████████");
+            System.out.println("██(E) To Select a furniture to buy using ID          ██");
+            System.out.println("███████████████████████████████████████████████████████");
+            System.out.println("██(F) Advertise a furniture for sale                 ██");
+            System.out.println("███████████████████████████████████████████████████████");
+            System.out.println("██(G) Main menu (Log out)                            ██");
+            System.out.println("███████████████████████████████████████████████████████");
+            view = sv.nextLine();
+            if (view.equalsIgnoreCase("A")) {
+
+                viewfloor();
+
+            } else if (view.equalsIgnoreCase("B")) {
+                selectfloor();
+            } else if (view.equalsIgnoreCase("C")) {
+
+                viewfurniture();
+
+            }else if(view.equalsIgnoreCase("E")){
+                selectfurniture();
+            } else if(view.equalsIgnoreCase("F")){
+                addfurniture(Sakan.OnlineUser);
+            } else if (view.equalsIgnoreCase("G")) {
+                Mainfunc();
+
+            }
+
+        }
     }
 
     static boolean isNumber(String s)
