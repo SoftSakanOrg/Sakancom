@@ -108,7 +108,7 @@ public class Sakan {
 
            System.out.println("\nHere is a menu showing the available options:-");
            System.out.println("███████████████████████████████████████████████████████");
-           System.out.println("██(A) View available housing                         ██");
+           System.out.println("██(A) View available Apartments                      ██");
            System.out.println("███████████████████████████████████████████████████████");
            System.out.println("██(B) To Select one of the available floors using ID ██");
            System.out.println("███████████████████████████████████████████████████████");
@@ -123,7 +123,7 @@ public class Sakan {
            view = sv.nextLine();
            if (view.equalsIgnoreCase("A")) {
 
-             viewhouse();
+             viewfloor();
 
            } else if (view.equalsIgnoreCase("B")) {
                selectfloor();
@@ -143,7 +143,7 @@ public class Sakan {
        }
     }
 
-    public static void viewhouse(){
+    public static void viewfloor(){
         Connection connection = null;
         PreparedStatement pst= null;
         ResultSet rs = null;
