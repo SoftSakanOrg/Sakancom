@@ -1,6 +1,6 @@
 package main;
 
-public class Houses {
+public class Floors {
 
     private Integer houseId;
     private String houseName;
@@ -17,10 +17,10 @@ public class Houses {
 
 
 
-    public Houses() {
+    public Floors() {
     }
 
-    public Houses(Integer houseId, String houseName, String avalibilty, Integer housePrice, String houseLocation, String houseServices, Integer houseParticipants, Integer houseMaxParticipants, String houseOwnerName, Integer houseOwnerContact) {
+    public Floors(Integer houseId, String houseName, String avalibilty, Integer housePrice, String houseLocation, String houseServices, Integer houseParticipants, Integer houseMaxParticipants, String houseOwnerName, Integer houseOwnerContact) {
         this.houseId = houseId;
         this.houseName = houseName;
         this.avalibilty = avalibilty;

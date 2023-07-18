@@ -18,7 +18,7 @@ public class Sakan {
     public static String OnlineUser = "" ;
     public boolean flaglogin;
    public static Tenant T=new Tenant();
-    static Houses H=new Houses();
+    static Floors H=new Floors();
     static Furniture F=new Furniture();
     static houseParticipants hp=new houseParticipants();
     static housePictures hpc=new housePictures();
@@ -110,7 +110,7 @@ public class Sakan {
            System.out.println("███████████████████████████████████████████████████████");
            System.out.println("██(A) View available housing                         ██");
            System.out.println("███████████████████████████████████████████████████████");
-           System.out.println("██(B) To Select one of the available houses using ID ██");
+           System.out.println("██(B) To Select one of the available floors using ID ██");
            System.out.println("███████████████████████████████████████████████████████");
            System.out.println("██(C) View furnitures for sale                       ██");
            System.out.println("███████████████████████████████████████████████████████");
@@ -126,7 +126,7 @@ public class Sakan {
              viewhouse();
 
            } else if (view.equalsIgnoreCase("B")) {
-               selecthouse();
+               selectfloor();
            } else if (view.equalsIgnoreCase("C")) {
 
                viewfurniture();
@@ -150,10 +150,10 @@ public class Sakan {
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT * FROM houses WHERE availability = 'available' ");
+            pst = connection.prepareStatement("SELECT * FROM floors WHERE availability = 'available' ");
             rs = pst.executeQuery();
             while (rs.next()) {
-                String content = "\t|\t ID: " + rs.getString(1) + " \t|\t HouseName: " + rs.getString(2) + "\t|\t availability: " + rs.getString(3) + "\t|\t price: " + rs.getInt(4) + "\t|\t location: " + rs.getString(5) + "\t|\t services: " + rs.getString(6) + "\t|\t Number of residents: " + rs.getString(7) + "\t|\t Owner Name: " + rs.getString(9) + "\t|\t Contact number: " + rs.getInt(10) + "\t|\t";
+                String content = "\t|\t ID: " + rs.getString(1)  + "\t|\t price: " + rs.getInt(4) +  "\t|\t services: " + rs.getString(5) + "\t|\t Number of residents: " + rs.getString(6)  + "\t|\t";
                 System.out.println(content);
             }
 
@@ -165,29 +165,29 @@ public class Sakan {
 
     }
 
-    public static void selecthouse(){
+    public static void selectfloor(){
         Scanner sc=new Scanner(System.in);
         Connection connection = null;
         PreparedStatement pst= null;
         ResultSet rs = null;
-        System.out.print("Enter the house ID: ");
+        System.out.print("Enter the floor ID: ");
 
         Sakan.H.setHouseId(sc.nextInt());
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT * FROM houses WHERE house_id = '" +  Sakan.H.getHouseId() + "' AND availability = 'available'" );
+            pst = connection.prepareStatement("SELECT * FROM floors WHERE floor_id = '" +  Sakan.H.getHouseId() + "' AND availability = 'available'" );
             rs = pst.executeQuery();
             if (rs.next()) {
-               Sakan.H.setHouseName(rs.getString(2));
-                String content = "\t|\t ID: " + rs.getString(1) + " \t|\t HouseName: " + rs.getString(2) + "\t|\t availability: " + rs.getString(3) + "\t|\t price: " + rs.getInt(4) + "\t|\t location: " + rs.getString(5) + "\t|\t services: " + rs.getString(6) + "\t|\t Number of residents: " + rs.getString(7) + "\t|\t Owner Name: " + rs.getString(9) + "\t|\t Contact number: " + rs.getInt(10) + "\t|\t";
+              // Sakan.H.setHouseName(rs.getString(2));
+                String content = "\t|\t ID: " + rs.getString(1)  + "\t|\t price: " + rs.getInt(4) +  "\t|\t services: " + rs.getString(5) + "\t|\t Number of residents: " + rs.getString(6)  + "\t|\t";
                 System.out.println(content);
-                viewhousesfunc(Sakan.H.getHouseName(),Sakan.H.getHouseId(),Sakan.OnlineUser);
+                viewfloorsfunc(Sakan.H.getHouseId(),Sakan.OnlineUser);
 
 
             }
             else if(!rs.next()){
-                System.out.println("Please enter a valid house ID...");
+                System.out.println("Please enter a valid floor ID...");
 
             }
 
@@ -738,7 +738,7 @@ public class Sakan {
 
 
 
-    public static void viewhousesfunc(String HouseName , int HouseID, String Temail) {
+    public static void viewfloorsfunc( int floorID, String Temail) {
         Scanner st = new Scanner(System.in);
         Scanner sc=new Scanner(System.in);
 
@@ -748,13 +748,13 @@ public class Sakan {
         String view1;
 while(true) {
     System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-    System.out.println("\t            ★★  " + HouseName + "  ★★                 \t");
+    System.out.println("\t      ★★  "+ "Apartment("+floorID+")" +"  ★★      \t");
     System.out.println("███████████████████████████████████████████████████████");
-    System.out.println("██(A) View pictures of the selected house            ██");
+    System.out.println("██(A) View pictures of the selected floor            ██");
     System.out.println("███████████████████████████████████████████████████████");
-    System.out.println("██(B) View the people living in the selected house   ██");
+    System.out.println("██(B) View the people living in the selected floor   ██");
     System.out.println("███████████████████████████████████████████████████████");
-    System.out.println("██(C) To book the selected house                     ██");
+    System.out.println("██(C) To book the selected floor                    ██");
     System.out.println("███████████████████████████████████████████████████████");
     System.out.println("██(D) Back                                           ██");
     System.out.println("███████████████████████████████████████████████████████");
@@ -767,7 +767,7 @@ while(true) {
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT picture FROM house_pic  WHERE " + HouseID + " = house_id  ");
+            pst = connection.prepareStatement("SELECT picture FROM house_pic  WHERE " + floorID + " = floor_id  ");
             rs = pst.executeQuery();
             while (rs.next()) {
 
@@ -791,7 +791,7 @@ while(true) {
         try {
             int flagpart = 0;
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT * FROM house_participants  WHERE " + HouseID + " = house_id  ");
+            pst = connection.prepareStatement("SELECT * FROM house_participants  WHERE " + floorID + " = floor_id  ");
             rs = pst.executeQuery();
 
 
@@ -829,7 +829,7 @@ while(true) {
         try {
 
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT * FROM houses  WHERE " + HouseID + " = house_id AND max_participants > 1 ");
+            pst = connection.prepareStatement("SELECT * FROM floors  WHERE " + floorID + " = floor_id AND max_participants > 1 ");
             rs = pst.executeQuery();
 
 
@@ -890,22 +890,22 @@ while(true) {
                                      Sakan.T.setUsername(rs.getString(1));
 
                                 }
-                                pst = connection.prepareStatement("INSERT INTO house_participants(house_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
-                                pst.setInt(1,HouseID );
+                                pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
+                                pst.setInt(1,floorID );
                                 pst.setString(2,Sakan.T.getUsername() );
                                 pst.setInt(3, Sakan.hp.getPartAge());
                                 pst.setString(4, Sakan.hp.getPartMajor());
                                 pst.setString(5, Sakan.hp.getPartGender() );
 
                                 pst.executeUpdate();
-                                pst = connection.prepareStatement("UPDATE houses SET participants = (participants+1) WHERE house_id = '" + HouseID + "'");
+                                pst = connection.prepareStatement("UPDATE floors SET participants = (participants+1) WHERE floor_id = '" + floorID + "'");
                                 pst.executeUpdate();
-                                pst = connection.prepareStatement("SELECT house_id FROM houses WHERE participants = max_participants ");
+                                pst = connection.prepareStatement("SELECT floor_id FROM floors WHERE participants = max_participants ");
                                 rs = pst.executeQuery();
 
                                 if(rs.next()){
 
-                                    pst = connection.prepareStatement("UPDATE houses SET availability = 'unavailable' WHERE house_id = '" + HouseID + "'");
+                                    pst = connection.prepareStatement("UPDATE floors SET availability = 'unavailable' WHERE floor_id = '" + floorID + "'");
                                     pst.executeUpdate();
                                 }
 
@@ -962,22 +962,22 @@ while(true) {
                                     nameb = rs.getString(1);
 
                                 }
-                                pst = connection.prepareStatement("INSERT INTO house_participants(house_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
-                                pst.setInt(1,HouseID );
+                                pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
+                                pst.setInt(1,floorID );
                                 pst.setString(2,nameb );
                                 pst.setInt(3, ageb);
                                 pst.setString(4, majorb);
                                 pst.setString(5, gender );
 
                                 pst.executeUpdate();
-                                pst = connection.prepareStatement("UPDATE houses SET participants = (participants+1) WHERE house_id = '" + HouseID + "'");
+                                pst = connection.prepareStatement("UPDATE floors SET participants = (participants+1) WHERE floor_id = '" + floorID + "'");
                                 pst.executeUpdate();
-                                pst = connection.prepareStatement("SELECT house_id FROM houses WHERE participants = max_participants ");
+                                pst = connection.prepareStatement("SELECT floor_id FROM floors WHERE participants = max_participants ");
                                 rs = pst.executeQuery();
 
                                 if(rs.next()){
 
-                                    pst = connection.prepareStatement("UPDATE houses SET availability = 'unavailable' WHERE house_id = '" + HouseID + "'");
+                                    pst = connection.prepareStatement("UPDATE floors SET availability = 'unavailable' WHERE floor_id = '" + floorID + "'");
                                     pst.executeUpdate();
                                 }
 
