@@ -17,7 +17,11 @@ public class Sakan {
 
     public static String OnlineUser = "" ;
     public boolean flaglogin;
-   public static Tenant T=new Tenant();
+    public static Users U=new Users();
+
+    public static Tenant T=new Tenant();
+
+    public static Owners O=new Owners();
     static Floors H=new Floors();
     static Furniture F=new Furniture();
     static houseParticipants hp=new houseParticipants();
@@ -27,6 +31,7 @@ public class Sakan {
            Sakan.flag1 =0;
            Sakan.flag2 = 0;
            Sakan.OnlineUser = "";
+           Sakan.flag11 = 0;
         Scanner sc=new Scanner(System.in);
 
         String c ;
@@ -48,6 +53,11 @@ public class Sakan {
 
             if(c.equalsIgnoreCase("1")){
                 tenantfunc("TENANTS");
+
+
+            }
+            else if(c.equalsIgnoreCase("2")){
+                tenantfunc("OWNERS");
 
 
             }
@@ -394,64 +404,97 @@ public class Sakan {
     public static void Signup(String usertype){
 
 
+
       if (Sakan.flag1 == 0) {
           Scanner sc = new Scanner(System.in);
 
           Connection connection = null;
           PreparedStatement pst = null;
-          ResultSet rs = null;
-
+         // ResultSet rs = null;
+          PreparedStatement tst= null;
 
           System.out.println("███████████████████████████████");
           System.out.println("██(1) To go back to main menu██");
           System.out.println("███████████████████████████████");
 
+
+         // if(usertype.equalsIgnoreCase("TENANTS"))
+
           System.out.print("Enter your email: ");
 //          String tempemail
-              Sakan.T.setEmail(sc.nextLine());
-          if (Sakan.T.getEmail().equalsIgnoreCase("1")) {
+
+              Sakan.U.setEmail(sc.nextLine());
+
+          if (Sakan.U.getEmail().equalsIgnoreCase("1")) {
               Mainfunc();
 
           }
-          if (!Sakan.T.getEmail().contains("@") || !T.getEmail().contains(".")) {
+          if (!Sakan.U.getEmail().contains("@") || !U.getEmail().contains(".")) {
               System.out.println("Please enter a valid email...");
               Signup(usertype);
           }
 
 
 
-          checkemail(Sakan.T.getEmail(), 1, usertype);
+          checkemail(Sakan.U.getEmail(), 1, usertype);
               if(Sakan.flag1==0) {
 
-           System.out.print("Enter username: ");
-                  Sakan. T.setUsername( sc.nextLine());
-           if (Sakan.T.getUsername().equalsIgnoreCase("1")) {
-               Mainfunc();
+                  System.out.print("Enter username: ");
+                  Sakan.U.setUsername(sc.nextLine());
+                  if (Sakan.U.getUsername().equalsIgnoreCase("1")) {
+                      Mainfunc();
 
-           }
+                  }
 //           name = tempname;
 
 
-           System.out.print("Enter password: ");
-                  Sakan.T.setPassword(sc.nextLine());
+                  System.out.print("Enter password: ");
+                  Sakan.U.setPassword(sc.nextLine());
 
-           if (Sakan.T.getPassword().equalsIgnoreCase("1")) {
-               Mainfunc();
+                  if (Sakan.U.getPassword().equalsIgnoreCase("1")) {
+                      Mainfunc();
 
-           }
+                  }
+                  if(usertype.equalsIgnoreCase("OWNERS")){
+                      System.out.print("Enter Contact Number: ");
+                      Sakan.O.setContactNum(Integer.parseInt(sc.nextLine()));
+
+                      if (Sakan.O.getContactNum()==1) {
+                          Mainfunc();
+
+                      }
+                  }
+
+              }
 
          //  pass = temppass;
 
 
            try {
                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-               pst = connection.prepareStatement("INSERT INTO TENANTS(EMAIL,USERNAME,PASSWORD) VALUES" + "(?,?,?)");
+               pst = connection.prepareStatement("INSERT INTO "+usertype+"(EMAIL,USERNAME,PASSWORD) VALUES" + "(?,?,?)");
 
-               pst.setString(1, T.getEmail());
-               pst.setString(2, T.getUsername());
-               pst.setString(3, T.getPassword());
+               pst.setString(1, U.getEmail());
+               pst.setString(2, U.getUsername());
+               pst.setString(3, U.getPassword());
+               if (usertype.equalsIgnoreCase("OWNERS")) {
+                   connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                   pst = connection.prepareStatement("INSERT INTO OWNERS(contact_number) VALUES" + "(?)");
 
+                   pst.setInt(1,O.getContactNum());
+                   pst.executeUpdate();
+               }
                pst.executeUpdate();
+
+
+
+                   tst = connection.prepareStatement("INSERT INTO USERS(EMAIL,USERNAME,PASSWORD) VALUES" + "(?,?,?)");
+
+                   tst.setString(1, U.getEmail());
+                   tst.setString(2, U.getUsername());
+                   tst.setString(3, U.getPassword());
+
+                   tst.executeUpdate();
 
            System.out.println("Signed  up successfully...");
 
@@ -461,10 +504,10 @@ public class Sakan {
                e.printStackTrace();
 
            }
-           Sakan.OnlineUser=T.getEmail();
+           Sakan.OnlineUser=U.getEmail();
            Sakan.flag1 = 1;
 
-       }
+
       }
     }
 
@@ -517,9 +560,10 @@ public class Sakan {
                 }
 
 //                pass = temppass;
+                    checklogin(T.getEmail(),T.getPassword(),usertype);
             }
                  Sakan.flag11 =1;
-            Sakan.OnlineUser =Sakan.T.getEmail() ;
+            Sakan.OnlineUser =Sakan.U.getEmail() ;
 
         }
 

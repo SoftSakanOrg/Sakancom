@@ -1,34 +1,27 @@
 package main;
 
-
-public class Owners {
-
-    private Integer ownerID;
+public class Users {
+    private Integer usersID;
     private String username;
     private  String password;
     private String email;
 
-    private int contactNum;
+    public Users(){}
 
-    public Owners(){
-
-    }
-
-
-    public Owners(Integer ownerID, String username, String password, String email, int contactNum) {
-        this.ownerID = ownerID;
+    public Users(Integer usersID, String username, String password, String email) {
+        this.usersID = usersID;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.contactNum = contactNum;
     }
 
-    public Integer getOwnerID() {
-        return ownerID;
+
+    public Integer getUsersID() {
+        return usersID;
     }
 
-    public void setOwnerID(Integer ownerID) {
-        this.ownerID = ownerID;
+    public void setUsersID(Integer usersID) {
+        this.usersID = usersID;
     }
 
     public String getUsername() {
@@ -53,13 +46,5 @@ public class Owners {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public int getContactNum() {
-        return contactNum;
-    }
-
-    public void setContactNum(int contactNum) {
-        this.contactNum = contactNum;
     }
 }
