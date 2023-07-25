@@ -472,19 +472,25 @@ public class Sakan {
 
            try {
                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-               pst = connection.prepareStatement("INSERT INTO "+usertype+"(EMAIL,USERNAME,PASSWORD) VALUES" + "(?,?,?)");
+               if (usertype.equalsIgnoreCase("TENANTS")) {
+                   pst = connection.prepareStatement("INSERT INTO TENANTS(EMAIL,USERNAME,PASSWORD) VALUES" + "(?,?,?)");
 
-               pst.setString(1, U.getEmail());
-               pst.setString(2, U.getUsername());
-               pst.setString(3, U.getPassword());
-               if (usertype.equalsIgnoreCase("OWNERS")) {
-                   connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                   pst = connection.prepareStatement("INSERT INTO OWNERS(contact_number) VALUES" + "(?)");
-
-                   pst.setInt(1,O.getContactNum());
+                   pst.setString(1, U.getEmail());
+                   pst.setString(2, U.getUsername());
+                   pst.setString(3, U.getPassword());
                    pst.executeUpdate();
                }
-               pst.executeUpdate();
+               if (usertype.equalsIgnoreCase("OWNERS")) {
+                   connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                   pst = connection.prepareStatement("INSERT INTO OWNERS(EMAIL,USERNAME,PASSWORD,contact_number) VALUES" + "(?,?,?,?)");
+
+                   pst.setString(1, U.getEmail());
+                   pst.setString(2, U.getUsername());
+                   pst.setString(3, U.getPassword());
+                   pst.setInt(4,O.getContactNum());
+                   pst.executeUpdate();
+               }
+
 
 
 
