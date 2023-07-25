@@ -504,7 +504,7 @@ public class Sakan {
 
            System.out.println("Signed  up successfully...");
 
-
+               Sakan.flag1 = 1;
 
            } catch (SQLException e) {
                e.printStackTrace();
