@@ -6,13 +6,16 @@ public class Users {
     private  String password;
     private String email;
 
+    private String contactNum;
+
     public Users(){}
 
-    public Users(Integer usersID, String username, String password, String email) {
+    public Users(Integer usersID, String username, String password, String email,String contactNum) {
         this.usersID = usersID;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.contactNum = contactNum;
     }
 
 
@@ -46,5 +49,13 @@ public class Users {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getContactNum() {
+        return contactNum;
+    }
+
+    public void setContactNum(String contactNum) {
+        this.contactNum = contactNum;
     }
 }
