@@ -11,13 +11,20 @@ public class Floors {
     private Integer houseParticipants;
     private Integer houseMaxParticipants;
 
+    private Integer bedrooms;
+    private Integer bathrooms;
+    private Integer contBalcony;
+
+    private String status;
+
 
 
 
     public Floors() {
     }
 
-    public Floors(Integer houseId, String houseName, String avalibilty, Integer housePrice, String houseLocation, String houseServices, Integer houseParticipants, Integer houseMaxParticipants, String houseOwnerName, Integer houseOwnerContact) {
+
+    public Floors(Integer houseId, String houseName, String avalibilty, Integer housePrice, String houseLocation, String houseServices, Integer houseParticipants, Integer houseMaxParticipants, Integer bedrooms, Integer bathrooms, Integer contBalcony,String status) {
         this.houseId = houseId;
         this.houseName = houseName;
         this.avalibilty = avalibilty;
@@ -26,8 +33,12 @@ public class Floors {
         this.houseServices = houseServices;
         this.houseParticipants = houseParticipants;
         this.houseMaxParticipants = houseMaxParticipants;
-
+        this.bedrooms = bedrooms;
+        this.bathrooms = bathrooms;
+        this.contBalcony = contBalcony;
+        this.status=status;
     }
+
 
     public Integer getHouseId() {
         return houseId;
@@ -93,5 +104,36 @@ public class Floors {
         this.houseMaxParticipants = houseMaxParticipants;
     }
 
+    public Integer getBedrooms() {
+        return bedrooms;
+    }
 
+    public void setBedrooms(Integer bedrooms) {
+        this.bedrooms = bedrooms;
+    }
+
+    public Integer getBathrooms() {
+        return bathrooms;
+    }
+
+    public void setBathrooms(Integer bathrooms) {
+        this.bathrooms = bathrooms;
+    }
+
+    public Integer getContBalcony() {
+        return contBalcony;
+    }
+
+    public void setContBalcony(Integer contBalcony) {
+        this.contBalcony = contBalcony;
+    }
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
