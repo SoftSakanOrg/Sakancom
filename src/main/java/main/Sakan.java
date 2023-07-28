@@ -1435,7 +1435,9 @@ public static void selectbuilding(){
         Scanner sf=new Scanner(System.in);
         Connection connection = null;
         PreparedStatement pst = null;
+        PreparedStatement tst = null;
         ResultSet rs = null;
+        ResultSet ts = null;
 
      System.out.println(building_id);
 
@@ -1518,10 +1520,67 @@ while(true) {
         System.out.println("You have successfully added the Floor...");
 
 
+        tst = connection.prepareStatement("UPDATE BUILDING SET FLOORS_NUM= (FLOORS_NUM + 1) WHERE BUILDING_ID='"+building_id+ "'");
+        tst.executeUpdate();
+
+
     } catch (SQLException e) {
         e.printStackTrace();
 
     }
+
+    try{
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        pst = connection.prepareStatement("SELECT FLOOR_ID FROM FLOORS ORDER BY FLOOR_ID DESC LIMIT 1");
+        rs= pst.executeQuery();
+
+        if(rs.next()){
+            Sakan.H.setHouseId(rs.getInt(1));
+        }
+
+    }
+    catch (SQLException e) {
+        e.printStackTrace();
+
+    }
+//    try {
+//        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+//        pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE WHERE FURNITURE_ID='" + Sakan.F.getFurnitureID() + "'");
+//        rs = pst.executeQuery();
+//        if (rs.next()) {
+//            Sakan.F.setFurnitureID(rs.getInt(1));
+//        }
+//    } catch (SQLException e) {
+//        e.printStackTrace();
+//
+//    }
+    System.out.println("Do you want to add  pictures for this FLOOR ?");
+    System.out.println("A) yes . B) No");
+    String ans = sf.next();
+//     String picture = null;
+    if (ans.equalsIgnoreCase("A")) {
+        System.out.println(" Enter pictures: ");
+
+        Sakan.hpc.setHousePicture(sf.next());
+        if (  Sakan.hpc.getHousePicture().equalsIgnoreCase("1")) {
+            break;
+        }
+//         picture = pictext;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            pst = connection.prepareStatement("INSERT INTO HOUSE_PIC(FLOOR_ID,PICTURE) VALUES (?,?)");
+            pst.setInt(1, Sakan.H.getHouseId());
+            pst.setString(2, Sakan.hpc.getHousePicture());
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+        System.out.println("Pictures have been added");
+    }
+
+
+
 
 
     break;
