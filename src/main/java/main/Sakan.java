@@ -181,7 +181,7 @@ public class Sakan {
             ts = tst.executeQuery();
             while (rs.next()) {
                 ts.next();
-                String content = "\t|\t ID: " + rs.getString(1)  + "\t|\t Building name: " + ts.getString(2)  + "\t|\t price: " + rs.getInt(4) +  "\t|\t services: " + rs.getString(5) + "\t|\t Number of residents: " + rs.getString(6)  + "\t|\t Location:" + ts.getString(1)  + "\t|\t";
+                String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t availability: "+ rs.getString(3)+ "\t|\t Price: "+ rs.getInt(4)+ "\t|\t Services: "+ rs.getString(5)+ "\t|\t Participants: "+ rs.getInt(6)+ "\t|\t Max_Participants: "+ rs.getInt(7)+ "\t|\t BedroomsNum: "+ rs.getInt(8)+ "\t|\t BathroomsNum: "+ rs.getInt(9)+ "\t|\t Balcony: "+ rs.getInt(10)+ "\t|\t Status: "+ rs.getString(11);
                 System.out.println(content);
             }
 
@@ -1414,7 +1414,12 @@ public static void selectbuilding(){
                 }
 
 
-            }else if (view1.equalsIgnoreCase("C")) {
+            }    else if (view1.equalsIgnoreCase("B")) {
+
+                  selectmyfloor(building_ID);
+            }
+
+            else if (view1.equalsIgnoreCase("C")) {
 
                 addfloor(building_ID);
 
@@ -1429,7 +1434,77 @@ public static void selectbuilding(){
         }
     }
 
+public static void selectmyfloor(int building_id){
 
+    Scanner sc=new Scanner(System.in);
+    Connection connection = null;
+    PreparedStatement pst= null;
+    PreparedStatement tst= null;
+    ResultSet rs = null;
+    ResultSet ts = null;
+    Scanner sf=new Scanner(System.in);
+    System.out.print("Enter the floor ID: ");
+
+    Sakan.H.setHouseId(sc.nextInt());
+
+    try {
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        pst = connection.prepareStatement("SELECT * FROM floors WHERE floor_id = '" +  Sakan.H.getHouseId() + "' AND BUILDING_ID= '"+building_id+"'" );
+        rs = pst.executeQuery();
+
+
+
+
+        if (rs.next()) {
+
+            String content = "\t|\t ID: " + rs.getString(1)  + "\t|\t price: " + rs.getInt(4) +  "\t|\t services: " + rs.getString(5) + "\t|\t Number of residents: " + rs.getString(6)  + "\t|\t";
+            System.out.println(content);
+
+            while(true) {
+                System.out.println("Do you want to add  pictures for this FLOOR ?");
+                System.out.println("A) yes . B) No");
+                String ans = sf.next();
+
+                if (ans.equalsIgnoreCase("A")) {
+                    System.out.println(" Enter pictures: ");
+
+                    Sakan.hpc.setHousePicture(sf.next());
+
+                    try {
+                        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                        pst = connection.prepareStatement("INSERT INTO HOUSE_PIC(FLOOR_ID,PICTURE) VALUES (?,?)");
+                        pst.setInt(1, Sakan.H.getHouseId());
+                        pst.setString(2, Sakan.hpc.getHousePicture());
+                        pst.executeUpdate();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+
+                    }
+                    System.out.println("Pictures have been added");
+                    break;
+                } else if (ans.equalsIgnoreCase("B")) {
+                    break;
+                }
+            }
+        }
+        else if(!rs.next()){
+            System.out.println("Please enter a valid floor ID...");
+
+        }
+
+
+
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+
+    }
+
+
+
+
+
+}
     public static void addfloor(int building_id){
 
         Scanner sf=new Scanner(System.in);
@@ -1543,17 +1618,7 @@ while(true) {
         e.printStackTrace();
 
     }
-//    try {
-//        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-//        pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE WHERE FURNITURE_ID='" + Sakan.F.getFurnitureID() + "'");
-//        rs = pst.executeQuery();
-//        if (rs.next()) {
-//            Sakan.F.setFurnitureID(rs.getInt(1));
-//        }
-//    } catch (SQLException e) {
-//        e.printStackTrace();
-//
-//    }
+
     System.out.println("Do you want to add  pictures for this FLOOR ?");
     System.out.println("A) yes . B) No");
     String ans = sf.next();
@@ -1577,6 +1642,8 @@ while(true) {
 
         }
         System.out.println("Pictures have been added");
+    }else if(ans.equalsIgnoreCase("B")){
+        break;
     }
 
 
