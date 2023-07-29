@@ -1798,8 +1798,6 @@ while(true) {
             System.out.println("███████████████████████████████████████████████████████");
             System.out.println("██(C) View System Observations                       ██");
             System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(D) Select the observation you want to delete by ID██");
-            System.out.println("███████████████████████████████████████████████████████");
             System.out.println("██(D) to delete all observations                     ██");
             System.out.println("███████████████████████████████████████████████████████");
             System.out.println("██(E) Main menu (Log out)                            ██");
@@ -1812,6 +1810,27 @@ while(true) {
 
 
                 viewRequests();
+
+
+            }
+            else if (adminsc.equalsIgnoreCase("B")) {
+
+
+                selectRequest();
+
+
+            }
+            else if (adminsc.equalsIgnoreCase("C")) {
+
+
+                viewObservations();
+
+
+            }
+            else if (adminsc.equalsIgnoreCase("D")) {
+
+
+                deleteObservations();
 
 
             }
@@ -1830,6 +1849,46 @@ while(true) {
 
     }
 
+    public static void viewObservations() throws SQLException {
+
+        Connection connection = null;
+        PreparedStatement pst= null;
+        ResultSet rs = null;
+
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        pst = connection.prepareStatement("SELECT * FROM system_observation ORDER BY ID DESC" );
+        rs = pst.executeQuery();
+
+
+           if(!rs.next()){
+               System.out.println("There are no Observations currently...");
+           }
+        rs = pst.executeQuery();
+
+        while (rs.next())
+        {
+
+            String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Description: " + rs.getString(2) + "\t|\t";
+            System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            System.out.println(content);
+
+        }
+
+
+    }
+    public static void deleteObservations() throws SQLException {
+
+        Connection connection = null;
+        PreparedStatement pst= null;
+        ResultSet rs = null;
+
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        pst = connection.prepareStatement("DELETE FROM system_observation " );
+        pst.executeUpdate();
+
+        System.out.println("You have successfully Deleted the Observations");
+    }
+
     public static void viewRequests() throws SQLException {
 
         Connection connection = null;
@@ -1846,7 +1905,7 @@ while(true) {
         while (rs.next())
     {
 
-        String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Building_Name: " + rs.getString(2) + "\t|\t Owner_name: " + rs.getString(3) + "\t|\t Contact_Number: " + rs.getInt(4) + "\t|\t" + rs.getInt(5) + "\t|\t";
+        String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Building_Name: " + rs.getString(2) + "\t|\t Owner_name: " + rs.getString(3) + "\t|\t Contact_Number: " + rs.getInt(4) + "\t|\t" + rs.getInt(5) + "\t|\t Floor_ID: " +rs.getInt(6)+"\t|\t";
         System.out.println(content);
 
     }
@@ -1870,7 +1929,7 @@ while(true) {
 
             if (rs.next()) {
 
-                String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Building_Name: " + rs.getString(2) + "\t|\t Owner_name: " + rs.getString(3) + "\t|\t Contact_Number: " + rs.getInt(4) + "\t|\t" + rs.getInt(5) + "\t|\t";
+                String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Building_Name: " + rs.getString(2) + "\t|\t Owner_name: " + rs.getString(3) + "\t|\t Contact_Number: " + rs.getInt(4) + "\t|\t" + rs.getInt(5) + "\t|\t Floor_ID: "  +rs.getInt(6)+"\t|\t";
                 System.out.println(content);
                 requestAction(rs.getInt(1));
             }
@@ -1892,7 +1951,7 @@ while(true) {
 
     }
 
-    public static void requestAction(int ID){
+    public static void requestAction(int ID) throws SQLException {
 
         Scanner sf=new Scanner(System.in);
         Connection connection = null;
@@ -1900,38 +1959,78 @@ while(true) {
         ResultSet rs = null;
 
         while(true) {
+
+
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            pst = connection.prepareStatement("SELECT FLOOR_ID FROM advertisment_requests WHERE REQ_ID='"+ID+"'");
+            rs= pst.executeQuery();
+
+            if(rs.next()){
+                Sakan.ar.setFloorId(rs.getInt(1));
+            }
+
+
+
             System.out.println("Do you want to accept this request or deleter it? ");
             System.out.println("(A)Accept    (B)delete    (C)Go back   ");
 
 
             String ans = sf.next();
+
 //     String picture = null;
             if (ans.equalsIgnoreCase("A")) {
 
-                Sakan.hpc.setHousePicture(sf.next());
-                if (  Sakan.hpc.getHousePicture().equalsIgnoreCase("C")) {
-                    break;
-                }
+
+
                 try {
+
+
+
                     connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                    pst = connection.prepareStatement("UPDATE FLOORS (FLOOR_ID,PICTURE) VALUES (?,?)");
-                    pst.setInt(1, Sakan.H.getHouseId());
-                    pst.setString(2, Sakan.hpc.getHousePicture());
+                    pst = connection.prepareStatement("UPDATE FLOORS SET STATUS='Advertised' where FLOOR_ID='"+Sakan.ar.getFloorId()+"'");
                     pst.executeUpdate();
 
-                    pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
-
-                    pst.setString(1, Sakan.OnlineUser + " has added a picture (" +  Sakan.hpc.getHousePicture()+ ") to the apartment");
-
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                    pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='"+ID+"'");
                     pst.executeUpdate();
+
+
+
 
 
                 } catch (SQLException e) {
                     e.printStackTrace();
 
                 }
-                System.out.println("Pictures have been added");
+                System.out.println("Request has been Approved...");
+                break;
             }else if(ans.equalsIgnoreCase("B")){
+
+                try {
+
+
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                    pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='"+ID+"'");
+                    pst.executeUpdate();
+
+                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                    pst = connection.prepareStatement("DELETE FROM FLOORS where FLOOR_ID='"+Sakan.ar.getFloorId()+"'");
+                    pst.executeUpdate();
+
+
+
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+
+                System.out.println("Request has been Rejected...");
+                break;
+
+            }
+
+            else if (  ans.equalsIgnoreCase("C")) {
                 break;
             }
         }
