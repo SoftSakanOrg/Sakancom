@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import static java.lang.System.exit;
 import static java.lang.System.getLogger;
+import static main.checkEmailFunc.checkemail;
+import static main.usersLoginFunc.Login;
 
 public class Sakan {
 
@@ -16,8 +18,10 @@ public class Sakan {
 
     public static int flagnext = 0;
 
+    public static  int flaglogin = 0;
+
     public static String OnlineUser = "" ;
-    public boolean flaglogin;
+
     public static Users U=new Users();
 
     public static Tenant T=new Tenant();
@@ -37,11 +41,15 @@ public class Sakan {
     static  systemObservation so = new systemObservation();
     static bookingInfo bi=new bookingInfo();
 
+    static Users Login=new Users();
+
+
     public static void Mainfunc(){
            Sakan.flag1 =0;
            Sakan.flag2 = 0;
            Sakan.OnlineUser = "";
            Sakan.flag11 = 0;
+           Sakan.flaglogin=0;
         Scanner sc=new Scanner(System.in);
 
         String c ;
@@ -91,26 +99,30 @@ public class Sakan {
     }
 
     public static void tenantfunc(String usertype){
-
-
-
         Scanner sc=new Scanner(System.in);
-
         String temp;
+          if(Sakan.flaglogin==1)temp="2";
+       else temp="3";
+
+
+
 
 
         if(Sakan.flag2==0){
-       if(!usertype.equalsIgnoreCase("ADMIN")){
-        System.out.println("█████████████████████████");
-        System.out.println("██(1) Sign up          ██");}
-        System.out.println("█████████████████████████");
-        System.out.println("██(2) Log in           ██");
-        System.out.println("█████████████████████████");
-        System.out.println("██(3) Back to main menu██");
-        System.out.println("█████████████████████████");
+            if(Sakan.flaglogin==0) {
 
 
+                if (!usertype.equalsIgnoreCase("ADMIN")) {
+                    System.out.println("█████████████████████████");
+                    System.out.println("██(1) Sign up          ██");}
+                    System.out.println("█████████████████████████");
+                    System.out.println("██(2) Log in           ██");
+                    System.out.println("█████████████████████████");
+                    System.out.println("██(3) Back to main menu██");
+                    System.out.println("█████████████████████████");
+            }
 
+      if(Sakan.flaglogin==0)
         temp=sc.nextLine();
 
         if(temp.equalsIgnoreCase("3")){
@@ -123,8 +135,25 @@ public class Sakan {
 
 
         }
+
         else if(temp.equalsIgnoreCase("2")) {
-            Login(usertype);
+
+           // Scanner sc = new Scanner(System.in);
+
+
+          //  Scanner sc = new Scanner(System.in);
+            System.out.println("███████████████████████████████");
+            System.out.println("██(1) To go back to main menu██");
+            System.out.println("███████████████████████████████");
+
+            System.out.print("Enter your email: ");
+            Sakan.U.setEmail(sc.nextLine());
+
+            System.out.print("Enter password: ");
+            Sakan.U.setPassword(sc.nextLine());
+
+
+            Login(usertype,Sakan.U.getEmail(),Sakan.U.getPassword());
 
 
         }
@@ -628,183 +657,10 @@ public static void viewBookingInfo(int tenant_id){
       }
     }
 
-    public static void Login(String usertype){
 
 
 
-        if (Sakan.flag11 == 0) {
 
-
-            Scanner sc = new Scanner(System.in);
-
-
-
-            Connection connection = null;
-            PreparedStatement pst = null;
-            ResultSet rs = null;
-
-
-
-
-            System.out.println("███████████████████████████████");
-            System.out.println("██(1) To go back to main menu██");
-            System.out.println("███████████████████████████████");
-
-            System.out.print("Enter your email: ");
-            Sakan.U.setEmail(sc.nextLine());
-            if ( Sakan.U.getEmail().equalsIgnoreCase("1")) {
-                Mainfunc();
-
-            }
-            if (!Sakan.U.getEmail().contains("@") || !Sakan.U.getEmail().contains(".")) {
-                System.out.println("Please enter a valid email...");
-                Login(usertype);
-            }
-
-//            email = tempemail;
-
-            checkemail(Sakan.U.getEmail(), 2, usertype);
-                if (Sakan.flag11 == 0) {
-
-
-
-                System.out.print("Enter password: ");
-                    Sakan.U.setPassword(sc.nextLine());
-
-                if (  Sakan.U.getPassword().equalsIgnoreCase("1")) {
-                    Mainfunc();
-
-                }
-
-//                pass = temppass;
-                    checklogin(U.getEmail(),U.getPassword(),usertype);
-            }
-                 Sakan.flag11 =1;
-            Sakan.OnlineUser =Sakan.U.getEmail() ;
-
-        }
-
-
-
-
-
-
-    }
-
-    public static void checklogin(String email, String pass, String usertype){
-
-
-        Connection connection = null;
-        PreparedStatement pst= null;
-        ResultSet rs = null;
-        PreparedStatement tst= null;
-
-
-
-
-            try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                pst = connection.prepareStatement("SELECT EMAIL,PASSWORD,USER_TYPE FROM USERS WHERE EMAIL = '" + email + "' AND PASSWORD = '" + pass + "'  AND user_type = '" + usertype + "'");
-                rs = pst.executeQuery();
-
-
-
-                if (rs.next()) {
-
-                    String tempE = rs.getString(1);
-                    String tempP = rs.getString(2);
-                    String tempU = rs.getString(3);
-                    if (!tempE.equals(null) && !tempP.equals(null) && !tempU.equals(null)) {
-                        System.out.println("Logged in successfully");
-                        Sakan.flag1 = 1;
-                    }
-
-                } else if (!rs.next()) {
-                    System.out.println("Invalid username or email");
-                    Login(usertype);
-                }
-
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                pst = connection.prepareStatement("SELECT USER_ID FROM USERS WHERE EMAIL = '" + email + "'");
-                rs = pst.executeQuery();
-
-                if (rs.next()) {
-                    Sakan.U.setUsersID(rs.getInt(1));
-
-                    if(usertype.equalsIgnoreCase("OWNERS")) {
-                        Sakan.OnlineUser=U.getEmail();
-                        ownerfunc("OWNERS", Sakan.U.getUsersID());
-                    }
-
-                    else if(usertype.equalsIgnoreCase("ADMIN")) {
-                        Sakan.OnlineUser=U.getEmail();
-                        adminfunc("ADMIN", Sakan.U.getUsersID());
-                    }
-                }
-
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-
-            }
-
-
-//
-
-    }
-
-    public static void checkemail(String email, int func, String usertype ){  //func 1 forSign up // func2 for Login
-
-
-        Connection connection = null;
-        PreparedStatement pst= null;
-        ResultSet rs = null;
-
-
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-             pst = connection.prepareStatement("SELECT EMAIL FROM USERS WHERE EMAIL = '" + email + "' "  );
-             rs = pst.executeQuery();
-
-            if(rs.next()){
-
-             String tempE =  rs.getString(1);
-
-                if(Sakan.flag1==0) {
-
-                if(!tempE.equals(null)){
-
-                       if (func == 1) {
-                           System.out.println("This email already exists..");
-                           Signup(usertype);
-                       }
-                   }
-
-
-             }
-            }
-            else if(!rs.next()){
-                if (flag11==0) {
-                    if (func == 2) {
-                        System.out.println("a user with that email doesn't exists..");
-                        Login(usertype);
-                    }
-                }
-            }
-
-
-
-
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        }
-
-
-
-    }
 
     public static void viewfurnituresfunc(String Fdescription , int FurnitureID) {
 
@@ -1884,68 +1740,6 @@ while(true) {
     }
 
 
-    public static void adminfunc(String usertype, int admin_ID) throws SQLException {
-
-        Scanner sc = new Scanner(System.in);
-        while(true) {
-            System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(A) View Requests                                  ██");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(B) Select request by ID                           ██");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(C) View System Observations                       ██");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(D) to delete all observations                     ██");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(E) Main menu (Log out)                            ██");
-            System.out.println("███████████████████████████████████████████████████████");
-
-
-            String adminsc = sc.nextLine();
-
-            if (adminsc.equalsIgnoreCase("A")) {
-
-
-                viewRequests();
-
-
-            }
-            else if (adminsc.equalsIgnoreCase("B")) {
-
-
-                selectRequest();
-
-
-            }
-            else if (adminsc.equalsIgnoreCase("C")) {
-
-
-                viewObservations();
-
-
-            }
-            else if (adminsc.equalsIgnoreCase("D")) {
-
-
-                deleteObservations();
-
-
-            }
-
-           else if (adminsc.equalsIgnoreCase("E")) {
-                Mainfunc();
-
-            }
-
-
-        }
-
-
-
-
-
-    }
 
     public static void viewObservations() throws SQLException {
 

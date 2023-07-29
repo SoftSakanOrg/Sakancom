@@ -22,7 +22,7 @@ public class featureTestFunc {
             System.out.println(tenant.getEmail()+tenant.getPassword());
             if(rs.next()){
 
-             System.out.println("hello");
+             //System.out.println("hello");
                 featureTestFunc.flag=1;
 //                String tempE =  rs.getString(1) ;
 //                String tempP = rs.getString(2);

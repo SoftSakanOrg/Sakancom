@@ -8,14 +8,17 @@ public class Users {
 
     private String contactNum;
 
+    private String usertype;
+
     public Users(){}
 
-    public Users(Integer usersID, String username, String password, String email,String contactNum) {
+    public Users(Integer usersID, String username, String password, String email,String contactNum, String usertype) {
         this.usersID = usersID;
         this.username = username;
         this.password = password;
         this.email = email;
         this.contactNum = contactNum;
+        this.usertype=usertype;
     }
 
 
@@ -57,5 +60,13 @@ public class Users {
 
     public void setContactNum(String contactNum) {
         this.contactNum = contactNum;
+    }
+
+    public String getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
     }
 }
