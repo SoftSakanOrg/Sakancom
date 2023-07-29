@@ -18,16 +18,18 @@ public class funcViewRequest {
         pst = connection.prepareStatement("SELECT * FROM advertisment_requests" );
         rs = pst.executeQuery();
 
-        if(!rs.next()){
+       if(!rs.next()){
 
             output = "No requests currently";
-            System.out.println(output);
+           System.out.println(output);
         }
         rs = pst.executeQuery();
 
 
+
         while (rs.next())
         {
+
             ViewRequestFlag=1;
             String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Building_Name: " + rs.getString(2) + "\t|\t Owner_name: " + rs.getString(3) + "\t|\t Contact_Number: " + rs.getInt(4) + "\t|\t" + rs.getInt(5) + "\t|\t Floor_ID: " +rs.getInt(6)+"\t|\t";
             System.out.println(content);

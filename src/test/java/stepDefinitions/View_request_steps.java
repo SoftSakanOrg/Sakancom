@@ -36,7 +36,7 @@ public class View_request_steps {
     public void aMessageShouldAppearTellingNoDataIsFound(String message) throws SQLException {
         String expected = message;
         view.viewRequests();
-        assertNotEquals(expected,view.output);
+        assertEquals(expected,view.output);
        }
 
 
