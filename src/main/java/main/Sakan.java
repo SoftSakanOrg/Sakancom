@@ -1,5 +1,6 @@
 package main;//import java.util.Scanner;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import static java.lang.System.exit;
 import static java.lang.System.getLogger;
@@ -34,6 +35,8 @@ public class Sakan {
     static advertismentRequests ar = new advertismentRequests();
 
     static  systemObservation so = new systemObservation();
+    static bookingInfo bi=new bookingInfo();
+
     public static void Mainfunc(){
            Sakan.flag1 =0;
            Sakan.flag2 = 0;
@@ -135,6 +138,8 @@ public class Sakan {
          if(usertype.equalsIgnoreCase("TENANTS")){
        while(true) {
 
+           tenantId();
+
            System.out.println("\nHere is a menu showing the available options:-");
            System.out.println("███████████████████████████████████████████████████████");
            System.out.println("██(A) View available Apartments                      ██");
@@ -147,7 +152,9 @@ public class Sakan {
            System.out.println("███████████████████████████████████████████████████████");
            System.out.println("██(F) Advertise a furniture for sale                 ██");
            System.out.println("███████████████████████████████████████████████████████");
-           System.out.println("██(G) Main menu (Log out)                            ██");
+           System.out.println("██(G) View personal info of booking                  ██");
+           System.out.println("███████████████████████████████████████████████████████");
+           System.out.println("██(H) Main menu (Log out)                            ██");
            System.out.println("███████████████████████████████████████████████████████");
            view = sv.nextLine();
            if (view.equalsIgnoreCase("A")) {
@@ -164,7 +171,12 @@ public class Sakan {
             selectfurniture();
            } else if(view.equalsIgnoreCase("F")){
               addfurniture(Sakan.OnlineUser);
-           } else if (view.equalsIgnoreCase("G")) {
+
+           }  else if(view.equalsIgnoreCase("G")){
+               viewBookingInfo(Sakan.U.getUsersID());
+           }
+
+           else if (view.equalsIgnoreCase("H")) {
                Mainfunc();
 
            }
@@ -175,6 +187,57 @@ public class Sakan {
 
 
 
+    public static void tenantId(){
+
+        Connection connection = null;
+        PreparedStatement pst= null;
+        ResultSet rs = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            pst = connection.prepareStatement("SELECT user_id,USERNAME FROM USERS WHERE EMAIL='" + Sakan.OnlineUser + "'");
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                Sakan.bi.setTenantId(rs.getInt(1));
+                Sakan.U.setUsername(rs.getString(2));
+                Sakan.U.setUsersID(rs.getInt(1));
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+public static void viewBookingInfo(int tenant_id){
+
+    Connection connection = null;
+    PreparedStatement pst= null;
+    ResultSet rs = null;
+
+
+    try {
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        pst = connection.prepareStatement("SELECT * FROM BOOKING_INFO WHERE TENANT_ID = '" +tenant_id+"'");
+        rs = pst.executeQuery();
+        if(!rs.next()){
+            System.out.println("You don`t have any rented apartment yet...");
+        }
+        rs= pst.executeQuery();
+        while (rs.next()) {
+
+            String content = "\t|\t Tenant_Name: " + rs.getString(2) + "\t|\t Owner_Name: "+ rs.getString(3)+ "\t|\t Contact_info: "+ rs.getInt(4)+ "\t|\t Rent_Date: "+ rs.getString(5)+ "\t|\t ";
+            System.out.println(content);
+        }
+
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+
+    }
+
+
+
+}
 
 
 
@@ -890,7 +953,7 @@ while(true) {
     System.out.println("███████████████████████████████████████████████████████");
     System.out.println("██(B) View the people living in the selected floor   ██");
     System.out.println("███████████████████████████████████████████████████████");
-    System.out.println("██(C) To book the selected floor                    ██");
+    System.out.println("██(C) To book the selected floor                     ██");
     System.out.println("███████████████████████████████████████████████████████");
     System.out.println("██(D) Back                                           ██");
     System.out.println("███████████████████████████████████████████████████████");
@@ -961,7 +1024,11 @@ while(true) {
         String majorb;
         String confirm;
         String nameb = null;
-        String hosid = null;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        timestamp.setMonth(timestamp.getMonth()+1);
+
         try {
 
 
@@ -1029,14 +1096,8 @@ while(true) {
                         confirm = st.nextLine();
                         if(confirm.equalsIgnoreCase("A")){
                             try {
-                                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                                pst = connection.prepareStatement("SELECT username FROM users WHERE email = '" + Temail + "'" );
-                                rs = pst.executeQuery();
 
-                                if(rs.next()){
-                                     Sakan.U.setUsername(rs.getString(1));
 
-                                }
                                 pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
                                 pst.setInt(1,floorID );
                                 pst.setString(2,Sakan.U.getUsername() );
@@ -1071,7 +1132,8 @@ while(true) {
                                ust.executeUpdate();
 
 
-                                pst = connection.prepareStatement("SELECT floor_id FROM floors WHERE participants = max_participants ");
+
+                                pst = connection.prepareStatement("SELECT floor_id FROM floors WHERE participants = max_participants AND FLOOR_ID='"+floorID+"' ");
                                 rs = pst.executeQuery();
 
                                 if(rs.next()){
@@ -1088,6 +1150,28 @@ while(true) {
                                 }
 
                               System.out.println("Apartment booked successfully!");
+
+                                Sakan.bi.setRentDate(sdf.format((timestamp)));
+
+                                pst=connection.prepareStatement("SELECT OWNER_NAME,CONTACT_NUM FROM BUILDING WHERE BUILDING_ID='"+buildingID+"'");
+                                rs= pst.executeQuery();
+                                if(rs.next()){
+                                    Sakan.bi.setOwnerName(rs.getString(1));
+                                    Sakan.bi.setContactInfo(rs.getInt(2));
+                                }
+
+
+                                pst=connection.prepareStatement("INSERT INTO BOOKING_INFO(TENANT_NAME,OWNER_NAME,CONTACT_INFO,RENT_DATE,TENANT_ID) VALUES (?,?,?,?,?)");
+                                pst.setString(1,Sakan.U.getUsername());
+                                pst.setString(2,Sakan.bi.getOwnerName());
+                                pst.setInt(3,Sakan.bi.getContactInfo());
+                                pst.setString(4,sdf.format(timestamp));
+                                pst.setInt(5,Sakan.bi.getTenantId());
+                                pst.executeUpdate();
+
+
+
+
                                 Sakan.whileflag2 = 1;
                                 Sakan.flag2 = 1;
                                 tenantfunc("TENANTS");
@@ -1133,11 +1217,12 @@ while(true) {
                         if(confirm.equalsIgnoreCase("A")){
                             try {
                                 connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                                pst = connection.prepareStatement("SELECT username FROM users WHERE email = '" + Temail + "'" );
+                                pst = connection.prepareStatement("SELECT USER_ID,username FROM users WHERE email = '" + Temail + "'" );
                                 rs = pst.executeQuery();
 
                                 if(rs.next()){
-                                    nameb = rs.getString(1);
+                                    Sakan.bi.setTenantId(rs.getInt(1));
+                                    nameb = rs.getString(2);
 
                                 }
                                 pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
@@ -1175,7 +1260,7 @@ while(true) {
 
 
 
-                                pst = connection.prepareStatement("SELECT floor_id FROM floors WHERE participants = max_participants ");
+                                pst = connection.prepareStatement("SELECT floor_id FROM floors WHERE participants = max_participants AND FLOOR_ID='"+floorID+"' ");
                                 rs = pst.executeQuery();
 
                                 if(rs.next()){
@@ -1193,6 +1278,19 @@ while(true) {
                                 }
 
                                 System.out.println("Apartment booked successfully!");
+
+
+
+                              Sakan.bi.setRentDate(sdf.format((timestamp)));
+
+                                pst=connection.prepareStatement("INSERT INTO BOOKING_INFO(TENANT_NAME,OWNER_NAME,CONTACT_INFO,RENT_DATE,TENANT_ID) VALUES (?,?,?,?,?)");
+                                pst.setString(1,nameb);
+                                pst.setString(2,Sakan.bi.getOwnerName());
+                                pst.setInt(3,Sakan.bi.getContactInfo());
+                                pst.setString(4,sdf.format(timestamp));
+                                pst.setInt(5,Sakan.bi.getTenantId());
+                                pst.executeUpdate();
+
                                 Sakan.flag2 = 1;
                                 Sakan.whileflag2 = 1;
                                 tenantfunc("TENANTS");
