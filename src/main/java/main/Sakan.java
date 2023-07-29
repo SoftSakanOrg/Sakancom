@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import static java.lang.System.exit;
 import static java.lang.System.getLogger;
-import static main.checkEmailFunc.checkemail;
-import static main.usersLoginFunc.Login;
+import static main.funcCheckEmail.checkemail;
+import static main.funcUsersLogin.Login;
 
 public class Sakan {
 
@@ -19,6 +19,8 @@ public class Sakan {
     public static int flagnext = 0;
 
     public static  int flaglogin = 0;
+
+
 
     public static String OnlineUser = "" ;
 
@@ -50,6 +52,7 @@ public class Sakan {
            Sakan.OnlineUser = "";
            Sakan.flag11 = 0;
            Sakan.flaglogin=0;
+
         Scanner sc=new Scanner(System.in);
 
         String c ;
@@ -1079,7 +1082,7 @@ while(true) {
                                 if(rs.next()){
                                     Sakan.bi.setTenantId(rs.getInt(1));
                                     nameb = rs.getString(2);
-
+                                     System.out.print(Sakan.U.getUsername());
                                 }
                                 pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
                                 pst.setInt(1,floorID );
@@ -1781,27 +1784,6 @@ while(true) {
         System.out.println("You have successfully Deleted the Observations");
     }
 
-    public static void viewRequests() throws SQLException {
-
-        Connection connection = null;
-        PreparedStatement pst= null;
-        ResultSet rs = null;
-
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-        pst = connection.prepareStatement("SELECT * FROM advertisment_requests " );
-        rs = pst.executeQuery();
-
-
-
-
-        while (rs.next())
-    {
-
-        String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Building_Name: " + rs.getString(2) + "\t|\t Owner_name: " + rs.getString(3) + "\t|\t Contact_Number: " + rs.getInt(4) + "\t|\t" + rs.getInt(5) + "\t|\t Floor_ID: " +rs.getInt(6)+"\t|\t";
-        System.out.println(content);
-
-    }
-        }
 
 
 

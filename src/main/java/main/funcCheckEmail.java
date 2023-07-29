@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 import static main.Sakan.Signup;
 import static main.Sakan.flag11;
-import static main.usersLoginFunc.Login;
+import static main.funcUsersLogin.Login;
 
-public class checkEmailFunc {
+public class funcCheckEmail {
 
 
     public static void checkemail(String email, int func, String usertype ){  //func 1 forSign up // func2 for Login

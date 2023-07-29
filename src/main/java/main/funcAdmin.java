@@ -4,8 +4,9 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import static main.Sakan.*;
+import static main.funcViewRequest.viewRequests;
 
-public class adminFunc {
+public class funcAdmin {
 
 
     public static void adminfunc(String usertype, int admin_ID) throws SQLException {

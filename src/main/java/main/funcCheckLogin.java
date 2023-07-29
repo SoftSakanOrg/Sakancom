@@ -4,10 +4,9 @@ import java.sql.*;
 import java.util.Scanner;
 
 import static main.Sakan.*;
-import static main.adminFunc.adminfunc;
-import static main.usersLoginFunc.Login;
+import static main.funcAdmin.adminfunc;
 
-public class checkLoginFunc {
+public class funcCheckLogin {
 
     public static void checklogin(String email, String pass, String usertype){
 
@@ -62,6 +61,7 @@ public class checkLoginFunc {
                 }
 
                 else if(usertype.equalsIgnoreCase("ADMIN")) {
+
                     Sakan.OnlineUser=U.getEmail();
 
                     adminfunc("ADMIN", U.getUsersID());

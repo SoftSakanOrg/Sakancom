@@ -5,7 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import main.Users;
 import main.featureTestFunc;
-import main.usersLoginFunc;
+import main.funcUsersLogin;
 
 import static org.junit.Assert.assertTrue;
 
@@ -25,7 +25,7 @@ public class Users_login_steps {
         obj.setPassword(password);
 
 
-        usersLoginFunc.Login(obj.getUsertype(),obj.getEmail(),obj.getPassword());
+        funcUsersLogin.Login(obj.getUsertype(),obj.getEmail(),obj.getPassword());
 
 
         assertTrue(featureTestFunc.flag==1);
