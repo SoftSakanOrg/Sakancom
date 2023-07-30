@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import static main.Sakan.*;
+import static main.funcDeleteObservation.deleteObservations;
 import static main.funcRequestAction.requestAction;
 import static main.funcSelectRequest.selectRequest;
 import static main.funcViewObservation.viewObservations;
