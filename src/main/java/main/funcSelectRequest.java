@@ -7,7 +7,7 @@ import static main.funcRequestAction.requestAction;
 
 public class funcSelectRequest {
 
-    public static void selectRequest(){
+    public static void selectRequest(int testp){
         Scanner sc=new Scanner(System.in);
         Connection connection = null;
         PreparedStatement pst= null;
@@ -26,7 +26,7 @@ public class funcSelectRequest {
                 System.out.println("Do you want to accept this request or deleter it? ");
                 System.out.println("(A)Accept    (B)delete    (C)Go back   ");
                 String answer = sf.next();
-                requestAction(rs.getInt(1),answer);
+                requestAction(rs.getInt(1),answer,testp);
             }
             else if(!rs.next()){
                 System.out.println("Please enter a valid request ID...");

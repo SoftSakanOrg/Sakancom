@@ -45,7 +45,7 @@ public class funcAdmin {
                 Sakan.ar.setReqId(sc.nextInt());
 
 
-                selectRequest();
+                selectRequest(1);
 
 
             }

@@ -5,7 +5,11 @@ import java.util.Scanner;
 
 public class funcRequestAction {
 
-    public static void requestAction(int ID,String answer) throws SQLException {
+    public static int RequestFlag=0;
+
+    public static void requestAction(int ID, String answer, int testp) throws SQLException {
+
+        RequestFlag=0;
 
 
 
@@ -16,11 +20,13 @@ public class funcRequestAction {
         while(true) {
          Sakan.flagRequestAction=0;
 
+
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
             pst = connection.prepareStatement("SELECT FLOOR_ID FROM advertisment_requests WHERE REQ_ID='"+ID+"'");
             rs= pst.executeQuery();
 
             if(rs.next()){
+                RequestFlag=1;
                 Sakan.ar.setFloorId(rs.getInt(1));
             }
 
@@ -31,50 +37,51 @@ public class funcRequestAction {
 //     String picture = null;
             if (answer.equalsIgnoreCase("A")) {
 
-
-
-                try {
-
-
-
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                    pst = connection.prepareStatement("UPDATE FLOORS SET STATUS='Advertised' where FLOOR_ID='"+Sakan.ar.getFloorId()+"'");
-                    pst.executeUpdate();
-
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                    pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='"+ID+"'");
-                    pst.executeUpdate();
+                RequestFlag=1;
 
 
 
 
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
 
-                }
+                        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                        if(testp==1) {
+                            pst = connection.prepareStatement("UPDATE FLOORS SET STATUS='Advertised' where FLOOR_ID='" + Sakan.ar.getFloorId() + "'");
+                            pst.executeUpdate();
+                        }
+                            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                        if(testp==1) {
+                            pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='" + ID + "'");
+                            pst.executeUpdate();
+                        }
+
+
+
                 System.out.println("Request has been Approved...");
                 break;
             }else if(answer.equalsIgnoreCase("B")){
 
-                try {
+                RequestFlag=1;
 
 
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                    pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='"+ID+"'");
+
+
+
+
+                        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                if(testp==1) {
+                    pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='" + ID + "'");
                     pst.executeUpdate();
-
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                    pst = connection.prepareStatement("DELETE FROM FLOORS where FLOOR_ID='"+Sakan.ar.getFloorId()+"'");
-                    pst.executeUpdate();
-
-
-
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-
                 }
+
+                        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                if(testp==1) {
+                    pst = connection.prepareStatement("DELETE FROM FLOORS where FLOOR_ID='" + Sakan.ar.getFloorId() + "'");
+                    pst.executeUpdate();
+                }
+
+
+
 
                 System.out.println("Request has been Rejected...");
                 break;
@@ -82,6 +89,8 @@ public class funcRequestAction {
             }
 
             else if ( answer.equalsIgnoreCase("C")) {
+
+                RequestFlag=1;
                 break;
             }
             else {
