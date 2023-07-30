@@ -69,7 +69,7 @@ public class funcAdmin {
             else if (adminsc.equalsIgnoreCase("D")) {
 
 
-                deleteObservations();
+                deleteObservations(1);
 
 
             }
