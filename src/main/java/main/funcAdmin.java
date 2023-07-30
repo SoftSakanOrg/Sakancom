@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import static main.Sakan.*;
+import static main.funcViewObservation.viewObservations;
 import static main.funcViewRequest.viewRequests;
 
 public class funcAdmin {

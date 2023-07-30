@@ -1744,33 +1744,7 @@ while(true) {
 
 
 
-    public static void viewObservations() throws SQLException {
 
-        Connection connection = null;
-        PreparedStatement pst= null;
-        ResultSet rs = null;
-
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-        pst = connection.prepareStatement("SELECT * FROM system_observation ORDER BY ID DESC" );
-        rs = pst.executeQuery();
-
-
-           if(!rs.next()){
-               System.out.println("There are no Observations currently...");
-           }
-        rs = pst.executeQuery();
-
-        while (rs.next())
-        {
-
-            String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Description: " + rs.getString(2) + "\t|\t";
-            System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            System.out.println(content);
-
-        }
-
-
-    }
     public static void deleteObservations() throws SQLException {
 
         Connection connection = null;
