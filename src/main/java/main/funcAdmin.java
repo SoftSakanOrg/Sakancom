@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import static main.Sakan.*;
+import static main.funcSelectRequest.selectRequest;
 import static main.funcViewObservation.viewObservations;
 import static main.funcViewRequest.viewRequests;
 
@@ -28,7 +29,7 @@ public class funcAdmin {
             System.out.println("███████████████████████████████████████████████████████");
 
 
-            String adminsc = sc.nextLine();
+            String adminsc = sc.next();
 
             if (adminsc.equalsIgnoreCase("A")) {
 
@@ -38,6 +39,10 @@ public class funcAdmin {
 
             }
             else if (adminsc.equalsIgnoreCase("B")) {
+
+                System.out.print("Enter the request ID: ");
+
+                Sakan.ar.setReqId(sc.nextInt());
 
 
                 selectRequest();

@@ -20,6 +20,8 @@ public class Sakan {
 
     public static  int flaglogin = 0;
 
+    public static  int flagRequestAction = 0;
+
 
 
     public static String OnlineUser = "" ;
@@ -1761,128 +1763,8 @@ while(true) {
 
 
 
-    public static void selectRequest(){
-        Scanner sc=new Scanner(System.in);
-        Connection connection = null;
-        PreparedStatement pst= null;
-        ResultSet rs = null;
-        System.out.print("Enter the request ID: ");
-
-        Sakan.ar.setReqId(sc.nextInt());
-
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT * FROM advertisment_requests WHERE req_id = '" +  Sakan.ar.getReqId() + "'" );
-            rs = pst.executeQuery();
-
-            if (rs.next()) {
-
-                String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Building_Name: " + rs.getString(2) + "\t|\t Owner_name: " + rs.getString(3) + "\t|\t Contact_Number: " + rs.getInt(4) + "\t|\t" + rs.getInt(5) + "\t|\t Floor_ID: "  +rs.getInt(6)+"\t|\t";
-                System.out.println(content);
-                requestAction(rs.getInt(1));
-            }
-            else if(!rs.next()){
-                System.out.println("Please enter a valid request ID...");
-
-            }
 
 
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        }
-
-
-
-
-    }
-
-    public static void requestAction(int ID) throws SQLException {
-
-        Scanner sf=new Scanner(System.in);
-        Connection connection = null;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-
-        while(true) {
-
-
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT FLOOR_ID FROM advertisment_requests WHERE REQ_ID='"+ID+"'");
-            rs= pst.executeQuery();
-
-            if(rs.next()){
-                Sakan.ar.setFloorId(rs.getInt(1));
-            }
-
-
-
-            System.out.println("Do you want to accept this request or deleter it? ");
-            System.out.println("(A)Accept    (B)delete    (C)Go back   ");
-
-
-            String ans = sf.next();
-
-//     String picture = null;
-            if (ans.equalsIgnoreCase("A")) {
-
-
-
-                try {
-
-
-
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                    pst = connection.prepareStatement("UPDATE FLOORS SET STATUS='Advertised' where FLOOR_ID='"+Sakan.ar.getFloorId()+"'");
-                    pst.executeUpdate();
-
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                    pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='"+ID+"'");
-                    pst.executeUpdate();
-
-
-
-
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-
-                }
-                System.out.println("Request has been Approved...");
-                break;
-            }else if(ans.equalsIgnoreCase("B")){
-
-                try {
-
-
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                    pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='"+ID+"'");
-                    pst.executeUpdate();
-
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                    pst = connection.prepareStatement("DELETE FROM FLOORS where FLOOR_ID='"+Sakan.ar.getFloorId()+"'");
-                    pst.executeUpdate();
-
-
-
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-
-                }
-
-                System.out.println("Request has been Rejected...");
-                break;
-
-            }
-
-            else if (  ans.equalsIgnoreCase("C")) {
-                break;
-            }
-        }
-    }
 
     static boolean isNumber(String s)
     {
