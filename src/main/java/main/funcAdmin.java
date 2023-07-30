@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import static main.Sakan.*;
+import static main.funcRequestAction.requestAction;
 import static main.funcSelectRequest.selectRequest;
 import static main.funcViewObservation.viewObservations;
 import static main.funcViewRequest.viewRequests;
@@ -46,7 +47,15 @@ public class funcAdmin {
 
 
                 selectRequest(1);
-
+               while(flagSelectRequest==1) {
+                   Scanner sf = new Scanner(System.in);
+                   System.out.println("Do you want to accept this request or deleter it? ");
+                   System.out.println("(A)Accept    (B)delete    (C)Go back   ");
+                   String answer = sf.next();
+                   if(!answer.equalsIgnoreCase("A") && !answer.equalsIgnoreCase("B") && !answer.equalsIgnoreCase("C")) continue;
+                   requestAction(Sakan.ar.getReqId(), answer, 1);
+                   break;
+               }
 
             }
             else if (adminsc.equalsIgnoreCase("C")) {

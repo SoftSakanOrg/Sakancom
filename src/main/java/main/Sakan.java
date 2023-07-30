@@ -22,6 +22,8 @@ public class Sakan {
 
     public static  int flagRequestAction = 0;
 
+    public static  int flagSelectRequest = 0;
+
 
 
     public static String OnlineUser = "" ;
