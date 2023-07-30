@@ -16,31 +16,27 @@ public class Request_action_steps {
     advertismentRequests obj;
     funcRequestAction obj2;
 
-    @Given("the admin is on the requests page")
-    public void theAdminIsOnTheRequestsPage() {
 
-   obj= new advertismentRequests();
-   obj2=new funcRequestAction();
-
+    @Given("the admin is on the requests section")
+    public void theAdminIsOnTheRequestsSection() {
+        obj= new advertismentRequests();
+        obj2=new funcRequestAction();
     }
-    @When("the admin selects a request by ID like {int}")
-    public void theAdminSelectsARequestByIDLike(Integer req_ID) throws SQLException {
-
+    @When("the admin selects a requestID like {int}")
+    public void theAdminSelectsARequestIDLike(Integer req_ID) throws SQLException {
         obj.setReqId(req_ID);
 
         obj2.requestAction(req_ID,"",2);
-
     }
-    @Then("the request should appear to the admin")
-    public void theRequestShouldAppearToTheAdmin() {
-
+    @Then("the floorID should be received by the admin")
+    public void theFloorIDShouldBeReceivedByTheAdmin() {
         assertTrue(obj2.RequestFlag==1);
-
     }
 
 
-    @Given("the admin selected a request")
-    public void theAdminSelectedARequest() {
+
+   @Given("the admin selected a request")
+   public void theAdminSelectedARequest() {
         obj2=new funcRequestAction();
     }
 

@@ -1,9 +1,9 @@
 Feature: RequestAction test
 
-  Scenario: Admin views the Request successfully
-    Given the admin is on the requests page
-    When  the admin selects a request by ID like 8
-    Then the request should appear to the admin
+  Scenario: Admin gets the floorID successfully
+    Given the admin is on the requests section
+    When  the admin selects a requestID like 8
+    Then the floorID should be received by the admin
 
 
   Scenario Outline: After selecting a request
