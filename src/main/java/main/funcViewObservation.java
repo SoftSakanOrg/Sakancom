@@ -20,7 +20,8 @@ public class funcViewObservation {
 
 
         if(!rs.next()){
-            System.out.println("There are no Observations currently...");
+            output="No Observations currently";
+            System.out.println("output");
         }
         rs = pst.executeQuery();
 
