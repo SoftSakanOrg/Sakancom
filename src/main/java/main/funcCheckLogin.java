@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import static main.Sakan.*;
 import static main.funcAdmin.adminfunc;
+import static main.funcOwner.ownerfunc;
 import static main.funcRequestAction.requestAction;
 import static main.funcSelectRequest.selectRequest;
 
