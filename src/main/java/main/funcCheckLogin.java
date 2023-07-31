@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import static main.Sakan.*;
 import static main.funcAdmin.adminfunc;
+import static main.funcRequestAction.requestAction;
+import static main.funcSelectRequest.selectRequest;
 
 public class funcCheckLogin {
 
@@ -64,7 +66,50 @@ public class funcCheckLogin {
 
                     Sakan.OnlineUser=U.getEmail();
 
-                    adminfunc("ADMIN", U.getUsersID());
+
+                    Scanner sc = new Scanner(System.in);
+                    while(true) {
+                        System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+                        System.out.println("███████████████████████████████████████████████████████");
+                        System.out.println("██(A) View Requests                                  ██");
+                        System.out.println("███████████████████████████████████████████████████████");
+                        System.out.println("██(B) Select request by ID                           ██");
+                        System.out.println("███████████████████████████████████████████████████████");
+                        System.out.println("██(C) View System Observations                       ██");
+                        System.out.println("███████████████████████████████████████████████████████");
+                        System.out.println("██(D) to delete all observations                     ██");
+                        System.out.println("███████████████████████████████████████████████████████");
+                        System.out.println("██(E) Main menu (Log out)                            ██");
+                        System.out.println("███████████████████████████████████████████████████████");
+
+
+                        String adminsc = sc.next();
+
+                        adminfunc("ADMIN", U.getUsersID(), adminsc);
+
+                        if(Sakan.flagAdminFunc ==1){
+
+                            System.out.print("Enter the request ID: ");
+
+                            Sakan.ar.setReqId(sc.nextInt());
+
+
+                            selectRequest(Sakan.ar.getReqId(), 1);
+                            while (flagSelectRequest == 1) {
+                                Scanner sf = new Scanner(System.in);
+                                System.out.println("Do you want to accept this request or deleter it? ");
+                                System.out.println("(A)Accept    (B)delete    (C)Go back   ");
+                                String answer = sf.next();
+                                if (!answer.equalsIgnoreCase("A") && !answer.equalsIgnoreCase("B") && !answer.equalsIgnoreCase("C"))
+                                    continue;
+                                requestAction(Sakan.ar.getReqId(), answer, 1);
+                                break;
+                            }
+
+
+                        }
+
+                    }
                 }
             }
 
