@@ -62,8 +62,50 @@ public class funcViewBuildingFunc {
 
 
             }    else if (view1.equalsIgnoreCase("B")) {
+                Scanner sc1 =new Scanner(System.in);
+                System.out.print("Enter the floor ID: ");
+
+                Sakan.H.setHouseId(sc1.nextInt());
 
                 selectmyfloor(building_ID);
+
+                if(flagSelectMyFloor==1){
+                    while(true) {
+                        Scanner sf1=new Scanner(System.in);
+                        System.out.println("Do you want to add  pictures for this FLOOR ?");
+                        System.out.println("A) yes . B) No");
+                        String ans = sf1.next();
+
+                        if (ans.equalsIgnoreCase("A")) {
+                            System.out.println(" Enter pictures: ");
+
+                            Sakan.hpc.setHousePicture(sf1.next());
+
+                            try {
+                                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                                pst = connection.prepareStatement("INSERT INTO HOUSE_PIC(FLOOR_ID,PICTURE) VALUES (?,?)");
+                                pst.setInt(1, Sakan.H.getHouseId());
+                                pst.setString(2, Sakan.hpc.getHousePicture());
+                                pst.executeUpdate();
+
+                                pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+
+                                pst.setString(1, Sakan.OnlineUser + " has added a picture (" + Sakan.hpc.getHousePicture() + ") to his apartment ");
+
+                                pst.executeUpdate();
+
+
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+
+                            }
+                            System.out.println("Pictures have been added");
+                            break;
+                        } else if (ans.equalsIgnoreCase("B")) {
+                            break;
+                        }
+                    }
+                }
             }
 
             else if (view1.equalsIgnoreCase("C")) {
