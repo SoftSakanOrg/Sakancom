@@ -3,6 +3,7 @@ package main;
 import java.util.Scanner;
 
 import static main.Sakan.*;
+import static main.funcAddBuilding.addbuildingfunc;
 import static main.funcSelectBuilding.selectbuilding;
 import static main.funcViewBuilding.viewbuilding;
 
