@@ -3,8 +3,7 @@ package main;
 import java.sql.*;
 import java.util.Scanner;
 
-import static main.Sakan.Signup;
-import static main.Sakan.flag11;
+import static main.Sakan.*;
 import static main.funcUsersLogin.Login;
 
 public class funcCheckEmail {
@@ -32,7 +31,7 @@ public class funcCheckEmail {
                     if(!tempE.equals(null)){
 
                         if (func == 1) {
-                            System.out.println("This email already exists..");
+                            logger.info("This email already exists..");
                             Signup(usertype);
                         }
                     }
@@ -43,12 +42,11 @@ public class funcCheckEmail {
             else if(!rs.next()){
                 if (flag11==0) {
                     if (func == 2) {
-                        System.out.println("a user with that email doesn't exists..");
+                        logger.info("a user with that email doesn't exists..");
 
                         Scanner sc=new Scanner(System.in);
-                        System.out.println("███████████████████████████████");
-                        System.out.println("██(1) To go back to main menu██");
-                        System.out.println("███████████████████████████████");
+
+                        logger.info("(1) To go back to main menu");
 
                         System.out.print("Enter your email: ");
                         Sakan.U.setEmail(sc.nextLine());

@@ -3,6 +3,8 @@ package main;
 import java.sql.*;
 import java.util.Scanner;
 
+import static main.Sakan.logger;
+
 public class funcAddFloor {
 
     public static void addfloor(int building_id){
@@ -17,59 +19,59 @@ public class funcAddFloor {
 
 
         while(true) {
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(111) Back                                         ██");
-            System.out.println("███████████████████████████████████████████████████████");
 
-            System.out.println(" Enter Price: ");
+            logger.info("(111) Back                                         ");
+
+
+            logger.info(" Enter Price: ");
 
             Sakan.H.setHousePrice(sf.nextInt());
 
             if (Sakan.H.getHousePrice()==111) {
-                // Sakan.flag2 = 1;
+
                 break;
             }
 
 
-            System.out.println(" Enter Services: ");
+            logger.info(" Enter Services: ");
             Sakan.H.setHouseServices(sf.next());
 
             if (Sakan.H.getHouseServices().equalsIgnoreCase("111")) {
-                // Sakan.flag2 = 1;
+
                 break;
             }
 
-            System.out.println(" How Many Participants Can Live In this Floor? ");
+            logger.info(" How Many Participants Can Live In this Floor? ");
             Sakan.H.setHouseMaxParticipants(sf.nextInt());
 
             if (Sakan.H.getHouseMaxParticipants()==111) {
-                // Sakan.flag2 = 1;
+
                 break;
             }
 
-            System.out.println(" Enter the number of Bedrooms: ");
+            logger.info(" Enter the number of Bedrooms: ");
             Sakan.H.setBedrooms(sf.nextInt());
 
             if (Sakan.H.getBedrooms()==111) {
-                // Sakan.flag2 = 1;
+
                 break;
             }
 
 
-            System.out.println(" Enter the number of Bathrooms: ");
+            logger.info(" Enter the number of Bathrooms: ");
             Sakan.H.setBathrooms(sf.nextInt());
 
             if (Sakan.H.getBathrooms()==111) {
-                // Sakan.flag2 = 1;
+
                 break;
             }
 
 
-            System.out.println(" how many Does Balconies does it have? ");
+            logger.info(" how many Does Balconies does it have? ");
             Sakan.H.setContBalcony(sf.nextInt());
 
             if (Sakan.H.getContBalcony()==111) {
-                // Sakan.flag2 = 1;
+
                 break;
             }
 
@@ -109,8 +111,8 @@ public class funcAddFloor {
 
 
 
-                System.out.println("You have successfully added the Floor...");
-                System.out.println("Waiting for the admin to accept your request");
+                logger.info("You have successfully added the Floor...");
+                logger.info("Waiting for the admin to accept your request");
                 pst = connection.prepareStatement("INSERT INTO advertisment_requests (BUILDING_NAME,OWNER_NAME,CONTACT_NUMBER,PRICE,floor_id) VALUES" + "(?,?,?,?,?)");
                 pst.setString(1, Sakan.ar.getBuildingName());
                 pst.setString(2, Sakan.ar.getOwnerName());
@@ -142,18 +144,18 @@ public class funcAddFloor {
 
             }
 
-            System.out.println("Do you want to add  pictures for this FLOOR ?");
-            System.out.println("(A) yes . (B) No");
+            logger.info("Do you want to add  pictures for this FLOOR ?");
+            logger.info("(A) yes . (B) No");
             String ans = sf.next();
-//     String picture = null;
+
             if (ans.equalsIgnoreCase("A")) {
-                System.out.println(" Enter pictures: ");
+                logger.info(" Enter pictures: ");
 
                 Sakan.hpc.setHousePicture(sf.next());
                 if (  Sakan.hpc.getHousePicture().equalsIgnoreCase("1")) {
                     break;
                 }
-//         picture = pictext;
+
                 try {
                     connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
                     pst = connection.prepareStatement("INSERT INTO HOUSE_PIC(FLOOR_ID,PICTURE) VALUES (?,?)");
@@ -172,7 +174,7 @@ public class funcAddFloor {
                     e.printStackTrace();
 
                 }
-                System.out.println("Pictures have been added");
+                logger.info("Pictures have been added");
             }else if(ans.equalsIgnoreCase("B")){
                 break;
             }

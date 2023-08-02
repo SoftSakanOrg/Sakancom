@@ -35,14 +35,14 @@ public class funcCheckLogin {
                 String tempP = rs.getString(2);
                 String tempU = rs.getString(3);
                 if (!tempE.equals(null) && !tempP.equals(null) && !tempU.equals(null)) {
-                    System.out.println("Logged in successfully");
+                    logger.info("Logged in successfully");
 
                     Sakan.flag1 = 1;
                 }
 
             } else if (!rs.next()) {
                 Scanner sc=new Scanner(System.in);
-                System.out.println("Invalid username or email");
+                logger.info("Invalid username or email");
 
 
                 flaglogin=1;
@@ -70,18 +70,14 @@ public class funcCheckLogin {
 
                     Scanner sc = new Scanner(System.in);
                     while(true) {
-                        System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-                        System.out.println("███████████████████████████████████████████████████████");
-                        System.out.println("██(A) View Requests                                  ██");
-                        System.out.println("███████████████████████████████████████████████████████");
-                        System.out.println("██(B) Select request by ID                           ██");
-                        System.out.println("███████████████████████████████████████████████████████");
-                        System.out.println("██(C) View System Observations                       ██");
-                        System.out.println("███████████████████████████████████████████████████████");
-                        System.out.println("██(D) to delete all observations                     ██");
-                        System.out.println("███████████████████████████████████████████████████████");
-                        System.out.println("██(E) Main menu (Log out)                            ██");
-                        System.out.println("███████████████████████████████████████████████████████");
+
+
+                        logger.info("(A) View Requests                                  ");
+                        logger.info("(B) Select request by ID                           ");
+                        logger.info("(C) View System Observations                       ");
+                        logger.info("(D) to delete all observations                     ");
+                        logger.info("(E) Main menu (Log out)                            ");
+
 
 
                         String adminsc = sc.next();
@@ -98,8 +94,8 @@ public class funcCheckLogin {
                             selectRequest(Sakan.ar.getReqId(), 1);
                             while (flagSelectRequest == 1) {
                                 Scanner sf = new Scanner(System.in);
-                                System.out.println("Do you want to accept this request or deleter it? ");
-                                System.out.println("(A)Accept    (B)delete    (C)Go back   ");
+                                logger.info("Do you want to accept this request or deleter it? ");
+                                logger.info("(A)Accept    (B)delete    (C)Go back   ");
                                 String answer = sf.next();
                                 if (!answer.equalsIgnoreCase("A") && !answer.equalsIgnoreCase("B") && !answer.equalsIgnoreCase("C"))
                                     continue;

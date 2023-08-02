@@ -3,6 +3,8 @@ package main;
 import java.sql.*;
 import java.util.Scanner;
 
+import static main.Sakan.logger;
+
 public class funcRequestAction {
 
     public static int RequestFlag=0;
@@ -57,7 +59,7 @@ public class funcRequestAction {
 
 
 
-                System.out.println("Request has been Approved...");
+                logger.info("Request has been Approved...");
                 break;
             }else if(answer.equalsIgnoreCase("B")){
 
@@ -83,7 +85,7 @@ public class funcRequestAction {
 
 
 
-                System.out.println("Request has been Rejected...");
+                logger.info("Request has been Rejected...");
                 break;
 
             }

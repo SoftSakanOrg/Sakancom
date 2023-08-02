@@ -54,7 +54,7 @@ public class funcAdmin {
             break;
         }
         adminflag=1;
-        System.out.println("Invalid input");
+           logger.info("Invalid input");
         break;
 
     }

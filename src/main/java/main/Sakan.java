@@ -7,6 +7,7 @@ import static java.lang.System.getLogger;
 import static main.funcCheckEmail.checkemail;
 import static main.funcOwner.ownerfunc;
 import static main.funcUsersLogin.Login;
+import java.util.logging.Logger;
 
 public class Sakan {
 
@@ -54,6 +55,8 @@ public class Sakan {
 
     static Users Login=new Users();
 
+    static Logger logger =
+            Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static void Mainfunc(){
            Sakan.flag1 =0;
@@ -62,6 +65,8 @@ public class Sakan {
            Sakan.flag11 = 0;
            Sakan.flaglogin=0;
 
+
+
         Scanner sc=new Scanner(System.in);
 
         String c ;
@@ -69,14 +74,12 @@ public class Sakan {
         while (true)
         {
 
-            System.out.println( "███████████████" );
-            System.out.println( "██(1) Tenant ██" );
-            System.out.println( "███████████████" );
-            System.out.println( "██(2) Owner  ██" );
-            System.out.println( "███████████████" );
-            System.out.println( "██(3) Admin  ██" );
-            System.out.println( "███████████████" );
-            System.out.print( "Choose between the specific users :  " );
+
+            logger.info( "(1) Tenant " );
+            logger.info( "(2) Owner  " );
+            logger.info( "(3) Admin  " );
+
+            logger.info( "Choose between the specific users :  " );
             c= sc.nextLine();
 
 
@@ -101,8 +104,8 @@ public class Sakan {
                 exit(0);
             }
             else{
-                System.out.println("Please make sure to enter the right user........");
-                System.out.print("\n");
+                logger.info("Please make sure to enter the right user........");
+             //   System.out.print("\n");
 
             }
 
@@ -125,13 +128,11 @@ public class Sakan {
 
 
                 if (!usertype.equalsIgnoreCase("ADMIN")) {
-                    System.out.println("█████████████████████████");
-                    System.out.println("██(1) Sign up          ██");}
-                    System.out.println("█████████████████████████");
-                    System.out.println("██(2) Log in           ██");
-                    System.out.println("█████████████████████████");
-                    System.out.println("██(3) Back to main menu██");
-                    System.out.println("█████████████████████████");
+
+                    logger.info("(1) Sign up          ");}
+                    logger.info("(2) Log in           ");
+                    logger.info("(3) Back to main menu");
+
             }
 
       if(Sakan.flaglogin==0)
@@ -150,18 +151,14 @@ public class Sakan {
 
         else if(temp.equalsIgnoreCase("2")) {
 
-           // Scanner sc = new Scanner(System.in);
 
 
-          //  Scanner sc = new Scanner(System.in);
-            System.out.println("███████████████████████████████");
-            System.out.println("██(1) To go back to main menu██");
-            System.out.println("███████████████████████████████");
+            logger.info("(1) To go back to main menu");
 
-            System.out.print("Enter your email: ");
+            logger.info("Enter your email: ");
             Sakan.U.setEmail(sc.nextLine());
 
-            System.out.print("Enter password: ");
+            logger.info("Enter password: ");
             Sakan.U.setPassword(sc.nextLine());
 
 
@@ -172,31 +169,21 @@ public class Sakan {
        }
         Scanner sv = new Scanner(System.in);
         String view;
-//        if(usertype.equalsIgnoreCase("OWNERS")){
-//            ownerfunc("OWNERS");
-//        }
 
          if(usertype.equalsIgnoreCase("TENANTS")){
        while(true) {
 
            tenantId();
 
-           System.out.println("\nHere is a menu showing the available options:-");
-           System.out.println("███████████████████████████████████████████████████████");
-           System.out.println("██(A) View available Apartments                      ██");
-           System.out.println("███████████████████████████████████████████████████████");
-           System.out.println("██(B) To Select one of the available floors using ID ██");
-           System.out.println("███████████████████████████████████████████████████████");
-           System.out.println("██(C) View furnitures for sale                       ██");
-           System.out.println("███████████████████████████████████████████████████████");
-           System.out.println("██(E) To Select a furniture to buy using ID          ██");
-           System.out.println("███████████████████████████████████████████████████████");
-           System.out.println("██(F) Advertise a furniture for sale                 ██");
-           System.out.println("███████████████████████████████████████████████████████");
-           System.out.println("██(G) View personal info of booking                  ██");
-           System.out.println("███████████████████████████████████████████████████████");
-           System.out.println("██(H) Main menu (Log out)                            ██");
-           System.out.println("███████████████████████████████████████████████████████");
+           logger.info("\nHere is a menu showing the available options:-");
+           logger.info("(A) View available Apartments                     ");
+           logger.info("(B) To Select one of the available floors using ID");
+           logger.info("(C) View furnitures for sale                       ");
+           logger.info("(E) To Select a furniture to buy using ID          ");
+           logger.info("(F) Advertise a furniture for sale                 ");
+           logger.info("(G) View personal info of booking                  ");
+           logger.info("(H) Main menu (Log out)                            ");
+
            view = sv.nextLine();
            if (view.equalsIgnoreCase("A")) {
 
@@ -261,13 +248,13 @@ public static void viewBookingInfo(int tenant_id){
         pst = connection.prepareStatement("SELECT * FROM BOOKING_INFO WHERE TENANT_ID = '" +tenant_id+"'");
         rs = pst.executeQuery();
         if(!rs.next()){
-            System.out.println("You don`t have any rented apartment yet...");
+            logger.info("You don`t have any rented apartment yet...");
         }
         rs= pst.executeQuery();
         while (rs.next()) {
 
             String content = "\t|\t Tenant_Name: " + rs.getString(2) + "\t|\t Owner_Name: "+ rs.getString(3)+ "\t|\t Contact_info: "+ rs.getInt(4)+ "\t|\t Rent_Date: "+ rs.getString(5)+ "\t|\t ";
-            System.out.println(content);
+            logger.info(content);
         }
 
 
@@ -298,7 +285,7 @@ public static void viewBookingInfo(int tenant_id){
             while (rs.next()) {
                 ts.next();
                 String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t availability: "+ rs.getString(3)+ "\t|\t Price: "+ rs.getInt(4)+ "\t|\t Services: "+ rs.getString(5)+ "\t|\t Participants: "+ rs.getInt(6)+ "\t|\t Max_Participants: "+ rs.getInt(7)+ "\t|\t BedroomsNum: "+ rs.getInt(8)+ "\t|\t BathroomsNum: "+ rs.getInt(9)+ "\t|\t Balcony: "+ rs.getInt(10)+ "\t|\t Status: "+ rs.getString(11);
-                System.out.println(content);
+                logger.info(content);
             }
 
 
@@ -316,7 +303,7 @@ public static void viewBookingInfo(int tenant_id){
         PreparedStatement tst= null;
         ResultSet rs = null;
         ResultSet ts = null;
-        System.out.print("Enter the floor ID: ");
+        logger.info("Enter the floor ID: ");
 
         Sakan.H.setHouseId(sc.nextInt());
 
@@ -334,13 +321,13 @@ public static void viewBookingInfo(int tenant_id){
             if (rs.next()) {
               // Sakan.H.setHouseName(rs.getString(2));
                 String content = "\t|\t ID: " + rs.getString(1)  + "\t|\t price: " + rs.getInt(4) +  "\t|\t services: " + rs.getString(5) + "\t|\t Number of residents: " + rs.getString(6)  + "\t|\t";
-                System.out.println(content);
+                logger.info(content);
                 viewfloorsfunc(Sakan.H.getHouseId(),Sakan.B.getBuildingId(),Sakan.OnlineUser);
 
 
             }
             else if(!rs.next()){
-                System.out.println("Please enter a valid floor ID...");
+                logger.info("Please enter a valid floor ID...");
 
             }
 
@@ -368,7 +355,7 @@ public static void viewBookingInfo(int tenant_id){
             rs = pst.executeQuery();
             while (rs.next()) {
                 String content = "\t|\t ID: " + rs.getInt(1) + " \t|\t price: " + rs.getInt(3) + "\t|\t description: " + rs.getString(4) + "\t|\t status: " + rs.getString(5) + "\t|\t" ;
-                System.out.println(content);
+                logger.info(content);
             }
 
 
@@ -384,7 +371,7 @@ public static void viewBookingInfo(int tenant_id){
         Connection connection = null;
         PreparedStatement pst= null;
         ResultSet rs = null;
-        System.out.print("Enter the furniture ID: ");
+        logger.info("Enter the furniture ID: ");
 
        Sakan.F.setFurnitureID(sc.nextInt());
 
@@ -395,13 +382,13 @@ public static void viewBookingInfo(int tenant_id){
             if (rs.next()) {
                Sakan.F.setFurnitureDescription(rs.getString(4));
                 String content = "\t|\t ID: " + rs.getInt(1) + " \t|\t price: " + rs.getInt(3) + "\t|\t description: " + rs.getString(4) + "\t|\t";
-                System.out.println(content);
+                logger.info(content);
                 viewfurnituresfunc(  Sakan.F.getFurnitureDescription(),Sakan.F.getFurnitureID());
 
 
             }
             else if(!rs.next()){
-                System.out.println("Please enter a valid furniture ID...");
+                logger.info("Please enter a valid furniture ID...");
 
             }
 
@@ -432,32 +419,32 @@ public static void viewBookingInfo(int tenant_id){
 
 
 
-        System.out.println("███████████████████████████████████████████████████████");
-        System.out.println("██(1) Back                                           ██");
-        System.out.println("███████████████████████████████████████████████████████");
 
-        System.out.println(" Enter description: ");
-//        String description;
+        logger.info("(1) Back                                           ");
+
+
+        logger.info(" Enter description: ");
+
        Sakan.F.setFurnitureDescription(sf.nextLine());
 
        if(Sakan.F.getFurnitureDescription().equalsIgnoreCase("1")){
            Sakan.flag2 = 1;
            tenantfunc("TENANTS");
        }
-      //   description=text;
+
 
 
 
         int price;
 
-        System.out.println(" Enter price: ");
+        logger.info(" Enter price: ");
          Sakan.F.setFurniturePrice(sf.nextInt());
 
         if(String.valueOf(Sakan.F.getFurniturePrice()).equalsIgnoreCase("1")){
             Sakan.flag2 = 1;
             tenantfunc("TENANTS");
         }
-//        price=tnum;
+
 
      try {
 
@@ -485,7 +472,7 @@ public static void viewBookingInfo(int tenant_id){
 
          pst.executeUpdate();
 
-         System.out.println("You have successfully added your furnitures...");
+         logger.info("You have successfully added your furnitures...");
 
 
      } catch (SQLException e) {
@@ -517,19 +504,19 @@ public static void viewBookingInfo(int tenant_id){
          e.printStackTrace();
 
      }
-     System.out.println("Do you want to add  pictures for this furniture?");
-     System.out.println("A) yes . B) No");
+        logger.info("Do you want to add  pictures for this furniture?");
+        logger.info("A) yes . B) No");
      String ans = scon.nextLine();
-//     String picture = null;
+
      if (ans.equalsIgnoreCase("A")) {
-         System.out.println(" Enter pictures: ");
+         logger.info(" Enter pictures: ");
 
          Sakan.fpc.setFurniturePicture(scon.nextLine());
          if ( Sakan.fpc.getFurniturePicture().equalsIgnoreCase("1")) {
              Sakan.flag2 = 1;
              tenantfunc("TENANTS");
          }
-//         picture = pictext;
+
          try {
              connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
              pst = connection.prepareStatement("INSERT INTO FURNITURE_PIC(FURNITURE_ID,PICTURE) VALUES (?,?)");
@@ -546,7 +533,7 @@ public static void viewBookingInfo(int tenant_id){
              e.printStackTrace();
 
          }
-         System.out.println("Pictures have been added");
+         logger.info("Pictures have been added");
      }
 
 
@@ -566,15 +553,15 @@ public static void viewBookingInfo(int tenant_id){
           ResultSet rs = null;
           PreparedStatement tst= null;
 
-          System.out.println("███████████████████████████████");
-          System.out.println("██(1) To go back to main menu██");
-          System.out.println("███████████████████████████████");
+
+          logger.info("(1) To go back to main menu");
 
 
-         // if(usertype.equalsIgnoreCase("TENANTS"))
 
-          System.out.print("Enter your email: ");
-//          String tempemail
+
+
+          logger.info("Enter your email: ");
+
 
               Sakan.U.setEmail(sc.nextLine());
 
@@ -583,7 +570,7 @@ public static void viewBookingInfo(int tenant_id){
 
           }
           if (!Sakan.U.getEmail().contains("@") || !U.getEmail().contains(".")) {
-              System.out.println("Please enter a valid email...");
+              logger.info("Please enter a valid email...");
               Signup(usertype);
           }
 
@@ -592,16 +579,16 @@ public static void viewBookingInfo(int tenant_id){
           checkemail(Sakan.U.getEmail(), 1, usertype);
               if(Sakan.flag1==0) {
 
-                  System.out.print("Enter username: ");
+                  logger.info("Enter username: ");
                   Sakan.U.setUsername(sc.nextLine());
                   if (Sakan.U.getUsername().equalsIgnoreCase("1")) {
                       Mainfunc();
 
                   }
-//           name = tempname;
 
 
-                  System.out.print("Enter password: ");
+
+                  logger.info("Enter password: ");
                   Sakan.U.setPassword(sc.nextLine());
 
                   if (Sakan.U.getPassword().equalsIgnoreCase("1")) {
@@ -609,7 +596,7 @@ public static void viewBookingInfo(int tenant_id){
 
                   }
 
-                      System.out.print("Enter Contact Number: ");
+                  logger.info("Enter Contact Number: ");
                       Sakan.U.setContactNum(sc.nextLine());
 
                       if (Sakan.U.getContactNum().equalsIgnoreCase("1")) {
@@ -620,7 +607,7 @@ public static void viewBookingInfo(int tenant_id){
 
               }
 
-         //  pass = temppass;
+
 
 
            try {
@@ -637,7 +624,7 @@ public static void viewBookingInfo(int tenant_id){
                    tst.executeUpdate();
 
 
-               System.out.println("Signed  up successfully...");
+               logger.info("Signed  up successfully...");
 
                if(usertype.equalsIgnoreCase("owners")){
 
@@ -684,17 +671,12 @@ public static void viewBookingInfo(int tenant_id){
         ResultSet rs = null;
         String view1;
         while(true) {
-            System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-            System.out.println("\t            ★★  " + Fdescription + "  ★★                 \t");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(A) View pictures of the selected furniture        ██");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(B) To purchase the selected furniture             ██");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(C) Back                                           ██");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(D) Main menu (Log out)                            ██");
-            System.out.println("███████████████████████████████████████████████████████");
+            logger.info("\t            ★★  " + Fdescription + "  ★★                 \t");
+            logger.info("(A) View pictures of the selected furniture        ");
+            logger.info("(B) To purchase the selected furniture             ");
+            logger.info("(C) Back                                           ");
+            logger.info("(D) Main menu (Log out)                           ");
+
 
             view1  = sc.nextLine();
 
@@ -707,7 +689,7 @@ public static void viewBookingInfo(int tenant_id){
                     while (rs.next()) {
 
                         String content = "\t|\t" + rs.getString(1) + "\t|\t";
-                        System.out.println(content);
+                        logger.info(content);
 
 
                     }
@@ -738,8 +720,8 @@ public static void viewBookingInfo(int tenant_id){
                             while(true){
 
                                 Sakan.whileflag2=0;
-                                System.out.println("Are you sure you want to purchase this Furniture?");
-                                System.out.println("(A) Confirm   (B) Cancel");
+                                logger.info("Are you sure you want to purchase this Furniture?");
+                                logger.info("(A) Confirm   (B) Cancel");
                                 confirm = st.nextLine();
                                 if(confirm.equalsIgnoreCase("A")){
                                     try {
@@ -755,7 +737,7 @@ public static void viewBookingInfo(int tenant_id){
 
                                         pst.executeUpdate();
 
-                                        System.out.println("Furniture purchased successfully!");
+                                        logger.info("Furniture purchased successfully!");
                                         Sakan.flag2 = 1;
                                         Sakan.whileflag2 = 1;
                                         tenantfunc("TENANTS");
@@ -771,7 +753,7 @@ public static void viewBookingInfo(int tenant_id){
                                     Sakan.whileflag = 1;
                                     break;
                                 }
-                                else System.out.println("Invalid input");
+                                else logger.info("Invalid input");
                             }
                             if(Sakan.whileflag == 1){break;}
                         }
@@ -814,19 +796,15 @@ public static void viewBookingInfo(int tenant_id){
         PreparedStatement ust= null;
         ResultSet us = null;
 while(true) {
-    System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-    System.out.println("\t      ★★  "+ "Apartment("+floorID+")" +"  ★★      \t");
-    System.out.println("███████████████████████████████████████████████████████");
-    System.out.println("██(A) View pictures of the selected floor            ██");
-    System.out.println("███████████████████████████████████████████████████████");
-    System.out.println("██(B) View the people living in the selected floor   ██");
-    System.out.println("███████████████████████████████████████████████████████");
-    System.out.println("██(C) To book the selected floor                     ██");
-    System.out.println("███████████████████████████████████████████████████████");
-    System.out.println("██(D) Back                                           ██");
-    System.out.println("███████████████████████████████████████████████████████");
-    System.out.println("██(E) Main menu (Log out)                            ██");
-    System.out.println("███████████████████████████████████████████████████████");
+    logger.info("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+    logger.info("\t      ★★  "+ "Apartment("+floorID+")" +"  ★★      \t");
+
+    logger.info("(A) View pictures of the selected floor     ");
+    logger.info("(B) View the people living in the selected floor");
+    logger.info("(C) To book the selected floor                 ");
+    logger.info("(D) Back                                     ");
+    logger.info("(E) Main menu (Log out)                     ");
+
 
     view1  = sc.nextLine();
 
@@ -839,7 +817,7 @@ while(true) {
             while (rs.next()) {
 
                 String content = "\t|\t" + rs.getString(1) + "\t|\t";
-                System.out.println(content);
+                logger.info(content);
 
 
             }
@@ -865,12 +843,12 @@ while(true) {
             while (rs.next()) {
                 flagpart =1;
                 String content = "\t| Name: \t" + rs.getString(3) + "\t| Age: \t" + rs.getString(4) + "\t| Major: \t" + rs.getString(5) + "\t| Gender: \t" + rs.getString(6) + "\t|\t";
-                System.out.println(content);
+                logger.info(content);
 
 
             }
             if(flagpart==0){
-                System.out.println("No one is living in this apartment currently");
+                logger.info("No one is living in this apartment currently");
             }
 
 
@@ -919,14 +897,14 @@ while(true) {
                 while (true) {
                 Sakan.whileflag = 0;
                     Sakan.whileflag2 = 0;
-                System.out.println("████████████████████");
-                System.out.println("██(A) To go back  ██");
-                System.out.println("████████████████████");
 
-                System.out.println("This is a student housing.. Please fill the following data");
+                    logger.info("(A) To go back");
 
-                System.out.println("Please select your gender");
-                System.out.println("  (M) Male . (F) Female");
+
+                    logger.info("This is a student housing.. Please fill the following data");
+
+                    logger.info("Please select your gender");
+                    logger.info("  (M) Male . (F) Female");
 
                  backb = st.nextLine();
                 if (backb.equalsIgnoreCase("A")) {
@@ -936,7 +914,7 @@ while(true) {
                      Sakan.hp.setPartGender( backb);
                 } else continue;
 
-                System.out.println("Please Enter your age: ");
+                    logger.info("Please Enter your age: ");
                ageSTR = st.nextLine();
                     if (ageSTR.equalsIgnoreCase("A")) {
                         Sakan.whileflag = 1;
@@ -948,7 +926,7 @@ while(true) {
                }
                else continue;
 
-               System.out.println("Please Enter your Major: ");
+                    logger.info("Please Enter your Major: ");
 
 
               Sakan.hp.setPartMajor(st.nextLine());
@@ -959,8 +937,8 @@ while(true) {
 
                     while(true){
                         Sakan.whileflag2=0;
-                        System.out.println("Your data is ready.. are you sure you want to continue?");
-                        System.out.println("(A) Confirm   (B) Cancel");
+                        logger.info("Your data is ready.. are you sure you want to continue?");
+                        logger.info("(A) Confirm   (B) Cancel");
                         confirm = st.nextLine();
                         if(confirm.equalsIgnoreCase("A")){
                             try {
@@ -1017,7 +995,7 @@ while(true) {
 
                                 }
 
-                              System.out.println("Apartment booked successfully!");
+                                logger.info("Apartment booked successfully!");
 
                                 Sakan.bi.setRentDate(sdf.format((timestamp)));
 
@@ -1054,7 +1032,7 @@ while(true) {
                             Sakan.whileflag = 1;
                             break;
                         }
-                        else System.out.println("Invalid input");
+                        else logger.info("Invalid input");
                     }
 
                    if(Sakan.whileflag2 == 1){
@@ -1079,8 +1057,8 @@ while(true) {
                         majorb = "Unknown";
                         gender = "Unknown";
                         Sakan.whileflag2=0;
-                        System.out.println("Your data is ready.. are you sure you want to continue?");
-                        System.out.println("(A) Confirm   (B) Cancel");
+                        logger.info("Your data is ready.. are you sure you want to continue?");
+                        logger.info("(A) Confirm   (B) Cancel");
                         confirm = st.nextLine();
                         if(confirm.equalsIgnoreCase("A")){
                             try {
@@ -1145,7 +1123,7 @@ while(true) {
 
                                 }
 
-                                System.out.println("Apartment booked successfully!");
+                                logger.info("Apartment booked successfully!");
 
 
 
@@ -1174,7 +1152,7 @@ while(true) {
                             Sakan.whileflag = 1;
                             break;
                         }
-                        else System.out.println("Invalid input");
+                        else logger.info("Invalid input");
                     }
                     if(Sakan.whileflag == 1){break;}
                 }

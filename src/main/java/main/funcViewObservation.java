@@ -2,6 +2,8 @@ package main;
 
 import java.sql.*;
 
+import static main.Sakan.logger;
+
 public class funcViewObservation {
 
     public static int ViewObservationFlag=0;
@@ -21,7 +23,7 @@ public class funcViewObservation {
 
         if(!rs.next()){
             output="No Observations currently";
-            System.out.println("output");
+            logger.info("output");
         }
         rs = pst.executeQuery();
 
@@ -29,8 +31,8 @@ public class funcViewObservation {
         {
             ViewObservationFlag=1;
             String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Description: " + rs.getString(2) + "\t|\t";
-            System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            System.out.println(content);
+            logger.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+            logger.info(content);
 
         }
 

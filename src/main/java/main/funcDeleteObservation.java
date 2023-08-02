@@ -2,6 +2,8 @@ package main;
 
 import java.sql.*;
 
+import static main.Sakan.logger;
+
 public class funcDeleteObservation {
 
     public static int  flagDeleteObservations=0;
@@ -18,7 +20,7 @@ public class funcDeleteObservation {
         }
     flagDeleteObservations=1;
 
-        System.out.println("You have successfully Deleted the Observations");
+        logger.info("You have successfully Deleted the Observations");
     }
 
 }

@@ -3,6 +3,7 @@ package main;
 import java.sql.*;
 import java.util.Scanner;
 
+import static main.Sakan.logger;
 import static main.funcRequestAction.requestAction;
 
 public class funcSelectRequest {
@@ -24,7 +25,7 @@ public class funcSelectRequest {
                 rs = pst.executeQuery();
 
                 if (!rs.next()) {
-                    System.out.println("Please enter a valid request ID...");
+                    logger.info("Please enter a valid request ID...");
                     RequestFlag = 0;
                 }
 
@@ -33,7 +34,7 @@ public class funcSelectRequest {
                     RequestFlag = 1;
                     Sakan.flagSelectRequest = 1;
                     String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Building_Name: " + rs.getString(2) + "\t|\t Owner_name: " + rs.getString(3) + "\t|\t Contact_Number: " + rs.getInt(4) + "\t|\t" + rs.getInt(5) + "\t|\t Floor_ID: " + rs.getInt(6) + "\t|\t";
-                    System.out.println(content);
+                    logger.info(content);
                     Sakan.ar.setReqId(rs.getInt(1));
                 }
 

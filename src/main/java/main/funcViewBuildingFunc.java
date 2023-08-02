@@ -10,7 +10,7 @@ import static main.funcSelectmyfloorfunc.selectmyfloor;
 
 public class funcViewBuildingFunc {
 
-    public static void viewBuildingFunc(int owner_ID,int building_ID) {
+    public static void viewBuildingFunc(int owner_ID,int building_ID) throws SQLException {
         Scanner st = new Scanner(System.in);
         Scanner sc = new Scanner(System.in);
 
@@ -19,18 +19,13 @@ public class funcViewBuildingFunc {
         ResultSet rs = null;
         String view1;
         while (true) {
-            System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(A) View Floors                                    ██");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(B) Select Floor by ID                             ██");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(C) Add Floor                                      ██");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(D) Back                                           ██");
-            System.out.println("███████████████████████████████████████████████████████");
-            System.out.println("██(E) Main menu (Log out)                            ██");
-            System.out.println("███████████████████████████████████████████████████████");
+
+            logger.info("(A) View Floors                                    ");
+            logger.info("(B) Select Floor by ID                             ");
+            logger.info("(C) Add Floor                                      ");
+            logger.info("(D) Back                                           ");
+            logger.info("(E) Main menu (Log out)                            ");
+
 
             view1 = sc.nextLine();
 
@@ -41,7 +36,7 @@ public class funcViewBuildingFunc {
                     pst = connection.prepareStatement("SELECT * FROM floors WHERE  building_id = " + building_ID + "  ");
                     rs = pst.executeQuery();
                     if( !rs.next()){
-                        System.out.println("No floors available currently");
+                        logger.info("No floors available currently");
                     }
                     rs = pst.executeQuery();
 
@@ -49,7 +44,7 @@ public class funcViewBuildingFunc {
                     while (rs.next()) {
 
                         String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t availability: "+ rs.getString(3)+ "\t|\t Price: "+ rs.getInt(4)+ "\t|\t Services: "+ rs.getString(5)+ "\t|\t Participants: "+ rs.getInt(6)+ "\t|\t Max_Participants: "+ rs.getInt(7)+ "\t|\t BedroomsNum: "+ rs.getInt(8)+ "\t|\t BathroomsNum: "+ rs.getInt(9)+ "\t|\t Balcony: "+ rs.getInt(10)+ "\t|\t Status: "+ rs.getString(11);
-                        System.out.println(content);
+                        logger.info(content);
 
 
                     }
@@ -63,21 +58,21 @@ public class funcViewBuildingFunc {
 
             }    else if (view1.equalsIgnoreCase("B")) {
                 Scanner sc1 =new Scanner(System.in);
-                System.out.print("Enter the floor ID: ");
+                logger.info("Enter the floor ID: ");
 
                 Sakan.H.setHouseId(sc1.nextInt());
 
-                selectmyfloor(building_ID);
+                selectmyfloor(building_ID,Sakan.H.getHouseId());
 
                 if(flagSelectMyFloor==1){
                     while(true) {
                         Scanner sf1=new Scanner(System.in);
-                        System.out.println("Do you want to add  pictures for this FLOOR ?");
-                        System.out.println("A) yes . B) No");
+                        logger.info("Do you want to add  pictures for this FLOOR ?");
+                        logger.info("A) yes . B) No");
                         String ans = sf1.next();
 
                         if (ans.equalsIgnoreCase("A")) {
-                            System.out.println(" Enter pictures: ");
+                           logger.info(" Enter pictures: ");
 
                             Sakan.hpc.setHousePicture(sf1.next());
 
@@ -99,7 +94,7 @@ public class funcViewBuildingFunc {
                                 e.printStackTrace();
 
                             }
-                            System.out.println("Pictures have been added");
+                            logger.info("Pictures have been added");
                             break;
                         } else if (ans.equalsIgnoreCase("B")) {
                             break;

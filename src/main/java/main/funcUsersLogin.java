@@ -32,7 +32,7 @@ public class funcUsersLogin {
 
             }
             if (!Sakan.U.getEmail().contains("@") || !Sakan.U.getEmail().contains(".")) {
-                System.out.println("Please enter a valid email...");
+                logger.info("Please enter a valid email...");
                flaglogin=1;
                 tenantfunc(usertype);
           //      Login(usertype,email,pass);

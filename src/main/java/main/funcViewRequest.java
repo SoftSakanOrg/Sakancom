@@ -2,6 +2,8 @@ package main;
 
 import java.sql.*;
 
+import static main.Sakan.logger;
+
 public class funcViewRequest {
 
     public static int ViewRequestFlag=0;
@@ -21,7 +23,7 @@ public class funcViewRequest {
        if(!rs.next()){
 
             output = "No requests currently";
-           System.out.println(output);
+           logger.info(output);
         }
         rs = pst.executeQuery();
 
@@ -32,7 +34,7 @@ public class funcViewRequest {
 
             ViewRequestFlag=1;
             String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Building_Name: " + rs.getString(2) + "\t|\t Owner_name: " + rs.getString(3) + "\t|\t Contact_Number: " + rs.getInt(4) + "\t|\t" + rs.getInt(5) + "\t|\t Floor_ID: " +rs.getInt(6)+"\t|\t";
-            System.out.println(content);
+            logger.info(content);
 
         }
     }

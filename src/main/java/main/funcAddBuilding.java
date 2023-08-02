@@ -3,11 +3,12 @@ package main;
 import java.sql.*;
 import java.util.Scanner;
 
+import static main.Sakan.logger;
 import static main.funcOwner.ownerfunc;
 
 public class funcAddBuilding {
 
-    public static void addbuildingfunc(int owner_ID){
+    public static void addbuildingfunc(int owner_ID) throws SQLException {
         Scanner sf=new Scanner(System.in);
         Connection connection = null;
         PreparedStatement pst = null;
@@ -22,11 +23,11 @@ public class funcAddBuilding {
 
 
 
-        System.out.println("███████████████████████████████████████████████████████");
-        System.out.println("██(1) Back                                           ██");
-        System.out.println("███████████████████████████████████████████████████████");
 
-        System.out.println(" Enter Building_name: ");
+        logger.info("(1) Back                                           ");
+
+
+        logger.info(" Enter Building_name: ");
 
         Sakan.B.setBuildingName(sf.nextLine());
 
@@ -41,7 +42,7 @@ public class funcAddBuilding {
 
 
 
-        System.out.println(" Enter Location: ");
+        logger.info(" Enter Location: ");
         Sakan.B.setLocation(sf.nextLine());
 
         if(Sakan.B.getLocation().equalsIgnoreCase("1")){
@@ -82,7 +83,7 @@ public class funcAddBuilding {
             pst.executeUpdate();
 
 
-            System.out.println("You have successfully added your Building...");
+            logger.info("You have successfully added your Building...");
 
 
         } catch (SQLException e) {

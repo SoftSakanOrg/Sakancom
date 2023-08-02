@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 
+import static main.Sakan.logger;
 import static main.funcViewBuildingFunc.viewBuildingFunc;
 
 public class funcSelectBuilding {
@@ -25,9 +26,9 @@ public class funcSelectBuilding {
                 rs = pst.executeQuery();
                 if (rs.next()) {
                     Sakan.B.setBuildingName(rs.getString(3));
-                    System.out.println("\t\t\t          ★★★★★★★★   " + Sakan.B.getBuildingName() + "  ★★★★★★★★            \t\t\t");
+                    logger.info("\t\t\t          ★★★★★★★★   " + Sakan.B.getBuildingName() + "  ★★★★★★★★            \t\t\t");
                     String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Location: " + rs.getString(4) + "\t|\t Floors_num: " + rs.getInt(5) + "\t|\t Owner_name: " + rs.getString(6) + "\t|\t Contact_num: " + rs.getInt(7);
-                    System.out.println(content);
+                    logger.info(content);
                     Sakan.ar.setBuildingName(Sakan.B.getBuildingName());
                     Sakan.ar.setOwnerName(rs.getString(6));
                     Sakan.ar.setContactNumber(rs.getInt(7));
@@ -35,10 +36,9 @@ public class funcSelectBuilding {
 
                     viewBuildingFunc(rs.getInt(2), rs.getInt(1));
 
-                    //  ownerfunc("OWNERS",rs.getInt(2));
                 } else if (!rs.next()) {
 
-                    System.out.println("Invalid building ID...");
+                    logger.info("Invalid building ID...");
                     break;
 
                 }

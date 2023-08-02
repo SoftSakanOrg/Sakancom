@@ -1,5 +1,6 @@
 package main;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import static main.Sakan.*;
@@ -9,7 +10,7 @@ import static main.funcViewBuilding.viewbuilding;
 
 public class funcOwner {
 
-    public static void ownerfunc(String usertype,int ownerID){
+    public static void ownerfunc(String usertype,int ownerID) throws SQLException {
 
 
         while(true) {
@@ -17,22 +18,19 @@ public class funcOwner {
 
             String temp;
 
-            System.out.println("██████████████████████████████");
-            System.out.println("██(A) View my Buildings     ██");
-            System.out.println("██████████████████████████████");
-            System.out.println("██(B) select building by ID ██");
-            System.out.println("██████████████████████████████");
-            System.out.println("██(C) Add Building          ██");
-            System.out.println("██████████████████████████████");
-            System.out.println("██(E) Main Menu(Logout)     ██");
-            System.out.println("██████████████████████████████");
+
+            logger.info("(A) View my Buildings     ");
+            logger.info("(B) select building by ID ");
+            logger.info("(C) Add Building          ");
+            logger.info("(E) Main Menu(Logout)     ");
+
 
             String ownsc = sc.nextLine();
 
             if (ownsc.equalsIgnoreCase("A")) {
 
 
-                viewbuilding(ownerID);
+                viewbuilding(ownerID,1);
 
 
             } else if (ownsc.equalsIgnoreCase("B")) {
