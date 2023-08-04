@@ -29,6 +29,8 @@ public class Sakan {
     public static  int flagAdminFunc = 0;
 
     public static  int flagSelectMyFloor = 0;
+    public static  int flagSelectBuilding = 0;
+
 
 
 
