@@ -13,14 +13,11 @@ import static main.funcViewBuildingFunc.viewBuildingFunc;
 public class funcSelectBuilding {
 
     public static void selectbuilding(int owner_id){
-        Sakan.flagSelectBuilding = 0;
+        Sakan.flagSelectBuilding=0;
         Scanner sc=new Scanner(System.in);
         Connection connection = null;
         PreparedStatement pst= null;
         ResultSet rs = null;
-
-
-
 
 
 
@@ -29,7 +26,7 @@ public class funcSelectBuilding {
                 pst = connection.prepareStatement("SELECT * FROM building WHERE building_id = '" + Sakan.B.getBuildingId() + "' AND  OWNER_ID = '" + owner_id + "'");
                 rs = pst.executeQuery();
                 if (rs.next()) {
-                    Sakan.flagSelectBuilding =1;
+                    Sakan.flagSelectBuilding=1;
                     Sakan.B.setBuildingId(rs.getInt(1));
                     Sakan.B.setOwnerId(rs.getInt(2));
                     Sakan.B.setBuildingName(rs.getString(3));
@@ -43,6 +40,7 @@ public class funcSelectBuilding {
                 } else if (!rs.next()) {
 
                     logger.info("Invalid building ID...");
+
 
                 }
 

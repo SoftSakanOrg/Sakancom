@@ -171,7 +171,7 @@ public class funcOwner {
                                 }
 
 
-                                addfloor(Sakan.B.getBuildingId());
+                                addfloor(Sakan.B.getBuildingId(),1);
                                 break;
                             }
                         }
