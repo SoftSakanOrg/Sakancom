@@ -160,7 +160,7 @@ public class funcSelectBuilding {
                             }
 
 
-                            addfloor(rs.getInt(1));
+                            addfloor(rs.getInt(1),1);
                             break;
                         }
                     }
