@@ -45,12 +45,6 @@ public class funcViewBuildingFunc {
                 }
 
 
-            }    else if (view1.equalsIgnoreCase("B")) {
-
-            }
-
-            else if (view1.equalsIgnoreCase("C")) {
-
             }
 
             else if(view1.equalsIgnoreCase("D")){
