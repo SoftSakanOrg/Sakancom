@@ -12,7 +12,9 @@ import static main.funcViewBuildingFunc.viewBuildingFunc;
 
 public class funcSelectBuilding {
 
-    public static void selectbuilding(int owner_id){
+    public static int selectBuildingFlag;
+    public static int invalidFlag;
+    public static void selectbuilding(int building_id,int owner_id) throws SQLException {
         Sakan.flagSelectBuilding=0;
         Scanner sc=new Scanner(System.in);
         Connection connection = null;
@@ -21,11 +23,12 @@ public class funcSelectBuilding {
 
 
 
-            try {
+
                 connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                pst = connection.prepareStatement("SELECT * FROM building WHERE building_id = '" + Sakan.B.getBuildingId() + "' AND  OWNER_ID = '" + owner_id + "'");
+                pst = connection.prepareStatement("SELECT * FROM building WHERE building_id = '" + building_id + "' AND  OWNER_ID = '" + owner_id + "'");
                 rs = pst.executeQuery();
                 if (rs.next()) {
+                    selectBuildingFlag=1;
                     Sakan.flagSelectBuilding=1;
                     Sakan.B.setBuildingId(rs.getInt(1));
                     Sakan.B.setOwnerId(rs.getInt(2));
@@ -38,17 +41,15 @@ public class funcSelectBuilding {
                     Sakan.ar.setContactNumber(rs.getInt(7));
 
                 } else if (!rs.next()) {
-
+                    selectBuildingFlag=1;
+                    invalidFlag=1;
                     logger.info("Invalid building ID...");
 
 
                 }
 
 
-            } catch (SQLException e) {
-                e.printStackTrace();
 
-            }
 
 
 

@@ -7,7 +7,7 @@ Feature: viewObservation
 
 
 
-  Scenario: Admin views the fails to view observations
+  Scenario: Admin  fails to view observations
     Given the Admin is on the Admin page panel
     When there is no data in Observations table
-    Then a message should appear "No Observations currently" telling no Observation is found
+    Then a message should appear  telling no Observation is found

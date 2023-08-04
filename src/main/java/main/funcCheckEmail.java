@@ -48,10 +48,10 @@ public class funcCheckEmail {
 
                         logger.info("(1) To go back to main menu");
 
-                        System.out.print("Enter your email: ");
+                        logger.info("Enter your email: ");
                         Sakan.U.setEmail(sc.nextLine());
 
-                        System.out.print("Enter password: ");
+                        logger.info("Enter password: ");
                         Sakan.U.setPassword(sc.nextLine());
                         Login(usertype,Sakan.U.getEmail(),Sakan.U.getPassword());
                     }

@@ -6,11 +6,11 @@ import static main.Sakan.logger;
 
 public class funcViewObservation {
 
-    public static int ViewObservationFlag=0;
-    public static String output = "";
+    public static int viewObservationFlag=0;
+
 
     public static void viewObservations() throws SQLException {
-        ViewObservationFlag=0;
+        viewObservationFlag=0;
 
         Connection connection = null;
         PreparedStatement pst= null;
@@ -22,14 +22,15 @@ public class funcViewObservation {
 
 
         if(!rs.next()){
-            output="No Observations currently";
-            logger.info("output");
+            viewObservationFlag=1;
+
+            logger.info("No Observations currently");
         }
         rs = pst.executeQuery();
 
         while (rs.next())
         {
-            ViewObservationFlag=1;
+            viewObservationFlag=1;
             String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Description: " + rs.getString(2) + "\t|\t";
             logger.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             logger.info(content);

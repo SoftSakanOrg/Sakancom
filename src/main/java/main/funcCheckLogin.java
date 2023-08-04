@@ -9,6 +9,7 @@ import static main.funcAddFloor.addfloor;
 import static main.funcAdmin.adminfunc;
 import static main.funcOwner.ownerfunc;
 import static main.funcRequestAction.requestAction;
+import static main.funcSelectBuilding.invalidFlag;
 import static main.funcSelectBuilding.selectbuilding;
 import static main.funcSelectRequest.selectRequest;
 import static main.funcSelectmyfloorfunc.selectmyfloor;
@@ -86,10 +87,18 @@ public class funcCheckLogin {
 
                     if(ownsc.equalsIgnoreCase("B")){
 
-                        System.out.print("Enter the Building ID: ");
+                        logger.info("Enter the Building ID: ");
                         Sakan.B.setBuildingId(sc.nextInt());
 
-                        selectbuilding(U.getUsersID());
+                        selectbuilding( Sakan.B.getBuildingId(),U.getUsersID());
+
+                        if(invalidFlag==1){
+                            logger.info("Enter the Building ID: ");
+                            Sakan.B.setBuildingId(sc.nextInt());
+
+                            selectbuilding(Sakan.B.getBuildingId(),U.getUsersID());
+                        }
+
                         while(true){
                             if (flagSelectBuilding == 1) {
                                 String view1;
@@ -110,7 +119,7 @@ public class funcCheckLogin {
                                     logger.info("Invalid input");
                                 }
 
-                                viewBuildingFunc(Sakan.B.getOwnerId(), Sakan.B.getBuildingId(), view1);
+                                viewBuildingFunc(Sakan.B.getOwnerId(), Sakan.B.getBuildingId(), view1,1);
                                 if (view1.equalsIgnoreCase("B")) {
                                     Scanner sc1 = new Scanner(System.in);
                                     logger.info("Enter the floor ID: ");
@@ -259,7 +268,7 @@ public class funcCheckLogin {
                             checklogin(email,pass,usertype);
                             //  ownerfunc("OWNERS",U.getUsersID(),ownsc);
                         }
-                        addbuildingfunc(U.getUsersID());
+                        addbuildingfunc(U.getUsersID(),1);
                     }
 
                 }

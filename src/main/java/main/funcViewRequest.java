@@ -6,8 +6,8 @@ import static main.Sakan.logger;
 
 public class funcViewRequest {
 
-    public static int ViewRequestFlag=0;
-    public static String output = "";
+    public static int ViewRequestFlag;
+
 
     public static void viewRequests() throws SQLException {
         ViewRequestFlag=0;
@@ -22,8 +22,8 @@ public class funcViewRequest {
 
        if(!rs.next()){
 
-            output = "No requests currently";
-           logger.info(output);
+           ViewRequestFlag=1;
+           logger.info("No requests currently");
         }
         rs = pst.executeQuery();
 

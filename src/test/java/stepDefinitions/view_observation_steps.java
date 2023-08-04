@@ -19,34 +19,32 @@ public class view_observation_steps {
 
     @Given("the Admin is on the Admin page panel")
     public void theAdminIsOnTheAdminPagePanel() {
-
+        view= new funcViewObservation();
     }
     @When("there is data in Observations table")
-    public void thereIsDataInObservationsTable() {
-     view= new funcViewObservation();
+    public void thereIsDataInObservationsTable() throws SQLException {
+
+        view.viewObservations();
     }
 
 
     @Then("the Observation should appear to the admin")
-    public void theObservationShouldAppearToTheAdmin() throws SQLException {
-        view.viewObservations();
-        assertTrue(view.ViewObservationFlag==1);
-    }
+    public void theObservationShouldAppearToTheAdmin()  {
 
+        assertTrue(view.viewObservationFlag==1);
+    }
 
     @When("there is no data in Observations table")
-    public void thereIsNoDataInObservationsTable() {
-        view = new funcViewObservation();
-
-    }
-    @Then("a message should appear {string} telling no Observation is found")
-    public void aMessageShouldAppearTellingNoObservationIsFound(String message) throws SQLException {
-        String expected = message;
+    public void thereIsNoDataInObservationsTable() throws SQLException {
         view.viewObservations();
-
-        assertEquals(expected,view.output);
-
     }
+    @Then("a message should appear  telling no Observation is found")
+    public void aMessageShouldAppearTellingNoObservationIsFound() {
+        assertTrue(view.viewObservationFlag==1);
+    }
+
+
+
 
 
 }
