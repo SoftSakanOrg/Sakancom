@@ -9,7 +9,7 @@ public class funcAddFloor {
 
     public static void addfloor(int building_id){
 
-        Scanner sf=new Scanner(System.in);
+
         Connection connection = null;
         PreparedStatement pst = null;
         PreparedStatement tst = null;
@@ -18,62 +18,7 @@ public class funcAddFloor {
 
 
 
-        while(true) {
 
-            logger.info("(111) Back                                         ");
-
-
-            logger.info(" Enter Price: ");
-
-            Sakan.H.setHousePrice(sf.nextInt());
-
-            if (Sakan.H.getHousePrice()==111) {
-
-                break;
-            }
-
-
-            logger.info(" Enter Services: ");
-            Sakan.H.setHouseServices(sf.next());
-
-            if (Sakan.H.getHouseServices().equalsIgnoreCase("111")) {
-
-                break;
-            }
-
-            logger.info(" How Many Participants Can Live In this Floor? ");
-            Sakan.H.setHouseMaxParticipants(sf.nextInt());
-
-            if (Sakan.H.getHouseMaxParticipants()==111) {
-
-                break;
-            }
-
-            logger.info(" Enter the number of Bedrooms: ");
-            Sakan.H.setBedrooms(sf.nextInt());
-
-            if (Sakan.H.getBedrooms()==111) {
-
-                break;
-            }
-
-
-            logger.info(" Enter the number of Bathrooms: ");
-            Sakan.H.setBathrooms(sf.nextInt());
-
-            if (Sakan.H.getBathrooms()==111) {
-
-                break;
-            }
-
-
-            logger.info(" how many Does Balconies does it have? ");
-            Sakan.H.setContBalcony(sf.nextInt());
-
-            if (Sakan.H.getContBalcony()==111) {
-
-                break;
-            }
 
 
             try {
@@ -144,48 +89,13 @@ public class funcAddFloor {
 
             }
 
-            logger.info("Do you want to add  pictures for this FLOOR ?");
-            logger.info("(A) yes . (B) No");
-            String ans = sf.next();
-
-            if (ans.equalsIgnoreCase("A")) {
-                logger.info(" Enter pictures: ");
-
-                Sakan.hpc.setHousePicture(sf.next());
-                if (  Sakan.hpc.getHousePicture().equalsIgnoreCase("1")) {
-                    break;
-                }
-
-                try {
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                    pst = connection.prepareStatement("INSERT INTO HOUSE_PIC(FLOOR_ID,PICTURE) VALUES (?,?)");
-                    pst.setInt(1, Sakan.H.getHouseId());
-                    pst.setString(2, Sakan.hpc.getHousePicture());
-                    pst.executeUpdate();
-
-                    pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
-
-                    pst.setString(1, Sakan.OnlineUser + " has added a picture (" +  Sakan.hpc.getHousePicture()+ ") to the apartment");
-
-                    pst.executeUpdate();
-
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-
-                }
-                logger.info("Pictures have been added");
-            }else if(ans.equalsIgnoreCase("B")){
-                break;
-            }
 
 
 
 
 
-            break;
 
-        }
+
 
     }
 

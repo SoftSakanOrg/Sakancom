@@ -104,9 +104,67 @@ public class funcViewBuildingFunc {
             }
 
             else if (view1.equalsIgnoreCase("C")) {
+               while(true) {
+                   Scanner sf=new Scanner(System.in);
+                   logger.info("(111) Back                                         ");
 
-                addfloor(building_ID);
 
+                   logger.info(" Enter Price: ");
+
+                   Sakan.H.setHousePrice(sf.nextInt());
+
+                   if (Sakan.H.getHousePrice() == 111) {
+
+                       break;
+                   }
+
+
+                   logger.info(" Enter Services: ");
+                   Sakan.H.setHouseServices(sf.next());
+
+                   if (Sakan.H.getHouseServices().equalsIgnoreCase("111")) {
+
+                       break;
+                   }
+
+                   logger.info(" How Many Participants Can Live In this Floor? ");
+                   Sakan.H.setHouseMaxParticipants(sf.nextInt());
+
+                   if (Sakan.H.getHouseMaxParticipants() == 111) {
+
+                       break;
+                   }
+
+                   logger.info(" Enter the number of Bedrooms: ");
+                   Sakan.H.setBedrooms(sf.nextInt());
+
+                   if (Sakan.H.getBedrooms() == 111) {
+
+                       break;
+                   }
+
+
+                   logger.info(" Enter the number of Bathrooms: ");
+                   Sakan.H.setBathrooms(sf.nextInt());
+
+                   if (Sakan.H.getBathrooms() == 111) {
+
+                       break;
+                   }
+
+
+                   logger.info(" how many Does Balconies does it have? ");
+                   Sakan.H.setContBalcony(sf.nextInt());
+
+                   if (Sakan.H.getContBalcony() == 111) {
+
+                       break;
+                   }
+
+
+                   addfloor(building_ID);
+                   break;
+               }
             }
 
             else if(view1.equalsIgnoreCase("D")){
