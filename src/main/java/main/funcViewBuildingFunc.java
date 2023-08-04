@@ -48,7 +48,7 @@ public class funcViewBuildingFunc {
             }
 
             else if(view1.equalsIgnoreCase("D")){
-                ownerfunc("OWNERS",owner_ID);
+               // ownerfunc("OWNERS",owner_ID);
             }
             else if(view1.equalsIgnoreCase("E")){
                 Mainfunc();

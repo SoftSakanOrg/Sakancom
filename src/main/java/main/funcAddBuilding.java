@@ -9,14 +9,11 @@ import static main.funcOwner.ownerfunc;
 public class funcAddBuilding {
 
     public static void addbuildingfunc(int owner_ID) throws SQLException {
-        Scanner sf=new Scanner(System.in);
+
         Connection connection = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
         // Sakan.U.setUsersID(0);
-
-
-        Scanner scon=new Scanner(System.in);
 
 
         //  Sakan.F.setFurnitureStatus("forsale");
@@ -24,31 +21,6 @@ public class funcAddBuilding {
 
 
 
-        logger.info("(1) Back                                           ");
-
-
-        logger.info(" Enter Building_name: ");
-
-        Sakan.B.setBuildingName(sf.nextLine());
-
-        if(Sakan.B.getBuildingName().equalsIgnoreCase("1")){
-            // Sakan.flag2 = 1;
-            ownerfunc("OWNERS",owner_ID);
-        }
-
-
-
-
-
-
-
-        logger.info(" Enter Location: ");
-        Sakan.B.setLocation(sf.nextLine());
-
-        if(Sakan.B.getLocation().equalsIgnoreCase("1")){
-            // Sakan.flag2 = 1;
-            ownerfunc("OWNERS",owner_ID);
-        }
 
 
 
@@ -92,7 +64,7 @@ public class funcAddBuilding {
         }
 
         // Sakan.flag2 = 1;
-        ownerfunc("OWNERS",owner_ID);
+      // ownerfunc("OWNERS",owner_ID);
 
     }
 

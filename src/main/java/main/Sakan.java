@@ -5,6 +5,7 @@ import java.util.*;
 import static java.lang.System.exit;
 import static java.lang.System.getLogger;
 import static main.funcCheckEmail.checkemail;
+import static main.funcCheckLogin.checklogin;
 import static main.funcOwner.ownerfunc;
 import static main.funcUsersLogin.Login;
 import java.util.logging.Logger;
@@ -30,6 +31,10 @@ public class Sakan {
 
     public static  int flagSelectMyFloor = 0;
     public static  int flagSelectBuilding = 0;
+
+    public static  int flagOwner = 0;
+
+    public static  int flagReflect = 0;
 
 
 
@@ -66,7 +71,7 @@ public class Sakan {
            Sakan.OnlineUser = "";
            Sakan.flag11 = 0;
            Sakan.flaglogin=0;
-
+           Sakan.flagOwner = 0;
 
 
         Scanner sc=new Scanner(System.in);
@@ -642,7 +647,9 @@ public static void viewBookingInfo(int tenant_id){
 
                 if(usertype.equalsIgnoreCase("OWNERS")) {
                     Sakan.OnlineUser=U.getEmail();
-                    ownerfunc("OWNERS", Sakan.U.getUsersID());
+                    checklogin(U.getEmail(),U.getPassword(),usertype);
+                    Sakan.flagOwner=1;
+                   // ownerfunc("OWNERS", Sakan.U.getUsersID());
                 }
 
                Sakan.flag1 = 1;

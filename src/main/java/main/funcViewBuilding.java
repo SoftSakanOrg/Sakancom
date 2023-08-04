@@ -33,7 +33,7 @@ public class funcViewBuilding {
 
         if(testp==1) {
 
-            ownerfunc("OWNERS", ownerID);
+          //  ownerfunc("OWNERS", ownerID);
         }
     }
 
