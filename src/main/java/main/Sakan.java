@@ -13,6 +13,16 @@ public class Sakan {
 
     static String url = "jdbc:mysql://localhost:3306/Sakan";
 
+    static Connection connection;
+
+    static {
+        try {
+            connection = DriverManager.getConnection(url, "root", "");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     static String s = "\t|\t ID: ";
     static String s1 = "\t|\t";
      static  String tenants = "TENANTS";
@@ -231,12 +241,12 @@ public class Sakan {
 
     public static void tenantId() throws SQLException {
 
-        Connection connection = null;
+
         PreparedStatement pst= null;
         ResultSet rs = null;
 
 
-            connection = DriverManager.getConnection(url, "root", "");
+
             pst = connection.prepareStatement("SELECT user_id,USERNAME FROM USERS WHERE EMAIL='" + Sakan.onlineUser + "'");
             rs = pst.executeQuery();
 
@@ -250,13 +260,13 @@ public class Sakan {
 
 public static void viewBookingInfo(int tenantId) throws SQLException {
 
-    Connection connection = null;
+
     PreparedStatement pst= null;
     ResultSet rs = null;
 
 
 
-        connection = DriverManager.getConnection(url, "root", "");
+
         pst = connection.prepareStatement("SELECT * FROM BOOKING_INFO WHERE TENANT_ID = '" +tenantId+"'");
         rs = pst.executeQuery();
         if(!rs.next()){
@@ -279,14 +289,14 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
 
 
     public static void viewfloor() throws SQLException {
-        Connection connection = null;
+
         PreparedStatement pst= null;
         PreparedStatement tst= null;
         ResultSet rs = null;
         ResultSet ts = null;
 
 
-            connection = DriverManager.getConnection(url, "root", "");
+
             pst = connection.prepareStatement("SELECT * FROM floors WHERE availability = 'available' AND Status = 'Advertised' ");
             tst = connection.prepareStatement("SELECT B.location,B.building_name FROM floors F,building B WHERE F.building_id = B.building_id ");
             rs = pst.executeQuery();
@@ -306,7 +316,6 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
     public static void selectfloor() throws SQLException {
 
         Scanner sc=new Scanner(System.in);
-        Connection connection = null;
         PreparedStatement pst= null;
         PreparedStatement tst= null;
         ResultSet rs = null;
@@ -316,7 +325,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
         Sakan.h.setHouseId(sc.nextInt());
 
 
-            connection = DriverManager.getConnection(url, "root", "");
+
             pst = connection.prepareStatement("SELECT * FROM floors WHERE floor_id = '" +  Sakan.h.getHouseId() + "' AND availability = 'available' AND Status = 'Advertised'"  );
             tst= connection.prepareStatement("SELECT building_id FROM floors WHERE floor_id = '" +  Sakan.h.getHouseId() + "' AND availability = 'available'  AND Status = 'Advertised'" );
             ts = tst.executeQuery();
@@ -346,12 +355,12 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
     }
 
     public static void viewfurniture() throws SQLException {
-        Connection connection = null;
+
         PreparedStatement pst= null;
         ResultSet rs = null;
 
 
-            connection = DriverManager.getConnection(url, "root", "");
+
             pst = connection.prepareStatement("SELECT * FROM furniture WHERE status = 'forsale' ");
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -367,7 +376,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
 
     public static void selectfurniture() throws SQLException {
         Scanner sc=new Scanner(System.in);
-        Connection connection = null;
+
         PreparedStatement pst= null;
         ResultSet rs = null;
         logger.info("Enter the furniture ID: ");
@@ -375,7 +384,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
        Sakan.f.setFurnitureID(sc.nextInt());
 
 
-            connection = DriverManager.getConnection(url, "root", "");
+
             pst = connection.prepareStatement("SELECT * FROM furniture WHERE furniture_id = '" + Sakan.f.getFurnitureID() + "' AND status = 'forsale'" );
             rs = pst.executeQuery();
             if (rs.next()) {
@@ -401,7 +410,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
 
     public static void  addfurniture(String Temail) throws SQLException {
         Scanner sf=new Scanner(System.in);
-        Connection connection = null;
+
         PreparedStatement pst = null;
         ResultSet rs = null;
         Sakan.u.setUsersID(0);
@@ -443,7 +452,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
 
 
 
-         connection = DriverManager.getConnection(url, "root", "");
+
          pst = connection.prepareStatement("SELECT user_id FROM USERS WHERE EMAIL='" + Temail + "'");
          rs = pst.executeQuery();
 
@@ -451,7 +460,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
              Sakan.u.setUsersID(rs.getInt(1));
          }
 
-         connection = DriverManager.getConnection(url, "root", "");
+
          pst = connection.prepareStatement("INSERT INTO FURNITURE(user_ID,PRICE,DESCRIPTION,STATUS) VALUES (?,?,?,?)");
 
          pst.setInt(1,  Sakan.u.getUsersID());
@@ -472,7 +481,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
 
 
 
-         connection = DriverManager.getConnection(url, "root", "");
+
          pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE ORDER BY FURNITURE_ID DESC LIMIT 1");
          rs= pst.executeQuery();
 
@@ -482,7 +491,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
 
 
 
-         connection = DriverManager.getConnection(url, "root", "");
+
          pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE WHERE FURNITURE_ID='" + Sakan.f.getFurnitureID() + "'");
          rs = pst.executeQuery();
          if (rs.next()) {
@@ -503,7 +512,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
          }
 
 
-             connection = DriverManager.getConnection(url, "root", "");
+
              pst = connection.prepareStatement("INSERT INTO FURNITURE_PIC(FURNITURE_ID,PICTURE) VALUES (?,?)");
              pst.setInt(1, Sakan.f.getFurnitureID());
              pst.setString(2, Sakan.fpc.getFurniturePicture());
@@ -530,7 +539,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
       if (Sakan.flag1 == 0) {
           Scanner sc = new Scanner(System.in);
 
-          Connection connection = null;
+        ;
           PreparedStatement pst = null;
           ResultSet rs = null;
           PreparedStatement tst= null;
@@ -595,7 +604,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
 
 
 
-                   connection = DriverManager.getConnection(url, "root", "");
+
                    tst = connection.prepareStatement("INSERT INTO USERS(EMAIL,USERNAME,PASSWORD,contact_num,user_type) VALUES" + "(?,?,?,?,?)");
 
                    tst.setString(1, u.getEmail());
@@ -610,7 +619,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
 
                if(usertype.equalsIgnoreCase(owners)){
 
-                   connection = DriverManager.getConnection(url, "root", "");
+
                    tst = connection.prepareStatement("SELECT USER_ID FROM USERS ORDER BY USER_ID DESC LIMIT 1");
                    rs=tst.executeQuery();
                    if(rs.next()){
@@ -647,7 +656,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
         Scanner st = new Scanner(System.in);
         Scanner sc=new Scanner(System.in);
 
-        Connection connection = null;
+      ;
         PreparedStatement pst= null;
         ResultSet rs = null;
         String view1;
@@ -665,7 +674,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
             if (view1.equalsIgnoreCase("A")) {
 
 
-                    connection = DriverManager.getConnection(url, "root", "");
+
                     pst = connection.prepareStatement("SELECT picture FROM furniture_pic  WHERE " + FurnitureID + " = furniture_id  ");
                     rs = pst.executeQuery();
                     while (rs.next()) {
@@ -706,7 +715,7 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
 
 
 
-                                        connection = DriverManager.getConnection(url, "root", "");
+
                                         pst = connection.prepareStatement("UPDATE furniture SET status='sold' WHERE furniture_id = '" + FurnitureID + "'");
                                         pst.executeUpdate();
 
@@ -761,7 +770,6 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
         Scanner st = new Scanner(System.in);
         Scanner sc=new Scanner(System.in);
 
-        Connection connection = null;
         PreparedStatement pst= null;
         PreparedStatement tst= null;
         ResultSet rs = null;
@@ -788,7 +796,7 @@ while(true) {
     if (view1.equalsIgnoreCase("A")) {
 
 
-            connection = DriverManager.getConnection(url, "root", "");
+
             pst = connection.prepareStatement("SELECT picture FROM house_pic  WHERE " + floorID + " = floor_id  ");
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -809,7 +817,6 @@ while(true) {
 
 
             int flagpart = 0;
-            connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT * FROM house_participants  WHERE " + floorID + " = floor_id  ");
             rs = pst.executeQuery();
 
@@ -849,7 +856,7 @@ while(true) {
 
 
 
-            connection = DriverManager.getConnection(url, "root", "");
+
 
             pst = connection.prepareStatement("SELECT building_name FROM building WHERE building_id = '" + buildingID + "'" );
             rs = pst.executeQuery();
@@ -1031,7 +1038,7 @@ while(true) {
                         confirm = st.nextLine();
                         if(confirm.equalsIgnoreCase("A")){
 
-                                connection = DriverManager.getConnection(url, "root", "");
+
                                 pst = connection.prepareStatement("SELECT USER_ID,username FROM users WHERE email = '" + Temail + "'" );
                                 rs = pst.executeQuery();
 
