@@ -6,6 +6,9 @@ import static main.Sakan.logger;
 
 public class funcAddBuilding {
 
+   public funcAddBuilding(){
+
+    }
     public static int selectInfoFlag;
     public static int addBuildingFlag;
     public static int addObservationFlag;
