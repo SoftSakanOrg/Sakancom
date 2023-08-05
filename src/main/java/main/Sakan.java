@@ -11,35 +11,36 @@ import java.util.logging.Logger;
 
 public class Sakan {
 
-    public static int flag1 = 0;
-    public static int flag11 = 0;
-    public static int flag2 = 0;
+     static int flag1 = 0;
 
-    public static int whileflag = 0;
-    public static int whileflag2 = 0;
+     static int flag11 = 0;
+    static int flag2 = 0;
 
-
-    public static  int flaglogin = 0;
-
-    public static  int flagRequestAction = 0;
-
-    public static  int flagSelectRequest = 0;
-
-    public static  int flagAdminFunc = 0;
-
-    public static  int flagSelectMyFloor = 0;
-    public static  int flagSelectBuilding = 0;
-
-    public static  int flagOwner = 0;
-
-    public static  int flagReflect = 0;
+    static int whileflag = 0;
+    static int whileflag2 = 0;
 
 
+     static  int flaglogin = 0;
+
+     static  int flagRequestAction = 0;
+
+     static  int flagSelectRequest = 0;
+
+     static  int flagAdminFunc = 0;
+
+    static  int flagSelectMyFloor = 0;
+    static  int flagSelectBuilding = 0;
+
+     static  int flagOwner = 0;
+
+    static  int flagReflect = 0;
 
 
-    public static String onlineUser = "" ;
 
-    public static Users u =new Users();
+
+     static String onlineUser = "" ;
+
+     static Users u =new Users();
 
 
 
