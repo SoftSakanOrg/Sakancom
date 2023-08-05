@@ -726,16 +726,29 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
 
 
 
+                                  try {
+                                      pst = connection.prepareStatement("UPDATE furniture SET status='sold' WHERE furniture_id = '" + FurnitureID + "'");
+                                      pst.executeUpdate();
 
-                                        pst = connection.prepareStatement("UPDATE furniture SET status='sold' WHERE furniture_id = '" + FurnitureID + "'");
-                                        pst.executeUpdate();
+                                      pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
 
-                                        pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+                                      pst.setString(1, Sakan.onlineUser + " has purchased a furniture (" + Sakan.f.getFurnitureDescription() + ")");
 
-                                        pst.setString(1, Sakan.onlineUser + " has purchased a furniture (" + Sakan.f.getFurnitureDescription() + ")");
+                                      pst.executeUpdate();
 
-                                        pst.executeUpdate();
+                                  }catch (SQLException e){
 
+                                  }finally {
+                                      try {
+                                          if (rs != null){
+                                              rs.close();
+                                          }
+                                      }finally {
+                                          if (pst != null) {
+                                              pst.close();
+                                          }
+                                      }
+                                  }
                                         logger.info("Furniture purchased successfully!");
                                         Sakan.flag2 = 1;
                                         Sakan.whileflag2 = 1;
