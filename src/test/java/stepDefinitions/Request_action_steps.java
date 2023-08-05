@@ -4,7 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import main.AdvertismentRequests;
-import main.funcRequestAction;
+import main.FuncRequestAction;
 
 import java.sql.SQLException;
 
@@ -14,13 +14,13 @@ public class Request_action_steps {
 
 
     AdvertismentRequests obj;
-    funcRequestAction obj2;
+    FuncRequestAction obj2;
 
 
     @Given("the admin is on the requests section")
     public void theAdminIsOnTheRequestsSection() {
         obj= new AdvertismentRequests();
-        obj2=new funcRequestAction();
+        obj2=new FuncRequestAction();
     }
     @When("the admin selects a requestID like {int}")
     public void theAdminSelectsARequestIDLike(Integer req_ID) throws SQLException {
@@ -37,7 +37,7 @@ public class Request_action_steps {
 
    @Given("the admin selected a request")
    public void theAdminSelectedARequest() {
-        obj2=new funcRequestAction();
+        obj2=new FuncRequestAction();
     }
 
 

@@ -4,7 +4,7 @@ import java.sql.*;
 
 import static main.Sakan.logger;
 
-public class funcViewRequest {
+public class FuncViewRequest {
 
     public static int ViewRequestFlag;
 

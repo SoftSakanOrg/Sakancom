@@ -3,9 +3,7 @@ package stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import main.funcViewObservation;
-import main.funcViewRequest;
-import org.junit.Ignore;
+import main.FuncViewObservation;
 
 import java.sql.SQLException;
 
@@ -15,11 +13,11 @@ import static org.junit.Assert.assertTrue;
 
 public class view_observation_steps {
 
-   funcViewObservation view;
+   FuncViewObservation view;
 
     @Given("the Admin is on the Admin page panel")
     public void theAdminIsOnTheAdminPagePanel() {
-        view= new funcViewObservation();
+        view= new FuncViewObservation();
     }
     @When("there is data in Observations table")
     public void thereIsDataInObservationsTable() throws SQLException {

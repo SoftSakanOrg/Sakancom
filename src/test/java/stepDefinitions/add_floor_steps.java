@@ -3,7 +3,7 @@ package stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import main.funcAddFloor;
+import main.FuncAddFloor;
 
 import java.sql.SQLException;
 
@@ -11,11 +11,11 @@ import static org.junit.Assert.assertTrue;
 
 public class add_floor_steps {
 
-    funcAddFloor obj;
+    FuncAddFloor obj;
     @Given("Owner wants to add floor")
     public void ownerWantsToAddFloor() {
 
-       obj =new funcAddFloor();
+       obj =new FuncAddFloor();
 
     }
     @When("Owner adds floor to a building with id {int}")
@@ -43,7 +43,7 @@ public class add_floor_steps {
 
     @Given("selects last floor to get the id")
     public void selectsLastFloorToGetTheId() {
-       obj=new funcAddFloor();
+       obj=new FuncAddFloor();
     }
     @When("selecting the floor ordered by desc limit by one")
     public void selectingTheFloorOrderedByDescLimitByOne() throws SQLException {

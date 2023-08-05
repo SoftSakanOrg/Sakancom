@@ -3,9 +3,9 @@ package main;
 import java.sql.*;
 
 import static main.Sakan.*;
-import static main.funcViewBuilding.viewbuilding;
+import static main.FuncViewBuilding.viewbuilding;
 
-public class funcOwner {
+public class FuncOwner {
 
     public static int ownerFlag;
     public static void ownerfunc(String usertype,int ownerID,String ownsc,int testp) throws SQLException {

@@ -4,7 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import main.AdminPara;
-import main.funcAdmin;
+import main.FuncAdmin;
 
 import java.sql.SQLException;
 
@@ -12,11 +12,11 @@ import static org.junit.Assert.assertTrue;
 
 public class admin_steps {
 
-    funcAdmin obj;
+    FuncAdmin obj;
 
     @Given("admin is on admin panel")
     public void adminIsOnAdminPanel() {
-     obj=new funcAdmin();
+     obj=new FuncAdmin();
     }
     @When("admin enters {string} to choose a function")
     public void adminEntersToChooseAFunction(String functype) throws SQLException {

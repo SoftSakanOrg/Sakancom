@@ -3,11 +3,11 @@ package main;
 import java.sql.SQLException;
 
 import static main.Sakan.*;
-import static main.funcDeleteObservation.deleteObservations;
-import static main.funcViewObservation.viewObservations;
-import static main.funcViewRequest.viewRequests;
+import static main.FuncDeleteObservation.deleteObservations;
+import static main.FuncViewObservation.viewObservations;
+import static main.FuncViewRequest.viewRequests;
 
-public class funcAdmin {
+public class FuncAdmin {
 
   public static int adminflag=0;
     public static void adminfunc(AdminPara adminPara) throws SQLException {

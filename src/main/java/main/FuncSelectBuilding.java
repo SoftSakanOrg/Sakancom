@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import static main.Sakan.logger;
 
-public class funcSelectBuilding {
+public class FuncSelectBuilding {
 
     public static int selectBuildingFlag;
     public static int invalidFlag;

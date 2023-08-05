@@ -1,11 +1,10 @@
 package main;
 
 import java.sql.*;
-import java.util.Scanner;
 
 import static main.Sakan.logger;
 
-public class funcSelectmyfloorfunc {
+public class FuncSelectmyfloorfunc {
 
     public static int myFloorFlag=0;
     public static void selectmyfloor(int building_id,int floor_id) throws SQLException {

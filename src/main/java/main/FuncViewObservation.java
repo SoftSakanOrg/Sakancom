@@ -4,7 +4,7 @@ import java.sql.*;
 
 import static main.Sakan.logger;
 
-public class funcViewObservation {
+public class FuncViewObservation {
 
     public static int viewObservationFlag=0;
 

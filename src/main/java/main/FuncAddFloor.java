@@ -4,7 +4,7 @@ import java.sql.*;
 
 import static main.Sakan.logger;
 
-public class funcAddFloor {
+public class FuncAddFloor {
 
     public static int addFloorFlag;
     public static int selectLastFloorFlag;

@@ -1,11 +1,10 @@
 package main;
 
 import java.sql.*;
-import java.util.Scanner;
 
 import static main.Sakan.logger;
 
-public class funcRequestAction {
+public class FuncRequestAction {
 
     public static int RequestFlag=0;
 

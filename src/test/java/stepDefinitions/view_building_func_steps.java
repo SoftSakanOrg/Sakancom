@@ -3,7 +3,7 @@ package stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import main.funcViewBuildingFunc;
+import main.FuncViewBuildingFunc;
 
 import java.sql.SQLException;
 
@@ -11,11 +11,11 @@ import static org.junit.Assert.assertTrue;
 
 public class view_building_func_steps {
 
-    funcViewBuildingFunc obj;
+    FuncViewBuildingFunc obj;
 
     @Given("the owner wants to view a specific floor of his building")
     public void theOwnerWantsToViewASpecificFloorOfHisBuilding() {
-        obj=new funcViewBuildingFunc();
+        obj=new FuncViewBuildingFunc();
 
     }
     @When("owner enters {string} and building with id {int}")
@@ -31,7 +31,7 @@ public class view_building_func_steps {
 
     @Given("the owner failed to view his floor")
     public void theOwnerFailedToViewHisFloor() {
-        obj=new funcViewBuildingFunc();
+        obj=new FuncViewBuildingFunc();
     }
     @When("owner enters {string} and building id that doesn`t exit like {int}")
     public void ownerEntersAndBuildingIdThatDoesnTExitLike(String viewType, Integer building_id) throws SQLException {
@@ -46,7 +46,7 @@ public class view_building_func_steps {
 
     @Given("the owner tries to go back to main menu")
     public void theOwnerTriesToGoBackToMainMenu() {
-        obj=new funcViewBuildingFunc();
+        obj=new FuncViewBuildingFunc();
     }
     @When("owner enters {string}")
     public void ownerEnters(String viewType) throws SQLException {

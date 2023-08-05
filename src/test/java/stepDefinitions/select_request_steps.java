@@ -4,7 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import main.AdvertismentRequests;
-import main.funcSelectRequest;
+import main.FuncSelectRequest;
 
 import java.sql.SQLException;
 
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class select_request_steps {
 
     AdvertismentRequests obj;
-    funcSelectRequest obj2;
+    FuncSelectRequest obj2;
 
 
 
@@ -21,7 +21,7 @@ public class select_request_steps {
     @Given("the admin is on the requests page")
     public void theAdminIsOnTheRequestsPage() {
         obj= new AdvertismentRequests();
-        obj2=new funcSelectRequest();
+        obj2=new FuncSelectRequest();
 
     }
     @When("the admin selects a request by ID like {int}")

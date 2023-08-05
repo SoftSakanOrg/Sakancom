@@ -4,9 +4,8 @@ import java.sql.*;
 import java.util.Scanner;
 
 import static main.Sakan.logger;
-import static main.funcRequestAction.requestAction;
 
-public class funcSelectRequest {
+public class FuncSelectRequest {
 
     public static int RequestFlag=0;
     public static void selectRequest(int ReqID,int testp) throws SQLException {

@@ -5,15 +5,15 @@ import java.util.Scanner;
 
 import static main.Sakan.*;
 import static main.FuncAddBuilding.addbuildingfunc;
-import static main.funcAddFloor.addfloor;
-import static main.funcAdmin.adminfunc;
-import static main.funcOwner.ownerfunc;
-import static main.funcRequestAction.requestAction;
-import static main.funcSelectBuilding.invalidFlag;
-import static main.funcSelectBuilding.selectbuilding;
-import static main.funcSelectRequest.selectRequest;
-import static main.funcSelectmyfloorfunc.selectmyfloor;
-import static main.funcViewBuildingFunc.viewBuildingFunc;
+import static main.FuncAddFloor.addfloor;
+import static main.FuncAdmin.adminfunc;
+import static main.FuncOwner.ownerfunc;
+import static main.FuncRequestAction.requestAction;
+import static main.FuncSelectBuilding.invalidFlag;
+import static main.FuncSelectBuilding.selectbuilding;
+import static main.FuncSelectRequest.selectRequest;
+import static main.FuncSelectmyfloorfunc.selectmyfloor;
+import static main.FuncViewBuildingFunc.viewBuildingFunc;
 
 public class funcCheckLogin {
 

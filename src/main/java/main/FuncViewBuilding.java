@@ -3,9 +3,8 @@ package main;
 import java.sql.*;
 
 import static main.Sakan.logger;
-import static main.funcOwner.ownerfunc;
 
-public class funcViewBuilding {
+public class FuncViewBuilding {
 
     public static int flagViewBuilding=0;
     public static void viewbuilding(int ownerID,int testp) throws SQLException {

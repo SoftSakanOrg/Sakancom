@@ -4,9 +4,9 @@ import java.sql.*;
 import java.util.Scanner;
 
 import static main.Sakan.*;
-import static main.funcUsersLogin.Login;
+import static main.FuncUsersLogin.Login;
 
-public class funcCheckEmail {
+public class FuncCheckEmail {
 
 
     public static void checkemail(String email, int func, String usertype ){  //func 1 forSign up // func2 for Login

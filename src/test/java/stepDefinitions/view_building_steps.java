@@ -3,7 +3,7 @@ package stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import main.funcViewBuilding;
+import main.FuncViewBuilding;
 
 import java.sql.SQLException;
 
@@ -11,11 +11,11 @@ import static org.junit.Assert.assertTrue;
 
 public class view_building_steps {
 
-    funcViewBuilding obj;
+    FuncViewBuilding obj;
 
     @Given("the owner is on the owner page")
     public void theOwnerIsOnTheOwnerPage() {
-        obj=new funcViewBuilding();
+        obj=new FuncViewBuilding();
     }
     @When("the owner searches for his buildings by his id like {int}")
     public void theOwnerSearchesForHisBuildingsByHisIdLike(Integer owner_id) throws SQLException {

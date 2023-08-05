@@ -4,7 +4,7 @@ import java.sql.*;
 
 import static main.Sakan.*;
 
-public class funcViewBuildingFunc {
+public class FuncViewBuildingFunc {
 
     public static int viewFloorFlag;
     public static void viewBuildingFunc(int owner_ID,int building_ID, String view1,int testp) throws SQLException {

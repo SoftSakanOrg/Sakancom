@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import static java.lang.System.exit;
 import static java.lang.System.getLogger;
-import static main.funcCheckEmail.checkemail;
+import static main.FuncCheckEmail.checkemail;
 import static main.funcCheckLogin.checklogin;
-import static main.funcUsersLogin.Login;
+import static main.FuncUsersLogin.Login;
 import java.util.logging.Logger;
 
 public class Sakan {

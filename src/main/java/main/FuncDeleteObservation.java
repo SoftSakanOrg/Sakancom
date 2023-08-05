@@ -4,7 +4,7 @@ import java.sql.*;
 
 import static main.Sakan.logger;
 
-public class funcDeleteObservation {
+public class FuncDeleteObservation {
 
     public static int  flagDeleteObservations=0;
     public static void deleteObservations(int testp) throws SQLException {

@@ -3,7 +3,7 @@ package stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import main.funcSelectmyfloorfunc;
+import main.FuncSelectmyfloorfunc;
 
 import java.sql.SQLException;
 
@@ -11,11 +11,11 @@ import static org.junit.Assert.assertTrue;
 
 public class select_my_floor_steps {
 
-    funcSelectmyfloorfunc obj;
+    FuncSelectmyfloorfunc obj;
 
     @Given("the owner selected a specific building")
     public void theOwnerSelectedASpecificBuilding() {
-       obj=new funcSelectmyfloorfunc();
+       obj=new FuncSelectmyfloorfunc();
     }
     @When("owner selects the floor of one of his buildings by entering floor id like {int}")
     public void ownerSelectsTheFloorOfOneOfHisBuildingsByEnteringFloorIdLike(Integer floor_id) throws SQLException {

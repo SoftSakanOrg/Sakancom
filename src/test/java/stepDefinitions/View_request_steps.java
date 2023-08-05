@@ -3,17 +3,17 @@ package stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import main.funcViewRequest;
+import main.FuncViewRequest;
 
 import java.sql.SQLException;
 
 import static org.junit.Assert.*;
 
 public class View_request_steps {
-    funcViewRequest view ;
+    FuncViewRequest view ;
     @Given("the Admin is on the Admin page")
     public void theAdminIsOnTheAdminPage() {
-        view= new funcViewRequest();
+        view= new FuncViewRequest();
          }
     @When("there is data in requests table")
     public void thereIsDataInRequestsTable() throws SQLException {

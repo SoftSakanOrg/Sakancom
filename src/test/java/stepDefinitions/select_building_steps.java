@@ -3,7 +3,7 @@ package stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import main.funcSelectBuilding;
+import main.FuncSelectBuilding;
 
 import java.sql.SQLException;
 
@@ -11,10 +11,10 @@ import static org.junit.Assert.assertTrue;
 
 public class select_building_steps {
 
-    funcSelectBuilding obj;
+    FuncSelectBuilding obj;
     @Given("Owner wants to select one of his buildings")
     public void ownerWantsToSelectOneOfHisBuildings() {
-     obj=new funcSelectBuilding();
+     obj=new FuncSelectBuilding();
     }
     @When("Owner enters building id like {int}")
     public void ownerEntersBuildingIdLike(Integer building_id) throws SQLException {
@@ -30,7 +30,7 @@ public class select_building_steps {
 
     @Given("Owner wants to select one of his buildings but fails to do it")
     public void ownerWantsToSelectOneOfHisBuildingsButFailsToDoIt() {
-        obj=new funcSelectBuilding();
+        obj=new FuncSelectBuilding();
     }
     @When("Owner enters a invalid id like {int}")
     public void ownerEntersAInvalidIdLike(Integer building_id) throws SQLException {
