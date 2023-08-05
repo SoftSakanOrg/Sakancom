@@ -126,14 +126,11 @@ public class Sakan {
         Scanner sc=new Scanner(System.in);
         String temp;
 
-        extracted(usertype, sc);
-    }
+          if(Sakan.flaglogin==1)temp="2";
+       else temp="3";
 
 
-    private static void extracted(String usertype, Scanner sc) {
-        String temp;
-        if(Sakan.flaglogin==1)temp="2";
-     else temp="3";
+
 
 
         if(Sakan.flag2==0){
@@ -149,7 +146,7 @@ public class Sakan {
             }
 
       if(Sakan.flaglogin==0)
-        temp= sc.nextLine();
+        temp=sc.nextLine();
 
         if(temp.equalsIgnoreCase("3")){
             mainfunc();
@@ -183,48 +180,49 @@ public class Sakan {
         Scanner sv = new Scanner(System.in);
         String view;
 
-        if(usertype.equalsIgnoreCase(tenants)){
-      while(true) {
+         if(usertype.equalsIgnoreCase(tenants)){
+       while(true) {
 
-          tenantId();
+           tenantId();
 
-          logger.info("\nHere is a menu showing the available options:-");
-          logger.info("(A) View available Apartments                     ");
-          logger.info("(B) To Select one of the available floors using ID");
-          logger.info("(C) View furnitures for sale                       ");
-          logger.info("(E) To Select a furniture to buy using ID          ");
-          logger.info("(F) Advertise a furniture for sale                 ");
-          logger.info("(G) View personal info of booking                  ");
-          logger.info("(H) Main menu (Log out)                            ");
+           logger.info("\nHere is a menu showing the available options:-");
+           logger.info("(A) View available Apartments                     ");
+           logger.info("(B) To Select one of the available floors using ID");
+           logger.info("(C) View furnitures for sale                       ");
+           logger.info("(E) To Select a furniture to buy using ID          ");
+           logger.info("(F) Advertise a furniture for sale                 ");
+           logger.info("(G) View personal info of booking                  ");
+           logger.info("(H) Main menu (Log out)                            ");
 
-          view = sv.nextLine();
-          if (view.equalsIgnoreCase("A")) {
+           view = sv.nextLine();
+           if (view.equalsIgnoreCase("A")) {
 
-            viewfloor();
+             viewfloor();
 
-          } else if (view.equalsIgnoreCase("B")) {
-              selectfloor();
-          } else if (view.equalsIgnoreCase("C")) {
+           } else if (view.equalsIgnoreCase("B")) {
+               selectfloor();
+           } else if (view.equalsIgnoreCase("C")) {
 
-              viewfurniture();
+               viewfurniture();
 
-          }else if(view.equalsIgnoreCase("E")){
-           selectfurniture();
-          } else if(view.equalsIgnoreCase("F")){
-             addfurniture(Sakan.onlineUser);
+           }else if(view.equalsIgnoreCase("E")){
+            selectfurniture();
+           } else if(view.equalsIgnoreCase("F")){
+              addfurniture(Sakan.onlineUser);
 
-          }  else if(view.equalsIgnoreCase("G")){
-              viewBookingInfo(Sakan.u.getUsersID());
-          }
+           }  else if(view.equalsIgnoreCase("G")){
+               viewBookingInfo(Sakan.u.getUsersID());
+           }
 
-          else if (view.equalsIgnoreCase("H")) {
-              mainfunc();
+           else if (view.equalsIgnoreCase("H")) {
+               mainfunc();
 
-          }
+           }
 
-      }
-   }
+       }
     }
+    }
+
 
 
     public static void tenantId(){
