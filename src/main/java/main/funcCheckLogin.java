@@ -89,7 +89,6 @@ public class funcCheckLogin {
 
                         logger.info("Enter the Building ID: ");
                         Sakan.B.setBuildingId(sc.nextInt());
-
                         selectbuilding( Sakan.B.getBuildingId(),U.getUsersID());
 
                         if(invalidFlag==1){

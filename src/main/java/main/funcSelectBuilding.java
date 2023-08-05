@@ -28,6 +28,7 @@ public class funcSelectBuilding {
                 pst = connection.prepareStatement("SELECT * FROM building WHERE building_id = '" + building_id + "' AND  OWNER_ID = '" + owner_id + "'");
                 rs = pst.executeQuery();
                 if (rs.next()) {
+                    invalidFlag=0;
                     selectBuildingFlag=1;
                     Sakan.flagSelectBuilding=1;
                     Sakan.B.setBuildingId(rs.getInt(1));
