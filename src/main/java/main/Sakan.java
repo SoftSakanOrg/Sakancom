@@ -14,6 +14,7 @@ public class Sakan {
     public static final String DESCRIPTION_VALUES = "INSERT INTO system_observation(DESCRIPTION) VALUES (?)";
     public static final String QUESTION_MARKS = "(?,?,?,?,?)";
     public static final String LOCALHOST_3306_SAKAN = "jdbc:mysql://localhost:3306/Sakan";
+    public static final String A_CONFIRM_B_CANCEL = "(A) Confirm   (B) Cancel";
     static String tenants="TENANTS";
     static String owners="OWNERS";
     static String admin="ADMIN";
@@ -737,7 +738,7 @@ public class Sakan {
 
                         Sakan.whileflag2=0;
                         logger.info("Are you sure you want to purchase this Furniture?");
-                        logger.info("(A) Confirm   (B) Cancel");
+                        logger.info(A_CONFIRM_B_CANCEL);
                         confirm = st.nextLine();
                         if(confirm.equalsIgnoreCase("A")){
                             try {
@@ -955,7 +956,7 @@ public class Sakan {
                             while(true){
                                 Sakan.whileflag2=0;
                                 logger.info("Your data is ready.. are you sure you want to continue?");
-                                logger.info("(A) Confirm   (B) Cancel");
+                                logger.info(A_CONFIRM_B_CANCEL);
                                 confirm = st.nextLine();
                                 if(confirm.equalsIgnoreCase("A")){
 
@@ -1076,7 +1077,7 @@ public class Sakan {
                                 gender = "Unknown";
                                 Sakan.whileflag2=0;
                                 logger.info("Your data is ready.. are you sure you want to continue?");
-                                logger.info("(A) Confirm   (B) Cancel");
+                                logger.info(A_CONFIRM_B_CANCEL);
                                 confirm = st.nextLine();
                                 if(confirm.equalsIgnoreCase("A")){
                                     try {
