@@ -8,27 +8,27 @@ import static main.FuncViewBuilding.viewbuilding;
 public class FuncOwner {
 
     public static int ownerFlag;
-    public static void ownerfunc(String usertype,int ownerID,String ownsc,int testp) throws SQLException {
+    public static void ownerfunc(OwnerFuncParam ownerFuncParam) throws SQLException {
 
         Connection connection = null;
         PreparedStatement pst= null;
         ResultSet rs = null;
 
 
-            if (ownsc.equalsIgnoreCase("A")) {
+            if (ownerFuncParam.ownsc().equalsIgnoreCase("A")) {
 
                 ownerFlag=1;
 
-                if(testp==1) {
+                if(ownerFuncParam.testp() ==1) {
 
-                    viewbuilding(ownerID, 1);
+                    viewbuilding(ownerFuncParam.ownerID(), 1);
                 }
 
-            }   else if (ownsc.equalsIgnoreCase("E")) {
+            }   else if (ownerFuncParam.ownsc().equalsIgnoreCase("E")) {
 
                 ownerFlag=1;
 
-                if(testp==1) {
+                if(ownerFuncParam.testp() ==1) {
                     mainfunc();
                 }
 

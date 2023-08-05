@@ -83,7 +83,7 @@ public class funcCheckLogin {
                     String ownsc = sc.nextLine();
 
 
-                    ownerfunc("OWNERS", u.getUsersID(), ownsc,1);
+                    ownerfunc(new OwnerFuncParam("OWNERS", u.getUsersID(), ownsc, 1));
 
                     if(ownsc.equalsIgnoreCase("B")){
 
