@@ -21,7 +21,7 @@ public class funcAddBuilding {
 
 
 
-        try {
+
 
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
             pst = connection.prepareStatement("SELECT username,CONTACT_NUM FROM USERS WHERE user_id='" + owner_ID + "'");
@@ -38,7 +38,7 @@ public class funcAddBuilding {
             pst = connection.prepareStatement("INSERT INTO BUILDING(OWNER_ID,BUILDING_NAME,LOCATION,FLOORS_NUM,OWNER_NAME,CONTACT_NUM,TOTALPARTICIPANTS) VALUES" + "(?,?,?,?,?,?,?)");
             addBuildingFlag=1;
 
-            if(testp==1) {
+
                 pst.setInt(1, owner_ID);
                 pst.setString(2, Sakan.B.getBuildingName());
                 pst.setString(3, Sakan.B.getLocation());
@@ -46,7 +46,7 @@ public class funcAddBuilding {
                 pst.setString(5, Sakan.B.getOwnerName());
                 pst.setInt(6, Sakan.B.getContactNum());
                 pst.setInt(7, 0);
-
+        if(testp==1) {
                 pst.executeUpdate();
             }
 
@@ -61,10 +61,7 @@ public class funcAddBuilding {
             logger.info("You have successfully added your Building...");
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
 
-        }
 
 
 
