@@ -25,7 +25,7 @@ public class Floors {
     }
 
 
-    public Floors(floorParameters floorParameters) {
+    public Floors(FloorParameters floorParameters) {
         this.houseId = floorParameters.houseId();
         this.houseName = floorParameters.houseName();
         this.avalibilty = floorParameters.avalibilty();
