@@ -804,7 +804,8 @@ public static void viewBookingInfo(int tenant_id){
         ResultSet us = null;
 while(true) {
     logger.info("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
-    logger.info("\t      ★★  "+ "Apartment("+floorID+")" +"  ★★      \t");
+    String msg = "\t      ★★  " + "Apartment(" + floorID + ")" + "  ★★      \t";
+    logger.info(msg);
 
     logger.info("(A) View pictures of the selected floor     ");
     logger.info("(B) View the people living in the selected floor");
