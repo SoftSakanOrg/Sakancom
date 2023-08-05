@@ -25,19 +25,19 @@ public class add_floor_steps {
     @Then("floor should be added to this building")
     public void floorShouldBeAddedToThisBuilding() {
 
-        assertTrue(obj.addFloorFlag==1);
+        assertTrue(obj.addfloorflag ==1);
     }
     @Then("this observation should be added to Observations table")
     public void thisObservationShouldBeAddedToObservationsTable() {
-        assertTrue(obj.observationFlag==1);
+        assertTrue(obj.observationflag ==1);
     }
     @Then("it will be added as a request to advertisment_requests waiting for admin to accept it")
     public void itWillBeAddedAsARequestToAdvertismentRequestsWaitingForAdminToAcceptIt() {
-        assertTrue(obj.requestFlag==1);
+        assertTrue(obj.requestflag ==1);
     }
     @Then("floors number should be incremented in the specific building")
     public void floorsNumberShouldBeIncrementedInTheSpecificBuilding() {
-         assertTrue(obj.floorNumFlag==1);
+         assertTrue(obj.floornumflag ==1);
     }
 
 
@@ -52,7 +52,7 @@ public class add_floor_steps {
     @Then("last floor should appear from table")
     public void lastFloorShouldAppearFromTable() {
 
-        assertTrue(obj.selectLastFloorFlag==1);
+        assertTrue(obj.selectlastfloorflag ==1);
     }
 
 
