@@ -47,7 +47,7 @@ public class funcAdmin {
                 adminflag = 1;
               break;
             }
-            Mainfunc();
+            mainfunc();
             break;
         }
         adminflag=1;

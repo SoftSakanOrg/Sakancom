@@ -28,7 +28,7 @@ public class funcUsersLogin {
 
 
             if ( Sakan.u.getEmail().equalsIgnoreCase("1")) {
-                Mainfunc();
+                mainfunc();
 
             }
             if (!Sakan.u.getEmail().contains("@") || !Sakan.u.getEmail().contains(".")) {
@@ -47,7 +47,7 @@ public class funcUsersLogin {
 
 
                 if (  Sakan.u.getPassword().equalsIgnoreCase("1")) {
-                    Mainfunc();
+                    mainfunc();
 
                 }
 

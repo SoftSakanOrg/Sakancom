@@ -64,7 +64,7 @@ public class Sakan {
     static Logger logger =
             Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    public static void Mainfunc(){
+    public static void mainfunc(){
            Sakan.flag1 =0;
            Sakan.flag2 = 0;
            Sakan.onlineUser = "";
@@ -145,7 +145,7 @@ public class Sakan {
         temp=sc.nextLine();
 
         if(temp.equalsIgnoreCase("3")){
-            Mainfunc();
+            mainfunc();
 
         }
 
@@ -211,7 +211,7 @@ public class Sakan {
            }
 
            else if (view.equalsIgnoreCase("H")) {
-               Mainfunc();
+               mainfunc();
 
            }
 
@@ -571,7 +571,7 @@ public static void viewBookingInfo(int tenant_id){
               Sakan.u.setEmail(sc.nextLine());
 
           if (Sakan.u.getEmail().equalsIgnoreCase("1")) {
-              Mainfunc();
+              mainfunc();
 
           }
           if (!Sakan.u.getEmail().contains("@") || !u.getEmail().contains(".")) {
@@ -587,7 +587,7 @@ public static void viewBookingInfo(int tenant_id){
                   logger.info("Enter username: ");
                   Sakan.u.setUsername(sc.nextLine());
                   if (Sakan.u.getUsername().equalsIgnoreCase("1")) {
-                      Mainfunc();
+                      mainfunc();
 
                   }
 
@@ -597,7 +597,7 @@ public static void viewBookingInfo(int tenant_id){
                   Sakan.u.setPassword(sc.nextLine());
 
                   if (Sakan.u.getPassword().equalsIgnoreCase("1")) {
-                      Mainfunc();
+                      mainfunc();
 
                   }
 
@@ -605,7 +605,7 @@ public static void viewBookingInfo(int tenant_id){
                       Sakan.u.setContactNum(sc.nextLine());
 
                       if (Sakan.u.getContactNum().equalsIgnoreCase("1")) {
-                          Mainfunc();
+                          mainfunc();
 
                       }
 
@@ -777,7 +777,7 @@ public static void viewBookingInfo(int tenant_id){
             }
 
             else if (view1.equalsIgnoreCase("D")) {
-                Mainfunc();
+                mainfunc();
 
             }
 
@@ -1188,7 +1188,7 @@ while(true) {
     }
 
     else if (view1.equalsIgnoreCase("E")) {
-        Mainfunc();
+        mainfunc();
 
     }
 }
@@ -1207,7 +1207,7 @@ while(true) {
 
     public static void main(String []args){
 
-       Mainfunc();
+       mainfunc();
 
 }
 

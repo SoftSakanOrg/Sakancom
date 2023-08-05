@@ -1,12 +1,8 @@
 package main;
 
 import java.sql.*;
-import java.util.Scanner;
 
 import static main.Sakan.*;
-import static main.funcAddFloor.addfloor;
-import static main.funcOwner.ownerfunc;
-import static main.funcSelectmyfloorfunc.selectmyfloor;
 
 public class funcViewBuildingFunc {
 
@@ -51,7 +47,7 @@ public class funcViewBuildingFunc {
                     viewFloorFlag = 1;
 
                 if(testp==1) {
-                    Mainfunc();
+                    mainfunc();
                 }
             }
         }

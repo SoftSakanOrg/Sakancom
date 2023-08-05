@@ -1,15 +1,9 @@
 package main;
 
 import java.sql.*;
-import java.util.Scanner;
 
 import static main.Sakan.*;
-import static main.funcAddBuilding.addbuildingfunc;
-import static main.funcAddFloor.addfloor;
-import static main.funcSelectBuilding.selectbuilding;
-import static main.funcSelectmyfloorfunc.selectmyfloor;
 import static main.funcViewBuilding.viewbuilding;
-import static main.funcViewBuildingFunc.viewBuildingFunc;
 
 public class funcOwner {
 
@@ -35,7 +29,7 @@ public class funcOwner {
                 ownerFlag=1;
 
                 if(testp==1) {
-                    Mainfunc();
+                    mainfunc();
                 }
 
             }
