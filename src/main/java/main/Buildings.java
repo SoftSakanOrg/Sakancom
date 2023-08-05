@@ -5,7 +5,7 @@ public class Buildings {
     private Integer buildingId;
     private Integer ownerId;
     private String buildingName;
-    private String Location;
+    private String location;
     private Integer floorsNum;
     private String ownerName;
     private Integer contactNum;
@@ -18,7 +18,7 @@ public class Buildings {
         this.buildingId = buildingId;
         this.ownerId = ownerId;
         this.buildingName = buildingName;
-        this.Location = location;
+        this.location = location;
         this.floorsNum = floorsNum;
         this.ownerName = ownerName;
         this.contactNum = contactNum;
@@ -49,11 +49,11 @@ public class Buildings {
     }
 
     public String getLocation() {
-        return Location;
+        return location;
     }
 
     public void setLocation(String location) {
-        this.Location = location;
+        this.location = location;
     }
 
     public Integer getFloorsNum() {
