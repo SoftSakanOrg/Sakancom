@@ -50,7 +50,7 @@ public class funcAddBuilding {
 
             pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
             addObservationFlag=1;
-            pst.setString(1, Sakan.OnlineUser + " has added a building (" + Sakan.b.getBuildingName() + ") to the system");
+            pst.setString(1, Sakan.onlineUser + " has added a building (" + Sakan.b.getBuildingName() + ") to the system");
 
             if(testp==1) {
                 pst.executeUpdate();

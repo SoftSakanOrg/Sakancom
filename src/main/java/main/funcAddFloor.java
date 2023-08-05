@@ -63,7 +63,7 @@ public class funcAddFloor {
 
                 pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
 
-                pst.setString(1, Sakan.OnlineUser + " has added an apartment  (" + Sakan.b.getBuildingName() + ") to his building");
+                pst.setString(1, Sakan.onlineUser + " has added an apartment  (" + Sakan.b.getBuildingName() + ") to his building");
                 observationFlag=1;
                 if(testp==1) {
                     pst.executeUpdate();

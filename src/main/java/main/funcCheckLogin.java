@@ -65,7 +65,7 @@ public class funcCheckLogin {
                 u.setUsersID(rs.getInt(1));
 
                 if(usertype.equalsIgnoreCase("OWNERS")) {
-                    Sakan.OnlineUser = u.getEmail();
+                    Sakan.onlineUser = u.getEmail();
                     while (true){
 
                         flagReflect=0;
@@ -148,7 +148,7 @@ public class funcCheckLogin {
 
                                                     pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
 
-                                                    pst.setString(1, Sakan.OnlineUser + " has added a picture (" + Sakan.hpc.getHousePicture() + ") to his apartment ");
+                                                    pst.setString(1, Sakan.onlineUser + " has added a picture (" + Sakan.hpc.getHousePicture() + ") to his apartment ");
 
                                                     pst.executeUpdate();
 
@@ -275,7 +275,7 @@ public class funcCheckLogin {
 
                 else if(usertype.equalsIgnoreCase("ADMIN")) {
 
-                    Sakan.OnlineUser= u.getEmail();
+                    Sakan.onlineUser = u.getEmail();
 
 
                     Scanner sc = new Scanner(System.in);

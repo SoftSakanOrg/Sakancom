@@ -55,7 +55,7 @@ public class funcUsersLogin {
                 checklogin(u.getEmail(), u.getPassword(),usertype);
             }
             Sakan.flag11 =1;
-            Sakan.OnlineUser =Sakan.u.getEmail() ;
+            Sakan.onlineUser =Sakan.u.getEmail() ;
 
         }
 
