@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 public class Sakan {
 
+    static String url = "jdbc:mysql://localhost:3306/Sakan";
      static  String tenants = "TENANTS";
     static  String owners = "OWNERS";
     static  String admin = "ADMIN";
@@ -231,7 +232,8 @@ public class Sakan {
         PreparedStatement pst= null;
         ResultSet rs = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+
+            connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT user_id,USERNAME FROM USERS WHERE EMAIL='" + Sakan.onlineUser + "'");
             rs = pst.executeQuery();
 
@@ -254,7 +256,7 @@ public static void viewBookingInfo(int tenant_id){
 
 
     try {
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        connection = DriverManager.getConnection(url, "root", "");
         pst = connection.prepareStatement("SELECT * FROM BOOKING_INFO WHERE TENANT_ID = '" +tenant_id+"'");
         rs = pst.executeQuery();
         if(!rs.next()){
@@ -287,7 +289,7 @@ public static void viewBookingInfo(int tenant_id){
         ResultSet ts = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT * FROM floors WHERE availability = 'available' AND Status = 'Advertised' ");
             tst = connection.prepareStatement("SELECT B.location,B.building_name FROM floors F,building B WHERE F.building_id = B.building_id ");
             rs = pst.executeQuery();
@@ -318,7 +320,7 @@ public static void viewBookingInfo(int tenant_id){
         Sakan.h.setHouseId(sc.nextInt());
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT * FROM floors WHERE floor_id = '" +  Sakan.h.getHouseId() + "' AND availability = 'available' AND Status = 'Advertised'"  );
             tst= connection.prepareStatement("SELECT building_id FROM floors WHERE floor_id = '" +  Sakan.h.getHouseId() + "' AND availability = 'available'  AND Status = 'Advertised'" );
             ts = tst.executeQuery();
@@ -360,7 +362,7 @@ public static void viewBookingInfo(int tenant_id){
         ResultSet rs = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT * FROM furniture WHERE status = 'forsale' ");
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -386,7 +388,7 @@ public static void viewBookingInfo(int tenant_id){
        Sakan.f.setFurnitureID(sc.nextInt());
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT * FROM furniture WHERE furniture_id = '" + Sakan.f.getFurnitureID() + "' AND status = 'forsale'" );
             rs = pst.executeQuery();
             if (rs.next()) {
@@ -457,7 +459,7 @@ public static void viewBookingInfo(int tenant_id){
 
      try {
 
-         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+         connection = DriverManager.getConnection(url, "root", "");
          pst = connection.prepareStatement("SELECT user_id FROM USERS WHERE EMAIL='" + Temail + "'");
          rs = pst.executeQuery();
 
@@ -465,7 +467,7 @@ public static void viewBookingInfo(int tenant_id){
              Sakan.u.setUsersID(rs.getInt(1));
          }
 
-         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+         connection = DriverManager.getConnection(url, "root", "");
          pst = connection.prepareStatement("INSERT INTO FURNITURE(user_ID,PRICE,DESCRIPTION,STATUS) VALUES (?,?,?,?)");
 
          pst.setInt(1,  Sakan.u.getUsersID());
@@ -489,7 +491,7 @@ public static void viewBookingInfo(int tenant_id){
 
      }
      try{
-         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+         connection = DriverManager.getConnection(url, "root", "");
          pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE ORDER BY FURNITURE_ID DESC LIMIT 1");
          rs= pst.executeQuery();
 
@@ -503,7 +505,7 @@ public static void viewBookingInfo(int tenant_id){
 
      }
      try {
-         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+         connection = DriverManager.getConnection(url, "root", "");
          pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE WHERE FURNITURE_ID='" + Sakan.f.getFurnitureID() + "'");
          rs = pst.executeQuery();
          if (rs.next()) {
@@ -527,7 +529,7 @@ public static void viewBookingInfo(int tenant_id){
          }
 
          try {
-             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+             connection = DriverManager.getConnection(url, "root", "");
              pst = connection.prepareStatement("INSERT INTO FURNITURE_PIC(FURNITURE_ID,PICTURE) VALUES (?,?)");
              pst.setInt(1, Sakan.f.getFurnitureID());
              pst.setString(2, Sakan.fpc.getFurniturePicture());
@@ -622,7 +624,7 @@ public static void viewBookingInfo(int tenant_id){
            try {
 
 
-                   connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                   connection = DriverManager.getConnection(url, "root", "");
                    tst = connection.prepareStatement("INSERT INTO USERS(EMAIL,USERNAME,PASSWORD,contact_num,user_type) VALUES" + "(?,?,?,?,?)");
 
                    tst.setString(1, u.getEmail());
@@ -637,7 +639,7 @@ public static void viewBookingInfo(int tenant_id){
 
                if(usertype.equalsIgnoreCase(owners)){
 
-                   connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                   connection = DriverManager.getConnection(url, "root", "");
                    tst = connection.prepareStatement("SELECT USER_ID FROM USERS ORDER BY USER_ID DESC LIMIT 1");
                    rs=tst.executeQuery();
                    if(rs.next()){
@@ -695,7 +697,7 @@ public static void viewBookingInfo(int tenant_id){
             if (view1.equalsIgnoreCase("A")) {
 
                 try {
-                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                    connection = DriverManager.getConnection(url, "root", "");
                     pst = connection.prepareStatement("SELECT picture FROM furniture_pic  WHERE " + FurnitureID + " = furniture_id  ");
                     rs = pst.executeQuery();
                     while (rs.next()) {
@@ -739,7 +741,7 @@ public static void viewBookingInfo(int tenant_id){
                                     try {
 
 
-                                        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                                        connection = DriverManager.getConnection(url, "root", "");
                                         pst = connection.prepareStatement("UPDATE furniture SET status='sold' WHERE furniture_id = '" + FurnitureID + "'");
                                         pst.executeUpdate();
 
@@ -824,7 +826,7 @@ while(true) {
     if (view1.equalsIgnoreCase("A")) {
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT picture FROM house_pic  WHERE " + floorID + " = floor_id  ");
             rs = pst.executeQuery();
             while (rs.next()) {
@@ -848,7 +850,7 @@ while(true) {
 
         try {
             int flagpart = 0;
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT * FROM house_participants  WHERE " + floorID + " = floor_id  ");
             rs = pst.executeQuery();
 
@@ -891,7 +893,7 @@ while(true) {
         try {
 
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            connection = DriverManager.getConnection(url, "root", "");
 
             pst = connection.prepareStatement("SELECT building_name FROM building WHERE building_id = '" + buildingID + "'" );
             rs = pst.executeQuery();
@@ -1076,7 +1078,7 @@ while(true) {
                         confirm = st.nextLine();
                         if(confirm.equalsIgnoreCase("A")){
                             try {
-                                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                                connection = DriverManager.getConnection(url, "root", "");
                                 pst = connection.prepareStatement("SELECT USER_ID,username FROM users WHERE email = '" + Temail + "'" );
                                 rs = pst.executeQuery();
 
