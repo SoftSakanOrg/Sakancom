@@ -18,7 +18,6 @@ public class Sakan {
     public static int whileflag = 0;
     public static int whileflag2 = 0;
 
-    public static int flagnext = 0;
 
     public static  int flaglogin = 0;
 

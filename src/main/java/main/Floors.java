@@ -21,22 +21,23 @@ public class Floors {
 
 
     public Floors() {
+
     }
 
 
-    public Floors(Integer houseId, String houseName, String avalibilty, Integer housePrice, String houseLocation, String houseServices, Integer houseParticipants, Integer houseMaxParticipants, Integer bedrooms, Integer bathrooms, Integer contBalcony,String status) {
-        this.houseId = houseId;
-        this.houseName = houseName;
-        this.avalibilty = avalibilty;
-        this.housePrice = housePrice;
-        this.houseLocation = houseLocation;
-        this.houseServices = houseServices;
-        this.houseParticipants = houseParticipants;
-        this.houseMaxParticipants = houseMaxParticipants;
-        this.bedrooms = bedrooms;
-        this.bathrooms = bathrooms;
-        this.contBalcony = contBalcony;
-        this.status=status;
+    public Floors(floorParameters floorParameters) {
+        this.houseId = floorParameters.houseId();
+        this.houseName = floorParameters.houseName();
+        this.avalibilty = floorParameters.avalibilty();
+        this.housePrice = floorParameters.housePrice();
+        this.houseLocation = floorParameters.houseLocation();
+        this.houseServices = floorParameters.houseServices();
+        this.houseParticipants = floorParameters.houseParticipants();
+        this.houseMaxParticipants = floorParameters.houseMaxParticipants();
+        this.bedrooms = floorParameters.bedrooms();
+        this.bathrooms = floorParameters.bathrooms();
+        this.contBalcony = floorParameters.contBalcony();
+        this.status= floorParameters.status();
     }
 
 
