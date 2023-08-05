@@ -14,6 +14,7 @@ public class Sakan {
     static String url = "jdbc:mysql://localhost:3306/Sakan";
 
     static String s = "\t|\t ID: ";
+    static String s1 = "\t|\t";
      static  String tenants = "TENANTS";
     static  String owners = "OWNERS";
     static  String admin = "ADMIN";
@@ -335,7 +336,7 @@ public static void viewBookingInfo(int tenantId){
 
             if (rs.next()) {
 
-                String content = s + rs.getString(1)  + "\t|\t price: " + rs.getInt(4) +  "\t|\t services: " + rs.getString(5) + "\t|\t Number of residents: " + rs.getString(6)  + "\t|\t";
+                String content = s + rs.getString(1)  + "\t|\t price: " + rs.getInt(4) +  "\t|\t services: " + rs.getString(5) + "\t|\t Number of residents: " + rs.getString(6)  + s1;
                 logger.info(content);
                 viewfloorsfunc(Sakan.h.getHouseId(),Sakan.b.getBuildingId(),Sakan.onlineUser);
 
@@ -369,7 +370,8 @@ public static void viewBookingInfo(int tenantId){
             pst = connection.prepareStatement("SELECT * FROM furniture WHERE status = 'forsale' ");
             rs = pst.executeQuery();
             while (rs.next()) {
-                String content = s+ rs.getInt(1) + " \t|\t price: " + rs.getInt(3) + "\t|\t description: " + rs.getString(4) + "\t|\t status: " + rs.getString(5) + "\t|\t" ;
+
+                String content = s+ rs.getInt(1) + " \t|\t price: " + rs.getInt(3) + "\t|\t description: " + rs.getString(4) + "\t|\t status: " + rs.getString(5) + s1;
                 logger.info(content);
             }
 
@@ -396,7 +398,7 @@ public static void viewBookingInfo(int tenantId){
             rs = pst.executeQuery();
             if (rs.next()) {
                Sakan.f.setFurnitureDescription(rs.getString(4));
-                String content = "\t|\t ID: " + rs.getInt(1) + " \t|\t price: " + rs.getInt(3) + "\t|\t description: " + rs.getString(4) + "\t|\t";
+                String content = "\t|\t ID: " + rs.getInt(1) + " \t|\t price: " + rs.getInt(3) + "\t|\t description: " + rs.getString(4) + s1;
                 logger.info(content);
                 viewfurnituresfunc(  Sakan.f.getFurnitureDescription(),Sakan.f.getFurnitureID());
 
@@ -705,7 +707,7 @@ public static void viewBookingInfo(int tenantId){
                     rs = pst.executeQuery();
                     while (rs.next()) {
 
-                        String content = "\t|\t" + rs.getString(1) + "\t|\t";
+                        String content = s1 + rs.getString(1) + s1;
                         logger.info(content);
 
 
@@ -834,7 +836,7 @@ while(true) {
             rs = pst.executeQuery();
             while (rs.next()) {
 
-                String content = "\t|\t" + rs.getString(1) + "\t|\t";
+                String content = s1 + rs.getString(1) + s1;
                 logger.info(content);
 
 
@@ -860,7 +862,7 @@ while(true) {
 
             while (rs.next()) {
                 flagpart =1;
-                String content = "\t| Name: \t" + rs.getString(3) + "\t| Age: \t" + rs.getString(4) + "\t| Major: \t" + rs.getString(5) + "\t| Gender: \t" + rs.getString(6) + "\t|\t";
+                String content = "\t| Name: \t" + rs.getString(3) + "\t| Age: \t" + rs.getString(4) + "\t| Major: \t" + rs.getString(5) + "\t| Gender: \t" + rs.getString(6) + s1;
                 logger.info(content);
 
 
