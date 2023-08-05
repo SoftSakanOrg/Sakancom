@@ -949,6 +949,7 @@ while(true) {
                         logger.info("(A) Confirm   (B) Cancel");
                         confirm = st.nextLine();
                         if(confirm.equalsIgnoreCase("A")){
+
                             try {
 
 
@@ -1077,7 +1078,7 @@ while(true) {
                                 if(rs.next()){
                                     Sakan.bi.setTenantId(rs.getInt(1));
                                     nameb = rs.getString(2);
-                                     System.out.print(Sakan.u.getUsername());
+                                    logger.info(Sakan.u.getUsername());
                                 }
                                 pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
                                 pst.setInt(1,floorID );
