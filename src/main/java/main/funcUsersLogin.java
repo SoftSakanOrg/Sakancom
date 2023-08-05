@@ -36,10 +36,10 @@ public class funcUsersLogin {
                 logger.info("Please enter a valid email...");
                flaglogin=1;
                 tenantfunc(usertype);
-          //      Login(usertype,email,pass);
+
             }
 
-//            email = tempemail;
+
 
             checkemail(Sakan.u.getEmail(), 2, usertype);
             if (Sakan.flag11 == 0) {
