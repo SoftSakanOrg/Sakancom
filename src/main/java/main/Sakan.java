@@ -248,7 +248,7 @@ public class Sakan {
         }
     }
 
-public static void viewBookingInfo(int tenant_id){
+public static void viewBookingInfo(int tenantId){
 
     Connection connection = null;
     PreparedStatement pst= null;
@@ -257,7 +257,7 @@ public static void viewBookingInfo(int tenant_id){
 
     try {
         connection = DriverManager.getConnection(url, "root", "");
-        pst = connection.prepareStatement("SELECT * FROM BOOKING_INFO WHERE TENANT_ID = '" +tenant_id+"'");
+        pst = connection.prepareStatement("SELECT * FROM BOOKING_INFO WHERE TENANT_ID = '" +tenantId+"'");
         rs = pst.executeQuery();
         if(!rs.next()){
             logger.info("You don`t have any rented apartment yet...");
