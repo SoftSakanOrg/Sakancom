@@ -397,7 +397,7 @@ public class Sakan {
                 Sakan.f.setFurnitureDescription(rs.getString(4));
                 String content = s + rs.getInt(1) + " \t|\t price: " + rs.getInt(3) + "\t|\t description: " + rs.getString(4) + s1;
                 logger.info(content);
-                viewfurnituresfunc(  Sakan.f.getFurnitureDescription(),Sakan.f.getFurnitureID());
+                viewFurnituresFunc(  Sakan.f.getFurnitureDescription(),Sakan.f.getFurnitureID());
 
 
             }
@@ -675,7 +675,7 @@ public class Sakan {
 
 
 
-    public static void viewfurnituresfunc(String Fdescription , int FurnitureID) {
+    public static void viewFurnituresFunc(String fdescription , int furnitureID) {
 
         Scanner st = new Scanner(System.in);
         Scanner sc=new Scanner(System.in);
@@ -685,7 +685,7 @@ public class Sakan {
         ResultSet rs = null;
         String view1;
         while(true) {
-            String desc = "\t            ★★  " + Fdescription + "  ★★                 \t";
+            String desc = "\t            ★★  " + fdescription + "  ★★                 \t";
             logger.info(desc);
             logger.info("(A) View pictures of the selected furniture        ");
             logger.info("(B) To purchase the selected furniture             ");
@@ -699,7 +699,7 @@ public class Sakan {
 
                 try {
                     connection = DriverManager.getConnection(getUrl(), "root", "");
-                    pst = connection.prepareStatement("SELECT picture FROM furniture_pic  WHERE " + FurnitureID + " = furniture_id  ");
+                    pst = connection.prepareStatement("SELECT picture FROM furniture_pic  WHERE " + furnitureID + " = furniture_id  ");
                     rs = pst.executeQuery();
                     while (rs.next()) {
 
@@ -743,7 +743,7 @@ public class Sakan {
 
 
                                 connection = DriverManager.getConnection(getUrl(), "root", "");
-                                pst = connection.prepareStatement("UPDATE furniture SET status='sold' WHERE furniture_id = '" + FurnitureID + "'");
+                                pst = connection.prepareStatement("UPDATE furniture SET status='sold' WHERE furniture_id = '" + furnitureID + "'");
                                 pst.executeUpdate();
 
                                 pst = connection.prepareStatement(DESCRIPTION_VALUES);
