@@ -3,6 +3,7 @@ package main;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import static main.Sakan.*;
 import static main.funcCheckEmail.checkemail;
@@ -10,7 +11,7 @@ import static main.funcCheckLogin.checklogin;
 
 public class funcUsersLogin {
 
-    public static void Login(String usertype,String email,String pass){
+    public static void Login(String usertype,String email,String pass) throws SQLException {
 
 
 

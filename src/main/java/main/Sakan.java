@@ -71,7 +71,7 @@ public class Sakan {
     static Logger logger =
             Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-    public static void mainfunc(){
+    public static void mainfunc() throws SQLException {
            Sakan.flag1 =0;
            Sakan.flag2 = 0;
            Sakan.onlineUser = "";
@@ -126,7 +126,7 @@ public class Sakan {
         }
     }
 
-    public static void tenantfunc(String usertype){
+    public static void tenantfunc(String usertype) throws SQLException {
         Scanner sc=new Scanner(System.in);
         String temp;
 
@@ -229,12 +229,12 @@ public class Sakan {
 
 
 
-    public static void tenantId(){
+    public static void tenantId() throws SQLException {
 
         Connection connection = null;
         PreparedStatement pst= null;
         ResultSet rs = null;
-        try {
+
 
             connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT user_id,USERNAME FROM USERS WHERE EMAIL='" + Sakan.onlineUser + "'");
@@ -245,20 +245,17 @@ public class Sakan {
                 Sakan.u.setUsername(rs.getString(2));
                 Sakan.u.setUsersID(rs.getInt(1));
             }
-        }catch (SQLException e) {
-            e.printStackTrace();
 
-        }
     }
 
-public static void viewBookingInfo(int tenantId){
+public static void viewBookingInfo(int tenantId) throws SQLException {
 
     Connection connection = null;
     PreparedStatement pst= null;
     ResultSet rs = null;
 
 
-    try {
+
         connection = DriverManager.getConnection(url, "root", "");
         pst = connection.prepareStatement("SELECT * FROM BOOKING_INFO WHERE TENANT_ID = '" +tenantId+"'");
         rs = pst.executeQuery();
@@ -273,10 +270,7 @@ public static void viewBookingInfo(int tenantId){
         }
 
 
-    } catch (SQLException e) {
-        e.printStackTrace();
 
-    }
 
 
 
@@ -284,14 +278,14 @@ public static void viewBookingInfo(int tenantId){
 
 
 
-    public static void viewfloor(){
+    public static void viewfloor() throws SQLException {
         Connection connection = null;
         PreparedStatement pst= null;
         PreparedStatement tst= null;
         ResultSet rs = null;
         ResultSet ts = null;
 
-        try {
+
             connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT * FROM floors WHERE availability = 'available' AND Status = 'Advertised' ");
             tst = connection.prepareStatement("SELECT B.location,B.building_name FROM floors F,building B WHERE F.building_id = B.building_id ");
@@ -305,14 +299,12 @@ public static void viewBookingInfo(int tenantId){
             }
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
 
-        }
 
     }
 
-    public static void selectfloor(){
+    public static void selectfloor() throws SQLException {
+
         Scanner sc=new Scanner(System.in);
         Connection connection = null;
         PreparedStatement pst= null;
@@ -323,7 +315,7 @@ public static void viewBookingInfo(int tenantId){
 
         Sakan.h.setHouseId(sc.nextInt());
 
-        try {
+
             connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT * FROM floors WHERE floor_id = '" +  Sakan.h.getHouseId() + "' AND availability = 'available' AND Status = 'Advertised'"  );
             tst= connection.prepareStatement("SELECT building_id FROM floors WHERE floor_id = '" +  Sakan.h.getHouseId() + "' AND availability = 'available'  AND Status = 'Advertised'" );
@@ -350,22 +342,15 @@ public static void viewBookingInfo(int tenantId){
 
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        }
-
-
-
 
     }
 
-    public static void viewfurniture(){
+    public static void viewfurniture() throws SQLException {
         Connection connection = null;
         PreparedStatement pst= null;
         ResultSet rs = null;
 
-        try {
+
             connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT * FROM furniture WHERE status = 'forsale' ");
             rs = pst.executeQuery();
@@ -376,14 +361,11 @@ public static void viewBookingInfo(int tenantId){
             }
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
 
-        }
 
     }
 
-    public static void selectfurniture(){
+    public static void selectfurniture() throws SQLException {
         Scanner sc=new Scanner(System.in);
         Connection connection = null;
         PreparedStatement pst= null;
@@ -392,7 +374,7 @@ public static void viewBookingInfo(int tenantId){
 
        Sakan.f.setFurnitureID(sc.nextInt());
 
-        try {
+
             connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT * FROM furniture WHERE furniture_id = '" + Sakan.f.getFurnitureID() + "' AND status = 'forsale'" );
             rs = pst.executeQuery();
@@ -410,17 +392,14 @@ public static void viewBookingInfo(int tenantId){
             }
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
 
-        }
 
 
 
 
     }
 
-    public static void  addfurniture(String Temail){
+    public static void  addfurniture(String Temail) throws SQLException {
         Scanner sf=new Scanner(System.in);
         Connection connection = null;
         PreparedStatement pst = null;
@@ -462,7 +441,7 @@ public static void viewBookingInfo(int tenantId){
         }
 
 
-     try {
+
 
          connection = DriverManager.getConnection(url, "root", "");
          pst = connection.prepareStatement("SELECT user_id FROM USERS WHERE EMAIL='" + Temail + "'");
@@ -491,11 +470,8 @@ public static void viewBookingInfo(int tenantId){
          logger.info("You have successfully added your furnitures...");
 
 
-     } catch (SQLException e) {
-         e.printStackTrace();
 
-     }
-     try{
+
          connection = DriverManager.getConnection(url, "root", "");
          pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE ORDER BY FURNITURE_ID DESC LIMIT 1");
          rs= pst.executeQuery();
@@ -504,22 +480,15 @@ public static void viewBookingInfo(int tenantId){
           Sakan.f.setFurnitureID(rs.getInt(1));
          }
 
-     }
-     catch (SQLException e) {
-         e.printStackTrace();
 
-     }
-     try {
+
          connection = DriverManager.getConnection(url, "root", "");
          pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE WHERE FURNITURE_ID='" + Sakan.f.getFurnitureID() + "'");
          rs = pst.executeQuery();
          if (rs.next()) {
              Sakan.f.setFurnitureID(rs.getInt(1));
          }
-     } catch (SQLException e) {
-         e.printStackTrace();
 
-     }
         logger.info("Do you want to add  pictures for this furniture?");
         logger.info("A) yes . B) No");
      String ans = scon.nextLine();
@@ -533,7 +502,7 @@ public static void viewBookingInfo(int tenantId){
              tenantfunc(tenants);
          }
 
-         try {
+
              connection = DriverManager.getConnection(url, "root", "");
              pst = connection.prepareStatement("INSERT INTO FURNITURE_PIC(FURNITURE_ID,PICTURE) VALUES (?,?)");
              pst.setInt(1, Sakan.f.getFurnitureID());
@@ -545,10 +514,7 @@ public static void viewBookingInfo(int tenantId){
              pst.setString(1, Sakan.onlineUser + " has added a new picture (" + Sakan.fpc.getFurniturePicture() + " to the furniture with ID: (" + Sakan.f.getFurnitureID()+ ")");
 
              pst.executeUpdate();
-         } catch (SQLException e) {
-             e.printStackTrace();
 
-         }
          logger.info("Pictures have been added");
      }
 
@@ -558,7 +524,7 @@ public static void viewBookingInfo(int tenantId){
 
     }
 
-    public static void Signup(String usertype){
+    public static void Signup(String usertype) throws SQLException {
 
 
       if (Sakan.flag1 == 0) {
@@ -626,7 +592,7 @@ public static void viewBookingInfo(int tenantId){
 
 
 
-           try {
+
 
 
                    connection = DriverManager.getConnection(url, "root", "");
@@ -663,10 +629,7 @@ public static void viewBookingInfo(int tenantId){
 
                Sakan.flag1 = 1;
 
-           } catch (SQLException e) {
-               e.printStackTrace();
 
-           }
            Sakan.onlineUser = u.getEmail();
            Sakan.flag1 = 1;
 
@@ -679,7 +642,7 @@ public static void viewBookingInfo(int tenantId){
 
 
 
-    public static void viewfurnituresfunc(String Fdescription , int FurnitureID) {
+    public static void viewfurnituresfunc(String Fdescription , int FurnitureID) throws SQLException {
 
         Scanner st = new Scanner(System.in);
         Scanner sc=new Scanner(System.in);
@@ -701,7 +664,7 @@ public static void viewBookingInfo(int tenantId){
 
             if (view1.equalsIgnoreCase("A")) {
 
-                try {
+
                     connection = DriverManager.getConnection(url, "root", "");
                     pst = connection.prepareStatement("SELECT picture FROM furniture_pic  WHERE " + FurnitureID + " = furniture_id  ");
                     rs = pst.executeQuery();
@@ -714,10 +677,7 @@ public static void viewBookingInfo(int tenantId){
                     }
 
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
 
-                }
 
 
             }
@@ -743,7 +703,7 @@ public static void viewBookingInfo(int tenantId){
                                 logger.info("(A) Confirm   (B) Cancel");
                                 confirm = st.nextLine();
                                 if(confirm.equalsIgnoreCase("A")){
-                                    try {
+
 
 
                                         connection = DriverManager.getConnection(url, "root", "");
@@ -762,10 +722,7 @@ public static void viewBookingInfo(int tenantId){
                                         tenantfunc(tenants);
 
 
-                                    } catch (SQLException e) {
-                                        e.printStackTrace();
 
-                                    }
 
                                 }
                                 else if(confirm.equalsIgnoreCase("B")){
@@ -800,7 +757,7 @@ public static void viewBookingInfo(int tenantId){
 
 
 
-    public static void viewfloorsfunc( int floorID,int buildingID, String Temail) {
+    public static void viewfloorsfunc( int floorID,int buildingID, String Temail) throws SQLException {
         Scanner st = new Scanner(System.in);
         Scanner sc=new Scanner(System.in);
 
@@ -830,7 +787,7 @@ while(true) {
 
     if (view1.equalsIgnoreCase("A")) {
 
-        try {
+
             connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT picture FROM house_pic  WHERE " + floorID + " = floor_id  ");
             rs = pst.executeQuery();
@@ -843,17 +800,14 @@ while(true) {
             }
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
 
-        }
 
 
     }
 
     if (view1.equalsIgnoreCase("B")) {
 
-        try {
+
             int flagpart = 0;
             connection = DriverManager.getConnection(url, "root", "");
             pst = connection.prepareStatement("SELECT * FROM house_participants  WHERE " + floorID + " = floor_id  ");
@@ -873,10 +827,7 @@ while(true) {
 
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
 
-        }
 
 
     }
@@ -895,7 +846,7 @@ while(true) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         timestamp.setMonth(timestamp.getMonth()+1);
 
-        try {
+
 
 
             connection = DriverManager.getConnection(url, "root", "");
@@ -962,7 +913,7 @@ while(true) {
                         confirm = st.nextLine();
                         if(confirm.equalsIgnoreCase("A")){
 
-                            try {
+
 
 
                                 pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
@@ -1043,10 +994,7 @@ while(true) {
                                 Sakan.flag2 = 1;
                                 tenantfunc(tenants);
 
-                            } catch (SQLException e) {
-                                e.printStackTrace();
 
-                            }
 
                         }
                         else if(confirm.equalsIgnoreCase("B")){
@@ -1082,7 +1030,7 @@ while(true) {
                         logger.info("(A) Confirm   (B) Cancel");
                         confirm = st.nextLine();
                         if(confirm.equalsIgnoreCase("A")){
-                            try {
+
                                 connection = DriverManager.getConnection(url, "root", "");
                                 pst = connection.prepareStatement("SELECT USER_ID,username FROM users WHERE email = '" + Temail + "'" );
                                 rs = pst.executeQuery();
@@ -1163,10 +1111,7 @@ while(true) {
                                 tenantfunc(tenants);
 
 
-                            } catch (SQLException e) {
-                                e.printStackTrace();
 
-                            }
 
                         }
                         else if(confirm.equalsIgnoreCase("B")){
@@ -1185,10 +1130,6 @@ while(true) {
 
 
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        }
 
 
     }
@@ -1216,7 +1157,7 @@ while(true) {
         return true;
     }
 
-    public static void main(String []args){
+    public static void main(String []args) throws SQLException {
 
        mainfunc();
 
