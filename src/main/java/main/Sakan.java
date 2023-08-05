@@ -965,18 +965,16 @@ public class Sakan {
 
 
                                         pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + QUESTION_MARKS);
-                                        pst.setInt(1, floorID);
-                                        pst.setString(2, Sakan.u.getUsername());
+                                        pst.setInt(1,floorID );
+                                        pst.setString(2,Sakan.u.getUsername() );
                                         pst.setInt(3, Sakan.hp.getPartAge());
                                         pst.setString(4, Sakan.hp.getPartMajor());
-                                        pst.setString(5, Sakan.hp.getPartGender());
+                                        pst.setString(5, Sakan.hp.getPartGender() );
                                         pst.executeUpdate();
 
-                                    }catch (SQLException e){
 
-                                        }
 
-                                   try{
+
                                         pst = connection.prepareStatement(DESCRIPTION_VALUES);
 
                                         pst.setString(1, Sakan.onlineUser + " has reserved an apartment in the building (" + Sakan.b.getBuildingName() + ")");
