@@ -927,6 +927,7 @@ while(true) {
            try {
                pst = connection.prepareStatement("SELECT building_name FROM building WHERE building_id = '" + buildingID + "'");
                rs = pst.executeQuery();
+
                if (rs.next()) {
                    Sakan.b.setBuildingName(rs.getString(1));
                }
@@ -950,6 +951,19 @@ while(true) {
                pst = connection.prepareStatement("SELECT * FROM floors  WHERE " + floorID + " = floor_id AND max_participants > 1 ");
                rs = pst.executeQuery();
 
+           }catch (SQLException e){
+
+           }finally {
+               try {
+                   if (rs != null){
+                       rs.close();
+                   }
+               }finally {
+                   if (pst != null) {
+                       pst.close();
+                   }
+               }
+           }
 
                if (rs.next()) {
                    while (true) {
@@ -1465,19 +1479,6 @@ while(true) {
                    }
 
 
-               }
-           }catch (SQLException e){
-
-               }finally {
-                   try {
-                       if (rs != null){
-                           rs.close();
-                       }
-                   }finally {
-                       if (pst != null) {
-                           pst.close();
-                       }
-                   }
                }
 
 
