@@ -15,6 +15,7 @@ public class Sakan {
     public static final String QUESTION_MARKS = "(?,?,?,?,?)";
     public static final String LOCALHOST_3306_SAKAN = "jdbc:mysql://localhost:3306/Sakan";
     public static final String A_CONFIRM_B_CANCEL = "(A) Confirm   (B) Cancel";
+    public static final String INVALID_INPUT = "Invalid input";
     static String tenants="TENANTS";
     static String owners="OWNERS";
     static String admin="ADMIN";
@@ -770,7 +771,7 @@ public class Sakan {
                             Sakan.whileflag = 1;
                             break;
                         }
-                        else logger.info("Invalid input");
+                        else logger.info(INVALID_INPUT);
                     }
                     if(Sakan.whileflag == 1){break;}
                 }
@@ -1051,7 +1052,7 @@ public class Sakan {
                                     Sakan.whileflag = 1;
                                     break;
                                 }
-                                else logger.info("Invalid input");
+                                else logger.info(INVALID_INPUT);
                             }
 
                             if(Sakan.whileflag2 == 1){
@@ -1171,7 +1172,7 @@ public class Sakan {
                                     Sakan.whileflag = 1;
                                     break;
                                 }
-                                else logger.info("Invalid input");
+                                else logger.info(INVALID_INPUT);
                             }
                             if(Sakan.whileflag == 1){break;}
                         }
