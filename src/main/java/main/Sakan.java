@@ -110,7 +110,7 @@ public class Sakan {
             }
             else{
                 logger.info("Please make sure to enter the right user........");
-             //   System.out.print("\n");
+
 
             }
 
@@ -324,7 +324,7 @@ public static void viewBookingInfo(int tenant_id){
             }
 
             if (rs.next()) {
-              // Sakan.H.setHouseName(rs.getString(2));
+
                 String content = "\t|\t ID: " + rs.getString(1)  + "\t|\t price: " + rs.getInt(4) +  "\t|\t services: " + rs.getString(5) + "\t|\t Number of residents: " + rs.getString(6)  + "\t|\t";
                 logger.info(content);
                 viewfloorsfunc(Sakan.h.getHouseId(),Sakan.b.getBuildingId(),Sakan.onlineUser);
@@ -413,7 +413,6 @@ public static void viewBookingInfo(int tenant_id){
         Connection connection = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-       // int TenantID=0;
         Sakan.u.setUsersID(0);
 
         int furID=0;
@@ -647,7 +646,7 @@ public static void viewBookingInfo(int tenant_id){
                     Sakan.onlineUser = u.getEmail();
                     checklogin(u.getEmail(), u.getPassword(),usertype);
                     Sakan.flagOwner=1;
-                   // ownerfunc("OWNERS", Sakan.U.getUsersID());
+
                 }
 
                Sakan.flag1 = 1;
@@ -749,7 +748,7 @@ public static void viewBookingInfo(int tenant_id){
                                         Sakan.whileflag2 = 1;
                                         tenantfunc("TENANTS");
 
-                                        // break;
+
                                     } catch (SQLException e) {
                                         e.printStackTrace();
 
@@ -1028,7 +1027,7 @@ while(true) {
                                 Sakan.whileflag2 = 1;
                                 Sakan.flag2 = 1;
                                 tenantfunc("TENANTS");
-                             //  break;
+
                             } catch (SQLException e) {
                                 e.printStackTrace();
 
@@ -1148,7 +1147,7 @@ while(true) {
                                 Sakan.whileflag2 = 1;
                                 tenantfunc("TENANTS");
 
-                               // break;
+
                             } catch (SQLException e) {
                                 e.printStackTrace();
 
