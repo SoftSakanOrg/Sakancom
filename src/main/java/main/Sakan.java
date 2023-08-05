@@ -11,7 +11,10 @@ import java.util.logging.Logger;
 
 public class Sakan {
 
-     static int flag1 = 0;
+     static  String TENANTS = "TENANTS";
+    static  String OWNERS = "OWNERS";
+    static  String ADMIN = "ADMIN";
+    static int flag1 = 0;
 
      static int flag11 = 0;
     static int flag2 = 0;
@@ -91,18 +94,18 @@ public class Sakan {
 
 
             if(c.equalsIgnoreCase("1")){
-                tenantfunc("TENANTS");
+                tenantfunc(TENANTS);
 
 
             }
             else if(c.equalsIgnoreCase("2")){
-                tenantfunc("OWNERS");
+                tenantfunc(OWNERS);
 
 
             }
 
             else if(c.equalsIgnoreCase("3")){
-                tenantfunc("ADMIN");
+                tenantfunc(ADMIN);
 
 
             }
@@ -133,7 +136,7 @@ public class Sakan {
             if(Sakan.flaglogin==0) {
 
 
-                if (!usertype.equalsIgnoreCase("ADMIN")) {
+                if (!usertype.equalsIgnoreCase(ADMIN)) {
 
                     logger.info("(1) Sign up          ");}
                     logger.info("(2) Log in           ");
@@ -149,7 +152,7 @@ public class Sakan {
 
         }
 
-        else if(temp.equalsIgnoreCase("1") && !usertype.equalsIgnoreCase("ADMIN")) {
+        else if(temp.equalsIgnoreCase("1") && !usertype.equalsIgnoreCase(ADMIN)) {
             Signup(usertype);
 
 
@@ -176,7 +179,7 @@ public class Sakan {
         Scanner sv = new Scanner(System.in);
         String view;
 
-         if(usertype.equalsIgnoreCase("TENANTS")){
+         if(usertype.equalsIgnoreCase(TENANTS)){
        while(true) {
 
            tenantId();
@@ -434,7 +437,7 @@ public static void viewBookingInfo(int tenant_id){
 
        if(Sakan.f.getFurnitureDescription().equalsIgnoreCase("1")){
            Sakan.flag2 = 1;
-           tenantfunc("TENANTS");
+           tenantfunc(TENANTS);
        }
 
 
@@ -447,7 +450,7 @@ public static void viewBookingInfo(int tenant_id){
 
         if(String.valueOf(Sakan.f.getFurniturePrice()).equalsIgnoreCase("1")){
             Sakan.flag2 = 1;
-            tenantfunc("TENANTS");
+            tenantfunc(TENANTS);
         }
 
 
@@ -519,7 +522,7 @@ public static void viewBookingInfo(int tenant_id){
          Sakan.fpc.setFurniturePicture(scon.nextLine());
          if ( Sakan.fpc.getFurniturePicture().equalsIgnoreCase("1")) {
              Sakan.flag2 = 1;
-             tenantfunc("TENANTS");
+             tenantfunc(TENANTS);
          }
 
          try {
@@ -543,7 +546,7 @@ public static void viewBookingInfo(int tenant_id){
 
 
      Sakan.flag2 = 1;
-     tenantfunc("TENANTS");
+     tenantfunc(TENANTS);
 
     }
 
@@ -631,7 +634,7 @@ public static void viewBookingInfo(int tenant_id){
 
                logger.info("Signed  up successfully...");
 
-               if(usertype.equalsIgnoreCase("owners")){
+               if(usertype.equalsIgnoreCase(OWNERS)){
 
                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
                    tst = connection.prepareStatement("SELECT USER_ID FROM USERS ORDER BY USER_ID DESC LIMIT 1");
@@ -643,7 +646,7 @@ public static void viewBookingInfo(int tenant_id){
                }
 
 
-                if(usertype.equalsIgnoreCase("OWNERS")) {
+                if(usertype.equalsIgnoreCase(OWNERS)) {
                     Sakan.onlineUser = u.getEmail();
                     checklogin(u.getEmail(), u.getPassword(),usertype);
                     Sakan.flagOwner=1;
@@ -748,7 +751,7 @@ public static void viewBookingInfo(int tenant_id){
                                         logger.info("Furniture purchased successfully!");
                                         Sakan.flag2 = 1;
                                         Sakan.whileflag2 = 1;
-                                        tenantfunc("TENANTS");
+                                        tenantfunc(TENANTS);
 
 
                                     } catch (SQLException e) {
@@ -773,7 +776,7 @@ public static void viewBookingInfo(int tenant_id){
                 }
             else if (view1.equalsIgnoreCase("C")) {
                 Sakan.flag2 = 1;
-                tenantfunc("TENANTS");
+                tenantfunc(TENANTS);
             }
 
             else if (view1.equalsIgnoreCase("D")) {
@@ -1030,7 +1033,7 @@ while(true) {
 
                                 Sakan.whileflag2 = 1;
                                 Sakan.flag2 = 1;
-                                tenantfunc("TENANTS");
+                                tenantfunc(TENANTS);
 
                             } catch (SQLException e) {
                                 e.printStackTrace();
@@ -1149,7 +1152,7 @@ while(true) {
 
                                 Sakan.flag2 = 1;
                                 Sakan.whileflag2 = 1;
-                                tenantfunc("TENANTS");
+                                tenantfunc(TENANTS);
 
 
                             } catch (SQLException e) {
@@ -1184,7 +1187,7 @@ while(true) {
 
     if (view1.equalsIgnoreCase("D")) {
         Sakan.flag2 = 1;
-        tenantfunc("TENANTS");
+        tenantfunc(TENANTS);
     }
 
     else if (view1.equalsIgnoreCase("E")) {
