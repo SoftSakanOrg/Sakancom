@@ -416,16 +416,16 @@ public class Sakan {
 
     }
 
-    public static void  addfurniture(String Temail){
+    public static void  addfurniture(String temail){
         Scanner sf=new Scanner(System.in);
         Connection connection = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
         Sakan.u.setUsersID(0);
 
-        int furID=0;
+
         Scanner scon=new Scanner(System.in);
-        int furIDVal=0;
+
 
         Sakan.f.setFurnitureStatus("forsale");
 
@@ -461,7 +461,7 @@ public class Sakan {
         try {
 
             connection = DriverManager.getConnection(getUrl(), "root", "");
-            pst = connection.prepareStatement("SELECT user_id FROM USERS WHERE EMAIL='" + Temail + "'");
+            pst = connection.prepareStatement("SELECT user_id FROM USERS WHERE EMAIL='" + temail + "'");
             rs = pst.executeQuery();
 
             if (rs.next()) {
