@@ -673,20 +673,31 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
 
             if (view1.equalsIgnoreCase("A")) {
 
+                 try {
+                     pst = connection.prepareStatement("SELECT picture FROM furniture_pic  WHERE " + FurnitureID + " = furniture_id  ");
+                     rs = pst.executeQuery();
+                     while (rs.next()) {
+
+                         String content = s1 + rs.getString(1) + s1;
+                         logger.info(content);
 
 
-                    pst = connection.prepareStatement("SELECT picture FROM furniture_pic  WHERE " + FurnitureID + " = furniture_id  ");
-                    rs = pst.executeQuery();
-                    while (rs.next()) {
-
-                        String content = s1 + rs.getString(1) + s1;
-                        logger.info(content);
+                     }
 
 
-                    }
+                 }catch (SQLException e){
 
-
-
+                 }finally {
+                     try {
+                         if (rs != null){
+                             rs.close();
+                         }
+                     }finally {
+                         if (pst != null) {
+                             pst.close();
+                         }
+                     }
+                 }
 
 
             }
