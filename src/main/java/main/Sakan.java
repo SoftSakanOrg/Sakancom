@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 public class Sakan {
 
+    public static final String DESCRIPTION_VALUES = "INSERT INTO system_observation(DESCRIPTION) VALUES (?)";
     static String tenants="TENANTS";
     static String owners="OWNERS";
     static String admin="ADMIN";
@@ -477,7 +478,7 @@ public class Sakan {
 
             pst.executeUpdate();
 
-            pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+            pst = connection.prepareStatement(DESCRIPTION_VALUES);
 
             pst.setString(1, Sakan.onlineUser + " has added a new furniture (" + Sakan.f.getFurnitureDescription() + "," + Sakan.f.getFurniturePrice() + "$)");
 
@@ -535,7 +536,7 @@ public class Sakan {
                 pst.setString(2, Sakan.fpc.getFurniturePicture());
                 pst.executeUpdate();
 
-                pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+                pst = connection.prepareStatement(DESCRIPTION_VALUES);
 
                 pst.setString(1, Sakan.onlineUser + " has added a new picture (" + Sakan.fpc.getFurniturePicture() + " to the furniture with ID: (" + Sakan.f.getFurnitureID()+ ")");
 
@@ -745,7 +746,7 @@ public class Sakan {
                                 pst = connection.prepareStatement("UPDATE furniture SET status='sold' WHERE furniture_id = '" + FurnitureID + "'");
                                 pst.executeUpdate();
 
-                                pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+                                pst = connection.prepareStatement(DESCRIPTION_VALUES);
 
                                 pst.setString(1, Sakan.onlineUser + " has purchased a furniture (" + Sakan.f.getFurnitureDescription() + ")");
 
@@ -970,7 +971,7 @@ public class Sakan {
 
 
 
-                                        pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+                                        pst = connection.prepareStatement(DESCRIPTION_VALUES);
 
                                         pst.setString(1, Sakan.onlineUser + " has reserved an apartment in the building (" + Sakan.b.getBuildingName() + ")");
 
@@ -1003,7 +1004,7 @@ public class Sakan {
                                             pst = connection.prepareStatement("UPDATE floors SET availability = 'unavailable' WHERE floor_id = '" + floorID + "'");
                                             pst.executeUpdate();
 
-                                            pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+                                            pst = connection.prepareStatement(DESCRIPTION_VALUES);
 
                                             pst.setString(1, " The apartment with the id ("+ floorID+ ") in the building (" + Sakan.b.getBuildingName() + ") is full");
 
@@ -1096,7 +1097,7 @@ public class Sakan {
 
                                         pst.executeUpdate();
 
-                                        pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+                                        pst = connection.prepareStatement(DESCRIPTION_VALUES);
 
                                         pst.setString(1, Sakan.onlineUser + " has reserved an apartment in the building (" + Sakan.b.getBuildingName() + ")");
 
@@ -1130,7 +1131,7 @@ public class Sakan {
                                             pst = connection.prepareStatement("UPDATE floors SET availability = 'unavailable' WHERE floor_id = '" + floorID + "'");
                                             pst.executeUpdate();
 
-                                            pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+                                            pst = connection.prepareStatement(DESCRIPTION_VALUES);
 
                                             pst.setString(1, " The apartment with the id ("+ floorID+ ") in the building (" + Sakan.b.getBuildingName() + ") is full");
 
