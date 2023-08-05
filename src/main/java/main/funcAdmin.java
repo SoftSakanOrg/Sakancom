@@ -10,7 +10,7 @@ import static main.funcViewRequest.viewRequests;
 public class funcAdmin {
 
   public static int adminflag=0;
-    public static void adminfunc(adminPara adminPara) throws SQLException {
+    public static void adminfunc(adminpara adminPara) throws SQLException {
         adminflag=0;
 
         Sakan.flagAdminFunc =0;

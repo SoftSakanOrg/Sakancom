@@ -1,7 +1,7 @@
 package main;
 
 
-public class advertismentRequests {
+public class advertismentrequests {
     private int reqId;
     private String buildingName;
     private String ownerName;
@@ -10,12 +10,12 @@ public class advertismentRequests {
     private int price;
 
     private int floorId;
-    public advertismentRequests(){
+    public advertismentrequests(){
 
     }
 
 
-    public advertismentRequests(int reqId, String buildingName, String ownerName, int contactNumber,int price, int floorId) {
+    public advertismentrequests(int reqId, String buildingName, String ownerName, int contactNumber, int price, int floorId) {
         this.reqId = reqId;
         this.buildingName = buildingName;
         this.ownerName = ownerName;

@@ -3,8 +3,7 @@ package stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import main.advertismentRequests;
-import main.funcRequestAction;
+import main.advertismentrequests;
 import main.funcSelectRequest;
 
 import java.sql.SQLException;
@@ -13,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class select_request_steps {
 
-    advertismentRequests obj;
+    advertismentrequests obj;
     funcSelectRequest obj2;
 
 
@@ -21,7 +20,7 @@ public class select_request_steps {
 
     @Given("the admin is on the requests page")
     public void theAdminIsOnTheRequestsPage() {
-        obj= new advertismentRequests();
+        obj= new advertismentrequests();
         obj2=new funcSelectRequest();
 
     }
