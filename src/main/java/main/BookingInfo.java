@@ -3,7 +3,7 @@ package main;
 
 
 
-public class bookingInfo {
+public class BookingInfo {
 
 
     private int bookingInfoID;
@@ -14,11 +14,11 @@ public class bookingInfo {
 
     private int tenantId;
 
-    public bookingInfo(){
+    public BookingInfo(){
 
     }
 
-    public bookingInfo(int bookingInfoID, String tenantName, String ownerName, int contactInfo, String rentDate,int tenantId) {
+    public BookingInfo(int bookingInfoID, String tenantName, String ownerName, int contactInfo, String rentDate, int tenantId) {
         this.bookingInfoID = bookingInfoID;
         this.tenantName = tenantName;
         this.ownerName = ownerName;

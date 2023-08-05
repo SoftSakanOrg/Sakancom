@@ -68,7 +68,7 @@ public class Sakan {
     static AdvertismentRequests ar = new AdvertismentRequests();
 
 
-    static bookingInfo bi=new bookingInfo();
+    static BookingInfo bi=new BookingInfo();
 
 
 
