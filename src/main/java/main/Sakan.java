@@ -730,6 +730,23 @@ public static void viewBookingInfo(int tenantId) throws SQLException {
                                       pst = connection.prepareStatement("UPDATE furniture SET status='sold' WHERE furniture_id = '" + FurnitureID + "'");
                                       pst.executeUpdate();
 
+                                  }catch (SQLException e){
+
+                                  }finally {
+                                      try {
+                                          if (rs != null){
+                                              rs.close();
+                                          }
+                                      }finally {
+                                          if (pst != null) {
+                                              pst.close();
+                                          }
+                                      }
+                                  }
+
+
+
+                                  try{
                                       pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
 
                                       pst.setString(1, Sakan.onlineUser + " has purchased a furniture (" + Sakan.f.getFurnitureDescription() + ")");
