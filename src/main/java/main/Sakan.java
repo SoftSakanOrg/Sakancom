@@ -6,7 +6,6 @@ import static java.lang.System.exit;
 import static java.lang.System.getLogger;
 import static main.funcCheckEmail.checkemail;
 import static main.funcCheckLogin.checklogin;
-import static main.funcOwner.ownerfunc;
 import static main.funcUsersLogin.Login;
 import java.util.logging.Logger;
 
