@@ -292,7 +292,7 @@ public class funcCheckLogin {
 
                         String adminsc = sc.next();
 
-                        adminfunc(new adminpara("ADMIN", u.getUsersID(), adminsc, 1));
+                        adminfunc(new AdminPara("ADMIN", u.getUsersID(), adminsc, 1));
 
                         if(Sakan.flagAdminFunc ==1){
 

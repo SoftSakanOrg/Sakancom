@@ -65,7 +65,7 @@ public class Sakan {
 
     static Buildings b =new Buildings();
 
-    static advertismentrequests ar = new advertismentrequests();
+    static AdvertismentRequests ar = new AdvertismentRequests();
 
 
     static bookingInfo bi=new bookingInfo();

@@ -3,7 +3,7 @@ package stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import main.advertismentrequests;
+import main.AdvertismentRequests;
 import main.funcRequestAction;
 
 import java.sql.SQLException;
@@ -13,13 +13,13 @@ import static org.junit.Assert.assertTrue;
 public class Request_action_steps {
 
 
-    advertismentrequests obj;
+    AdvertismentRequests obj;
     funcRequestAction obj2;
 
 
     @Given("the admin is on the requests section")
     public void theAdminIsOnTheRequestsSection() {
-        obj= new advertismentrequests();
+        obj= new AdvertismentRequests();
         obj2=new funcRequestAction();
     }
     @When("the admin selects a requestID like {int}")
