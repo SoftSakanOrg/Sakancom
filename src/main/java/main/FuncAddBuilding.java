@@ -10,7 +10,7 @@ public class FuncAddBuilding {
     public static int SelectInfoFlag;
     public static int AddBuildingFlag;
     public static int AddObservationFlag;
-    public static void addbuildingfunc(int owner_ID,int testp) throws SQLException {
+    public static void addbuildingfunc(int ownerId,int testp) throws SQLException {
 
         Connection connection = null;
         PreparedStatement pst = null;
@@ -23,7 +23,7 @@ public class FuncAddBuilding {
 
 
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT username,CONTACT_NUM FROM USERS WHERE user_id='" + owner_ID + "'");
+            pst = connection.prepareStatement("SELECT username,CONTACT_NUM FROM USERS WHERE user_id='" + ownerId + "'");
             rs = pst.executeQuery();
 
             if (rs.next()) {
@@ -38,7 +38,7 @@ public class FuncAddBuilding {
             AddBuildingFlag =1;
 
 
-                pst.setInt(1, owner_ID);
+                pst.setInt(1, ownerId);
                 pst.setString(2, Sakan.b.getBuildingName());
                 pst.setString(3, Sakan.b.getLocation());
                 pst.setInt(4, 0);
