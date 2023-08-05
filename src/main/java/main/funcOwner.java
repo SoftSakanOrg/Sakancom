@@ -13,7 +13,8 @@ import static main.funcViewBuildingFunc.viewBuildingFunc;
 
 public class funcOwner {
 
-    public static void ownerfunc(String usertype,int ownerID,String ownsc) throws SQLException {
+    public static int ownerFlag;
+    public static void ownerfunc(String usertype,int ownerID,String ownsc,int testp) throws SQLException {
 
         Connection connection = null;
         PreparedStatement pst= null;
@@ -22,15 +23,20 @@ public class funcOwner {
 
             if (ownsc.equalsIgnoreCase("A")) {
 
+                ownerFlag=1;
 
-                viewbuilding(ownerID,1);
+                if(testp==1) {
 
+                    viewbuilding(ownerID, 1);
+                }
 
             }   else if (ownsc.equalsIgnoreCase("E")) {
 
+                ownerFlag=1;
 
-                Mainfunc();
-
+                if(testp==1) {
+                    Mainfunc();
+                }
 
             }
            // else logger.info("Invalid input");
