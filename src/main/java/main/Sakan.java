@@ -1097,7 +1097,7 @@ while(true) {
                                    }
                                }finally {
                                    if (ust != null) {
-                                       pst.close();
+                                       ust.close();
                                    }
                                }
                            }
@@ -1106,20 +1106,7 @@ while(true) {
                                pst = connection.prepareStatement("SELECT floor_id FROM floors WHERE participants = max_participants AND FLOOR_ID='" + floorID + "' ");
                                rs = pst.executeQuery();
 
-                               if (rs.next()) {
-
-                                   pst = connection.prepareStatement("UPDATE floors SET availability = 'unavailable' WHERE floor_id = '" + floorID + "'");
-                                   pst.executeUpdate();
-
-                                   pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
-
-                                   pst.setString(1, " The apartment with the id (" + floorID + ") in the building (" + Sakan.b.getBuildingName() + ") is full");
-
-                                   pst.executeUpdate();
-
-                               }
-                           }
-                           catch (SQLException e){
+                           }catch (SQLException e){
 
                            }finally {
                                try {
@@ -1132,6 +1119,49 @@ while(true) {
                                    }
                                }
                            }
+
+                               if (rs.next()) {
+                               try {
+                                   pst = connection.prepareStatement("UPDATE floors SET availability = 'unavailable' WHERE floor_id = '" + floorID + "'");
+                                   pst.executeUpdate();
+
+                               }catch (SQLException e){
+
+                               }finally {
+                                   try {
+                                       if (rs != null){
+                                           rs.close();
+                                       }
+                                   }finally {
+                                       if (pst != null) {
+                                           pst.close();
+                                       }
+                                   }
+                               }
+
+                                try {
+                                    pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+
+                                    pst.setString(1, " The apartment with the id (" + floorID + ") in the building (" + Sakan.b.getBuildingName() + ") is full");
+
+                                    pst.executeUpdate();
+
+                                }catch (SQLException e){
+
+                                }finally {
+                                    try {
+                                        if (rs != null){
+                                            rs.close();
+                                        }
+                                    }finally {
+                                        if (pst != null) {
+                                            pst.close();
+                                        }
+                                    }
+                                }
+
+                               }
+
 
                                logger.info("Apartment booked successfully!");
 
