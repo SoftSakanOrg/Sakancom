@@ -447,7 +447,7 @@ public class Sakan {
 
 
 
-        int price;
+
 
         logger.info(" Enter price: ");
         Sakan.f.setFurniturePrice(sf.nextInt());
