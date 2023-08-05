@@ -62,10 +62,10 @@ public class funcCheckLogin {
             rs = pst.executeQuery();
 
             if (rs.next()) {
-                U.setUsersID(rs.getInt(1));
+                u.setUsersID(rs.getInt(1));
 
                 if(usertype.equalsIgnoreCase("OWNERS")) {
-                    Sakan.OnlineUser = U.getEmail();
+                    Sakan.OnlineUser = u.getEmail();
                     while (true){
 
                         flagReflect=0;
@@ -83,19 +83,19 @@ public class funcCheckLogin {
                     String ownsc = sc.nextLine();
 
 
-                    ownerfunc("OWNERS", U.getUsersID(), ownsc,1);
+                    ownerfunc("OWNERS", u.getUsersID(), ownsc,1);
 
                     if(ownsc.equalsIgnoreCase("B")){
 
                         logger.info("Enter the Building ID: ");
-                        Sakan.B.setBuildingId(sc.nextInt());
-                        selectbuilding( Sakan.B.getBuildingId(),U.getUsersID());
+                        Sakan.b.setBuildingId(sc.nextInt());
+                        selectbuilding( Sakan.b.getBuildingId(), u.getUsersID());
 
                         if(invalidFlag==1){
                             logger.info("Enter the Building ID: ");
-                            Sakan.B.setBuildingId(sc.nextInt());
+                            Sakan.b.setBuildingId(sc.nextInt());
 
-                            selectbuilding(Sakan.B.getBuildingId(),U.getUsersID());
+                            selectbuilding(Sakan.b.getBuildingId(), u.getUsersID());
                         }
 
                         while(true){
@@ -118,14 +118,14 @@ public class funcCheckLogin {
                                     logger.info("Invalid input");
                                 }
 
-                                viewBuildingFunc(Sakan.B.getOwnerId(), Sakan.B.getBuildingId(), view1,1);
+                                viewBuildingFunc(Sakan.b.getOwnerId(), Sakan.b.getBuildingId(), view1,1);
                                 if (view1.equalsIgnoreCase("B")) {
                                     Scanner sc1 = new Scanner(System.in);
                                     logger.info("Enter the floor ID: ");
 
-                                    Sakan.H.setHouseId(sc1.nextInt());
+                                    Sakan.h.setHouseId(sc1.nextInt());
 
-                                    selectmyfloor(Sakan.B.getBuildingId(), Sakan.H.getHouseId());
+                                    selectmyfloor(Sakan.b.getBuildingId(), Sakan.h.getHouseId());
 
                                     if (flagSelectMyFloor == 1) {
                                         while (true) {
@@ -142,7 +142,7 @@ public class funcCheckLogin {
                                                 try {
                                                     connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
                                                     pst = connection.prepareStatement("INSERT INTO HOUSE_PIC(FLOOR_ID,PICTURE) VALUES (?,?)");
-                                                    pst.setInt(1, Sakan.H.getHouseId());
+                                                    pst.setInt(1, Sakan.h.getHouseId());
                                                     pst.setString(2, Sakan.hpc.getHousePicture());
                                                     pst.executeUpdate();
 
@@ -172,58 +172,58 @@ public class funcCheckLogin {
 
                                         logger.info(" Enter Price: ");
 
-                                        Sakan.H.setHousePrice(sf.nextInt());
+                                        Sakan.h.setHousePrice(sf.nextInt());
 
-                                        if (Sakan.H.getHousePrice() == 111) {
+                                        if (Sakan.h.getHousePrice() == 111) {
 
                                             break;
                                         }
 
 
                                         logger.info(" Enter Services: ");
-                                        Sakan.H.setHouseServices(sf.next());
+                                        Sakan.h.setHouseServices(sf.next());
 
-                                        if (Sakan.H.getHouseServices().equalsIgnoreCase("111")) {
+                                        if (Sakan.h.getHouseServices().equalsIgnoreCase("111")) {
 
                                             break;
                                         }
 
                                         logger.info(" How Many Participants Can Live In this Floor? ");
-                                        Sakan.H.setHouseMaxParticipants(sf.nextInt());
+                                        Sakan.h.setHouseMaxParticipants(sf.nextInt());
 
-                                        if (Sakan.H.getHouseMaxParticipants() == 111) {
+                                        if (Sakan.h.getHouseMaxParticipants() == 111) {
 
                                             break;
                                         }
 
                                         logger.info(" Enter the number of Bedrooms: ");
-                                        Sakan.H.setBedrooms(sf.nextInt());
+                                        Sakan.h.setBedrooms(sf.nextInt());
 
-                                        if (Sakan.H.getBedrooms() == 111) {
+                                        if (Sakan.h.getBedrooms() == 111) {
 
                                             break;
                                         }
 
 
                                         logger.info(" Enter the number of Bathrooms: ");
-                                        Sakan.H.setBathrooms(sf.nextInt());
+                                        Sakan.h.setBathrooms(sf.nextInt());
 
-                                        if (Sakan.H.getBathrooms() == 111) {
+                                        if (Sakan.h.getBathrooms() == 111) {
 
                                             break;
                                         }
 
 
                                         logger.info(" how many Does Balconies does it have? ");
-                                        Sakan.H.setContBalcony(sf.nextInt());
+                                        Sakan.h.setContBalcony(sf.nextInt());
 
-                                        if (Sakan.H.getContBalcony() == 111) {
+                                        if (Sakan.h.getContBalcony() == 111) {
 
                                             break;
                                         }
 
 
-                                        addfloor(Sakan.B.getBuildingId(),1);
+                                        addfloor(Sakan.b.getBuildingId(),1);
                                         break;
                                     }
                                 }
@@ -243,11 +243,11 @@ public class funcCheckLogin {
 
                         logger.info(" Enter Building_name: ");
 
-                        Sakan.B.setBuildingName(sf.nextLine());
+                        Sakan.b.setBuildingName(sf.nextLine());
 
 
 
-                        if(Sakan.B.getBuildingName().equalsIgnoreCase("1")){
+                        if(Sakan.b.getBuildingName().equalsIgnoreCase("1")){
                                flagOwner =1;
                                checklogin(email,pass,usertype);
                           //  ownerfunc("OWNERS",U.getUsersID(),ownsc);
@@ -260,14 +260,14 @@ public class funcCheckLogin {
 
 
                         logger.info(" Enter Location: ");
-                        Sakan.B.setLocation(sf.nextLine());
+                        Sakan.b.setLocation(sf.nextLine());
 
-                        if(Sakan.B.getLocation().equalsIgnoreCase("1")){
+                        if(Sakan.b.getLocation().equalsIgnoreCase("1")){
                             flagOwner =1;
                             checklogin(email,pass,usertype);
                             //  ownerfunc("OWNERS",U.getUsersID(),ownsc);
                         }
-                        addbuildingfunc(U.getUsersID(),1);
+                        addbuildingfunc(u.getUsersID(),1);
                     }
 
                 }
@@ -275,7 +275,7 @@ public class funcCheckLogin {
 
                 else if(usertype.equalsIgnoreCase("ADMIN")) {
 
-                    Sakan.OnlineUser=U.getEmail();
+                    Sakan.OnlineUser= u.getEmail();
 
 
                     Scanner sc = new Scanner(System.in);
@@ -292,7 +292,7 @@ public class funcCheckLogin {
 
                         String adminsc = sc.next();
 
-                        adminfunc("ADMIN", U.getUsersID(), adminsc,1);
+                        adminfunc("ADMIN", u.getUsersID(), adminsc,1);
 
                         if(Sakan.flagAdminFunc ==1){
 

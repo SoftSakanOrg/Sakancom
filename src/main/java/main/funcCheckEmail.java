@@ -49,11 +49,11 @@ public class funcCheckEmail {
                         logger.info("(1) To go back to main menu");
 
                         logger.info("Enter your email: ");
-                        Sakan.U.setEmail(sc.nextLine());
+                        Sakan.u.setEmail(sc.nextLine());
 
                         logger.info("Enter password: ");
-                        Sakan.U.setPassword(sc.nextLine());
-                        Login(usertype,Sakan.U.getEmail(),Sakan.U.getPassword());
+                        Sakan.u.setPassword(sc.nextLine());
+                        Login(usertype,Sakan.u.getEmail(),Sakan.u.getPassword());
                     }
                 }
             }

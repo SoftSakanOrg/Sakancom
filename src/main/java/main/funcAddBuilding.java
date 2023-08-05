@@ -1,10 +1,8 @@
 package main;
 
 import java.sql.*;
-import java.util.Scanner;
 
 import static main.Sakan.logger;
-import static main.funcOwner.ownerfunc;
 
 public class funcAddBuilding {
 
@@ -29,8 +27,8 @@ public class funcAddBuilding {
 
             if (rs.next()) {
                 selectInfoFlag=1;
-                Sakan.B.setOwnerName(rs.getString(1));
-                Sakan.B.setContactNum(rs.getInt(2));
+                Sakan.b.setOwnerName(rs.getString(1));
+                Sakan.b.setContactNum(rs.getInt(2));
 
             }
 
@@ -40,11 +38,11 @@ public class funcAddBuilding {
 
 
                 pst.setInt(1, owner_ID);
-                pst.setString(2, Sakan.B.getBuildingName());
-                pst.setString(3, Sakan.B.getLocation());
+                pst.setString(2, Sakan.b.getBuildingName());
+                pst.setString(3, Sakan.b.getLocation());
                 pst.setInt(4, 0);
-                pst.setString(5, Sakan.B.getOwnerName());
-                pst.setInt(6, Sakan.B.getContactNum());
+                pst.setString(5, Sakan.b.getOwnerName());
+                pst.setInt(6, Sakan.b.getContactNum());
                 pst.setInt(7, 0);
         if(testp==1) {
                 pst.executeUpdate();
@@ -52,7 +50,7 @@ public class funcAddBuilding {
 
             pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
             addObservationFlag=1;
-            pst.setString(1, Sakan.OnlineUser + " has added a building (" + Sakan.B.getBuildingName() + ") to the system");
+            pst.setString(1, Sakan.OnlineUser + " has added a building (" + Sakan.b.getBuildingName() + ") to the system");
 
             if(testp==1) {
                 pst.executeUpdate();

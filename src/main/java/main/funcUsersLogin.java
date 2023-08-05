@@ -27,11 +27,11 @@ public class funcUsersLogin {
 
 
 
-            if ( Sakan.U.getEmail().equalsIgnoreCase("1")) {
+            if ( Sakan.u.getEmail().equalsIgnoreCase("1")) {
                 Mainfunc();
 
             }
-            if (!Sakan.U.getEmail().contains("@") || !Sakan.U.getEmail().contains(".")) {
+            if (!Sakan.u.getEmail().contains("@") || !Sakan.u.getEmail().contains(".")) {
                 logger.info("Please enter a valid email...");
                flaglogin=1;
                 tenantfunc(usertype);
@@ -40,22 +40,22 @@ public class funcUsersLogin {
 
 //            email = tempemail;
 
-            checkemail(Sakan.U.getEmail(), 2, usertype);
+            checkemail(Sakan.u.getEmail(), 2, usertype);
             if (Sakan.flag11 == 0) {
 
 
 
 
-                if (  Sakan.U.getPassword().equalsIgnoreCase("1")) {
+                if (  Sakan.u.getPassword().equalsIgnoreCase("1")) {
                     Mainfunc();
 
                 }
 
 //                pass = temppass;
-                checklogin(U.getEmail(),U.getPassword(),usertype);
+                checklogin(u.getEmail(), u.getPassword(),usertype);
             }
             Sakan.flag11 =1;
-            Sakan.OnlineUser =Sakan.U.getEmail() ;
+            Sakan.OnlineUser =Sakan.u.getEmail() ;
 
         }
 

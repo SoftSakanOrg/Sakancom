@@ -1,7 +1,6 @@
 package main;
 
 import java.sql.*;
-import java.util.Scanner;
 
 import static main.Sakan.logger;
 
@@ -36,16 +35,16 @@ public class funcAddFloor {
         if(testp==1) {
                 pst.setInt(1, building_id);
                 pst.setString(2, "available");
-                pst.setInt(3, Sakan.H.getHousePrice());
-                pst.setString(4, Sakan.H.getHouseServices());
+                pst.setInt(3, Sakan.h.getHousePrice());
+                pst.setString(4, Sakan.h.getHouseServices());
                 pst.setInt(5, 0);
-                pst.setInt(6, Sakan.H.getHouseMaxParticipants());
-                pst.setInt(7, Sakan.H.getBedrooms());
-                pst.setInt(8, Sakan.H.getBathrooms());
-                pst.setInt(9, Sakan.H.getContBalcony());
+                pst.setInt(6, Sakan.h.getHouseMaxParticipants());
+                pst.setInt(7, Sakan.h.getBedrooms());
+                pst.setInt(8, Sakan.h.getBathrooms());
+                pst.setInt(9, Sakan.h.getContBalcony());
                 pst.setString(10, "Not_Advertised");
 
-                Sakan.ar.setPrice(Sakan.H.getHousePrice());
+                Sakan.ar.setPrice(Sakan.h.getHousePrice());
 
                 pst.executeUpdate();
             }
@@ -64,7 +63,7 @@ public class funcAddFloor {
 
                 pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
 
-                pst.setString(1, Sakan.OnlineUser + " has added an apartment  (" + Sakan.B.getBuildingName() + ") to his building");
+                pst.setString(1, Sakan.OnlineUser + " has added an apartment  (" + Sakan.b.getBuildingName() + ") to his building");
                 observationFlag=1;
                 if(testp==1) {
                     pst.executeUpdate();
@@ -99,7 +98,7 @@ public class funcAddFloor {
 
                 if(rs.next()){
                    selectLastFloorFlag=1;
-                    Sakan.H.setHouseId(rs.getInt(1));
+                    Sakan.h.setHouseId(rs.getInt(1));
                 }
 
            

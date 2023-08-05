@@ -39,26 +39,26 @@ public class Sakan {
 
     public static String OnlineUser = "" ;
 
-    public static Users U=new Users();
-
-    public static Tenant T=new Tenant();
+    public static Users u =new Users();
 
 
-    static Floors H=new Floors();
-    static Furniture F=new Furniture();
+
+
+    static Floors h =new Floors();
+    static Furniture f =new Furniture();
 
     static houseParticipants hp=new houseParticipants();
     static housePictures hpc=new housePictures();
     static furniturePictures fpc=new furniturePictures();
 
-    static Buildings B=new Buildings();
+    static Buildings b =new Buildings();
 
     static advertismentRequests ar = new advertismentRequests();
 
-    static  systemObservation so = new systemObservation();
+
     static bookingInfo bi=new bookingInfo();
 
-    static Users Login=new Users();
+
 
     static Logger logger =
             Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -161,13 +161,13 @@ public class Sakan {
             logger.info("(1) To go back to main menu");
 
             logger.info("Enter your email: ");
-            Sakan.U.setEmail(sc.nextLine());
+            Sakan.u.setEmail(sc.nextLine());
 
             logger.info("Enter password: ");
-            Sakan.U.setPassword(sc.nextLine());
+            Sakan.u.setPassword(sc.nextLine());
 
 
-            Login(usertype,Sakan.U.getEmail(),Sakan.U.getPassword());
+            Login(usertype,Sakan.u.getEmail(),Sakan.u.getPassword());
 
 
         }
@@ -206,7 +206,7 @@ public class Sakan {
               addfurniture(Sakan.OnlineUser);
 
            }  else if(view.equalsIgnoreCase("G")){
-               viewBookingInfo(Sakan.U.getUsersID());
+               viewBookingInfo(Sakan.u.getUsersID());
            }
 
            else if (view.equalsIgnoreCase("H")) {
@@ -232,8 +232,8 @@ public class Sakan {
 
             if (rs.next()) {
                 Sakan.bi.setTenantId(rs.getInt(1));
-                Sakan.U.setUsername(rs.getString(2));
-                Sakan.U.setUsersID(rs.getInt(1));
+                Sakan.u.setUsername(rs.getString(2));
+                Sakan.u.setUsersID(rs.getInt(1));
             }
         }catch (SQLException e) {
             e.printStackTrace();
@@ -310,24 +310,24 @@ public static void viewBookingInfo(int tenant_id){
         ResultSet ts = null;
         logger.info("Enter the floor ID: ");
 
-        Sakan.H.setHouseId(sc.nextInt());
+        Sakan.h.setHouseId(sc.nextInt());
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT * FROM floors WHERE floor_id = '" +  Sakan.H.getHouseId() + "' AND availability = 'available' AND Status = 'Advertised'"  );
-            tst= connection.prepareStatement("SELECT building_id FROM floors WHERE floor_id = '" +  Sakan.H.getHouseId() + "' AND availability = 'available'  AND Status = 'Advertised'" );
+            pst = connection.prepareStatement("SELECT * FROM floors WHERE floor_id = '" +  Sakan.h.getHouseId() + "' AND availability = 'available' AND Status = 'Advertised'"  );
+            tst= connection.prepareStatement("SELECT building_id FROM floors WHERE floor_id = '" +  Sakan.h.getHouseId() + "' AND availability = 'available'  AND Status = 'Advertised'" );
             ts = tst.executeQuery();
             rs = pst.executeQuery();
 
             if(ts.next()){
-                Sakan.B.setBuildingId(ts.getInt(1));
+                Sakan.b.setBuildingId(ts.getInt(1));
             }
 
             if (rs.next()) {
               // Sakan.H.setHouseName(rs.getString(2));
                 String content = "\t|\t ID: " + rs.getString(1)  + "\t|\t price: " + rs.getInt(4) +  "\t|\t services: " + rs.getString(5) + "\t|\t Number of residents: " + rs.getString(6)  + "\t|\t";
                 logger.info(content);
-                viewfloorsfunc(Sakan.H.getHouseId(),Sakan.B.getBuildingId(),Sakan.OnlineUser);
+                viewfloorsfunc(Sakan.h.getHouseId(),Sakan.b.getBuildingId(),Sakan.OnlineUser);
 
 
             }
@@ -378,17 +378,17 @@ public static void viewBookingInfo(int tenant_id){
         ResultSet rs = null;
         logger.info("Enter the furniture ID: ");
 
-       Sakan.F.setFurnitureID(sc.nextInt());
+       Sakan.f.setFurnitureID(sc.nextInt());
 
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT * FROM furniture WHERE furniture_id = '" + Sakan.F.getFurnitureID() + "' AND status = 'forsale'" );
+            pst = connection.prepareStatement("SELECT * FROM furniture WHERE furniture_id = '" + Sakan.f.getFurnitureID() + "' AND status = 'forsale'" );
             rs = pst.executeQuery();
             if (rs.next()) {
-               Sakan.F.setFurnitureDescription(rs.getString(4));
+               Sakan.f.setFurnitureDescription(rs.getString(4));
                 String content = "\t|\t ID: " + rs.getInt(1) + " \t|\t price: " + rs.getInt(3) + "\t|\t description: " + rs.getString(4) + "\t|\t";
                 logger.info(content);
-                viewfurnituresfunc(  Sakan.F.getFurnitureDescription(),Sakan.F.getFurnitureID());
+                viewfurnituresfunc(  Sakan.f.getFurnitureDescription(),Sakan.f.getFurnitureID());
 
 
             }
@@ -414,13 +414,13 @@ public static void viewBookingInfo(int tenant_id){
         PreparedStatement pst = null;
         ResultSet rs = null;
        // int TenantID=0;
-        Sakan.U.setUsersID(0);
+        Sakan.u.setUsersID(0);
 
         int furID=0;
         Scanner scon=new Scanner(System.in);
         int furIDVal=0;
 
-       Sakan.F.setFurnitureStatus("forsale");
+       Sakan.f.setFurnitureStatus("forsale");
 
 
 
@@ -430,9 +430,9 @@ public static void viewBookingInfo(int tenant_id){
 
         logger.info(" Enter description: ");
 
-       Sakan.F.setFurnitureDescription(sf.nextLine());
+       Sakan.f.setFurnitureDescription(sf.nextLine());
 
-       if(Sakan.F.getFurnitureDescription().equalsIgnoreCase("1")){
+       if(Sakan.f.getFurnitureDescription().equalsIgnoreCase("1")){
            Sakan.flag2 = 1;
            tenantfunc("TENANTS");
        }
@@ -443,9 +443,9 @@ public static void viewBookingInfo(int tenant_id){
         int price;
 
         logger.info(" Enter price: ");
-         Sakan.F.setFurniturePrice(sf.nextInt());
+         Sakan.f.setFurniturePrice(sf.nextInt());
 
-        if(String.valueOf(Sakan.F.getFurniturePrice()).equalsIgnoreCase("1")){
+        if(String.valueOf(Sakan.f.getFurniturePrice()).equalsIgnoreCase("1")){
             Sakan.flag2 = 1;
             tenantfunc("TENANTS");
         }
@@ -458,22 +458,22 @@ public static void viewBookingInfo(int tenant_id){
          rs = pst.executeQuery();
 
          if (rs.next()) {
-             Sakan.U.setUsersID(rs.getInt(1));
+             Sakan.u.setUsersID(rs.getInt(1));
          }
 
          connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
          pst = connection.prepareStatement("INSERT INTO FURNITURE(user_ID,PRICE,DESCRIPTION,STATUS) VALUES (?,?,?,?)");
 
-         pst.setInt(1,  Sakan.U.getUsersID());
-         pst.setInt(2, Sakan.F.getFurniturePrice());
-         pst.setString(3, Sakan.F.getFurnitureDescription());
-         pst.setString(4, Sakan.F.getFurnitureStatus());
+         pst.setInt(1,  Sakan.u.getUsersID());
+         pst.setInt(2, Sakan.f.getFurniturePrice());
+         pst.setString(3, Sakan.f.getFurnitureDescription());
+         pst.setString(4, Sakan.f.getFurnitureStatus());
 
          pst.executeUpdate();
 
          pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
 
-         pst.setString(1, Sakan.OnlineUser + " has added a new furniture (" + Sakan.F.getFurnitureDescription() + "," + Sakan.F.getFurniturePrice() + "$)");
+         pst.setString(1, Sakan.OnlineUser + " has added a new furniture (" + Sakan.f.getFurnitureDescription() + "," + Sakan.f.getFurniturePrice() + "$)");
 
          pst.executeUpdate();
 
@@ -490,7 +490,7 @@ public static void viewBookingInfo(int tenant_id){
          rs= pst.executeQuery();
 
          if(rs.next()){
-          Sakan.F.setFurnitureID(rs.getInt(1));
+          Sakan.f.setFurnitureID(rs.getInt(1));
          }
 
      }
@@ -500,10 +500,10 @@ public static void viewBookingInfo(int tenant_id){
      }
      try {
          connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-         pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE WHERE FURNITURE_ID='" + Sakan.F.getFurnitureID() + "'");
+         pst = connection.prepareStatement("SELECT FURNITURE_ID FROM FURNITURE WHERE FURNITURE_ID='" + Sakan.f.getFurnitureID() + "'");
          rs = pst.executeQuery();
          if (rs.next()) {
-             Sakan.F.setFurnitureID(rs.getInt(1));
+             Sakan.f.setFurnitureID(rs.getInt(1));
          }
      } catch (SQLException e) {
          e.printStackTrace();
@@ -525,13 +525,13 @@ public static void viewBookingInfo(int tenant_id){
          try {
              connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
              pst = connection.prepareStatement("INSERT INTO FURNITURE_PIC(FURNITURE_ID,PICTURE) VALUES (?,?)");
-             pst.setInt(1, Sakan.F.getFurnitureID());
+             pst.setInt(1, Sakan.f.getFurnitureID());
              pst.setString(2, Sakan.fpc.getFurniturePicture());
              pst.executeUpdate();
 
              pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
 
-             pst.setString(1, Sakan.OnlineUser + " has added a new picture (" + Sakan.fpc.getFurniturePicture() + " to the furniture with ID: (" + Sakan.F.getFurnitureID()+ ")");
+             pst.setString(1, Sakan.OnlineUser + " has added a new picture (" + Sakan.fpc.getFurniturePicture() + " to the furniture with ID: (" + Sakan.f.getFurnitureID()+ ")");
 
              pst.executeUpdate();
          } catch (SQLException e) {
@@ -568,25 +568,25 @@ public static void viewBookingInfo(int tenant_id){
           logger.info("Enter your email: ");
 
 
-              Sakan.U.setEmail(sc.nextLine());
+              Sakan.u.setEmail(sc.nextLine());
 
-          if (Sakan.U.getEmail().equalsIgnoreCase("1")) {
+          if (Sakan.u.getEmail().equalsIgnoreCase("1")) {
               Mainfunc();
 
           }
-          if (!Sakan.U.getEmail().contains("@") || !U.getEmail().contains(".")) {
+          if (!Sakan.u.getEmail().contains("@") || !u.getEmail().contains(".")) {
               logger.info("Please enter a valid email...");
               Signup(usertype);
           }
 
 
 
-          checkemail(Sakan.U.getEmail(), 1, usertype);
+          checkemail(Sakan.u.getEmail(), 1, usertype);
               if(Sakan.flag1==0) {
 
                   logger.info("Enter username: ");
-                  Sakan.U.setUsername(sc.nextLine());
-                  if (Sakan.U.getUsername().equalsIgnoreCase("1")) {
+                  Sakan.u.setUsername(sc.nextLine());
+                  if (Sakan.u.getUsername().equalsIgnoreCase("1")) {
                       Mainfunc();
 
                   }
@@ -594,17 +594,17 @@ public static void viewBookingInfo(int tenant_id){
 
 
                   logger.info("Enter password: ");
-                  Sakan.U.setPassword(sc.nextLine());
+                  Sakan.u.setPassword(sc.nextLine());
 
-                  if (Sakan.U.getPassword().equalsIgnoreCase("1")) {
+                  if (Sakan.u.getPassword().equalsIgnoreCase("1")) {
                       Mainfunc();
 
                   }
 
                   logger.info("Enter Contact Number: ");
-                      Sakan.U.setContactNum(sc.nextLine());
+                      Sakan.u.setContactNum(sc.nextLine());
 
-                      if (Sakan.U.getContactNum().equalsIgnoreCase("1")) {
+                      if (Sakan.u.getContactNum().equalsIgnoreCase("1")) {
                           Mainfunc();
 
                       }
@@ -621,10 +621,10 @@ public static void viewBookingInfo(int tenant_id){
                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
                    tst = connection.prepareStatement("INSERT INTO USERS(EMAIL,USERNAME,PASSWORD,contact_num,user_type) VALUES" + "(?,?,?,?,?)");
 
-                   tst.setString(1, U.getEmail());
-                   tst.setString(2, U.getUsername());
-                   tst.setString(3, U.getPassword());
-                   tst.setString(4, U.getContactNum());
+                   tst.setString(1, u.getEmail());
+                   tst.setString(2, u.getUsername());
+                   tst.setString(3, u.getPassword());
+                   tst.setString(4, u.getContactNum());
                    tst.setString(5, usertype);
                    tst.executeUpdate();
 
@@ -637,15 +637,15 @@ public static void viewBookingInfo(int tenant_id){
                    tst = connection.prepareStatement("SELECT USER_ID FROM USERS ORDER BY USER_ID DESC LIMIT 1");
                    rs=tst.executeQuery();
                    if(rs.next()){
-                       Sakan.U.setUsersID(rs.getInt(1));
+                       Sakan.u.setUsersID(rs.getInt(1));
                    }
 
                }
 
 
                 if(usertype.equalsIgnoreCase("OWNERS")) {
-                    Sakan.OnlineUser=U.getEmail();
-                    checklogin(U.getEmail(),U.getPassword(),usertype);
+                    Sakan.OnlineUser= u.getEmail();
+                    checklogin(u.getEmail(), u.getPassword(),usertype);
                     Sakan.flagOwner=1;
                    // ownerfunc("OWNERS", Sakan.U.getUsersID());
                 }
@@ -656,7 +656,7 @@ public static void viewBookingInfo(int tenant_id){
                e.printStackTrace();
 
            }
-           Sakan.OnlineUser=U.getEmail();
+           Sakan.OnlineUser= u.getEmail();
            Sakan.flag1 = 1;
 
 
@@ -740,7 +740,7 @@ public static void viewBookingInfo(int tenant_id){
 
                                         pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
 
-                                        pst.setString(1, Sakan.OnlineUser + " has purchased a furniture (" + Sakan.F.getFurnitureDescription() + ")");
+                                        pst.setString(1, Sakan.OnlineUser + " has purchased a furniture (" + Sakan.f.getFurnitureDescription() + ")");
 
                                         pst.executeUpdate();
 
@@ -890,7 +890,7 @@ while(true) {
             pst = connection.prepareStatement("SELECT building_name FROM building WHERE building_id = '" + buildingID + "'" );
             rs = pst.executeQuery();
             if(rs.next()){
-                Sakan.B.setBuildingName(rs.getString(1));
+                Sakan.b.setBuildingName(rs.getString(1));
             }
 
 
@@ -953,7 +953,7 @@ while(true) {
 
                                 pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
                                 pst.setInt(1,floorID );
-                                pst.setString(2,Sakan.U.getUsername() );
+                                pst.setString(2,Sakan.u.getUsername() );
                                 pst.setInt(3, Sakan.hp.getPartAge());
                                 pst.setString(4, Sakan.hp.getPartMajor());
                                 pst.setString(5, Sakan.hp.getPartGender() );
@@ -963,7 +963,7 @@ while(true) {
 
                                 pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
 
-                                pst.setString(1, Sakan.OnlineUser + " has reserved an apartment in the building (" + Sakan.B.getBuildingName() + ")");
+                                pst.setString(1, Sakan.OnlineUser + " has reserved an apartment in the building (" + Sakan.b.getBuildingName() + ")");
 
                                 pst.executeUpdate();
 
@@ -996,7 +996,7 @@ while(true) {
 
                                     pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
 
-                                    pst.setString(1, " The apartment with the id ("+ floorID+ ") in the building (" + Sakan.B.getBuildingName() + ") is full");
+                                    pst.setString(1, " The apartment with the id ("+ floorID+ ") in the building (" + Sakan.b.getBuildingName() + ") is full");
 
                                     pst.executeUpdate();
 
@@ -1015,7 +1015,7 @@ while(true) {
 
 
                                 pst=connection.prepareStatement("INSERT INTO BOOKING_INFO(TENANT_NAME,OWNER_NAME,CONTACT_INFO,RENT_DATE,TENANT_ID) VALUES (?,?,?,?,?)");
-                                pst.setString(1,Sakan.U.getUsername());
+                                pst.setString(1,Sakan.u.getUsername());
                                 pst.setString(2,Sakan.bi.getOwnerName());
                                 pst.setInt(3,Sakan.bi.getContactInfo());
                                 pst.setString(4,sdf.format(timestamp));
@@ -1076,7 +1076,7 @@ while(true) {
                                 if(rs.next()){
                                     Sakan.bi.setTenantId(rs.getInt(1));
                                     nameb = rs.getString(2);
-                                     System.out.print(Sakan.U.getUsername());
+                                     System.out.print(Sakan.u.getUsername());
                                 }
                                 pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
                                 pst.setInt(1,floorID );
@@ -1089,7 +1089,7 @@ while(true) {
 
                                 pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
 
-                                pst.setString(1, Sakan.OnlineUser + " has reserved an apartment in the building (" + Sakan.B.getBuildingName() + ")");
+                                pst.setString(1, Sakan.OnlineUser + " has reserved an apartment in the building (" + Sakan.b.getBuildingName() + ")");
 
                                 pst.executeUpdate();
 
@@ -1123,7 +1123,7 @@ while(true) {
 
                                     pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
 
-                                    pst.setString(1, " The apartment with the id ("+ floorID+ ") in the building (" + Sakan.B.getBuildingName() + ") is full");
+                                    pst.setString(1, " The apartment with the id ("+ floorID+ ") in the building (" + Sakan.b.getBuildingName() + ") is full");
 
                                     pst.executeUpdate();
 
