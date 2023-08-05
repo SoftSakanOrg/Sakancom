@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 import static main.Sakan.*;
-import static main.funcAddBuilding.addbuildingfunc;
+import static main.FuncAddBuilding.addbuildingfunc;
 import static main.funcAddFloor.addfloor;
 import static main.funcAdmin.adminfunc;
 import static main.funcOwner.ownerfunc;

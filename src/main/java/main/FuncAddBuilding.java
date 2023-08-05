@@ -4,12 +4,12 @@ import java.sql.*;
 
 import static main.Sakan.logger;
 
-public class funcAddBuilding {
+public class FuncAddBuilding {
 
 
-    public static int selectInfoFlag;
-    public static int addBuildingFlag;
-    public static int addObservationFlag;
+    public static int SelectInfoFlag;
+    public static int AddBuildingFlag;
+    public static int AddObservationFlag;
     public static void addbuildingfunc(int owner_ID,int testp) throws SQLException {
 
         Connection connection = null;
@@ -27,7 +27,7 @@ public class funcAddBuilding {
             rs = pst.executeQuery();
 
             if (rs.next()) {
-                selectInfoFlag=1;
+                SelectInfoFlag =1;
                 Sakan.b.setOwnerName(rs.getString(1));
                 Sakan.b.setContactNum(rs.getInt(2));
 
@@ -35,7 +35,7 @@ public class funcAddBuilding {
 
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
             pst = connection.prepareStatement("INSERT INTO BUILDING(OWNER_ID,BUILDING_NAME,LOCATION,FLOORS_NUM,OWNER_NAME,CONTACT_NUM,TOTALPARTICIPANTS) VALUES" + "(?,?,?,?,?,?,?)");
-            addBuildingFlag=1;
+            AddBuildingFlag =1;
 
 
                 pst.setInt(1, owner_ID);
@@ -50,7 +50,7 @@ public class funcAddBuilding {
             }
 
             pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
-            addObservationFlag=1;
+            AddObservationFlag =1;
             pst.setString(1, Sakan.onlineUser + " has added a building (" + Sakan.b.getBuildingName() + ") to the system");
 
             if(testp==1) {
