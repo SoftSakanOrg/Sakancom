@@ -11,7 +11,7 @@ import static main.funcCheckLogin.checklogin;
 
 public class funcUsersLogin {
 
-    public static void Login(String usertype,String email,String pass) throws SQLException {
+    public static void Login(String usertype,String email,String pass) {
 
 
 
