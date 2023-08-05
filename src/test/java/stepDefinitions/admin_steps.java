@@ -3,6 +3,7 @@ package stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import main.adminPara;
 import main.funcAdmin;
 
 import java.sql.SQLException;
@@ -21,24 +22,24 @@ public class admin_steps {
     public void adminEntersToChooseAFunction(String functype) throws SQLException {
 
         if(functype.equalsIgnoreCase("A")){
-           obj.adminfunc("ADMINS",30,functype,2);
+           obj.adminfunc(new adminPara("ADMINS", 30, functype, 2));
 
         } else if(functype.equalsIgnoreCase("B")){
-            obj.adminfunc("ADMINS",30,functype,2);
+            obj.adminfunc(new adminPara("ADMINS", 30, functype, 2));
 
         } else if(functype.equalsIgnoreCase("C")){
-            obj.adminfunc("ADMINS",30,functype,2);
+            obj.adminfunc(new adminPara("ADMINS", 30, functype, 2));
 
         }
         else if(functype.equalsIgnoreCase("D")){
-            obj.adminfunc("ADMINS",30,functype,2);
+            obj.adminfunc(new adminPara("ADMINS", 30, functype, 2));
 
         }
         else if(functype.equalsIgnoreCase("E")){
-            obj.adminfunc("ADMINS",30,functype,2);
+            obj.adminfunc(new adminPara("ADMINS", 30, functype, 2));
 
         }else
-            obj.adminfunc("ADMINS",30,functype,2);
+            obj.adminfunc(new adminPara("ADMINS", 30, functype, 2));
 
 
     }
