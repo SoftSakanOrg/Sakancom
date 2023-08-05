@@ -677,8 +677,8 @@ public static void viewBookingInfo(int tenant_id){
         ResultSet rs = null;
         String view1;
         while(true) {
-            String s = "\t            ★★  " + Fdescription + "  ★★                 \t";
-            logger.info(s);
+            String desc = "\t            ★★  " + Fdescription + "  ★★                 \t";
+            logger.info(desc);
             logger.info("(A) View pictures of the selected furniture        ");
             logger.info("(B) To purchase the selected furniture             ");
             logger.info("(C) Back                                           ");
