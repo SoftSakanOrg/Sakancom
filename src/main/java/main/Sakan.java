@@ -19,7 +19,7 @@ public class Sakan {
     static String tenants="TENANTS";
     static String owners="OWNERS";
     static String admin="ADMIN";
-
+//tes
        static String s="\t|\t ID: ";
        static String s1="\t|\t";
     static int flag1 = 0;
