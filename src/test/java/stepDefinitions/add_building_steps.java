@@ -23,7 +23,7 @@ public class add_building_steps {
     }
     @Then("contact info should appear")
     public void contactInfoShouldAppear() {
-        assertTrue(obj.SelectInfoFlag ==1);
+        assertTrue(obj.selectinfoflag ==1);
     }
 
 
@@ -38,7 +38,7 @@ public class add_building_steps {
     }
     @Then("new building should appear to the table")
     public void newBuildingShouldAppearToTheTable() {
-        assertTrue(obj.AddBuildingFlag ==1);
+        assertTrue(obj.addbuildingflag ==1);
     }
 
 
@@ -53,7 +53,7 @@ public class add_building_steps {
     }
     @Then("the adding observation will appear to admin")
     public void theAddingObservationWillAppearToAdmin() {
-        assertTrue(obj.AddObservationFlag ==1);
+        assertTrue(obj.addobservationflag ==1);
     }
 
 
