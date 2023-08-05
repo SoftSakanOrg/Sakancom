@@ -157,7 +157,7 @@ public class Sakan {
             }
 
             else if(temp.equalsIgnoreCase("1") && !usertype.equalsIgnoreCase(admin)) {
-                Signup(usertype);
+                signup(usertype);
 
 
             }
@@ -554,14 +554,13 @@ public class Sakan {
 
     }
 
-    public static void Signup(String usertype){
+    public static void signup(String usertype){
 
 
         if (Sakan.flag1 == 0) {
             Scanner sc = new Scanner(System.in);
 
             Connection connection = null;
-            PreparedStatement pst = null;
             ResultSet rs = null;
             PreparedStatement tst= null;
 
@@ -583,7 +582,7 @@ public class Sakan {
             }
             if (!Sakan.u.getEmail().contains("@") || !u.getEmail().contains(".")) {
                 logger.info("Please enter a valid email...");
-                Signup(usertype);
+                signup(usertype);
             }
 
 

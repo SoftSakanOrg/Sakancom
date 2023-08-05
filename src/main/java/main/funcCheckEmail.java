@@ -32,7 +32,7 @@ public class funcCheckEmail {
 
                         if (func == 1) {
                             logger.info("This email already exists..");
-                            Signup(usertype);
+                            signup(usertype);
                         }
                     }
 
