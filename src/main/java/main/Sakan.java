@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 public class Sakan {
 
     static String url = "jdbc:mysql://localhost:3306/Sakan";
+
+    static String s = "\t|\t ID: ";
      static  String tenants = "TENANTS";
     static  String owners = "OWNERS";
     static  String admin = "ADMIN";
@@ -296,7 +298,8 @@ public static void viewBookingInfo(int tenantId){
             ts = tst.executeQuery();
             while (rs.next()) {
                 ts.next();
-                String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t availability: "+ rs.getString(3)+ "\t|\t Price: "+ rs.getInt(4)+ "\t|\t Services: "+ rs.getString(5)+ "\t|\t Participants: "+ rs.getInt(6)+ "\t|\t Max_Participants: "+ rs.getInt(7)+ "\t|\t BedroomsNum: "+ rs.getInt(8)+ "\t|\t BathroomsNum: "+ rs.getInt(9)+ "\t|\t Balcony: "+ rs.getInt(10)+ "\t|\t Status: "+ rs.getString(11);
+
+                String content = s + rs.getInt(1) + "\t|\t availability: "+ rs.getString(3)+ "\t|\t Price: "+ rs.getInt(4)+ "\t|\t Services: "+ rs.getString(5)+ "\t|\t Participants: "+ rs.getInt(6)+ "\t|\t Max_Participants: "+ rs.getInt(7)+ "\t|\t BedroomsNum: "+ rs.getInt(8)+ "\t|\t BathroomsNum: "+ rs.getInt(9)+ "\t|\t Balcony: "+ rs.getInt(10)+ "\t|\t Status: "+ rs.getString(11);
                 logger.info(content);
             }
 
@@ -332,7 +335,7 @@ public static void viewBookingInfo(int tenantId){
 
             if (rs.next()) {
 
-                String content = "\t|\t ID: " + rs.getString(1)  + "\t|\t price: " + rs.getInt(4) +  "\t|\t services: " + rs.getString(5) + "\t|\t Number of residents: " + rs.getString(6)  + "\t|\t";
+                String content = s + rs.getString(1)  + "\t|\t price: " + rs.getInt(4) +  "\t|\t services: " + rs.getString(5) + "\t|\t Number of residents: " + rs.getString(6)  + "\t|\t";
                 logger.info(content);
                 viewfloorsfunc(Sakan.h.getHouseId(),Sakan.b.getBuildingId(),Sakan.onlineUser);
 
@@ -366,7 +369,7 @@ public static void viewBookingInfo(int tenantId){
             pst = connection.prepareStatement("SELECT * FROM furniture WHERE status = 'forsale' ");
             rs = pst.executeQuery();
             while (rs.next()) {
-                String content = "\t|\t ID: " + rs.getInt(1) + " \t|\t price: " + rs.getInt(3) + "\t|\t description: " + rs.getString(4) + "\t|\t status: " + rs.getString(5) + "\t|\t" ;
+                String content = s+ rs.getInt(1) + " \t|\t price: " + rs.getInt(3) + "\t|\t description: " + rs.getString(4) + "\t|\t status: " + rs.getString(5) + "\t|\t" ;
                 logger.info(content);
             }
 
