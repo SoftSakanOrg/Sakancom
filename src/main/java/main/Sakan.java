@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 public class Sakan {
 
     public static final String DESCRIPTION_VALUES = "INSERT INTO system_observation(DESCRIPTION) VALUES (?)";
-    public static final String questionMarks = "(?,?,?,?,?)";
+    public static final String QUESTION_MARKS = "(?,?,?,?,?)";
     static String tenants="TENANTS";
     static String owners="OWNERS";
     static String admin="ADMIN";
@@ -626,7 +626,7 @@ public class Sakan {
 
 
                 connection = DriverManager.getConnection(getUrl(), "root", "");
-                tst = connection.prepareStatement("INSERT INTO USERS(EMAIL,USERNAME,PASSWORD,contact_num,user_type) VALUES" + questionMarks);
+                tst = connection.prepareStatement("INSERT INTO USERS(EMAIL,USERNAME,PASSWORD,contact_num,user_type) VALUES" + QUESTION_MARKS);
 
                 tst.setString(1, u.getEmail());
                 tst.setString(2, u.getUsername());
@@ -961,7 +961,7 @@ public class Sakan {
                                     try {
 
 
-                                        pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + questionMarks);
+                                        pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + QUESTION_MARKS);
                                         pst.setInt(1,floorID );
                                         pst.setString(2,Sakan.u.getUsername() );
                                         pst.setInt(3, Sakan.hp.getPartAge());
@@ -1088,7 +1088,7 @@ public class Sakan {
                                             nameb = rs.getString(2);
                                             logger.info(Sakan.u.getUsername());
                                         }
-                                        pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + questionMarks);
+                                        pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + QUESTION_MARKS);
                                         pst.setInt(1,floorID );
                                         pst.setString(2,nameb );
                                         pst.setInt(3, ageb);
