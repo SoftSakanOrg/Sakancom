@@ -837,6 +837,7 @@ while(true) {
     if (view1.equalsIgnoreCase("A")) {
 
 
+        try {
 
             pst = connection.prepareStatement("SELECT picture FROM house_pic  WHERE " + floorID + " = floor_id  ");
             rs = pst.executeQuery();
@@ -848,7 +849,19 @@ while(true) {
 
             }
 
+        }catch (SQLException e){
 
+        }finally {
+            try {
+                if (rs != null){
+                    rs.close();
+                }
+            }finally {
+                if (pst != null) {
+                    pst.close();
+                }
+            }
+        }
 
 
 
@@ -858,22 +871,35 @@ while(true) {
 
 
             int flagpart = 0;
-            pst = connection.prepareStatement("SELECT * FROM house_participants  WHERE " + floorID + " = floor_id  ");
-            rs = pst.executeQuery();
+            try {
+                pst = connection.prepareStatement("SELECT * FROM house_participants  WHERE " + floorID + " = floor_id  ");
+                rs = pst.executeQuery();
 
 
-            while (rs.next()) {
-                flagpart =1;
-                String content = "\t| Name: \t" + rs.getString(3) + "\t| Age: \t" + rs.getString(4) + "\t| Major: \t" + rs.getString(5) + "\t| Gender: \t" + rs.getString(6) + s1;
-                logger.info(content);
+                while (rs.next()) {
+                    flagpart = 1;
+                    String content = "\t| Name: \t" + rs.getString(3) + "\t| Age: \t" + rs.getString(4) + "\t| Major: \t" + rs.getString(5) + "\t| Gender: \t" + rs.getString(6) + s1;
+                    logger.info(content);
 
 
+                }
+                if (flagpart == 0) {
+                    logger.info("No one is living in this apartment currently");
+                }
+
+            }catch (SQLException e){
+
+            }finally {
+                try {
+                    if (rs != null){
+                        rs.close();
+                    }
+                }finally {
+                    if (pst != null) {
+                        pst.close();
+                    }
+                }
             }
-            if(flagpart==0){
-                logger.info("No one is living in this apartment currently");
-            }
-
-
 
 
 
@@ -898,283 +924,531 @@ while(true) {
 
 
 
-
-            pst = connection.prepareStatement("SELECT building_name FROM building WHERE building_id = '" + buildingID + "'" );
-            rs = pst.executeQuery();
-            if(rs.next()){
-                Sakan.b.setBuildingName(rs.getString(1));
-            }
-
-
-
-
-            pst = connection.prepareStatement("SELECT * FROM floors  WHERE " + floorID + " = floor_id AND max_participants > 1 ");
-            rs = pst.executeQuery();
-
-
-            if (rs.next()) {
-                while (true) {
-                Sakan.whileflag = 0;
-                    Sakan.whileflag2 = 0;
-
-                    logger.info("(A) To go back");
-
-
-                    logger.info("This is a student housing.. Please fill the following data");
-
-                    logger.info("Please select your gender");
-                    logger.info("  (M) Male . (F) Female");
-
-                 backb = st.nextLine();
-                if (backb.equalsIgnoreCase("A")) {
-                    Sakan.whileflag = 1;
-                    break;
-                } else if (backb.equalsIgnoreCase("M") || backb.equalsIgnoreCase("F")) {
-                     Sakan.hp.setPartGender( backb);
-                } else continue;
-
-                    logger.info("Please Enter your age: ");
-               ageSTR = st.nextLine();
-                    if (ageSTR.equalsIgnoreCase("A")) {
-                        Sakan.whileflag = 1;
-                        break;
-                    }
-
-               if(isNumber(ageSTR)){
-                   Sakan.hp.setPartAge(Integer.parseInt(ageSTR));
+           try {
+               pst = connection.prepareStatement("SELECT building_name FROM building WHERE building_id = '" + buildingID + "'");
+               rs = pst.executeQuery();
+               if (rs.next()) {
+                   Sakan.b.setBuildingName(rs.getString(1));
                }
-               else continue;
+           }catch (SQLException e){
 
-                    logger.info("Please Enter your Major: ");
-
-
-              Sakan.hp.setPartMajor(st.nextLine());
-                    if (Sakan.hp.getPartMajor().equalsIgnoreCase("A")) {
-                        Sakan.whileflag = 1;
-                        break;
-                    }
-
-                    while(true){
-                        Sakan.whileflag2=0;
-                        logger.info("Your data is ready.. are you sure you want to continue?");
-                        logger.info("(A) Confirm   (B) Cancel");
-                        confirm = st.nextLine();
-                        if(confirm.equalsIgnoreCase("A")){
+           }finally {
+               try {
+                   if (rs != null){
+                       rs.close();
+                   }
+               }finally {
+                   if (pst != null) {
+                       pst.close();
+                   }
+               }
+           }
 
 
 
-
-                                pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
-                                pst.setInt(1,floorID );
-                                pst.setString(2,Sakan.u.getUsername() );
-                                pst.setInt(3, Sakan.hp.getPartAge());
-                                pst.setString(4, Sakan.hp.getPartMajor());
-                                pst.setString(5, Sakan.hp.getPartGender() );
-                                pst.executeUpdate();
+           try {
+               pst = connection.prepareStatement("SELECT * FROM floors  WHERE " + floorID + " = floor_id AND max_participants > 1 ");
+               rs = pst.executeQuery();
 
 
+               if (rs.next()) {
+                   while (true) {
+                       Sakan.whileflag = 0;
+                       Sakan.whileflag2 = 0;
 
-                                pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
-
-                                pst.setString(1, Sakan.onlineUser + " has reserved an apartment in the building (" + Sakan.b.getBuildingName() + ")");
-
-                                pst.executeUpdate();
+                       logger.info("(A) To go back");
 
 
-                                pst = connection.prepareStatement("UPDATE floors SET participants = (participants+1) WHERE floor_id = '" + floorID + "'");
-                                pst.executeUpdate();
+                       logger.info("This is a student housing.. Please fill the following data");
 
-                                tst = connection.prepareStatement("SELECT PARTICIPANTS FROM FLOORS WHERE BUILDING_ID= '"+buildingID+"'");
+                       logger.info("Please select your gender");
+                       logger.info("  (M) Male . (F) Female");
 
-                                ts=tst.executeQuery();
+                       backb = st.nextLine();
+                       if (backb.equalsIgnoreCase("A")) {
+                           Sakan.whileflag = 1;
+                           break;
+                       } else if (backb.equalsIgnoreCase("M") || backb.equalsIgnoreCase("F")) {
+                           Sakan.hp.setPartGender(backb);
+                       } else continue;
 
-                                while(ts.next()){
+                       logger.info("Please Enter your age: ");
+                       ageSTR = st.nextLine();
+                       if (ageSTR.equalsIgnoreCase("A")) {
+                           Sakan.whileflag = 1;
+                           break;
+                       }
 
-                                sum+=ts.getInt(1);
-                                }
+                       if (isNumber(ageSTR)) {
+                           Sakan.hp.setPartAge(Integer.parseInt(ageSTR));
+                       } else continue;
 
-                                ust = connection.prepareStatement("UPDATE BUILDING SET TOTALPARTICIPANTS='"+sum+"' WHERE BUILDING_ID= '"+buildingID+"'");
+                       logger.info("Please Enter your Major: ");
+
+
+                       Sakan.hp.setPartMajor(st.nextLine());
+                       if (Sakan.hp.getPartMajor().equalsIgnoreCase("A")) {
+                           Sakan.whileflag = 1;
+                           break;
+                       }
+
+                       while (true) {
+                           Sakan.whileflag2 = 0;
+                           logger.info("Your data is ready.. are you sure you want to continue?");
+                           logger.info("(A) Confirm   (B) Cancel");
+                           confirm = st.nextLine();
+                           if (confirm.equalsIgnoreCase("A")) {
+
+                           try {
+                               pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
+                               pst.setInt(1, floorID);
+                               pst.setString(2, Sakan.u.getUsername());
+                               pst.setInt(3, Sakan.hp.getPartAge());
+                               pst.setString(4, Sakan.hp.getPartMajor());
+                               pst.setString(5, Sakan.hp.getPartGender());
+                               pst.executeUpdate();
+
+                           }catch (SQLException e){
+
+                           }finally {
+                               try {
+                                   if (rs != null){
+                                       rs.close();
+                                   }
+                               }finally {
+                                   if (pst != null) {
+                                       pst.close();
+                                   }
+                               }
+                           }
+
+                           try {
+                               pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+
+                               pst.setString(1, Sakan.onlineUser + " has reserved an apartment in the building (" + Sakan.b.getBuildingName() + ")");
+
+                               pst.executeUpdate();
+                           }catch (SQLException e){
+
+                           }finally {
+                               try {
+                                   if (rs != null){
+                                       rs.close();
+                                   }
+                               }finally {
+                                   if (pst != null) {
+                                       pst.close();
+                                   }
+                               }
+                           }
+
+                           try {
+                               pst = connection.prepareStatement("UPDATE floors SET participants = (participants+1) WHERE floor_id = '" + floorID + "'");
+                               pst.executeUpdate();
+                           }catch (SQLException e){
+
+                           }finally {
+                               try {
+                                   if (rs != null){
+                                       rs.close();
+                                   }
+                               }finally {
+                                   if (pst != null) {
+                                       pst.close();
+                                   }
+                               }
+                           }
+
+                           try {
+
+                               tst = connection.prepareStatement("SELECT PARTICIPANTS FROM FLOORS WHERE BUILDING_ID= '" + buildingID + "'");
+
+                               ts = tst.executeQuery();
+
+                               while (ts.next()) {
+
+                                   sum += ts.getInt(1);
+                               }
+                           }catch (SQLException e){
+
+                           }finally {
+                               try {
+                                   if (ts != null){
+                                       ts.close();
+                                   }
+                               }finally {
+                                   if (tst != null) {
+                                       tst.close();
+                                   }
+                               }
+                           }
+
+                           try {
+                               ust = connection.prepareStatement("UPDATE BUILDING SET TOTALPARTICIPANTS='" + sum + "' WHERE BUILDING_ID= '" + buildingID + "'");
 
                                ust.executeUpdate();
 
+                           }catch (SQLException e){
+
+                           }finally {
+                               try {
+                                   if (rs != null){
+                                       rs.close();
+                                   }
+                               }finally {
+                                   if (ust != null) {
+                                       pst.close();
+                                   }
+                               }
+                           }
+
+                           try {
+                               pst = connection.prepareStatement("SELECT floor_id FROM floors WHERE participants = max_participants AND FLOOR_ID='" + floorID + "' ");
+                               rs = pst.executeQuery();
+
+                               if (rs.next()) {
+
+                                   pst = connection.prepareStatement("UPDATE floors SET availability = 'unavailable' WHERE floor_id = '" + floorID + "'");
+                                   pst.executeUpdate();
+
+                                   pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+
+                                   pst.setString(1, " The apartment with the id (" + floorID + ") in the building (" + Sakan.b.getBuildingName() + ") is full");
+
+                                   pst.executeUpdate();
+
+                               }
+                           }
+                           catch (SQLException e){
+
+                           }finally {
+                               try {
+                                   if (rs != null){
+                                       rs.close();
+                                   }
+                               }finally {
+                                   if (pst != null) {
+                                       pst.close();
+                                   }
+                               }
+                           }
+
+                               logger.info("Apartment booked successfully!");
+
+                               Sakan.bi.setRentDate(sdf.format((timestamp)));
+
+                               try {
+
+                                   pst = connection.prepareStatement("SELECT OWNER_NAME,CONTACT_NUM FROM BUILDING WHERE BUILDING_ID='" + buildingID + "'");
+                                   rs = pst.executeQuery();
+                                   if (rs.next()) {
+                                       Sakan.bi.setOwnerName(rs.getString(1));
+                                       Sakan.bi.setContactInfo(rs.getInt(2));
+                                   }
+
+                               }catch (SQLException e){
+
+                               }finally {
+                                   try {
+                                       if (rs != null){
+                                           rs.close();
+                                       }
+                                   }finally {
+                                       if (pst != null) {
+                                           pst.close();
+                                       }
+                                   }
+                               }
+
+                               try {
+
+                                   pst = connection.prepareStatement("INSERT INTO BOOKING_INFO(TENANT_NAME,OWNER_NAME,CONTACT_INFO,RENT_DATE,TENANT_ID) VALUES (?,?,?,?,?)");
+                                   pst.setString(1, Sakan.u.getUsername());
+                                   pst.setString(2, Sakan.bi.getOwnerName());
+                                   pst.setInt(3, Sakan.bi.getContactInfo());
+                                   pst.setString(4, sdf.format(timestamp));
+                                   pst.setInt(5, Sakan.bi.getTenantId());
+                                   pst.executeUpdate();
 
 
-                                pst = connection.prepareStatement("SELECT floor_id FROM floors WHERE participants = max_participants AND FLOOR_ID='"+floorID+"' ");
-                                rs = pst.executeQuery();
+                                   Sakan.whileflag2 = 1;
+                                   Sakan.flag2 = 1;
+                                   tenantfunc(tenants);
 
-                                if(rs.next()){
+                               }
+                               catch (SQLException e){
 
-                                    pst = connection.prepareStatement("UPDATE floors SET availability = 'unavailable' WHERE floor_id = '" + floorID + "'");
-                                    pst.executeUpdate();
-
-                                    pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
-
-                                    pst.setString(1, " The apartment with the id ("+ floorID+ ") in the building (" + Sakan.b.getBuildingName() + ") is full");
-
-                                    pst.executeUpdate();
-
-                                }
-
-                                logger.info("Apartment booked successfully!");
-
-                                Sakan.bi.setRentDate(sdf.format((timestamp)));
-
-                                pst=connection.prepareStatement("SELECT OWNER_NAME,CONTACT_NUM FROM BUILDING WHERE BUILDING_ID='"+buildingID+"'");
-                                rs= pst.executeQuery();
-                                if(rs.next()){
-                                    Sakan.bi.setOwnerName(rs.getString(1));
-                                    Sakan.bi.setContactInfo(rs.getInt(2));
-                                }
+                               }finally {
+                                   try {
+                                       if (rs != null){
+                                           rs.close();
+                                       }
+                                   }finally {
+                                       if (pst != null) {
+                                           pst.close();
+                                       }
+                                   }
+                               }
 
 
-                                pst=connection.prepareStatement("INSERT INTO BOOKING_INFO(TENANT_NAME,OWNER_NAME,CONTACT_INFO,RENT_DATE,TENANT_ID) VALUES (?,?,?,?,?)");
-                                pst.setString(1,Sakan.u.getUsername());
-                                pst.setString(2,Sakan.bi.getOwnerName());
-                                pst.setInt(3,Sakan.bi.getContactInfo());
-                                pst.setString(4,sdf.format(timestamp));
-                                pst.setInt(5,Sakan.bi.getTenantId());
-                                pst.executeUpdate();
+                           } else if (confirm.equalsIgnoreCase("B")) {
+                               Sakan.whileflag = 1;
+                               break;
+                           } else logger.info("Invalid input");
+                       }
 
+                       if (Sakan.whileflag2 == 1) {
 
+                           break;
+                       }
 
-
-                                Sakan.whileflag2 = 1;
-                                Sakan.flag2 = 1;
-                                tenantfunc(tenants);
-
-
-
-                        }
-                        else if(confirm.equalsIgnoreCase("B")){
-                            Sakan.whileflag = 1;
-                            break;
-                        }
-                        else logger.info("Invalid input");
-                    }
-
-                   if(Sakan.whileflag2 == 1){
-
-                       break;
+                   }
+                   if (Sakan.whileflag == 1) {
+                       continue;
                    }
 
-            }
-                if(Sakan.whileflag == 1){continue;}
+
+               } else {
+
+                   while (true) {
+                       Sakan.whileflag = 0;
+                       Sakan.whileflag2 = 0;
 
 
-            }
-           else {
+                       while (true) {
+                           ageb = 0;
+                           majorb = "Unknown";
+                           gender = "Unknown";
+                           Sakan.whileflag2 = 0;
+                           logger.info("Your data is ready.. are you sure you want to continue?");
+                           logger.info("(A) Confirm   (B) Cancel");
+                           confirm = st.nextLine();
+                           if (confirm.equalsIgnoreCase("A")) {
 
-                while (true) {
-                    Sakan.whileflag = 0;
-                    Sakan.whileflag2 = 0;
+                               try {
+                                   pst = connection.prepareStatement("SELECT USER_ID,username FROM users WHERE email = '" + Temail + "'");
+                                   rs = pst.executeQuery();
+
+                                   if (rs.next()) {
+                                       Sakan.bi.setTenantId(rs.getInt(1));
+                                       nameb = rs.getString(2);
+                                       logger.info(Sakan.u.getUsername());
+                                   }
+                               }catch (SQLException e){
+
+                               }finally {
+                                   try {
+                                       if (rs != null){
+                                           rs.close();
+                                       }
+                                   }finally {
+                                       if (pst != null) {
+                                           pst.close();
+                                       }
+                                   }
+                               }
+
+                               try {
+                                   pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
+                                   pst.setInt(1, floorID);
+                                   pst.setString(2, nameb);
+                                   pst.setInt(3, ageb);
+                                   pst.setString(4, majorb);
+                                   pst.setString(5, gender);
+
+                                   pst.executeUpdate();
+
+                               }catch (SQLException e){
+
+                               }finally {
+                                   try {
+                                       if (rs != null){
+                                           rs.close();
+                                       }
+                                   }finally {
+                                       if (pst != null) {
+                                           pst.close();
+                                       }
+                                   }
+                               }
+
+                               try {
+
+                                   pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+
+                                   pst.setString(1, Sakan.onlineUser + " has reserved an apartment in the building (" + Sakan.b.getBuildingName() + ")");
+
+                                   pst.executeUpdate();
+
+                               }catch (SQLException e){
+
+                               }finally {
+                                   try {
+                                       if (rs != null){
+                                           rs.close();
+                                       }
+                                   }finally {
+                                       if (pst != null) {
+                                           pst.close();
+                                       }
+                                   }
+                               }
+
+                               try {
+
+                                   pst = connection.prepareStatement("UPDATE floors SET participants = (participants+1) WHERE floor_id = '" + floorID + "'");
+                                   pst.executeUpdate();
+
+                               }catch (SQLException e){
+
+                               }finally {
+                                   try {
+                                       if (rs != null){
+                                           rs.close();
+                                       }
+                                   }finally {
+                                       if (pst != null) {
+                                           pst.close();
+                                       }
+                                   }
+                               }
+
+                               try {
+                                   tst = connection.prepareStatement("SELECT PARTICIPANTS FROM FLOORS WHERE BUILDING_ID= '" + buildingID + "'");
+
+                                   ts = tst.executeQuery();
+
+                                   while (ts.next()) {
+
+                                       sum += ts.getInt(1);
+                                   }
+
+                               }catch (SQLException e){
+
+                               }finally {
+                                   try {
+                                       if (ts != null){
+                                           ts.close();
+                                       }
+                                   }finally {
+                                       if (tst != null) {
+                                           tst.close();
+                                       }
+                                   }
+                               }
+
+                               try {
+
+                                   ust = connection.prepareStatement("UPDATE BUILDING SET TOTALPARTICIPANTS='" + sum + "' WHERE BUILDING_ID= '" + buildingID + "'");
+
+                                   ust.executeUpdate();
+                               }catch (SQLException e){
+
+                               }finally {
+                                   try {
+                                       if (rs != null){
+                                           rs.close();
+                                       }
+                                   }finally {
+                                       if (ust != null) {
+                                           pst.close();
+                                       }
+                                   }
+                               }
+
+                               try {
+                                   pst = connection.prepareStatement("SELECT floor_id FROM floors WHERE participants = max_participants AND FLOOR_ID='" + floorID + "' ");
+                                   rs = pst.executeQuery();
+
+                                   if (rs.next()) {
+
+                                       pst = connection.prepareStatement("UPDATE floors SET availability = 'unavailable' WHERE floor_id = '" + floorID + "'");
+                                       pst.executeUpdate();
+
+                                       pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+
+                                       pst.setString(1, " The apartment with the id (" + floorID + ") in the building (" + Sakan.b.getBuildingName() + ") is full");
+
+                                       pst.executeUpdate();
 
 
-                    while(true){
-                        ageb = 0;
-                        majorb = "Unknown";
-                        gender = "Unknown";
-                        Sakan.whileflag2=0;
-                        logger.info("Your data is ready.. are you sure you want to continue?");
-                        logger.info("(A) Confirm   (B) Cancel");
-                        confirm = st.nextLine();
-                        if(confirm.equalsIgnoreCase("A")){
+                                   }
+
+                               }catch (SQLException e){
+
+                               }finally {
+                                   try {
+                                       if (rs != null){
+                                           rs.close();
+                                       }
+                                   }finally {
+                                       if (pst != null) {
+                                           pst.close();
+                                       }
+                                   }
+                               }
+
+                               logger.info("Apartment booked successfully!");
 
 
-                                pst = connection.prepareStatement("SELECT USER_ID,username FROM users WHERE email = '" + Temail + "'" );
-                                rs = pst.executeQuery();
+                               Sakan.bi.setRentDate(sdf.format((timestamp)));
 
-                                if(rs.next()){
-                                    Sakan.bi.setTenantId(rs.getInt(1));
-                                    nameb = rs.getString(2);
-                                    logger.info(Sakan.u.getUsername());
-                                }
-                                pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + "(?,?,?,?,?)");
-                                pst.setInt(1,floorID );
-                                pst.setString(2,nameb );
-                                pst.setInt(3, ageb);
-                                pst.setString(4, majorb);
-                                pst.setString(5, gender );
+                               try {
+                                   pst = connection.prepareStatement("INSERT INTO BOOKING_INFO(TENANT_NAME,OWNER_NAME,CONTACT_INFO,RENT_DATE,TENANT_ID) VALUES (?,?,?,?,?)");
+                                   pst.setString(1, nameb);
+                                   pst.setString(2, Sakan.bi.getOwnerName());
+                                   pst.setInt(3, Sakan.bi.getContactInfo());
+                                   pst.setString(4, sdf.format(timestamp));
+                                   pst.setInt(5, Sakan.bi.getTenantId());
+                                   pst.executeUpdate();
 
-                                pst.executeUpdate();
+                               }catch (SQLException e){
 
-                                pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
+                               }finally {
+                                   try {
+                                       if (rs != null){
+                                           rs.close();
+                                       }
+                                   }finally {
+                                       if (pst != null) {
+                                           pst.close();
+                                       }
+                                   }
+                               }
 
-                                pst.setString(1, Sakan.onlineUser + " has reserved an apartment in the building (" + Sakan.b.getBuildingName() + ")");
-
-                                pst.executeUpdate();
-
-
-                                pst = connection.prepareStatement("UPDATE floors SET participants = (participants+1) WHERE floor_id = '" + floorID + "'");
-                                pst.executeUpdate();
-
-                                tst = connection.prepareStatement("SELECT PARTICIPANTS FROM FLOORS WHERE BUILDING_ID= '"+buildingID+"'");
-
-                                ts=tst.executeQuery();
-
-                                while(ts.next()){
-
-                                    sum+=ts.getInt(1);
-                                }
-
-                                ust = connection.prepareStatement("UPDATE BUILDING SET TOTALPARTICIPANTS='"+sum+"' WHERE BUILDING_ID= '"+buildingID+"'");
-
-                                ust.executeUpdate();
+                               Sakan.flag2 = 1;
+                               Sakan.whileflag2 = 1;
+                               tenantfunc(tenants);
 
 
+                           } else if (confirm.equalsIgnoreCase("B")) {
+                               Sakan.whileflag = 1;
+                               break;
+                           } else logger.info("Invalid input");
+                       }
+                       if (Sakan.whileflag == 1) {
+                           break;
+                       }
+                   }
+                   if (Sakan.whileflag == 1) {
+                       continue;
+                   }
 
 
-                                pst = connection.prepareStatement("SELECT floor_id FROM floors WHERE participants = max_participants AND FLOOR_ID='"+floorID+"' ");
-                                rs = pst.executeQuery();
+               }
+           }catch (SQLException e){
 
-                                if(rs.next()){
-
-                                    pst = connection.prepareStatement("UPDATE floors SET availability = 'unavailable' WHERE floor_id = '" + floorID + "'");
-                                    pst.executeUpdate();
-
-                                    pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
-
-                                    pst.setString(1, " The apartment with the id ("+ floorID+ ") in the building (" + Sakan.b.getBuildingName() + ") is full");
-
-                                    pst.executeUpdate();
-
-
-                                }
-
-                                logger.info("Apartment booked successfully!");
-
-
-
-                              Sakan.bi.setRentDate(sdf.format((timestamp)));
-
-                                pst=connection.prepareStatement("INSERT INTO BOOKING_INFO(TENANT_NAME,OWNER_NAME,CONTACT_INFO,RENT_DATE,TENANT_ID) VALUES (?,?,?,?,?)");
-                                pst.setString(1,nameb);
-                                pst.setString(2,Sakan.bi.getOwnerName());
-                                pst.setInt(3,Sakan.bi.getContactInfo());
-                                pst.setString(4,sdf.format(timestamp));
-                                pst.setInt(5,Sakan.bi.getTenantId());
-                                pst.executeUpdate();
-
-                                Sakan.flag2 = 1;
-                                Sakan.whileflag2 = 1;
-                                tenantfunc(tenants);
-
-
-
-
-                        }
-                        else if(confirm.equalsIgnoreCase("B")){
-                            Sakan.whileflag = 1;
-                            break;
-                        }
-                        else logger.info("Invalid input");
-                    }
-                    if(Sakan.whileflag == 1){break;}
-                }
-                if(Sakan.whileflag == 1){continue;}
-
-
-
-            }
+               }finally {
+                   try {
+                       if (rs != null){
+                           rs.close();
+                       }
+                   }finally {
+                       if (pst != null) {
+                           pst.close();
+                       }
+                   }
+               }
 
 
 
