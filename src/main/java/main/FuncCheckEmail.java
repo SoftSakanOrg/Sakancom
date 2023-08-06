@@ -26,7 +26,7 @@ public class FuncCheckEmail {
 
                 String tempE =  rs.getString(1);
 
-                extracted(func, usertype, tempE);
+                extracted(func, usertype);
             }
             else if(!rs.next() && flag11==0 && func == 2){
 
@@ -61,7 +61,7 @@ public class FuncCheckEmail {
 
     }
 
-    private static void extracted(int func, String usertype, String tempE) {
+    private static void extracted(int func, String usertype) {
         if(Sakan.flag1==0 && func == 1 ) {
 
 
