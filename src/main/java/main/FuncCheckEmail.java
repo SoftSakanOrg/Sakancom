@@ -28,8 +28,8 @@ public class FuncCheckEmail {
 
                 extracted(func, usertype, tempE);
             }
-            else if(!rs.next()){
-                if (flag11==0) {
+            else if(!rs.next() && flag11==0){
+
                     if (func == 2) {
                         logger.info("a user with that email doesn't exists..");
 
@@ -44,7 +44,7 @@ public class FuncCheckEmail {
                         Sakan.u.setPassword(sc.nextLine());
                         Login(usertype,Sakan.u.getEmail(),Sakan.u.getPassword());
                     }
-                }
+
             }
 
 
