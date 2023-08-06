@@ -7,19 +7,17 @@ import static main.Sakan.logger;
 public class FuncViewBuilding {
 
     public static int flagViewBuilding=0;
-    public static void viewbuilding(int ownerID,int testp) throws SQLException {
+    public static void viewbuilding(int ownerId) throws SQLException {
 
         flagViewBuilding=0;
 
         Connection connection = null;
         PreparedStatement pst= null;
-        PreparedStatement tst= null;
         ResultSet rs = null;
-        ResultSet ts = null;
 
 
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT * FROM building WHERE OWNER_ID= '"+ownerID+"'");
+            pst = connection.prepareStatement("SELECT * FROM building WHERE OWNER_ID= '"+ownerId+"'");
             rs = pst.executeQuery();
 
 
@@ -30,10 +28,7 @@ public class FuncViewBuilding {
             }
 
 
-        if(testp==1) {
 
-          //  ownerfunc("OWNERS", ownerID);
-        }
     }
 
 

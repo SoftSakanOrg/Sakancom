@@ -20,7 +20,7 @@ public class view_building_steps {
     @When("the owner searches for his buildings by his id like {int}")
     public void theOwnerSearchesForHisBuildingsByHisIdLike(Integer owner_id) throws SQLException {
 
-        obj.viewbuilding(owner_id,2);
+        obj.viewbuilding(owner_id);
     }
     @Then("the owner buildings should appear to him")
     public void theOwnerBuildingsShouldAppearToHim() {

@@ -17,7 +17,7 @@ public class FuncOwner {
 
                 if(ownerFuncParam.testp() ==1) {
 
-                    viewbuilding(ownerFuncParam.ownerID(), 1);
+                    viewbuilding(ownerFuncParam.ownerID());
                 }
 
             }   else if (ownerFuncParam.ownsc().equalsIgnoreCase("E")) {
