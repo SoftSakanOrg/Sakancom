@@ -10,6 +10,8 @@ public class FuncAddBuilding {
     public static int selectinfoflag;
     public static int addbuildingflag;
     public static int addobservationflag;
+
+    @SuppressWarnings("java:S1118")
     public static void addbuildingfunc(int ownerId,int testp) throws SQLException {
 
         Connection connection = null;
