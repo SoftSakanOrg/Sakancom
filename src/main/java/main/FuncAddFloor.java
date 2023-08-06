@@ -12,7 +12,7 @@ public class FuncAddFloor {
     public static int observationFlag;
     public static int requestFlag;
     public static int floorNumFlag;
-    public static void addfloor(int building_id,int testp) throws SQLException {
+    public static void addfloor(int buildingId,int testp) throws SQLException {
 
 
         
@@ -20,7 +20,7 @@ public class FuncAddFloor {
         PreparedStatement pst = null;
         PreparedStatement tst = null;
         ResultSet rs = null;
-        ResultSet ts = null;
+
 
 
 
@@ -34,7 +34,7 @@ public class FuncAddFloor {
                 connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
                 pst = connection.prepareStatement("INSERT INTO FLOORS(BUILDING_ID,AVAILABILITY,PRICE,SERVICES,PARTICIPANTS,MAX_PARTICIPANTS,BEDROOMS,BATHROOMS,BALCONY,STATUS) VALUES" + "(?,?,?,?,?,?,?,?,?,?)");
         if(testp==1) {
-                pst.setInt(1, building_id);
+                pst.setInt(1, buildingId);
                 pst.setString(2, "available");
                 pst.setInt(3, Sakan.h.getHousePrice());
                 pst.setString(4, Sakan.h.getHouseServices());
@@ -84,7 +84,7 @@ public class FuncAddFloor {
                     pst.executeUpdate();
                 }
                 addFloorFlag=1;
-                tst = connection.prepareStatement("UPDATE BUILDING SET FLOORS_NUM= (FLOORS_NUM + 1) WHERE BUILDING_ID='"+building_id+ "'");
+                tst = connection.prepareStatement("UPDATE BUILDING SET FLOORS_NUM= (FLOORS_NUM + 1) WHERE BUILDING_ID='"+buildingId+ "'");
                 floorNumFlag=1;
         if(testp==1) {
             tst.executeUpdate();
