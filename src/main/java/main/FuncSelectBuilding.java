@@ -20,7 +20,7 @@ public class FuncSelectBuilding {
 
 
                 connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                pst = connection.prepareStatement("SELECT * FROM building WHERE buildingId = '" + buildingId + "' AND  OWNER_ID = '" + ownerId + "'");
+                pst = connection.prepareStatement("SELECT * FROM building WHERE building_id = '" + buildingId + "' AND  OWNER_ID = '" + ownerId + "'");
                 rs = pst.executeQuery();
                 if (rs.next()) {
                     invalidflag =0;
