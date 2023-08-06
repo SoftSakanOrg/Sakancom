@@ -26,7 +26,7 @@ public class delete_observation_steps {
     @Then("the observations table should be empty")
     public void theObservationsTableShouldBeEmpty() {
 
-        assertTrue(obj.flagDeleteObservations==1);
+        assertTrue(obj.flagdeleteobservations ==1);
     }
 
 }
