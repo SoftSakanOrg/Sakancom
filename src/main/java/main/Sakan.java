@@ -685,9 +685,7 @@ public class Sakan {
         Scanner st = new Scanner(System.in);
         Scanner sc=new Scanner(System.in);
 
-        Connection connection = null;
-        PreparedStatement pst= null;
-        ResultSet rs = null;
+
         String view1;
         while(true) {
             String desc = "\t            ★★  " + fdescription + "  ★★                 \t";
