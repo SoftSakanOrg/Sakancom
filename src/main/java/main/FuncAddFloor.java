@@ -4,6 +4,7 @@ import java.sql.*;
 
 import static main.Sakan.logger;
 
+@SuppressWarnings("java:S1118")
 public class FuncAddFloor {
 
     public static int addFloorFlag;
