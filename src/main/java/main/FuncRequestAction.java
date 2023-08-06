@@ -6,6 +6,7 @@ import static main.Sakan.logger;
 @SuppressWarnings("java:S1118")
 public class FuncRequestAction {
 
+    public static final String JDBC_MYSQL_LOCALHOST_3306_SAKAN = "jdbc:mysql://localhost:3306/Sakan";
     public static int RequestFlag=0;
 
     public static void requestAction(int ID, String answer, int testp) throws SQLException {
@@ -22,7 +23,7 @@ public class FuncRequestAction {
          Sakan.flagRequestAction=0;
 
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            connection = DriverManager.getConnection(JDBC_MYSQL_LOCALHOST_3306_SAKAN, "root", "");
             pst = connection.prepareStatement("SELECT FLOOR_ID FROM advertisment_requests WHERE REQ_ID='"+ID+"'");
             rs= pst.executeQuery();
 
@@ -77,12 +78,12 @@ public class FuncRequestAction {
 
 
 
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        connection = DriverManager.getConnection(JDBC_MYSQL_LOCALHOST_3306_SAKAN, "root", "");
         if(testp ==1) {
             pst = connection.prepareStatement("UPDATE FLOORS SET STATUS='Advertised' where FLOOR_ID='" + Sakan.ar.getFloorId() + "'");
             pst.executeUpdate();
         }
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        connection = DriverManager.getConnection(JDBC_MYSQL_LOCALHOST_3306_SAKAN, "root", "");
         if(testp ==1) {
             pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='" + ID + "'");
             pst.executeUpdate();
@@ -93,13 +94,13 @@ public class FuncRequestAction {
     private static void rejectedextracted(int ID, int testp) throws SQLException {
         PreparedStatement pst;
         Connection connection;
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        connection = DriverManager.getConnection(JDBC_MYSQL_LOCALHOST_3306_SAKAN, "root", "");
         if(testp ==1) {
             pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='" + ID + "'");
             pst.executeUpdate();
         }
 
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        connection = DriverManager.getConnection(JDBC_MYSQL_LOCALHOST_3306_SAKAN, "root", "");
         if(testp ==1) {
             pst = connection.prepareStatement("DELETE FROM FLOORS where FLOOR_ID='" + Sakan.ar.getFloorId() + "'");
             pst.executeUpdate();
