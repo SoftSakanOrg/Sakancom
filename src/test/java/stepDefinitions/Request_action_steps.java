@@ -30,7 +30,7 @@ public class Request_action_steps {
     }
     @Then("the floorID should be received by the admin")
     public void theFloorIDShouldBeReceivedByTheAdmin() {
-        assertTrue(obj2.RequestFlag==1);
+        assertTrue(obj2.requestflag ==1);
     }
 
 
@@ -59,7 +59,7 @@ public class Request_action_steps {
     }
     @Then("the request will be accepted or rejected or admin will be redirected to main menu")
     public void theRequestWillBeAcceptedOrRejectedOrAdminWillBeRedirectedToMainMenu() {
-        assertTrue(obj2.RequestFlag==1);
+        assertTrue(obj2.requestflag ==1);
 
     }
 
