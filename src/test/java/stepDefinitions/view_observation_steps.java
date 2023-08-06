@@ -29,7 +29,7 @@ public class view_observation_steps {
     @Then("the Observation should appear to the admin")
     public void theObservationShouldAppearToTheAdmin()  {
 
-        assertEquals(view.viewObservationFlag,1);
+        assertEquals(1,view.viewObservationFlag);
     }
 
     @When("there is no data in Observations table")
