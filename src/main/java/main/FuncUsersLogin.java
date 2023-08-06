@@ -1,8 +1,5 @@
 package main;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import static main.Sakan.*;
 import static main.FuncCheckEmail.checkemail;
