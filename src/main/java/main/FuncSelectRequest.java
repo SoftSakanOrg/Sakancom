@@ -1,7 +1,7 @@
 package main;
 
 import java.sql.*;
-import java.util.Scanner;
+
 
 import static main.Sakan.logger;
 @SuppressWarnings("java:S1118")
@@ -10,7 +10,6 @@ public class FuncSelectRequest {
     public static int requestflag =0;
     public static void selectRequest(int reqId) throws SQLException {
         requestflag =0;
-        Scanner sc=new Scanner(System.in);
         Connection connection = null;
         PreparedStatement pst= null;
         ResultSet rs = null;

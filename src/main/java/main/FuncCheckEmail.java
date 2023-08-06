@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 import static main.Sakan.*;
-import static main.FuncUsersLogin.Login;
+import static main.FuncUsersLogin.login;
 @SuppressWarnings("java:S1118")
 public class FuncCheckEmail {
 
@@ -42,7 +42,7 @@ public class FuncCheckEmail {
 
                         logger.info("Enter password: ");
                         Sakan.u.setPassword(sc.nextLine());
-                        Login(usertype,Sakan.u.getEmail(),Sakan.u.getPassword());
+                        login(usertype,Sakan.u.getEmail(),Sakan.u.getPassword());
 
 
             }

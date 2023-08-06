@@ -6,7 +6,7 @@ import static java.lang.System.exit;
 import static java.lang.System.getLogger;
 import static main.FuncCheckEmail.checkemail;
 import static main.funcCheckLogin.checklogin;
-import static main.FuncUsersLogin.Login;
+import static main.FuncUsersLogin.login;
 import java.util.logging.Logger;
 
 public class Sakan {
@@ -179,7 +179,7 @@ public class Sakan {
                 Sakan.u.setPassword(sc.nextLine());
 
 
-                Login(usertype,Sakan.u.getEmail(),Sakan.u.getPassword());
+                login(usertype,Sakan.u.getEmail(),Sakan.u.getPassword());
 
 
             }

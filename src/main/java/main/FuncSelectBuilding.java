@@ -1,7 +1,7 @@
 package main;
 
 import java.sql.*;
-import java.util.Scanner;
+
 
 
 import static main.Sakan.logger;

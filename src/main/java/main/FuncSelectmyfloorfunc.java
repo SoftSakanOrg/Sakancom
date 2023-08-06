@@ -7,21 +7,20 @@ import static main.Sakan.logger;
 public class FuncSelectmyfloorfunc {
 
     public static int myFloorFlag=0;
-    public static void selectmyfloor(int building_id,int floor_id) throws SQLException {
+    public static void selectmyfloor(int buildingId,int floorId) throws SQLException {
 
         Sakan.flagSelectMyFloor = 0;
         myFloorFlag=0;
         Connection connection = null;
         PreparedStatement pst= null;
-        PreparedStatement tst= null;
         ResultSet rs = null;
-        ResultSet ts = null;
+
 
 
 
 
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-            pst = connection.prepareStatement("SELECT * FROM floors WHERE floor_id = '" +  floor_id + "' AND BUILDING_ID= '"+building_id+"'" );
+            pst = connection.prepareStatement("SELECT * FROM floors WHERE floor_id = '" +  floorId + "' AND BUILDING_ID= '"+buildingId+"'" );
             rs = pst.executeQuery();
 
 

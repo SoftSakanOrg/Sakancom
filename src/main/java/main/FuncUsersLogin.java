@@ -10,7 +10,7 @@ import static main.funcCheckLogin.checklogin;
 @SuppressWarnings("java:S1118")
 public class FuncUsersLogin {
 
-    public static void Login(String usertype,String email,String pass) {
+    public static void login(String usertype, String email, String pass) {
 
 
 
@@ -19,19 +19,11 @@ public class FuncUsersLogin {
 
 
 
-
-
-            Connection connection = null;
-            PreparedStatement pst = null;
-            ResultSet rs = null;
-
-
-
-            if ( Sakan.u.getEmail().equalsIgnoreCase("1")) {
+            if ( email.equalsIgnoreCase("1")) {
                 mainfunc();
 
             }
-            if (!Sakan.u.getEmail().contains("@") || !Sakan.u.getEmail().contains(".")) {
+            if (!email.contains("@") || !email.contains(".")) {
                 logger.info("Please enter a valid email...");
                flaglogin=1;
                 tenantfunc(usertype);
@@ -40,22 +32,22 @@ public class FuncUsersLogin {
 
 
 
-            checkemail(Sakan.u.getEmail(), 2, usertype);
+            checkemail(email, 2, usertype);
             if (Sakan.flag11 == 0) {
 
 
 
 
-                if (  Sakan.u.getPassword().equalsIgnoreCase("1")) {
+                if ( pass.equalsIgnoreCase("1")) {
                     mainfunc();
 
                 }
 
-//                pass = temppass;
-                checklogin(u.getEmail(), u.getPassword(),usertype);
+
+                checklogin(email, pass,usertype);
             }
             Sakan.flag11 =1;
-            Sakan.onlineUser =Sakan.u.getEmail() ;
+            Sakan.onlineUser =email ;
 
         }
 
