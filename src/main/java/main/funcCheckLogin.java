@@ -118,7 +118,7 @@ public class funcCheckLogin {
                                     logger.info("Invalid input");
                                 }
 
-                                viewBuildingFunc(Sakan.b.getOwnerId(), Sakan.b.getBuildingId(), view1,1);
+                                viewBuildingFunc( Sakan.b.getBuildingId(), view1,1);
                                 if (view1.equalsIgnoreCase("B")) {
                                     Scanner sc1 = new Scanner(System.in);
                                     logger.info("Enter the floor ID: ");

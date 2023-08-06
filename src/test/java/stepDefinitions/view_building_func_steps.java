@@ -20,7 +20,7 @@ public class view_building_func_steps {
     }
     @When("owner enters {string} and building with id {int}")
     public void ownerEntersAndBuildingWithId(String viewType, Integer building_id) throws SQLException {
-       obj.viewBuildingFunc(33,building_id,viewType,2);
+       obj.viewBuildingFunc(building_id,viewType,2);
     }
     @Then("floor should appear to him from the specific building")
     public void floorShouldAppearToHimFromTheSpecificBuilding() {
@@ -35,7 +35,7 @@ public class view_building_func_steps {
     }
     @When("owner enters {string} and building id that doesn`t exit like {int}")
     public void ownerEntersAndBuildingIdThatDoesnTExitLike(String viewType, Integer building_id) throws SQLException {
-        obj.viewBuildingFunc(33,building_id,viewType,2);
+        obj.viewBuildingFunc(building_id,viewType,2);
     }
     @Then("a message should appear telling no floors available")
     public void aMessageShouldAppearTellingNoFloorsAvailable() {
@@ -50,7 +50,7 @@ public class view_building_func_steps {
     }
     @When("owner enters {string}")
     public void ownerEnters(String viewType) throws SQLException {
-        obj.viewBuildingFunc(33,9,viewType,2);
+        obj.viewBuildingFunc(9,viewType,2);
     }
     @Then("owner should transfer back to main menu")
     public void ownerShouldTransferBackToMainMenu() {

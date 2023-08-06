@@ -7,7 +7,7 @@ import static main.Sakan.*;
 public class FuncViewBuildingFunc {
 
     public static int viewFloorFlag;
-    public static void viewBuildingFunc(int owner_ID,int building_ID, String view1,int testp) throws SQLException {
+    public static void viewBuildingFunc(int buildingId, String view1,int testp) throws SQLException {
 
         Connection connection = null;
         PreparedStatement pst = null;
@@ -19,7 +19,7 @@ public class FuncViewBuildingFunc {
 
 
                     connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                    pst = connection.prepareStatement("SELECT * FROM floors WHERE  building_id = " + building_ID + "  ");
+                    pst = connection.prepareStatement("SELECT * FROM floors WHERE  building_id = " + buildingId + "  ");
                     rs = pst.executeQuery();
                     if( !rs.next()){
                         viewFloorFlag=1;
