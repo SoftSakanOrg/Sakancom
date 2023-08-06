@@ -72,7 +72,7 @@ public class FuncRequestAction {
 
 
 
-    private static void acceptedextracted(int ID, int testp) throws SQLException {
+    private static void acceptedextracted(int id, int testp) throws SQLException {
         Connection connection;
         PreparedStatement pst ;
 
@@ -85,18 +85,18 @@ public class FuncRequestAction {
         }
         connection = DriverManager.getConnection(JDBC_MYSQL_LOCALHOST_3306_SAKAN, "root", "");
         if(testp ==1) {
-            pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='" + ID + "'");
+            pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='" + id + "'");
             pst.executeUpdate();
         }
     }
 
 
-    private static void rejectedextracted(int ID, int testp) throws SQLException {
+    private static void rejectedextracted(int id, int testp) throws SQLException {
         PreparedStatement pst;
         Connection connection;
         connection = DriverManager.getConnection(JDBC_MYSQL_LOCALHOST_3306_SAKAN, "root", "");
         if(testp ==1) {
-            pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='" + ID + "'");
+            pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='" + id + "'");
             pst.executeUpdate();
         }
 
