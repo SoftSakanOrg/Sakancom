@@ -1,15 +1,15 @@
 package main;
 
-public class systemObservation {
+public class SystemObservation {
 
     private int id;
     private String description;
 
 
-    public systemObservation(){
+    public SystemObservation(){
 
     }
-    public systemObservation(int id, String description) {
+    public SystemObservation(int id, String description) {
         this.id = id;
         this.description = description;
     }
