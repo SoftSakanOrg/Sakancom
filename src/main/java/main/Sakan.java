@@ -597,7 +597,7 @@ public class Sakan {
             checkemail(Sakan.u.getEmail(), 1, usertype);
 
 
-            entering_username_pass_contact(sc);
+            enteringUsernamePassContact(sc);
 
 
             try {
@@ -647,7 +647,7 @@ public class Sakan {
     }
 
 
-    private static void entering_username_pass_contact(Scanner sc) {
+    private static void enteringUsernamePassContact(Scanner sc) {
         if(Sakan.flag1==0) {
 
             logger.info("Enter username: ");
