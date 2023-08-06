@@ -5,7 +5,7 @@ import java.util.*;
 import static java.lang.System.exit;
 import static java.lang.System.getLogger;
 import static main.FuncCheckEmail.checkemail;
-import static main.funcCheckLogin.checklogin;
+import static main.FuncCheckLogin.checklogin;
 import static main.FuncUsersLogin.login;
 import java.util.logging.Logger;
 
@@ -934,7 +934,7 @@ public class Sakan {
                                 confirm = st.nextLine();
                                 if(confirm.equalsIgnoreCase("A")){
 
-                                    try {
+                                     try {
 
 
                                         pst = connection.prepareStatement("INSERT INTO house_participants(floor_id,part_name,part_age,part_major,part_gender) VALUES" + QUESTION_MARKS);

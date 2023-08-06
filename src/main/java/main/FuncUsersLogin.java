@@ -3,7 +3,7 @@ package main;
 
 import static main.Sakan.*;
 import static main.FuncCheckEmail.checkemail;
-import static main.funcCheckLogin.checklogin;
+import static main.FuncCheckLogin.checklogin;
 @SuppressWarnings("java:S1118")
 public class FuncUsersLogin {
 

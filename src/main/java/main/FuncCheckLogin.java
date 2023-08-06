@@ -15,7 +15,7 @@ import static main.FuncSelectRequest.selectRequest;
 import static main.FuncSelectmyfloorfunc.selectmyfloor;
 import static main.FuncViewBuildingFunc.viewBuildingFunc;
 @SuppressWarnings("java:S1118")
-public class funcCheckLogin {
+public class FuncCheckLogin {
 
     public static void checklogin(String email, String pass, String usertype){
 
@@ -23,7 +23,7 @@ public class funcCheckLogin {
         Connection connection = null;
         PreparedStatement pst= null;
         ResultSet rs = null;
-        PreparedStatement tst= null;
+
         flagReflect=0;
 
 
