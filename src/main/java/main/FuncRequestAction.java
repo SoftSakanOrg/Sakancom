@@ -33,29 +33,12 @@ public class FuncRequestAction {
 
 
 
-
-
-//     String picture = null;
             if (answer.equalsIgnoreCase("A")) {
 
                 RequestFlag=1;
 
 
-
-
-
-
-                        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                        if(testp==1) {
-                            pst = connection.prepareStatement("UPDATE FLOORS SET STATUS='Advertised' where FLOOR_ID='" + Sakan.ar.getFloorId() + "'");
-                            pst.executeUpdate();
-                        }
-                            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                        if(testp==1) {
-                            pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='" + ID + "'");
-                            pst.executeUpdate();
-                        }
-
+                acceptedextracted(ID, testp);
 
 
                 logger.info("Request has been Approved...");
@@ -65,23 +48,7 @@ public class FuncRequestAction {
                 RequestFlag=1;
 
 
-
-
-
-
-                        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                if(testp==1) {
-                    pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='" + ID + "'");
-                    pst.executeUpdate();
-                }
-
-                        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                if(testp==1) {
-                    pst = connection.prepareStatement("DELETE FROM FLOORS where FLOOR_ID='" + Sakan.ar.getFloorId() + "'");
-                    pst.executeUpdate();
-                }
-
-
+                rejectedextracted(ID, testp);
 
 
                 logger.info("Request has been Rejected...");
@@ -98,6 +65,44 @@ public class FuncRequestAction {
                 Sakan.flagRequestAction=1;
                 break;
             }
+        }
+    }
+
+
+
+
+    private static void acceptedextracted(int ID, int testp) throws SQLException {
+        Connection connection;
+        PreparedStatement pst ;
+
+
+
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        if(testp ==1) {
+            pst = connection.prepareStatement("UPDATE FLOORS SET STATUS='Advertised' where FLOOR_ID='" + Sakan.ar.getFloorId() + "'");
+            pst.executeUpdate();
+        }
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        if(testp ==1) {
+            pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='" + ID + "'");
+            pst.executeUpdate();
+        }
+    }
+
+
+    private static void rejectedextracted(int ID, int testp) throws SQLException {
+        PreparedStatement pst;
+        Connection connection;
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        if(testp ==1) {
+            pst = connection.prepareStatement("DELETE FROM advertisment_requests where REQ_ID='" + ID + "'");
+            pst.executeUpdate();
+        }
+
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+        if(testp ==1) {
+            pst = connection.prepareStatement("DELETE FROM FLOORS where FLOOR_ID='" + Sakan.ar.getFloorId() + "'");
+            pst.executeUpdate();
         }
     }
 

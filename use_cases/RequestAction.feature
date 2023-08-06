@@ -17,12 +17,3 @@ Feature: RequestAction test
       | B      |
       | C      |
 
-#  Scenario: After selecting a request
-#    Given the admin selected a request
-#    When  the admin enters "B"
-#    Then the request will be rejected
-#
-#  Scenario: After selecting a request
-#    Given the admin selected a request
-#    When  the admin enters "C"
-#    Then the admin will be redirected to main menu
