@@ -60,7 +60,7 @@ public class Request_action_steps {
     }
     @Then("the request will be accepted or rejected or admin will be redirected to main menu")
     public void theRequestWillBeAcceptedOrRejectedOrAdminWillBeRedirectedToMainMenu() {
-        assertEquals(obj2.requestflag ,1);
+        assertEquals(1,obj2.requestflag );
 
     }
 

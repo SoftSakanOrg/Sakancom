@@ -33,7 +33,7 @@ public class View_request_steps {
     }
     @Then("a message should appear  telling no data is found")
     public void aMessageShouldAppearTellingNoDataIsFound() {
-        assertEquals(view.viewrequestflag ,1);
+        assertEquals(1,view.viewrequestflag );
     }
 
 

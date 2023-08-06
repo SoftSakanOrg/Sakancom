@@ -40,7 +40,7 @@ public class view_building_func_steps {
     }
     @Then("a message should appear telling no floors available")
     public void aMessageShouldAppearTellingNoFloorsAvailable() {
-        assertEquals(obj.viewfloorflag ,1);
+        assertEquals(1,obj.viewfloorflag );
     }
 
 
@@ -55,7 +55,7 @@ public class view_building_func_steps {
     }
     @Then("owner should transfer back to main menu")
     public void ownerShouldTransferBackToMainMenu() {
-        assertEquals(obj.viewfloorflag ,1);
+        assertEquals(1,obj.viewfloorflag );
     }
 
 

@@ -54,7 +54,7 @@ public class add_building_steps {
     }
     @Then("the adding observation will appear to admin")
     public void theAddingObservationWillAppearToAdmin() {
-        assertEquals(obj.addobservationflag ,1);
+        assertEquals(1,obj.addobservationflag );
     }
 
 

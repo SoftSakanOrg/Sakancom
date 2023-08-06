@@ -38,7 +38,7 @@ public class view_observation_steps {
     }
     @Then("a message should appear  telling no Observation is found")
     public void aMessageShouldAppearTellingNoObservationIsFound() {
-        assertEquals(view.viewObservationFlag,1);
+        assertEquals(1,view.viewObservationFlag);
     }
 
 
