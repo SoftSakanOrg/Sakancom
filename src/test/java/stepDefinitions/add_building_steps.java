@@ -24,7 +24,7 @@ public class add_building_steps {
     }
     @Then("contact info should appear")
     public void contactInfoShouldAppear() {
-        assertTrue(obj.selectinfoflag ==1);
+        assertEquals(1,obj.selectinfoflag);
     }
 
 
@@ -39,7 +39,7 @@ public class add_building_steps {
     }
     @Then("new building should appear to the table")
     public void newBuildingShouldAppearToTheTable() {
-        assertTrue(obj.addbuildingflag ==1);
+        assertEquals(1,obj.addbuildingflag );
     }
 
 

@@ -31,7 +31,7 @@ public class Request_action_steps {
     }
     @Then("the floorID should be received by the admin")
     public void theFloorIDShouldBeReceivedByTheAdmin() {
-        assertEquals(obj2.requestflag ,1);
+        assertEquals(1,obj2.requestflag );
     }
 
 

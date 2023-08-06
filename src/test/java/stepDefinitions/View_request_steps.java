@@ -22,7 +22,7 @@ public class View_request_steps {
     @Then("the requests should appear to the admin")
     public void theRequestsShouldAppearToTheAdmin() throws SQLException {
 
-        assertEquals(view.viewrequestflag ,1);
+        assertEquals(1,view.viewrequestflag );
 
     }
 
