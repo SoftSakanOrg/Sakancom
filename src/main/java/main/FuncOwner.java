@@ -4,7 +4,7 @@ import java.sql.*;
 
 import static main.Sakan.*;
 import static main.FuncViewBuilding.viewbuilding;
-
+@SuppressWarnings("java:S1118")
 public class FuncOwner {
 
     public static int ownerFlag;
