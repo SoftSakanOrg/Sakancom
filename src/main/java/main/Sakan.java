@@ -59,9 +59,9 @@ public class Sakan {
     static Floors h =new Floors();
     static Furniture f =new Furniture();
 
-    static houseParticipants hp=new houseParticipants();
-    static housePictures hpc=new housePictures();
-    static furniturePictures fpc=new furniturePictures();
+    static HouseParticipants hp=new HouseParticipants();
+    static HousePictures hpc=new HousePictures();
+    static FurniturePictures fpc=new FurniturePictures();
 
     static Buildings b =new Buildings();
 

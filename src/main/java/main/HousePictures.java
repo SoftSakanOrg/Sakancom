@@ -1,15 +1,15 @@
 package main;
 
-public class housePictures {
+public class HousePictures {
 
   private Integer housePicId;
   private Integer houseId;
   private String housePicture;
 
-    public housePictures() {
+    public HousePictures() {
     }
 
-    public housePictures(Integer housePicId, Integer houseId, String housePicture) {
+    public HousePictures(Integer housePicId, Integer houseId, String housePicture) {
         this.housePicId = housePicId;
         this.houseId = houseId;
         this.housePicture = housePicture;

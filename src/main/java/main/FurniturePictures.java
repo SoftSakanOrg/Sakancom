@@ -1,16 +1,16 @@
 package main;
 
-public class furniturePictures {
+public class FurniturePictures {
 
 
     private Integer furniturePictureId;
     private Integer furnitureId;
     private String furniturePicture;
 
-    public furniturePictures() {
+    public FurniturePictures() {
     }
 
-    public furniturePictures(Integer furniturePictureId, Integer furnitureId, String furniturePicture) {
+    public FurniturePictures(Integer furniturePictureId, Integer furnitureId, String furniturePicture) {
         this.furniturePictureId = furniturePictureId;
         this.furnitureId = furnitureId;
         this.furniturePicture = furniturePicture;
