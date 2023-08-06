@@ -595,37 +595,9 @@ public class Sakan {
 
 
             checkemail(Sakan.u.getEmail(), 1, usertype);
-            if(Sakan.flag1==0) {
-
-                logger.info("Enter username: ");
-                Sakan.u.setUsername(sc.nextLine());
-                if (Sakan.u.getUsername().equalsIgnoreCase("1")) {
-                    mainfunc();
-
-                }
 
 
-
-                logger.info("Enter password: ");
-                Sakan.u.setPassword(sc.nextLine());
-
-                if (Sakan.u.getPassword().equalsIgnoreCase("1")) {
-                    mainfunc();
-
-                }
-
-                logger.info("Enter Contact Number: ");
-                Sakan.u.setContactNum(sc.nextLine());
-
-                if (Sakan.u.getContactNum().equalsIgnoreCase("1")) {
-                    mainfunc();
-
-                }
-
-
-            }
-
-
+            entering_username_pass_contact(sc);
 
 
             try {
@@ -653,10 +625,8 @@ public class Sakan {
                         Sakan.u.setUsersID(rs.getInt(1));
                     }
 
-                }
 
 
-                if(usertype.equalsIgnoreCase(owners)) {
                     Sakan.onlineUser = u.getEmail();
                     checklogin(u.getEmail(), u.getPassword(),usertype);
                     Sakan.flagOwner=1;
@@ -677,8 +647,37 @@ public class Sakan {
     }
 
 
+    private static void entering_username_pass_contact(Scanner sc) {
+        if(Sakan.flag1==0) {
+
+            logger.info("Enter username: ");
+            Sakan.u.setUsername(sc.nextLine());
+            if (Sakan.u.getUsername().equalsIgnoreCase("1")) {
+                mainfunc();
+
+            }
 
 
+
+            logger.info("Enter password: ");
+            Sakan.u.setPassword(sc.nextLine());
+
+            if (Sakan.u.getPassword().equalsIgnoreCase("1")) {
+                mainfunc();
+
+            }
+
+            logger.info("Enter Contact Number: ");
+            Sakan.u.setContactNum(sc.nextLine());
+
+            if (Sakan.u.getContactNum().equalsIgnoreCase("1")) {
+                mainfunc();
+
+            }
+
+
+        }
+    }
 
 
     public static void viewFurnituresFunc(String fdescription , int furnitureID) {
