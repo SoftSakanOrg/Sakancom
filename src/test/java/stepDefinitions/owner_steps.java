@@ -29,7 +29,7 @@ public class owner_steps {
     }
     @Then("a  specific function will be called depending on functype")
     public void aSpecificFunctionWillBeCalledDependingOnFunctype() {
-      assertTrue(obj.ownerFlag==1);
+      assertTrue(obj.ownerflag ==1);
     }
 
 }

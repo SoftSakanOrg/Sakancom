@@ -7,17 +7,13 @@ import static main.FuncViewBuilding.viewbuilding;
 @SuppressWarnings("java:S1118")
 public class FuncOwner {
 
-    public static int ownerFlag;
+    public static int ownerflag;
     public static void ownerfunc(OwnerFuncParam ownerFuncParam) throws SQLException {
-
-        Connection connection = null;
-        PreparedStatement pst= null;
-        ResultSet rs = null;
 
 
             if (ownerFuncParam.ownsc().equalsIgnoreCase("A")) {
 
-                ownerFlag=1;
+                ownerflag =1;
 
                 if(ownerFuncParam.testp() ==1) {
 
@@ -26,7 +22,7 @@ public class FuncOwner {
 
             }   else if (ownerFuncParam.ownsc().equalsIgnoreCase("E")) {
 
-                ownerFlag=1;
+                ownerflag =1;
 
                 if(ownerFuncParam.testp() ==1) {
                     mainfunc();
