@@ -28,11 +28,11 @@ public class select_request_steps {
     public void theAdminSelectsARequestByIDLike(Integer req_ID) throws SQLException {
         obj.setReqId(req_ID);
 
-         obj2.selectRequest(req_ID,2);
+         obj2.selectRequest(req_ID);
     }
     @Then("the request should appear to the admin")
     public void theRequestShouldAppearToTheAdmin() {
-        assertTrue(obj2.RequestFlag==1);
+        assertTrue(obj2.requestflag ==1);
     }
 
 

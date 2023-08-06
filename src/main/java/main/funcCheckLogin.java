@@ -301,7 +301,7 @@ public class funcCheckLogin {
                             Sakan.ar.setReqId(sc.nextInt());
 
 
-                            selectRequest(Sakan.ar.getReqId(), 1);
+                            selectRequest(Sakan.ar.getReqId());
                             while (flagSelectRequest == 1) {
                                 Scanner sf = new Scanner(System.in);
                                 logger.info("Do you want to accept this request or deleter it? ");
