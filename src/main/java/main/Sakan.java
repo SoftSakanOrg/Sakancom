@@ -702,23 +702,7 @@ public class Sakan {
 
             if (view1.equalsIgnoreCase("A")) {
 
-                try {
-                    connection = DriverManager.getConnection(LOCALHOST_3306_SAKAN, "root", "");
-                    pst = connection.prepareStatement("SELECT picture FROM furniture_pic  WHERE " + furnitureID + " = furniture_id  ");
-                    rs = pst.executeQuery();
-                    while (rs.next()) {
-
-                        String content = s1 + rs.getString(1) + s1;
-                        logger.info(content);
-
-
-                    }
-
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-
-                }
+                viewFurnitureTypeA(furnitureID);
 
 
             }
@@ -728,58 +712,10 @@ public class Sakan {
             if (view1.equalsIgnoreCase("B")) {
 
 
-                String confirm;
 
 
 
-                while (true) {
-                    Sakan.whileflag = 0;
-                    Sakan.whileflag2 = 0;
-
-
-                    while(true){
-
-                        Sakan.whileflag2=0;
-                        logger.info("Are you sure you want to purchase this Furniture?");
-                        logger.info(A_CONFIRM_B_CANCEL);
-                        confirm = st.nextLine();
-                        if(confirm.equalsIgnoreCase("A")){
-                            try {
-
-
-                                connection = DriverManager.getConnection(LOCALHOST_3306_SAKAN, "root", "");
-                                pst = connection.prepareStatement("UPDATE furniture SET status='sold' WHERE furniture_id = '" + furnitureID + "'");
-                                pst.executeUpdate();
-
-                                pst = connection.prepareStatement(DESCRIPTION_VALUES);
-
-                                pst.setString(1, Sakan.onlineUser + " has purchased a furniture (" + Sakan.f.getFurnitureDescription() + ")");
-
-                                pst.executeUpdate();
-
-                                logger.info("Furniture purchased successfully!");
-                                Sakan.flag2 = 1;
-                                Sakan.whileflag2 = 1;
-                                tenantfunc(tenants);
-
-
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-
-                            }
-
-                        }
-                        else if(confirm.equalsIgnoreCase("B")){
-                            Sakan.whileflag = 1;
-                            break;
-                        }
-                        else logger.info(INVALID_INPUT);
-                    }
-                    if(Sakan.whileflag == 1){break;}
-                }
-
-
-
+                viewFurnitureTypeB(furnitureID, st);
 
 
             }
@@ -799,6 +735,81 @@ public class Sakan {
 
     }
 
+
+    private static void viewFurnitureTypeB(int furnitureID, Scanner st) {
+        PreparedStatement pst;
+        Connection connection;
+        String confirm;
+        while (true) {
+            Sakan.whileflag = 0;
+            Sakan.whileflag2 = 0;
+
+
+            while(true){
+
+                Sakan.whileflag2=0;
+                logger.info("Are you sure you want to purchase this Furniture?");
+                logger.info(A_CONFIRM_B_CANCEL);
+                confirm = st.nextLine();
+                if(confirm.equalsIgnoreCase("A")){
+                    try {
+
+
+                        connection = DriverManager.getConnection(LOCALHOST_3306_SAKAN, "root", "");
+                        pst = connection.prepareStatement("UPDATE furniture SET status='sold' WHERE furniture_id = '" + furnitureID + "'");
+                        pst.executeUpdate();
+
+                        pst = connection.prepareStatement(DESCRIPTION_VALUES);
+
+                        pst.setString(1, Sakan.onlineUser + " has purchased a furniture (" + Sakan.f.getFurnitureDescription() + ")");
+
+                        pst.executeUpdate();
+
+                        logger.info("Furniture purchased successfully!");
+                        Sakan.flag2 = 1;
+                        Sakan.whileflag2 = 1;
+                        tenantfunc(tenants);
+
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+
+                    }
+
+                }
+                else if(confirm.equalsIgnoreCase("B")){
+                    Sakan.whileflag = 1;
+                    break;
+                }
+                else logger.info(INVALID_INPUT);
+            }
+            if(Sakan.whileflag == 1){break;}
+        }
+    }
+
+
+    private static void viewFurnitureTypeA(int furnitureID) {
+        PreparedStatement pst;
+        Connection connection;
+        ResultSet rs;
+        try {
+            connection = DriverManager.getConnection(LOCALHOST_3306_SAKAN, "root", "");
+            pst = connection.prepareStatement("SELECT picture FROM furniture_pic  WHERE " + furnitureID + " = furniture_id  ");
+            rs = pst.executeQuery();
+            while (rs.next()) {
+
+                String content = s1 + rs.getString(1) + s1;
+                logger.info(content);
+
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
 
 
     public static void viewfloorsfunc( int floorID,int buildingID, String temail) {
