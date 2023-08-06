@@ -6,7 +6,7 @@ import static main.Sakan.*;
 import static main.FuncDeleteObservation.deleteObservations;
 import static main.FuncViewObservation.viewObservations;
 import static main.FuncViewRequest.viewRequests;
-
+@SuppressWarnings("java:S1118")
 public class FuncAdmin {
 
   public static int adminflag=0;
