@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 import static main.Sakan.logger;
-
+@SuppressWarnings("java:S1118")
 public class FuncSelectBuilding {
 
     public static int selectBuildingFlag;

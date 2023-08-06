@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 import static main.Sakan.logger;
-
+@SuppressWarnings("java:S1118")
 public class FuncSelectRequest {
 
     public static int RequestFlag=0;

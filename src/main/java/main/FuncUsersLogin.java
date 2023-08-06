@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import static main.Sakan.*;
 import static main.FuncCheckEmail.checkemail;
 import static main.funcCheckLogin.checklogin;
-
+@SuppressWarnings("java:S1118")
 public class FuncUsersLogin {
 
     public static void Login(String usertype,String email,String pass) {

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import static main.Sakan.*;
 import static main.FuncUsersLogin.Login;
-
+@SuppressWarnings("java:S1118")
 public class FuncCheckEmail {
 
 

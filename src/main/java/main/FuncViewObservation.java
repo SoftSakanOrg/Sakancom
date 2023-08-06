@@ -3,7 +3,7 @@ package main;
 import java.sql.*;
 
 import static main.Sakan.logger;
-
+@SuppressWarnings("java:S1118")
 public class FuncViewObservation {
 
     public static int viewObservationFlag=0;

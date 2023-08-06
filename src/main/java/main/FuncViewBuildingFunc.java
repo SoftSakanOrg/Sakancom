@@ -3,7 +3,7 @@ package main;
 import java.sql.*;
 
 import static main.Sakan.*;
-
+@SuppressWarnings("java:S1118")
 public class FuncViewBuildingFunc {
 
     public static int viewFloorFlag;

@@ -14,7 +14,7 @@ import static main.FuncSelectBuilding.selectbuilding;
 import static main.FuncSelectRequest.selectRequest;
 import static main.FuncSelectmyfloorfunc.selectmyfloor;
 import static main.FuncViewBuildingFunc.viewBuildingFunc;
-
+@SuppressWarnings("java:S1118")
 public class funcCheckLogin {
 
     public static void checklogin(String email, String pass, String usertype){
