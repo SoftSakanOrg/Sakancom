@@ -26,7 +26,7 @@ public class view_building_func_steps {
     @Then("floor should appear to him from the specific building")
     public void floorShouldAppearToHimFromTheSpecificBuilding() {
 
-        assertTrue(obj.viewfloorflag ==1);
+        assertEquals(1,obj.viewfloorflag);
     }
 
 

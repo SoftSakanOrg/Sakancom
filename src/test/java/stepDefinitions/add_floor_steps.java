@@ -30,7 +30,7 @@ public class add_floor_steps {
     }
     @Then("this observation should be added to Observations table")
     public void thisObservationShouldBeAddedToObservationsTable() {
-        assertTrue(obj.observationFlag==1);
+        assertEquals(1,obj.observationFlag);
     }
     @Then("it will be added as a request to advertisment_requests waiting for admin to accept it")
     public void itWillBeAddedAsARequestToAdvertismentRequestsWaitingForAdminToAcceptIt() {
@@ -38,7 +38,7 @@ public class add_floor_steps {
     }
     @Then("floors number should be incremented in the specific building")
     public void floorsNumberShouldBeIncrementedInTheSpecificBuilding() {
-        assertEquals(obj.floorNumFlag,1);
+        assertEquals(1,obj.floorNumFlag);
     }
 
 
