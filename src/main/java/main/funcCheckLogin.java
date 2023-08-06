@@ -296,7 +296,7 @@ public class funcCheckLogin {
 
                         if(Sakan.flagAdminFunc ==1){
 
-                            System.out.print("Enter the request ID: ");
+                            logger.info("Enter the request ID: ");
 
                             Sakan.ar.setReqId(sc.nextInt());
 
