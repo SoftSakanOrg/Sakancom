@@ -7,6 +7,7 @@ import main.FuncViewBuildingFunc;
 
 import java.sql.SQLException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class view_building_func_steps {
@@ -39,7 +40,7 @@ public class view_building_func_steps {
     }
     @Then("a message should appear telling no floors available")
     public void aMessageShouldAppearTellingNoFloorsAvailable() {
-        assertTrue(obj.viewfloorflag ==1);
+        assertEquals(obj.viewfloorflag ,1);
     }
 
 
@@ -54,7 +55,7 @@ public class view_building_func_steps {
     }
     @Then("owner should transfer back to main menu")
     public void ownerShouldTransferBackToMainMenu() {
-        assertTrue(obj.viewfloorflag ==1);
+        assertEquals(obj.viewfloorflag ,1);
     }
 
 

@@ -8,6 +8,7 @@ import main.FuncRequestAction;
 
 import java.sql.SQLException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class Request_action_steps {
@@ -30,7 +31,7 @@ public class Request_action_steps {
     }
     @Then("the floorID should be received by the admin")
     public void theFloorIDShouldBeReceivedByTheAdmin() {
-        assertTrue(obj2.requestflag ==1);
+        assertEquals(obj2.requestflag ,1);
     }
 
 
@@ -59,7 +60,7 @@ public class Request_action_steps {
     }
     @Then("the request will be accepted or rejected or admin will be redirected to main menu")
     public void theRequestWillBeAcceptedOrRejectedOrAdminWillBeRedirectedToMainMenu() {
-        assertTrue(obj2.requestflag ==1);
+        assertEquals(obj2.requestflag ,1);
 
     }
 

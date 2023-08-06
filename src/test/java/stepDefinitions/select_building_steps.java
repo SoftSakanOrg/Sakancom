@@ -7,6 +7,7 @@ import main.FuncSelectBuilding;
 
 import java.sql.SQLException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class select_building_steps {
@@ -23,7 +24,7 @@ public class select_building_steps {
     @Then("all building info should appear to him")
     public void allBuildingInfoShouldAppearToHim() {
 
-        assertTrue(obj.selectbuildingflag ==1);
+        assertEquals(obj.selectbuildingflag ,1);
     }
 
 
@@ -38,7 +39,7 @@ public class select_building_steps {
     }
     @Then("an invalid message should appear to him")
     public void anInvalidMessageShouldAppearToHim() {
-       assertTrue(obj.selectbuildingflag ==1);
+        assertEquals(obj.selectbuildingflag ,1);
     }
 
 

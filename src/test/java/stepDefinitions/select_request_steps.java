@@ -8,6 +8,7 @@ import main.FuncSelectRequest;
 
 import java.sql.SQLException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class select_request_steps {
@@ -32,7 +33,7 @@ public class select_request_steps {
     }
     @Then("the request should appear to the admin")
     public void theRequestShouldAppearToTheAdmin() {
-        assertTrue(obj2.requestflag ==1);
+        assertEquals(obj2.requestflag ,1);
     }
 
 

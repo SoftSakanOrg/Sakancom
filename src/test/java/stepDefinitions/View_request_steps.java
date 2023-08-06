@@ -22,7 +22,7 @@ public class View_request_steps {
     @Then("the requests should appear to the admin")
     public void theRequestsShouldAppearToTheAdmin() throws SQLException {
 
-        assertTrue(view.viewrequestflag ==1);
+        assertEquals(view.viewrequestflag ,1);
 
     }
 
@@ -33,7 +33,7 @@ public class View_request_steps {
     }
     @Then("a message should appear  telling no data is found")
     public void aMessageShouldAppearTellingNoDataIsFound() {
-        assertTrue(view.viewrequestflag ==1);
+        assertEquals(view.viewrequestflag ,1);
     }
 
 

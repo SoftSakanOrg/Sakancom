@@ -7,6 +7,7 @@ import main.FuncViewBuilding;
 
 import java.sql.SQLException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class view_building_steps {
@@ -25,7 +26,7 @@ public class view_building_steps {
     @Then("the owner buildings should appear to him")
     public void theOwnerBuildingsShouldAppearToHim() {
 
-        assertTrue(obj.flagViewBuilding==1);
+        assertEquals(obj.flagViewBuilding,1);
     }
 
 }

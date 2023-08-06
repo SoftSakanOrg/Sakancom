@@ -8,6 +8,7 @@ import main.OwnerFuncParam;
 
 import java.sql.SQLException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class owner_steps {
@@ -29,7 +30,7 @@ public class owner_steps {
     }
     @Then("a  specific function will be called depending on functype")
     public void aSpecificFunctionWillBeCalledDependingOnFunctype() {
-      assertTrue(obj.ownerflag ==1);
+        assertEquals(obj.ownerflag ,1);
     }
 
 }

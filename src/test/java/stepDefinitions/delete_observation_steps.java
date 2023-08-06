@@ -7,6 +7,7 @@ import main.FuncDeleteObservation;
 
 import java.sql.SQLException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class delete_observation_steps {
@@ -26,7 +27,7 @@ public class delete_observation_steps {
     @Then("the observations table should be empty")
     public void theObservationsTableShouldBeEmpty() {
 
-        assertTrue(obj.flagdeleteobservations ==1);
+        assertEquals(obj.flagdeleteobservations ,1);
     }
 
 }

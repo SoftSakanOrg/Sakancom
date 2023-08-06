@@ -7,6 +7,7 @@ import main.FuncAddFloor;
 
 import java.sql.SQLException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class add_floor_steps {
@@ -37,7 +38,7 @@ public class add_floor_steps {
     }
     @Then("floors number should be incremented in the specific building")
     public void floorsNumberShouldBeIncrementedInTheSpecificBuilding() {
-         assertTrue(obj.floorNumFlag==1);
+        assertEquals(obj.floorNumFlag,1);
     }
 
 
@@ -52,7 +53,7 @@ public class add_floor_steps {
     @Then("last floor should appear from table")
     public void lastFloorShouldAppearFromTable() {
 
-        assertTrue(obj.selectLastFloorFlag==1);
+        assertEquals(obj.selectLastFloorFlag,1);
     }
 
 

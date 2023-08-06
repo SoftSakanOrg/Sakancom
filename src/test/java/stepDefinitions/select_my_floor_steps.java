@@ -7,6 +7,7 @@ import main.FuncSelectmyfloorfunc;
 
 import java.sql.SQLException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class select_my_floor_steps {
@@ -23,7 +24,7 @@ public class select_my_floor_steps {
     }
     @Then("the data of this floor should appear to him")
     public void theDataOfThisFloorShouldAppearToHim() {
-      assertTrue(obj.myFloorFlag==1);
+        assertEquals(obj.myFloorFlag,1);
     }
     @When("owner enters floor id that doesnt exist like {int}")
     public void ownerEntersFloorIdThatDoesntExistLike(Integer floor_id) throws SQLException {
@@ -31,7 +32,7 @@ public class select_my_floor_steps {
     }
     @Then("a message should appear telliung him to enter a valid one")
     public void aMessageShouldAppearTelliungHimToEnterAValidOne() {
-        assertTrue(obj.myFloorFlag==1);
+        assertEquals(obj.myFloorFlag,1);
     }
 
 }

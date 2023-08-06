@@ -8,6 +8,7 @@ import main.FuncAdmin;
 
 import java.sql.SQLException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class admin_steps {
@@ -46,7 +47,7 @@ public class admin_steps {
     @Then("a  specific function will be called")
     public void aSpecificFunctionWillBeCalled() {
 
-        assertTrue(obj.adminflag==1);
+        assertEquals(obj.adminflag,1);
     }
 
 

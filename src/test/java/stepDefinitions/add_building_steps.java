@@ -7,6 +7,7 @@ import main.FuncAddBuilding;
 
 import java.sql.SQLException;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class add_building_steps {
@@ -53,7 +54,7 @@ public class add_building_steps {
     }
     @Then("the adding observation will appear to admin")
     public void theAddingObservationWillAppearToAdmin() {
-        assertTrue(obj.addobservationflag ==1);
+        assertEquals(obj.addobservationflag ,1);
     }
 
 
