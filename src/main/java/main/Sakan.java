@@ -810,6 +810,7 @@ public class Sakan {
     }
 
 
+    @SuppressWarnings("java:S3776")
     public static void viewfloorsfunc( int floorID,int buildingID, String temail) {
         Scanner st = new Scanner(System.in);
         Scanner sc=new Scanner(System.in);
@@ -840,53 +841,14 @@ public class Sakan {
 
             if (view1.equalsIgnoreCase("A")) {
 
-                try {
-                    connection = DriverManager.getConnection(LOCALHOST_3306_SAKAN, "root", "");
-                    pst = connection.prepareStatement("SELECT picture FROM house_pic  WHERE " + floorID + " = floor_id  ");
-                    rs = pst.executeQuery();
-                    while (rs.next()) {
-
-                        String content = s1 + rs.getString(1) + s1;
-                        logger.info(content);
-
-
-                    }
-
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-
-                }
+                viewFloorPicTypeA(floorID);
 
 
             }
 
             if (view1.equalsIgnoreCase("B")) {
 
-                try {
-                    int flagpart = 0;
-                    connection = DriverManager.getConnection(LOCALHOST_3306_SAKAN, "root", "");
-                    pst = connection.prepareStatement("SELECT * FROM house_participants  WHERE " + floorID + " = floor_id  ");
-                    rs = pst.executeQuery();
-
-
-                    while (rs.next()) {
-                        flagpart =1;
-                        String content = "\t| Name: \t" + rs.getString(3) + "\t| Age: \t" + rs.getString(4) + "\t| Major: \t" + rs.getString(5) + "\t| Gender: \t" + rs.getString(6) + s1;
-                        logger.info(content);
-
-
-                    }
-                    if(flagpart==0){
-                        logger.info("No one is living in this apartment currently");
-                    }
-
-
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-
-                }
+                viewPeopleFloorTypeB(floorID);
 
 
             }
@@ -1216,6 +1178,60 @@ public class Sakan {
         }
     }
 
+
+    private static void viewPeopleFloorTypeB(int floorID) {
+        Connection connection;
+        PreparedStatement pst;
+        ResultSet rs;
+        try {
+            int flagpart = 0;
+            connection = DriverManager.getConnection(LOCALHOST_3306_SAKAN, "root", "");
+            pst = connection.prepareStatement("SELECT * FROM house_participants  WHERE " + floorID + " = floor_id  ");
+            rs = pst.executeQuery();
+
+
+            while (rs.next()) {
+                flagpart =1;
+                String content = "\t| Name: \t" + rs.getString(3) + "\t| Age: \t" + rs.getString(4) + "\t| Major: \t" + rs.getString(5) + "\t| Gender: \t" + rs.getString(6) + s1;
+                logger.info(content);
+
+
+            }
+            if(flagpart==0){
+                logger.info("No one is living in this apartment currently");
+            }
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+
+    private static void viewFloorPicTypeA(int floorID) {
+        ResultSet rs;
+        Connection connection;
+        PreparedStatement pst;
+        try {
+            connection = DriverManager.getConnection(LOCALHOST_3306_SAKAN, "root", "");
+            pst = connection.prepareStatement("SELECT picture FROM house_pic  WHERE " + floorID + " = floor_id  ");
+            rs = pst.executeQuery();
+            while (rs.next()) {
+
+                String content = s1 + rs.getString(1) + s1;
+                logger.info(content);
+
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
 
 
     static boolean isNumber(String s)
