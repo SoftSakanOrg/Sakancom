@@ -1,6 +1,6 @@
 package main;
 
-
+@SuppressWarnings("java:S1118")
 public class AdvertismentRequests {
     private int reqId;
     private String buildingName;

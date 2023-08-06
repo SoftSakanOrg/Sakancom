@@ -2,7 +2,7 @@ package main;
 
 
 
-
+@SuppressWarnings("java:S1118")
 public class BookingInfo {
 
 

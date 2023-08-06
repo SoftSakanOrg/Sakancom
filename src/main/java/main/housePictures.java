@@ -1,5 +1,5 @@
 package main;
-
+@SuppressWarnings("java:S1118")
 public class housePictures {
 
   private Integer housePicId;
