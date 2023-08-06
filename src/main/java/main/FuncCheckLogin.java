@@ -250,7 +250,7 @@ public class FuncCheckLogin {
                         if(Sakan.b.getBuildingName().equalsIgnoreCase("1")){
                                flagOwner =1;
                                checklogin(email,pass,usertype);
-                          //  ownerfunc("OWNERS",U.getUsersID(),ownsc);
+
                         }
 
 
@@ -265,7 +265,7 @@ public class FuncCheckLogin {
                         if(Sakan.b.getLocation().equalsIgnoreCase("1")){
                             flagOwner =1;
                             checklogin(email,pass,usertype);
-                            //  ownerfunc("OWNERS",U.getUsersID(),ownsc);
+
                         }
                         addbuildingfunc(u.getUsersID(),1);
                     }
@@ -327,7 +327,7 @@ public class FuncCheckLogin {
         }
 
 
-//
+
 
     }
 
