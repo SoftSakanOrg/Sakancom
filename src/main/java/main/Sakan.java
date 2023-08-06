@@ -130,14 +130,11 @@ public class Sakan {
         }
     }
 
+    @SuppressWarnings("java:S3776")
     public static void tenantfunc(String usertype){
         Scanner sc=new Scanner(System.in);
-        String temp;
-        if(Sakan.flaglogin==1)temp="2";
-        else temp="3";
 
-
-
+        String temp = getTemp();
 
 
         if(Sakan.flag2==0){
@@ -146,14 +143,14 @@ public class Sakan {
 
                 if (!usertype.equalsIgnoreCase(admin)) {
 
-                    logger.info("(1) Sign up          ");}
+                    logger.info("(1) Sign up          ");
+                }
                 logger.info("(2) Log in           ");
                 logger.info("(3) Back to main menu");
 
-            }
 
-            if(Sakan.flaglogin==0)
-                temp=sc.nextLine();
+                temp = sc.nextLine();
+            }
 
             if(temp.equalsIgnoreCase("3")){
                 mainfunc();
@@ -230,6 +227,12 @@ public class Sakan {
         }
     }
 
+    private static String getTemp() {
+        String temp;
+        if(Sakan.flaglogin==1)temp="2";
+        else temp="3";
+        return temp;
+    }
 
 
     public static void tenantId(){
