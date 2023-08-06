@@ -3,7 +3,7 @@ package main;
 import java.sql.*;
 
 import static main.Sakan.logger;
-
+@SuppressWarnings("java:S1118")
 public class FuncAddBuilding {
 
 
@@ -11,7 +11,7 @@ public class FuncAddBuilding {
     public static int addbuildingflag;
     public static int addobservationflag;
 
-    @SuppressWarnings("java:S1118")
+
     public static void addbuildingfunc(int ownerId,int testp) throws SQLException {
 
         Connection connection = null;
