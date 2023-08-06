@@ -12,7 +12,6 @@ public class FuncSelectBuilding {
     public static int invalidflag;
     public static void selectbuilding(int buildingId,int ownerId) throws SQLException {
         Sakan.flagSelectBuilding=0;
-        Scanner sc=new Scanner(System.in);
         Connection connection = null;
         PreparedStatement pst= null;
         ResultSet rs = null;
