@@ -9,7 +9,7 @@ public class FuncRequestAction {
     public static final String JDBC_MYSQL_LOCALHOST_3306_SAKAN = "jdbc:mysql://localhost:3306/Sakan";
     public static int requestflag =0;
 
-    public static void requestAction(int ID, String answer, int testp) throws SQLException {
+    public static void requestAction(int id, String answer, int testp) throws SQLException {
 
         requestflag =0;
 
@@ -24,7 +24,7 @@ public class FuncRequestAction {
 
 
             connection = DriverManager.getConnection(JDBC_MYSQL_LOCALHOST_3306_SAKAN, "root", "");
-            pst = connection.prepareStatement("SELECT FLOOR_ID FROM advertisment_requests WHERE REQ_ID='"+ID+"'");
+            pst = connection.prepareStatement("SELECT FLOOR_ID FROM advertisment_requests WHERE REQ_ID='"+id+"'");
             rs= pst.executeQuery();
 
             if(rs.next()){
@@ -39,7 +39,7 @@ public class FuncRequestAction {
                 requestflag =1;
 
 
-                acceptedextracted(ID, testp);
+                acceptedextracted(id, testp);
 
 
                 logger.info("Request has been Approved...");
@@ -49,7 +49,7 @@ public class FuncRequestAction {
                 requestflag =1;
 
 
-                rejectedextracted(ID, testp);
+                rejectedextracted(id, testp);
 
 
                 logger.info("Request has been Rejected...");
