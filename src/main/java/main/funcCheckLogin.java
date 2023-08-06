@@ -9,7 +9,7 @@ import static main.FuncAddFloor.addfloor;
 import static main.FuncAdmin.adminfunc;
 import static main.FuncOwner.ownerfunc;
 import static main.FuncRequestAction.requestAction;
-import static main.FuncSelectBuilding.invalidFlag;
+import static main.FuncSelectBuilding.invalidflag;
 import static main.FuncSelectBuilding.selectbuilding;
 import static main.FuncSelectRequest.selectRequest;
 import static main.FuncSelectmyfloorfunc.selectmyfloor;
@@ -91,7 +91,7 @@ public class funcCheckLogin {
                         Sakan.b.setBuildingId(sc.nextInt());
                         selectbuilding( Sakan.b.getBuildingId(), u.getUsersID());
 
-                        if(invalidFlag==1){
+                        if(invalidflag ==1){
                             logger.info("Enter the Building ID: ");
                             Sakan.b.setBuildingId(sc.nextInt());
 

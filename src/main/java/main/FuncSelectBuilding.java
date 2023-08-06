@@ -8,9 +8,9 @@ import static main.Sakan.logger;
 @SuppressWarnings("java:S1118")
 public class FuncSelectBuilding {
 
-    public static int selectBuildingFlag;
-    public static int invalidFlag;
-    public static void selectbuilding(int building_id,int owner_id) throws SQLException {
+    public static int selectbuildingflag;
+    public static int invalidflag;
+    public static void selectbuilding(int buildingId,int ownerId) throws SQLException {
         Sakan.flagSelectBuilding=0;
         Scanner sc=new Scanner(System.in);
         Connection connection = null;
@@ -21,11 +21,11 @@ public class FuncSelectBuilding {
 
 
                 connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
-                pst = connection.prepareStatement("SELECT * FROM building WHERE building_id = '" + building_id + "' AND  OWNER_ID = '" + owner_id + "'");
+                pst = connection.prepareStatement("SELECT * FROM building WHERE buildingId = '" + buildingId + "' AND  OWNER_ID = '" + ownerId + "'");
                 rs = pst.executeQuery();
                 if (rs.next()) {
-                    invalidFlag=0;
-                    selectBuildingFlag=1;
+                    invalidflag =0;
+                    selectbuildingflag =1;
                     Sakan.flagSelectBuilding=1;
                     Sakan.b.setBuildingId(rs.getInt(1));
                     Sakan.b.setOwnerId(rs.getInt(2));
@@ -38,8 +38,8 @@ public class FuncSelectBuilding {
                     Sakan.ar.setContactNumber(rs.getInt(7));
 
                 } else if (!rs.next()) {
-                    selectBuildingFlag=1;
-                    invalidFlag=1;
+                    selectbuildingflag =1;
+                    invalidflag =1;
                     logger.info("Invalid building ID...");
 
 
