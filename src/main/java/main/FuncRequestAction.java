@@ -19,7 +19,7 @@ public class FuncRequestAction {
         PreparedStatement pst = null;
         ResultSet rs = null;
 
-        while(true) {
+
          Sakan.flagRequestAction=0;
 
 
@@ -43,7 +43,7 @@ public class FuncRequestAction {
 
 
                 logger.info("Request has been Approved...");
-                break;
+
             }else if(answer.equalsIgnoreCase("B")){
 
                 requestflag =1;
@@ -53,20 +53,19 @@ public class FuncRequestAction {
 
 
                 logger.info("Request has been Rejected...");
-                break;
 
             }
 
             else if ( answer.equalsIgnoreCase("C")) {
 
                 requestflag =1;
-                break;
+
             }
             else {
                 Sakan.flagRequestAction=1;
-                break;
+
             }
-        }
+
     }
 
 
