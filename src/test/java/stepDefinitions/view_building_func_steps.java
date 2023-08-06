@@ -25,7 +25,7 @@ public class view_building_func_steps {
     @Then("floor should appear to him from the specific building")
     public void floorShouldAppearToHimFromTheSpecificBuilding() {
 
-        assertTrue(obj.viewFloorFlag==1);
+        assertTrue(obj.viewfloorflag ==1);
     }
 
 
@@ -39,7 +39,7 @@ public class view_building_func_steps {
     }
     @Then("a message should appear telling no floors available")
     public void aMessageShouldAppearTellingNoFloorsAvailable() {
-        assertTrue(obj.viewFloorFlag==1);
+        assertTrue(obj.viewfloorflag ==1);
     }
 
 
@@ -54,7 +54,7 @@ public class view_building_func_steps {
     }
     @Then("owner should transfer back to main menu")
     public void ownerShouldTransferBackToMainMenu() {
-        assertTrue(obj.viewFloorFlag==1);
+        assertTrue(obj.viewfloorflag ==1);
     }
 
 
