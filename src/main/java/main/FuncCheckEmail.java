@@ -28,9 +28,9 @@ public class FuncCheckEmail {
 
                 extracted(func, usertype, tempE);
             }
-            else if(!rs.next() && flag11==0){
+            else if(!rs.next() && flag11==0 && func == 2){
 
-                    if (func == 2) {
+
                         logger.info("a user with that email doesn't exists..");
 
                         Scanner sc=new Scanner(System.in);
@@ -43,7 +43,7 @@ public class FuncCheckEmail {
                         logger.info("Enter password: ");
                         Sakan.u.setPassword(sc.nextLine());
                         Login(usertype,Sakan.u.getEmail(),Sakan.u.getPassword());
-                    }
+
 
             }
 
