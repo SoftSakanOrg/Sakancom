@@ -62,15 +62,13 @@ public class FuncCheckEmail {
     }
 
     private static void extracted(int func, String usertype, String tempE) {
-        if(Sakan.flag1==0) {
+        if(Sakan.flag1==0 && !tempE.equals(null) && func == 1 ) {
 
-            if(!tempE.equals(null)){
 
-                if (func == 1) {
                     logger.info("This email already exists..");
                     signup(usertype);
-                }
-            }
+
+
 
 
         }
