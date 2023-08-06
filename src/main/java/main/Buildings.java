@@ -1,5 +1,5 @@
 package main;
-@SuppressWarnings("java:S1118")
+
 public class Buildings {
 
     private Integer buildingId;
