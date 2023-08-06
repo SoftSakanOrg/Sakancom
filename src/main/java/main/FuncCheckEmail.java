@@ -24,7 +24,7 @@ public class FuncCheckEmail {
 
             if(rs.next()){
 
-                String tempE =  rs.getString(1);
+                rs.getString(1);
 
                 extracted(func, usertype);
             }
