@@ -17,6 +17,8 @@ import static main.FuncViewBuildingFunc.viewBuildingFunc;
 @SuppressWarnings("java:S1118")
 public class FuncCheckLogin {
 
+    public static final String JDBC_MYSQL_LOCALHOST_3306_SAKAN = "jdbc:mysql://localhost:3306/Sakan";
+
     public static void checklogin(String email, String pass, String usertype){
 
 
@@ -30,7 +32,7 @@ public class FuncCheckLogin {
 
         try {
             if(flagOwner==0){
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            connection = DriverManager.getConnection(JDBC_MYSQL_LOCALHOST_3306_SAKAN, "root", "");
             pst = connection.prepareStatement("SELECT EMAIL,PASSWORD,USER_TYPE FROM USERS WHERE EMAIL = '" + email + "' AND PASSWORD = '" + pass + "'  AND user_type = '" + usertype + "'");
             rs = pst.executeQuery();
 
@@ -57,7 +59,7 @@ public class FuncCheckLogin {
 
             }
         }
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            connection = DriverManager.getConnection(JDBC_MYSQL_LOCALHOST_3306_SAKAN, "root", "");
             pst = connection.prepareStatement("SELECT USER_ID FROM USERS WHERE EMAIL = '" + email + "'");
             rs = pst.executeQuery();
 
@@ -140,7 +142,7 @@ public class FuncCheckLogin {
                                                 Sakan.hpc.setHousePicture(sf1.next());
 
                                                 try {
-                                                    connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+                                                    connection = DriverManager.getConnection(JDBC_MYSQL_LOCALHOST_3306_SAKAN, "root", "");
                                                     pst = connection.prepareStatement("INSERT INTO HOUSE_PIC(FLOOR_ID,PICTURE) VALUES (?,?)");
                                                     pst.setInt(1, Sakan.h.getHouseId());
                                                     pst.setString(2, Sakan.hpc.getHousePicture());
