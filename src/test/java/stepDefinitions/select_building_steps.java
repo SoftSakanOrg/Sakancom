@@ -24,7 +24,7 @@ public class select_building_steps {
     @Then("all building info should appear to him")
     public void allBuildingInfoShouldAppearToHim() {
 
-        assertEquals(1,obj.selectbuildingflag );
+        assertEquals(1,obj.getSelectbuildingflag() );
     }
 
 
@@ -39,7 +39,7 @@ public class select_building_steps {
     }
     @Then("an invalid message should appear to him")
     public void anInvalidMessageShouldAppearToHim() {
-        assertEquals(1,obj.selectbuildingflag );
+        assertEquals(1,obj.getSelectbuildingflag()  );
     }
 
 
