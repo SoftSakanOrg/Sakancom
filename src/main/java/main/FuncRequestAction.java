@@ -7,7 +7,16 @@ import static main.Sakan.logger;
 public class FuncRequestAction {
 
     public static final String JDBC_MYSQL_LOCALHOST_3306_SAKAN = "jdbc:mysql://localhost:3306/Sakan";
-    public static int requestflag =0;
+    private static int requestflag =0;
+
+
+    public static int getRequestflag() {
+        return requestflag;
+    }
+
+    public static void setRequestflag(int requestflag) {
+        FuncRequestAction.requestflag = requestflag;
+    }
 
     public static void requestAction(int id, String answer, int testp) throws SQLException {
 
@@ -28,7 +37,7 @@ public class FuncRequestAction {
             rs= pst.executeQuery();
 
             if(rs.next()){
-                requestflag =1;
+                setRequestflag(1);
                 Sakan.ar.setFloorId(rs.getInt(1));
             }
 
@@ -36,7 +45,7 @@ public class FuncRequestAction {
 
             if (answer.equalsIgnoreCase("A")) {
 
-                requestflag =1;
+                setRequestflag(1);
 
 
                 acceptedextracted(id, testp);
@@ -46,7 +55,7 @@ public class FuncRequestAction {
 
             }else if(answer.equalsIgnoreCase("B")){
 
-                requestflag =1;
+                setRequestflag(1);
 
 
                 rejectedextracted(id, testp);
@@ -58,7 +67,7 @@ public class FuncRequestAction {
 
             else if ( answer.equalsIgnoreCase("C")) {
 
-                requestflag =1;
+                setRequestflag(1);
 
             }
             else {
