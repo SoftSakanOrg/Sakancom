@@ -49,7 +49,7 @@ public class FuncCheckLogin {
                 }
 
             } else if (!rs.next()) {
-                Scanner sc = new Scanner(System.in);
+
                 logger.info("Invalid username or email");
 
 
@@ -73,7 +73,7 @@ public class FuncCheckLogin {
                         flagReflect=0;
                         Scanner sc = new Scanner(System.in);
 
-                    String temp;
+
 
 
                     logger.info("(A) View my Buildings     ");
