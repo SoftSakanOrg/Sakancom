@@ -7,12 +7,58 @@ import static main.Sakan.logger;
 @SuppressWarnings("java:S1118")
 public class FuncAddFloor {
 
-    public static int addFloorFlag;
-    public static int selectLastFloorFlag;
-    public static int observationFlag;
-    public static int requestFlag;
-    public static int floorNumFlag;
-    public static void addfloor(int buildingId,int testp) throws SQLException {
+    private static int addFloorFlag;
+    private static int selectLastFloorFlag;
+    private static int observationFlag;
+    private static int requestFlag;
+    private static int floorNumFlag;
+
+
+    public FuncAddFloor() {
+
+    }
+
+    public static int getAddFloorFlag() {
+        return addFloorFlag;
+    }
+
+    public static void setAddFloorFlag(int addFloorFlag) {
+        FuncAddFloor.addFloorFlag = addFloorFlag;
+    }
+
+    public static int getSelectLastFloorFlag() {
+        return selectLastFloorFlag;
+    }
+
+    public static void setSelectLastFloorFlag(int selectLastFloorFlag) {
+        FuncAddFloor.selectLastFloorFlag = selectLastFloorFlag;
+    }
+
+    public static int getObservationFlag() {
+        return observationFlag;
+    }
+
+    public static void setObservationFlag(int observationFlag) {
+        FuncAddFloor.observationFlag = observationFlag;
+    }
+
+    public static int getRequestFlag() {
+        return requestFlag;
+    }
+
+    public static void setRequestFlag(int requestFlag) {
+        FuncAddFloor.requestFlag = requestFlag;
+    }
+
+    public static int getFloorNumFlag() {
+        return floorNumFlag;
+    }
+
+    public static void setFloorNumFlag(int floorNumFlag) {
+        FuncAddFloor.floorNumFlag = floorNumFlag;
+    }
+
+    public static void addfloor(int buildingId, int testp) throws SQLException {
 
 
         
@@ -27,9 +73,9 @@ public class FuncAddFloor {
 
 
 
-     
 
-                addFloorFlag=1;
+
+         setAddFloorFlag(1);
                 
                 connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
                 pst = connection.prepareStatement("INSERT INTO FLOORS(BUILDING_ID,AVAILABILITY,PRICE,SERVICES,PARTICIPANTS,MAX_PARTICIPANTS,BEDROOMS,BATHROOMS,BALCONY,STATUS) VALUES" + "(?,?,?,?,?,?,?,?,?,?)");
@@ -58,21 +104,26 @@ public class FuncAddFloor {
 
 
                 if(rs.next()){
-                    selectLastFloorFlag=1;
+
+                    setSelectLastFloorFlag(1);
+
                     Sakan.ar.setFloorId(rs.getInt(1));
                 }
 
                 pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
 
                 pst.setString(1, Sakan.onlineUser + " has added an apartment  (" + Sakan.b.getBuildingName() + ") to his building");
-                observationFlag=1;
+
+                setObservationFlag(1);
+
                 if(testp==1) {
                     pst.executeUpdate();
 
                 }
 
 
-                addFloorFlag=1;
+                setAddFloorFlag(1);
+
                 requestFlag=1;
                 pst = connection.prepareStatement("INSERT INTO advertisment_requests (BUILDING_NAME,OWNER_NAME,CONTACT_NUMBER,PRICE,floor_id) VALUES" + "(?,?,?,?,?)");
                 pst.setString(1, Sakan.ar.getBuildingName());
@@ -83,7 +134,7 @@ public class FuncAddFloor {
                 if(testp==1) {
                     pst.executeUpdate();
                 }
-                addFloorFlag=1;
+                setAddFloorFlag(1);
                 tst = connection.prepareStatement("UPDATE BUILDING SET FLOORS_NUM= (FLOORS_NUM + 1) WHERE BUILDING_ID='"+buildingId+ "'");
                 floorNumFlag=1;
         if(testp==1) {
@@ -98,7 +149,7 @@ public class FuncAddFloor {
                 rs= pst.executeQuery();
 
                 if(rs.next()){
-                   selectLastFloorFlag=1;
+                   setSelectLastFloorFlag(1);
                     Sakan.h.setHouseId(rs.getInt(1));
                 }
 

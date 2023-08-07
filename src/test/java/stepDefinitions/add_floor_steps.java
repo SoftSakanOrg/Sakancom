@@ -26,19 +26,19 @@ public class add_floor_steps {
     @Then("floor should be added to this building")
     public void floorShouldBeAddedToThisBuilding() {
 
-        assertEquals(1,obj.addFloorFlag);
+        assertEquals(1,obj.getAddFloorFlag());
     }
     @Then("this observation should be added to Observations table")
     public void thisObservationShouldBeAddedToObservationsTable() {
-        assertEquals(1,obj.observationFlag);
+        assertEquals(1,obj.getObservationFlag());
     }
     @Then("it will be added as a request to advertisment_requests waiting for admin to accept it")
     public void itWillBeAddedAsARequestToAdvertismentRequestsWaitingForAdminToAcceptIt() {
-        assertEquals(1,obj.requestFlag);
+        assertEquals(1,obj.getRequestFlag());
     }
     @Then("floors number should be incremented in the specific building")
     public void floorsNumberShouldBeIncrementedInTheSpecificBuilding() {
-        assertEquals(1,obj.floorNumFlag);
+        assertEquals(1,obj.getFloorNumFlag());
     }
 
 
@@ -53,7 +53,7 @@ public class add_floor_steps {
     @Then("last floor should appear from table")
     public void lastFloorShouldAppearFromTable() {
 
-        assertEquals(1,obj.selectLastFloorFlag);
+        assertEquals(1,obj.getSelectLastFloorFlag());
     }
 
 
