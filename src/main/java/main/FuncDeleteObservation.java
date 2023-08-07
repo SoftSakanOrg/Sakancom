@@ -6,9 +6,18 @@ import static main.Sakan.logger;
 @SuppressWarnings("java:S1118")
 public class FuncDeleteObservation {
 
-    public static int flagdeleteobservations =0;
+    private static int flagdeleteobservations;
+
+    public static int getFlagdeleteobservations() {
+        return flagdeleteobservations;
+    }
+
+    public static void setFlagdeleteobservations(int flagdeleteobservations) {
+        FuncDeleteObservation.flagdeleteobservations = flagdeleteobservations;
+    }
+
     public static void deleteObservations(int testp) throws SQLException {
-       flagdeleteobservations =0;
+
         Connection connection = null;
         PreparedStatement pst= null;
 
@@ -18,7 +27,7 @@ public class FuncDeleteObservation {
             pst = connection.prepareStatement("DELETE FROM system_observation ");
             pst.executeUpdate();
         }
-    flagdeleteobservations =1;
+        setFlagdeleteobservations(1);
 
         logger.info("You have successfully Deleted the Observations");
     }
