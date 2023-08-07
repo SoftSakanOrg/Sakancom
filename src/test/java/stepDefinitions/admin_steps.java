@@ -47,7 +47,7 @@ public class admin_steps {
     @Then("a  specific function will be called")
     public void aSpecificFunctionWillBeCalled() {
 
-        assertEquals(1,obj.adminflag);
+        assertEquals(1,obj.getAdminflag());
     }
 
 
