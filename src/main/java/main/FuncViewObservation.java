@@ -6,11 +6,18 @@ import static main.Sakan.logger;
 @SuppressWarnings("java:S1118")
 public class FuncViewObservation {
 
-    public static int viewObservationFlag=0;
+    private static int viewObservationFlag=0;
 
+    public static int getViewObservationFlag() {
+        return viewObservationFlag;
+    }
+
+    public static void setViewObservationFlag(int viewObservationFlag) {
+        FuncViewObservation.viewObservationFlag = viewObservationFlag;
+    }
 
     public static void viewObservations() throws SQLException {
-        viewObservationFlag=0;
+        setViewObservationFlag(0);
 
         Connection connection = null;
         PreparedStatement pst= null;
@@ -22,7 +29,7 @@ public class FuncViewObservation {
 
 
         if(!rs.next()){
-            viewObservationFlag=1;
+            setViewObservationFlag(1);
 
             logger.info("No Observations currently");
         }
@@ -30,7 +37,7 @@ public class FuncViewObservation {
 
         while (rs.next())
         {
-            viewObservationFlag=1;
+            setViewObservationFlag(1);
             String content = "\t|\t ID: " + rs.getInt(1) + "\t|\t Description: " + rs.getString(2) + "\t|\t";
             logger.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             logger.info(content);
