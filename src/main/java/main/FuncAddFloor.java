@@ -16,6 +16,9 @@ public class FuncAddFloor {
 
     public FuncAddFloor() {
 
+        /***
+        do nothing
+         ***/
     }
 
     public static int getAddFloorFlag() {
