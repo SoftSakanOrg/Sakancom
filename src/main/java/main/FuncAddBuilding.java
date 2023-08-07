@@ -12,7 +12,46 @@ public class FuncAddBuilding {
     public static int addobservationflag;
 
 
-    public static void addbuildingfunc(int ownerId,int testp) throws SQLException {
+
+    static FuncAddBuilding obj=new FuncAddBuilding();
+
+    public FuncAddBuilding() {
+    }
+
+    public FuncAddBuilding(int selectinfoflag,int addbuildingflag,int addobservationflag) {
+        this.selectinfoflag=selectinfoflag;
+        this.addbuildingflag=addbuildingflag;
+        this.addobservationflag=addobservationflag;
+    }
+
+
+    public static int getSelectinfoflag() {
+        return selectinfoflag;
+    }
+
+    public static void setSelectinfoflag(int selectinfoflag) {
+        FuncAddBuilding.selectinfoflag = selectinfoflag;
+    }
+
+    public static int getAddbuildingflag() {
+        return addbuildingflag;
+    }
+
+    public static void setAddbuildingflag(int addbuildingflag) {
+        FuncAddBuilding.addbuildingflag = addbuildingflag;
+    }
+
+    public static int getAddobservationflag() {
+        return addobservationflag;
+    }
+
+    public static void setAddobservationflag(int addobservationflag) {
+        FuncAddBuilding.addobservationflag = addobservationflag;
+    }
+
+
+
+    public static void addbuildingfunc(int ownerId, int testp) throws SQLException {
 
         Connection connection = null;
         PreparedStatement pst = null;
@@ -29,7 +68,7 @@ public class FuncAddBuilding {
             rs = pst.executeQuery();
 
             if (rs.next()) {
-                selectinfoflag =1;
+               obj.setSelectinfoflag(1);
                 Sakan.b.setOwnerName(rs.getString(1));
                 Sakan.b.setContactNum(rs.getInt(2));
 
@@ -37,7 +76,7 @@ public class FuncAddBuilding {
 
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
             pst = connection.prepareStatement("INSERT INTO BUILDING(OWNER_ID,BUILDING_NAME,LOCATION,FLOORS_NUM,OWNER_NAME,CONTACT_NUM,TOTALPARTICIPANTS) VALUES" + "(?,?,?,?,?,?,?)");
-            addbuildingflag =1;
+           obj.setAddbuildingflag(1);
 
 
                 pst.setInt(1, ownerId);
@@ -52,7 +91,7 @@ public class FuncAddBuilding {
             }
 
             pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
-            addobservationflag =1;
+           obj.setAddobservationflag(1);
             pst.setString(1, Sakan.onlineUser + " has added a building (" + Sakan.b.getBuildingName() + ") to the system");
 
             if(testp==1) {

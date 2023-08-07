@@ -24,7 +24,7 @@ public class add_building_steps {
     }
     @Then("contact info should appear")
     public void contactInfoShouldAppear() {
-        assertEquals(1,obj.selectinfoflag);
+        assertEquals(1,obj.getSelectinfoflag());
     }
 
 
@@ -39,7 +39,7 @@ public class add_building_steps {
     }
     @Then("new building should appear to the table")
     public void newBuildingShouldAppearToTheTable() {
-        assertEquals(1,obj.addbuildingflag );
+        assertEquals(1,obj.getAddbuildingflag() );
     }
 
 
@@ -54,7 +54,7 @@ public class add_building_steps {
     }
     @Then("the adding observation will appear to admin")
     public void theAddingObservationWillAppearToAdmin() {
-        assertEquals(1,obj.addobservationflag );
+        assertEquals(1,obj.getAddobservationflag() );
     }
 
 
