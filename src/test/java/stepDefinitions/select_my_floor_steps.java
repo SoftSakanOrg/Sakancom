@@ -24,7 +24,7 @@ public class select_my_floor_steps {
     }
     @Then("the data of this floor should appear to him")
     public void theDataOfThisFloorShouldAppearToHim() {
-        assertEquals(1,obj.myFloorFlag);
+        assertEquals(1,obj.getMyFloorFlag());
     }
     @When("owner enters floor id that doesnt exist like {int}")
     public void ownerEntersFloorIdThatDoesntExistLike(Integer floor_id) throws SQLException {
@@ -32,7 +32,7 @@ public class select_my_floor_steps {
     }
     @Then("a message should appear telliung him to enter a valid one")
     public void aMessageShouldAppearTelliungHimToEnterAValidOne() {
-        assertEquals(1,obj.myFloorFlag);
+        assertEquals(1,obj.getMyFloorFlag());
     }
 
 }
