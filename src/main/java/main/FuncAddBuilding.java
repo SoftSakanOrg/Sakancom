@@ -15,7 +15,11 @@ public class FuncAddBuilding {
 
 
 
-    public FuncAddBuilding() throws UnsupportedOperationException  {
+    public FuncAddBuilding ()  {
+        /***
+         do nothing
+         ***/
+
     }
 
 
