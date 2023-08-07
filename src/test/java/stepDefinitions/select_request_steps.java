@@ -33,7 +33,7 @@ public class select_request_steps {
     }
     @Then("the request should appear to the admin")
     public void theRequestShouldAppearToTheAdmin() {
-        assertEquals(1,obj2.requestflag );
+        assertEquals(1,obj2.getRequestflag() );
     }
 
 
