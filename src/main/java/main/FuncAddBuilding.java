@@ -7,13 +7,13 @@ import static main.Sakan.logger;
 public class FuncAddBuilding {
 
 
-    public static int selectinfoflag;
-    public static int addbuildingflag;
-    public static int addobservationflag;
+   private static int selectinfoflag;
+    private static int addbuildingflag;
+   private static int addobservationflag;
 
 
 
-    static FuncAddBuilding obj=new FuncAddBuilding();
+    static FuncAddBuilding obj=new FuncAddBuilding(selectinfoflag,addbuildingflag,addobservationflag);
 
     public FuncAddBuilding() {
     }
