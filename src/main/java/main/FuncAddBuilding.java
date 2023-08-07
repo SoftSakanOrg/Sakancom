@@ -18,11 +18,6 @@ public class FuncAddBuilding {
     public FuncAddBuilding() {
     }
 
-    public FuncAddBuilding(int selectinfoflag1,int addbuildingflag1,int addobservationflag1) {
-        selectinfoflag=selectinfoflag1;
-       addbuildingflag=addbuildingflag1;
-        addobservationflag=addobservationflag1;
-    }
 
 
     public static int getSelectinfoflag() {
