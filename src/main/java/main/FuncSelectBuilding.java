@@ -9,8 +9,15 @@ import static main.Sakan.logger;
 public class FuncSelectBuilding {
 
     private static int selectbuildingflag;
-    public static int invalidflag;
+   static int invalidflag;
 
+    public static int getInvalidflag() {
+        return invalidflag;
+    }
+
+    public static void setInvalidflag(int invalidflag) {
+        FuncSelectBuilding.invalidflag = invalidflag;
+    }
 
     public static int getSelectbuildingflag() {
         return selectbuildingflag;
@@ -35,7 +42,7 @@ public class FuncSelectBuilding {
                 pst = connection.prepareStatement("SELECT * FROM building WHERE building_id = '" + buildingId + "' AND  OWNER_ID = '" + ownerId + "'");
                 rs = pst.executeQuery();
                 if (rs.next()) {
-                    invalidflag=0;
+                    setInvalidflag(0);
                     setSelectbuildingflag(1);
 
                     Sakan.flagSelectBuilding=1;
@@ -51,7 +58,7 @@ public class FuncSelectBuilding {
 
                 } else if (!rs.next()) {
                     setSelectbuildingflag (1);
-                    invalidflag =1;
+                    setInvalidflag(1);
 
                     logger.info("Invalid building ID...");
 
