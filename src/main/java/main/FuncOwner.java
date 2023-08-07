@@ -7,13 +7,22 @@ import static main.FuncViewBuilding.viewbuilding;
 @SuppressWarnings("java:S1118")
 public class FuncOwner {
 
-    public static int ownerflag;
+    private static int ownerflag;
+
+    public static int getOwnerflag() {
+        return ownerflag;
+    }
+
+    public static void setOwnerflag(int ownerflag) {
+        FuncOwner.ownerflag = ownerflag;
+    }
+
     public static void ownerfunc(OwnerFuncParam ownerFuncParam) throws SQLException {
 
 
             if (ownerFuncParam.ownsc().equalsIgnoreCase("A")) {
 
-                ownerflag =1;
+                setOwnerflag(1);
 
                 if(ownerFuncParam.testp() ==1) {
 
@@ -22,7 +31,7 @@ public class FuncOwner {
 
             }   else if (ownerFuncParam.ownsc().equalsIgnoreCase("E")) {
 
-                ownerflag =1;
+                setOwnerflag(1);
 
                 if(ownerFuncParam.testp() ==1) {
                     mainfunc();
