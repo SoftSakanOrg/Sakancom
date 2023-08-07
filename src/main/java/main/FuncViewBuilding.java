@@ -6,10 +6,19 @@ import static main.Sakan.logger;
 @SuppressWarnings("java:S1118")
 public class FuncViewBuilding {
 
-    public static int flagViewBuilding=0;
+    private static int flagViewBuilding=0;
+
+    public static int getFlagViewBuilding() {
+        return flagViewBuilding;
+    }
+
+    public static void setFlagViewBuilding(int flagViewBuilding) {
+        FuncViewBuilding.flagViewBuilding = flagViewBuilding;
+    }
+
     public static void viewbuilding(int ownerId) throws SQLException {
 
-        flagViewBuilding=0;
+        setFlagViewBuilding(0);
 
         Connection connection = null;
         PreparedStatement pst= null;
@@ -22,7 +31,7 @@ public class FuncViewBuilding {
 
 
             while (rs.next()) {
-                flagViewBuilding=1;
+                setFlagViewBuilding(1);
                 String content = "\t|\t ID: " + rs.getString(1)  + "\t|\t Building name: " + rs.getString(3)  + "\t|\t Location: " + rs.getString(4) +  "\t|\t FloorsNum: " + rs.getInt(5) + "\t|\t Owner: " + rs.getString(6)  + "\t|\t ContactNumber:" + rs.getInt(7)   + "\t|\t TotalParticipants:" + rs.getInt(8);
                 logger.info(content);
             }

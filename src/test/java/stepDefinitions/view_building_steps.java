@@ -26,7 +26,7 @@ public class view_building_steps {
     @Then("the owner buildings should appear to him")
     public void theOwnerBuildingsShouldAppearToHim() {
 
-        assertEquals(1,obj.flagViewBuilding);
+        assertEquals(1,obj.getFlagViewBuilding());
     }
 
 }
