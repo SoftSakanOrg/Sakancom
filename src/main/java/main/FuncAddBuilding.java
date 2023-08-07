@@ -13,15 +13,15 @@ public class FuncAddBuilding {
 
 
 
-    static FuncAddBuilding obj=new FuncAddBuilding(selectinfoflag,addbuildingflag,addobservationflag);
+
 
     public FuncAddBuilding() {
     }
 
-    public FuncAddBuilding(int selectinfoflag,int addbuildingflag,int addobservationflag) {
-        this.selectinfoflag=selectinfoflag;
-        this.addbuildingflag=addbuildingflag;
-        this.addobservationflag=addobservationflag;
+    public FuncAddBuilding(int selectinfoflag1,int addbuildingflag1,int addobservationflag1) {
+        selectinfoflag=selectinfoflag1;
+       addbuildingflag=addbuildingflag1;
+        addobservationflag=addobservationflag1;
     }
 
 
@@ -68,7 +68,7 @@ public class FuncAddBuilding {
             rs = pst.executeQuery();
 
             if (rs.next()) {
-               obj.setSelectinfoflag(1);
+               setSelectinfoflag(1);
                 Sakan.b.setOwnerName(rs.getString(1));
                 Sakan.b.setContactNum(rs.getInt(2));
 
@@ -76,7 +76,7 @@ public class FuncAddBuilding {
 
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
             pst = connection.prepareStatement("INSERT INTO BUILDING(OWNER_ID,BUILDING_NAME,LOCATION,FLOORS_NUM,OWNER_NAME,CONTACT_NUM,TOTALPARTICIPANTS) VALUES" + "(?,?,?,?,?,?,?)");
-           obj.setAddbuildingflag(1);
+           setAddbuildingflag(1);
 
 
                 pst.setInt(1, ownerId);
@@ -91,7 +91,7 @@ public class FuncAddBuilding {
             }
 
             pst = connection.prepareStatement("INSERT INTO system_observation(DESCRIPTION) VALUES (?)");
-           obj.setAddobservationflag(1);
+          setAddobservationflag(1);
             pst.setString(1, Sakan.onlineUser + " has added a building (" + Sakan.b.getBuildingName() + ") to the system");
 
             if(testp==1) {
