@@ -18,30 +18,7 @@ public class BookingInfo {
 
     }
 
-    public BookingInfo(int bookingInfoID, String tenantName, String ownerName, int contactInfo, String rentDate, int tenantId) {
-        this.bookingInfoID = bookingInfoID;
-        this.tenantName = tenantName;
-        this.ownerName = ownerName;
-        this.contactInfo = contactInfo;
-        this.rentDate = rentDate;
-        this.tenantId=tenantId;
-    }
 
-    public int getBookingInfoID() {
-        return bookingInfoID;
-    }
-
-    public void setBookingInfoID(int bookingInfoID) {
-        this.bookingInfoID = bookingInfoID;
-    }
-
-    public String getTenantName() {
-        return tenantName;
-    }
-
-    public void setTenantName(String tenantName) {
-        this.tenantName = tenantName;
-    }
 
     public String getOwnerName() {
         return ownerName;
@@ -59,9 +36,7 @@ public class BookingInfo {
         this.contactInfo = contactInfo;
     }
 
-    public String getRentDate() {
-        return rentDate;
-    }
+
 
     public void setRentDate(String rentDate) {
         this.rentDate = rentDate;
