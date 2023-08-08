@@ -1,9 +1,11 @@
 package main;
 
+import Runner.Sakan;
+
 import java.sql.*;
 import java.util.Scanner;
 
-import static main.Sakan.*;
+import static Runner.Sakan.*;
 import static main.FuncAddBuilding.addbuildingfunc;
 import static main.FuncAddFloor.addfloor;
 import static main.FuncAdmin.adminfunc;

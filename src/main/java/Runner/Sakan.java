@@ -1,4 +1,4 @@
-package main;//import java.util.Scanner;
+package Runner;//import java.util.Scanner;
 import classes.*;
 
 import java.sql.*;
@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import static java.lang.System.exit;
 import static java.lang.System.getLogger;
-import static main.FuncCheckEmail.checkemail;
 import static main.FuncCheckLogin.checklogin;
 import static main.FuncUsersLogin.login;
 import java.util.logging.Logger;
@@ -24,57 +23,57 @@ public class Sakan {
 
        static String s="\t|\t ID: ";
        static String s1="\t|\t";
-    static int flag1 = 0;
+    public static int flag1 = 0;
 
-    static int flag11 = 0;
+    public static int flag11 = 0;
     static int flag2 = 0;
 
     static int whileflag = 0;
     static int whileflag2 = 0;
 
 
-    static  int flaglogin = 0;
+    public static  int flaglogin = 0;
 
-    static  int flagRequestAction = 0;
+    public static  int flagRequestAction = 0;
 
-    static  int flagSelectRequest = 0;
+    public static  int flagSelectRequest = 0;
 
-    static  int flagAdminFunc = 0;
+    public static  int flagAdminFunc = 0;
 
-    static  int flagSelectMyFloor = 0;
-    static  int flagSelectBuilding = 0;
+    public static  int flagSelectMyFloor = 0;
+    public static  int flagSelectBuilding = 0;
 
-    static  int flagOwner = 0;
+    public static  int flagOwner = 0;
 
-    static  int flagReflect = 0;
-
-
-
-
-    static String onlineUser = "" ;
-
-    static Users u =new Users();
+    public static  int flagReflect = 0;
 
 
 
 
-    static Floors h =new Floors();
+    public static String onlineUser = "" ;
+
+    public static Users u =new Users();
+
+
+
+
+    public static Floors h =new Floors();
     static Furniture f =new Furniture();
 
     static HouseParticipants hp=new HouseParticipants();
-    static HousePictures hpc=new HousePictures();
+    public static HousePictures hpc=new HousePictures();
     static FurniturePictures fpc=new FurniturePictures();
 
-    static Buildings b =new Buildings();
+    public static Buildings b =new Buildings();
 
-    static AdvertismentRequests ar = new AdvertismentRequests();
+    public static AdvertismentRequests ar = new AdvertismentRequests();
 
 
     static BookingInfo bi=new BookingInfo();
 
 
 
-    static Logger logger =
+    public static Logger logger =
             Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static void mainfunc(){
@@ -1231,6 +1230,71 @@ public class Sakan {
 
         } catch (SQLException e) {
             e.printStackTrace();
+
+        }
+    }
+
+    public static void checkemail(String email, int func, String usertype ){  //func 1 forSign up // func2 for Login
+
+
+        Connection connection = null;
+        PreparedStatement pst= null;
+        ResultSet rs = null;
+
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
+            pst = connection.prepareStatement("SELECT EMAIL FROM USERS WHERE EMAIL = '" + email + "' "  );
+            rs = pst.executeQuery();
+
+            if(rs.next()){
+
+                rs.getString(1);
+
+                extracted(func, usertype);
+            }
+            else if(!rs.next() && flag11==0 && func == 2){
+
+
+                logger.info("a user with that email doesn't exists..");
+
+                Scanner sc=new Scanner(System.in);
+
+                logger.info("(1) To go back to main menu");
+
+                logger.info("Enter your email: ");
+                Sakan.u.setEmail(sc.nextLine());
+
+                logger.info("Enter password: ");
+                Sakan.u.setPassword(sc.nextLine());
+                login(usertype,Sakan.u.getEmail(),Sakan.u.getPassword());
+
+
+            }
+
+
+
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+
+
+    }
+
+    private static void extracted(int func, String usertype) {
+        if(Sakan.flag1==0 && func == 1 ) {
+
+
+            logger.info("This email already exists..");
+            signup(usertype);
+
+
+
 
         }
     }

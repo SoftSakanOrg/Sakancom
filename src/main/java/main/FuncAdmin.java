@@ -1,8 +1,10 @@
 package main;
 
+import Runner.Sakan;
+
 import java.sql.SQLException;
 
-import static main.Sakan.*;
+import static Runner.Sakan.*;
 import static main.FuncDeleteObservation.deleteObservations;
 import static main.FuncViewObservation.viewObservations;
 import static main.FuncViewRequest.viewRequests;

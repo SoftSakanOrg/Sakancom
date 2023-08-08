@@ -2,7 +2,7 @@ package main;
 
 import java.sql.*;
 
-import static main.Sakan.logger;
+import static Runner.Sakan.logger;
 @SuppressWarnings("java:S1118")
 public class FuncViewBuilding {
 

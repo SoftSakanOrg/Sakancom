@@ -1,7 +1,9 @@
 package main;
 
 
-import static main.Sakan.*;
+import Runner.Sakan;
+
+import static Runner.Sakan.*;
 import static main.FuncCheckEmail.checkemail;
 import static main.FuncCheckLogin.checklogin;
 @SuppressWarnings("java:S1118")
