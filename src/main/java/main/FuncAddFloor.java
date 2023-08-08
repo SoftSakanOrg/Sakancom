@@ -51,17 +51,13 @@ public class FuncAddFloor {
         return requestFlag;
     }
 
-    public static void setRequestFlag(int requestFlag) {
-        FuncAddFloor.requestFlag = requestFlag;
-    }
+
 
     public static int getFloorNumFlag() {
         return floorNumFlag;
     }
 
-    public static void setFloorNumFlag(int floorNumFlag) {
-        FuncAddFloor.floorNumFlag = floorNumFlag;
-    }
+
 
     public static void addfloor(int buildingId, int testp) throws SQLException {
 
@@ -84,7 +80,7 @@ public class FuncAddFloor {
                 
                 connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Sakan", "root", "");
                 pst = connection.prepareStatement("INSERT INTO FLOORS(BUILDING_ID,AVAILABILITY,PRICE,SERVICES,PARTICIPANTS,MAX_PARTICIPANTS,BEDROOMS,BATHROOMS,BALCONY,STATUS) VALUES" + "(?,?,?,?,?,?,?,?,?,?)");
-        if(testp==1) {
+
                 pst.setInt(1, buildingId);
                 pst.setString(2, "available");
                 pst.setInt(3, Sakan.h.getHousePrice());
@@ -97,7 +93,7 @@ public class FuncAddFloor {
                 pst.setString(10, "Not_Advertised");
 
                 Sakan.ar.setPrice(Sakan.h.getHousePrice());
-
+        if(testp==1) {
                 pst.executeUpdate();
             }
         logger.info("You have successfully added the Floor...");

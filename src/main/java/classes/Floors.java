@@ -2,20 +2,20 @@ package classes;
 
 public class Floors {
 
-    private Integer houseId;
-    private String houseName;
-    private  String avalibilty;
-    private Integer housePrice;
-    private String houseLocation;
-    private String houseServices;
-    private Integer houseParticipants;
-    private Integer houseMaxParticipants;
+    private Integer houseId=0;
+    private String houseName="";
+    private  String avalibilty="";
+    private Integer housePrice=0;
+    private String houseLocation="";
+    private String houseServices="";
+    private Integer houseParticipants=0;
+    private Integer houseMaxParticipants=0;
 
-    private Integer bedrooms;
-    private Integer bathrooms;
-    private Integer contBalcony;
+    private Integer bedrooms=0;
+    private Integer bathrooms=0;
+    private Integer contBalcony=0;
 
-    private String status;
+    private String status="";
 
 
 

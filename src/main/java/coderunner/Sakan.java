@@ -17,7 +17,6 @@ import static main.FuncSelectBuilding.invalidflag;
 import static main.FuncSelectBuilding.selectbuilding;
 import static main.FuncSelectRequest.selectRequest;
 import static main.FuncSelectmyfloorfunc.selectmyfloor;
-import static main.FuncUsersLogin.login;
 import static main.FuncViewBuildingFunc.viewBuildingFunc;
 
 import java.util.logging.Logger;
@@ -1625,6 +1624,55 @@ public class Sakan {
 
 
     }
+
+    public static void login(String usertype, String email, String pass) {
+
+
+
+        if (Sakan.flag11 == 0) {
+
+
+
+
+            if ( email.equalsIgnoreCase("1")) {
+                mainfunc();
+
+            }
+            if (!email.contains("@") || !email.contains(".")) {
+                logger.info("Please enter a valid email...");
+                flaglogin=1;
+                tenantfunc(usertype);
+
+            }
+
+
+
+            checkemail(email, 2, usertype);
+            if (Sakan.flag11 == 0) {
+
+
+
+
+                if ( pass.equalsIgnoreCase("1")) {
+                    mainfunc();
+
+                }
+
+
+                checklogin(email, pass,usertype);
+            }
+            Sakan.flag11 =1;
+            Sakan.onlineUser =email ;
+
+        }
+
+
+
+
+
+
+    }
+
 
     static boolean isNumber(String s)
     {
