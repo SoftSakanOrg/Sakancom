@@ -15,7 +15,9 @@ public class BookingInfo {
     private int tenantId;
 
     public BookingInfo(){
-
+        /***
+         do nothing
+         ***/
     }
 
 
