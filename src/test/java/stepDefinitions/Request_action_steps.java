@@ -1,9 +1,9 @@
 package stepDefinitions;
 
+import classes.AdvertismentRequests;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import main.AdvertismentRequests;
 import main.FuncRequestAction;
 
 import java.sql.SQLException;

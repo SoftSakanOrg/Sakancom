@@ -1,4 +1,4 @@
-package main;
+package classes;
 
 public record FloorParameters(Integer houseId, String houseName, String avalibilty, Integer housePrice,
                               String houseLocation, String houseServices, Integer houseParticipants,
