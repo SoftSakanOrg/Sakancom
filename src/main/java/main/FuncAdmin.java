@@ -1,10 +1,10 @@
 package main;
 
-import Runner.Sakan;
+import coderunner.Sakan;
 
 import java.sql.SQLException;
 
-import static Runner.Sakan.*;
+import static coderunner.Sakan.*;
 import static main.FuncDeleteObservation.deleteObservations;
 import static main.FuncViewObservation.viewObservations;
 import static main.FuncViewRequest.viewRequests;

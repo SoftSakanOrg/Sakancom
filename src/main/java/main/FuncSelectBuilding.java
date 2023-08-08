@@ -1,17 +1,17 @@
 package main;
 
-import Runner.Sakan;
+import coderunner.Sakan;
 
 import java.sql.*;
 
 
 
-import static Runner.Sakan.logger;
+import static coderunner.Sakan.logger;
 @SuppressWarnings("java:S1118")
 public class FuncSelectBuilding {
 
     private static int selectbuildingflag;
-   static int invalidflag;
+   public static int invalidflag;
 
     public static int getInvalidflag() {
         return invalidflag;

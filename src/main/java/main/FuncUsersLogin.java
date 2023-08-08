@@ -1,11 +1,10 @@
 package main;
 
 
-import Runner.Sakan;
+import coderunner.Sakan;
 
-import static Runner.Sakan.*;
-import static main.FuncCheckEmail.checkemail;
-import static main.FuncCheckLogin.checklogin;
+import static coderunner.Sakan.*;
+
 @SuppressWarnings("java:S1118")
 public class FuncUsersLogin {
 
