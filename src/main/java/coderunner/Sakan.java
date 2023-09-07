@@ -22,7 +22,7 @@ import static main.FuncViewBuildingFunc.viewBuildingFunc;
 import java.util.logging.Logger;
 
 public class Sakan {
-
+//hellos
     public static final String JDBC_MYSQL_LOCALHOST_3306_SAKAN = "jdbc:mysql://localhost:3306/Sakan";
     public static final String DESCRIPTION_VALUES = "INSERT INTO system_observation(DESCRIPTION) VALUES (?)";
     public static final String QUESTION_MARKS = "(?,?,?,?,?)";
